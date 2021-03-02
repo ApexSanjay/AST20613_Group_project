@@ -4,6 +4,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import Test from './Test';
 
 import './App.css';
 
@@ -33,6 +34,7 @@ const App = () => (
                 🎉
                 </span>
             </ExampleToast>
+            <Test></Test>
         </Jumbotron>
     </Container>
 );
