@@ -4,7 +4,6 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Test from './Test';
 
 import './App.css';
 
@@ -29,12 +28,13 @@ const App = () => (
         <Jumbotron>
             <h1 className="header">Welcome to React</h1>
             <ExampleToast>
-                We now have Toast
+                People who edited
+                <br/>Sanjay Thapa<br/>
+                Fan Tsz Kin<br/>
                 <span role="img" aria-label="tada">
                 🎉
                 </span>
             </ExampleToast>
-            <Test></Test>
         </Jumbotron>
     </Container>
 );
