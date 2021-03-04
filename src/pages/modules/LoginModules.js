@@ -1,17 +1,5 @@
 import firebase from 'firebase/app';
-// import auth from "firebase/auth";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDvYUabb_1GGZOHPLa2gOz3nqWGG5sYKIs",
-    authDomain: "redstream-d1a42.firebaseapp.com",
-    projectId: "redstream-d1a42",
-    storageBucket: "redstream-d1a42.appspot.com",
-    messagingSenderId: "194906792996",
-    appId: "1:194906792996:web:7560022676a7f7161b24b1",
-    measurementId: "G-3ESESXD7K5"
-};
-
-firebase.initializeApp(firebaseConfig);
+import "firebase/auth";
 
 const signup = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -25,10 +13,60 @@ const logout = () => {
     return firebase.auth().signOut();
 };   // .then().error() is available
 
+const updateName = (newName) => {
+    var user = firebase.auth().currentUser;
+
+    return user.updateProfile({
+        displayName: newName,
+    });     // .then().error() is available
+}
+
+const updatePassword = (newPassword) => {
+    var user = firebase.auth().currentUser;
+
+    return user.updatePassword(newPassword);
+}   // .then().error() is available
+
+const updateIcon = (newIcon) => {
+    const uid = getUserProfile().uid;
+    var user = firebase.auth().currentUser;
+
+    const iconRef = firebase.storage().ref(`/users/` + uid + `/icon`);
+
+    return iconRef.put(newIcon).then(
+        ()=>{
+            return iconRef.getDownloadURL().then((url)=>{
+                console.log(url);
+                return user.updateProfile({
+                    photoURL: url
+                });
+            });
+        }
+    );
+}
+
+const getUserProfile = () => {
+    var user = firebase.auth().currentUser;
+    var name, email, icon = null, uid;
+
+    if (user != null) {
+        name = user.displayName;
+        email = user.email;
+        uid = user.uid;
+        icon = user.photoURL;
+    }
+
+    return { name, email, icon, uid };
+}
+
 const LoginModules = {
     signup,
     register,
     logout,
-};  // after import this file, use LoginModules.method-name() to access above methods
+    updateName,
+    updateIcon,
+    updatePassword,
+    getUserProfile,
+};  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;
