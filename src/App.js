@@ -21,6 +21,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import firebase from 'firebase/app';
+import "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDvYUabb_1GGZOHPLa2gOz3nqWGG5sYKIs",
