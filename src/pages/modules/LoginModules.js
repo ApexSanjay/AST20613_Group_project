@@ -43,7 +43,7 @@ const updatePassword = (newPassword) => {
 
 const updateIcon = () => {
     //todo
-    return ;
+    return;
 }
 
 const getUserProfile = () => {
@@ -57,7 +57,7 @@ const getUserProfile = () => {
         email = user.email;
     }
 
-    return {name, email, icon};
+    return { name, email, icon };
 }
 
 const LoginModules = {
@@ -68,6 +68,6 @@ const LoginModules = {
     updateIcon,
     updatePassword,
     getUserProfile,
-};  // after import this file, use LoginModules.method_name() to access above methods
+};  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;
