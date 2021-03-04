@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import "firebase/auth";
 
 const signup = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -23,10 +24,8 @@ const updateName = (newName) => {
 const updatePassword = (newPassword) => {
     var user = firebase.auth().currentUser;
 
-    return user.updatePassword(newPassword).then(function () {
-        // Update successful.
-    });     // .then().error() is available
-}
+    return user.updatePassword(newPassword);     
+}   // .then().error() is available
 
 const updateIcon = () => {
     //todo
