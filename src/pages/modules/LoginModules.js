@@ -24,26 +24,39 @@ const updateName = (newName) => {
 const updatePassword = (newPassword) => {
     var user = firebase.auth().currentUser;
 
-    return user.updatePassword(newPassword);     
+    return user.updatePassword(newPassword);
 }   // .then().error() is available
 
-const updateIcon = () => {
-    //todo
-    return;
+const updateIcon = (newIcon) => {
+    const uid = getUserProfile().uid;
+    var user = firebase.auth().currentUser;
+
+    const iconRef = firebase.storage().ref(`/users/` + uid + `/icon`);
+
+    return iconRef.put(newIcon).then(
+        ()=>{
+            return iconRef.getDownloadURL().then((url)=>{
+                console.log(url);
+                return user.updateProfile({
+                    photoURL: url
+                });
+            });
+        }
+    );
 }
 
 const getUserProfile = () => {
-    //todo: icon
-
     var user = firebase.auth().currentUser;
-    var name, email, icon = null;
+    var name, email, icon = null, uid;
 
     if (user != null) {
         name = user.displayName;
         email = user.email;
+        uid = user.uid;
+        icon = user.photoURL;
     }
 
-    return { name, email, icon };
+    return { name, email, icon, uid };
 }
 
 const LoginModules = {

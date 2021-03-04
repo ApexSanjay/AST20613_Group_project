@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +13,14 @@ import SettingMenu from "./components/settingMenu";
 import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
 
+// import firebase from 'firebase/app';
+import "firebase/storage";
+
+import LoginModules from "./modules/LoginModules";
+
 function SettingProfile(props) {
+    var profileName = LoginModules.getUserProfile().name;
+
     const Container = styled.div`
         padding: 2%;
         margin: auto;
@@ -22,6 +29,10 @@ function SettingProfile(props) {
     `;
 
     const NameField = () => {
+        const updateNameState = (e) => {
+            profileName = e.target.value;
+        };
+
         return (
             <Grid container spacing={3}>
                 <Grid item xs={3}>
@@ -32,10 +43,11 @@ function SettingProfile(props) {
                 <Grid item xs={9}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="name"
                             label="Name"
                             variant="outlined"
-                            defaultValue="User123456"
+                            defaultValue={profileName}
+                            onChange={updateNameState}
                             fullWidth
                         />
                     </center>
@@ -45,6 +57,29 @@ function SettingProfile(props) {
     };
 
     const IconField = () => {
+        const [imageAsFile, setImageAsFile] = useState('');
+        const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
+
+        const handleImage = (e) => {
+            const image = e.target.files[0]
+            setImageAsFile(imageFile => (image));
+        }
+
+        const handleSubmit = e => {
+            e.preventDefault()
+            console.log('start of upload')
+
+            if (imageAsFile === '') {
+                console.error(`not an image, the image file is a ${typeof (imageAsFile)}`)
+            }
+            LoginModules.updateIcon(imageAsFile).then(() => {
+                var newIcon = LoginModules.getUserProfile().icon;
+                console.log(newIcon);
+                setIcon(newIcon);
+            }
+            );
+        }
+
         return (
             <Grid container spacing={3}>
                 <Grid item xs={3}>
@@ -54,8 +89,12 @@ function SettingProfile(props) {
                 </Grid>
                 <Grid item xs={9}>
                     <center>
-                        <img src={face} width="80%" alt="icon"></img> <br />
-                        <Button variant="contained" color="Secondary">Click to upload a new image</Button>
+                        <img src={icon} width="80%" alt="icon"></img> <br />
+                        <input
+                            type="file"
+                            onChange={handleImage}
+                        />
+                        <Button onClick={handleSubmit} variant="contained" color="secondary">Click to upload a new image</Button>
                     </center>
                 </Grid>
             </Grid>
@@ -63,6 +102,12 @@ function SettingProfile(props) {
     }
 
     const ProfileSetting = () => {
+        const updateProfile = () => {
+            LoginModules.updateName(profileName).then(() => {
+                console.log(LoginModules.getUserProfile().name);
+            });
+        }
+
         return (
             <Grid container spacing={0}>
                 <Grid item xs={12}>
@@ -71,7 +116,7 @@ function SettingProfile(props) {
                 <Grid item xs={12}>
                     <NameField />
                     <IconField />
-                    <SaveButton />
+                    <SaveButton onClick={updateProfile} />
                 </Grid>
             </Grid>
         );
