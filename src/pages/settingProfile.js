@@ -14,7 +14,7 @@ import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
 
 // import firebase from 'firebase/app';
-import "firebase/storage";
+// import "firebase/storage";
 
 import LoginModules from "./modules/LoginModules";
 

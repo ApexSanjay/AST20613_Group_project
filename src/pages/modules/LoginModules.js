@@ -3,29 +3,29 @@ import "firebase/auth";
 
 const signup = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
-};   // .then().error() is available
+};   // .then().catch() is available
 
 const register = (email, password) => {
     return firebase.auth().createUserWithEmailAndPassword(email, password);
-};   // .then().error() is available
+};   // .then().catch() is available
 
 const logout = () => {
     return firebase.auth().signOut();
-};   // .then().error() is available
+};   // .then().catch() is available
 
 const updateName = (newName) => {
     var user = firebase.auth().currentUser;
 
     return user.updateProfile({
         displayName: newName,
-    });     // .then().error() is available
+    });     // .then().catch() is available
 }
 
 const updatePassword = (newPassword) => {
     var user = firebase.auth().currentUser;
 
     return user.updatePassword(newPassword);
-}   // .then().error() is available
+}   // .then().catch() is available
 
 const updateIcon = (newIcon) => {
     const uid = getUserProfile().uid;
