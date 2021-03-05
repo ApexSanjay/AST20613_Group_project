@@ -11,12 +11,12 @@ const suggestMovie = () => {
     return;
 };
 
-const createPlaylist = (name, movies) => {
+const createPlaylist = (name, list) => {
     //todo
     return;
-};
+};  //list is an array
 
-const updatePlaylist = (playlistID, movies) => {
+const updatePlaylist = (playlistID, list) => {
     //todo
     return;
 };
