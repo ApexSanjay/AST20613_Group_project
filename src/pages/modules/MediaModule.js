@@ -18,6 +18,7 @@ const transcodeMovie = (movieFiles) => {
 };
 
 const movieInfo = (title, director, cast, description) => {
+    //todo: add movie ref
     var res = {
         title: title,
         director: director,
@@ -45,12 +46,8 @@ const removeMovieInfo = (id) => {
 };  //.then().catch() is available
 
 const getMovieInfo = (id) => {
-    return firebase.firestore().collection("movies").doc(id)
-        .get()
-        .then((doc) => {
-            return doc;
-        });
-};
+    return firebase.firestore().collection("movies").doc(id).get();
+};  //.then(doc).catch() is available
 
 const MediaModule = {
     getMovieStream,

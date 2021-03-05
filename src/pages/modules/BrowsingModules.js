@@ -12,36 +12,58 @@ const suggestMovie = () => {
 };
 
 const createPlaylist = (name, list) => {
-    //todo
-    return;
-};  //list is an array
+    return firebase.firestore().collection("playlists").add({
+        title: name,
+        list: list,
+    });
+};  //list is an array of movie id  //.then(docRef).catch is available
 
 const updatePlaylist = (playlistID, list) => {
-    //todo
-    return;
-};
+    return firebase.firestore().collection("playlists").doc(playlistID).set({
+        list: list,
+    });
+};  //.then().catch() is available
 
 const removePlaylist = (playlistID) => {
-    //todo
-    return;
-};
+    return firebase.firestore().collection("playlists").doc(playlistID).delete();
+};  //.then().catch() is available
 
 const getPlaylist = (playlistID) => {
-    //todo
-    return;
-}
+    return firebase.firestore().collection("playlists").doc(playlistID).get();
+};  //.then().catch() is available
 
-const createReview = () => {
-    //todo
-    return;
+const createReview = (movieID, review) => {
+    return firebase.firestore().collection("reviews").add({
+        movieID: movieID,
+        review: review,
+    });  //.then().catch() is available
 };
 
-const removeReview = () => {
-    //todo
-    return;
+const removeReview = (reviewID) => {
+    return firebase.firestore().collection("reviews").doc(reviewID).delete();
+};  //.then().catch() is available
+
+const getReviewSnapshot = (movieID) => {
+    return firebase.firestore().collection("reviews").where("movieID", "==", movieID).onSnapshot((doc) => {
+        return doc;
+    });;
+};  //
+
+const getReviewOnce = (movieID) => {
+    return firebase.firestore().collection("reviews").where("movieID", "==", movieID);
+};  //.then().catch() is available
+
+const BrowsingModules = {
+    searchMovie,
+    suggestMovie,
+    createPlaylist,
+    updatePlaylist,
+    removePlaylist,
+    getPlaylist,
+    createReview,
+    removeReview,
+    getReviewSnapshot,
+    getReviewOnce
 };
 
-const getReview = () => {
-    //todo
-    return;
-};
+export default BrowsingModules;
