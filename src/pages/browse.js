@@ -141,6 +141,11 @@ export function Browse(props) {
                     <MovieCardRow />
                 </Grid>
 
+                <Grid item xs={12}>
+                    <h3>Animation</h3>
+                    <MovieCardRow />
+                </Grid>
+
             </Grid>
         </Container>
     );

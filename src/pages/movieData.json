@@ -3,7 +3,7 @@
     "title": "Space Sweepers",
     "description": "Set in the year 2092 and follows the crew of a space junk collector ship called The Victory. When they discover a humanoid robot named Dorothy that's known to be a weapon of mass destruction, they get involved in a risky business deal.",
     "Director": "Sung-hee jo",
-    "cast": [" Song Joong-Ki", "Seon-kyu Jin", " Kim Tae-ri"],
+    "cast": [" Song Joong-Ki ,", "Seon-kyu Jin ,", " Kim Tae-ri"],
     "trailerURL": "https://www.youtube.com/watch?v=H1WYnJF1Pwo",
     "imdbReview": "6.6",
     "movieLength": "2 hour 16 minutes",
@@ -524,6 +524,6 @@
     "imdbReview": "7.0",
     "movieLength": "1 hour 50 minutes",
     "movieReleaseDate": "2013"
-},
+}
 
 ]

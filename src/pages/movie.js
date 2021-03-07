@@ -15,7 +15,12 @@ import playbtn from "./img/playbtn.svg";
 
 import ReactPlayer from 'react-player'
 
+//Movie database
+import moviesN from './movieData.json';
+
 function Movie(props) {
+
+    const movies = moviesN[0];
     const MenuBar = () => {
 
         var history = useHistory();
@@ -72,29 +77,29 @@ function Movie(props) {
         padding: 10px;
     `;
 
-    const Director = (props) => {
+    const Director = () => {
         return (
             <div>
                 <h3>Director</h3>
-                {props.children}
+                {movies.Director}
             </div>
         );
     }
 
-    const Cast = (props) => {
+    const Cast = () => {
         return (
             <div>
                 <h3>Cast</h3>
-                {props.children}
+                {movies.cast}
             </div>
         );
     }
 
-    const Description = (props) => {
+    const Description = () => {
         return (
             <div>
                 <h3>Movie Description</h3>
-                {props.children}
+                {movies.description}
             </div>
         );
     }
@@ -109,10 +114,11 @@ function Movie(props) {
         );
     }
 
+
     const ShareLink = () => {
         return (
             <div>
-                <Button>
+                <Button onClick =''>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>
@@ -123,7 +129,7 @@ function Movie(props) {
         return (
             <p>
                 <center>
-                    <Button fullWidth>
+                    <Button fullWidth onClick='#'>
                         <img src={playbtn} width="60%" alt="Play"></img>
                     </Button>
                 </center>
@@ -138,35 +144,31 @@ function Movie(props) {
             </BackGround>
             <Body>
                 <MenuBar />
-                <h1>Movie Title</h1>
+                {<h1>{movies.title}</h1>}
                 <Grid container>
                     <Grid item xs={3}>
                         <AddToLibrary />
                         <ShareLink />
                         <PlayButton />
                         <p>
-                            136 min | 2013 | IMDB: 6.6
+                           {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
                         </p>
                     </Grid>
                     <Grid item xs={9}>
                         <p>
                             <center>
-                                <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' width="100%" />
+                                <ReactPlayer url={movies.trailerURL} width="100%" />
                             </center>
                         </p>
                     </Grid>
                     <Grid item xs={3}>
-                        <Director>Sung-hee jo</Director>
+                        <Director></Director>
                         <Cast>
-                            Sung-hee jo <br />
-                            Nataile Portman <br />
-                            Chris Evan <br />
-                            Jackie Chan<br />
+                           
                         </Cast>
                     </Grid>
                     <Grid item xs={9}>
                         <Description>
-                            One man seeks revenge in Hong Kong.
                         </Description>
                     </Grid>
                 </Grid>
