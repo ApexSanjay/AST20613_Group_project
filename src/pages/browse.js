@@ -9,7 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import styled from 'styled-components';
 
-import moviePoster from "./img/movie01.jpg";
+//Should be array
+import moviePoster from "./img/soul_poster.jpg";
 
 export function Browse(props) {
 

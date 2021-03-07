@@ -10,7 +10,7 @@ import LinkIcon from '@material-ui/icons/Link';
 
 import styled from 'styled-components';
 
-import moviePoster from "./img/movie01.jpg";
+import moviePoster from "./img/soul_poster.jpg";
 import playbtn from "./img/playbtn.svg";
 
 import ReactPlayer from 'react-player'
