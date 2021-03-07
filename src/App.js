@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Redirect,
-  // Link
 } from "react-router-dom";
 import {
   Browse,
@@ -17,10 +16,27 @@ import {
   SignupAccount,
   SignupPayment,
 } from './pages';
-// import styled from 'styled-components';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+
+import firebase from 'firebase/app';
+import "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDvYUabb_1GGZOHPLa2gOz3nqWGG5sYKIs",
+  authDomain: "redstream-d1a42.firebaseapp.com",
+  projectId: "redstream-d1a42",
+  storageBucket: "redstream-d1a42.appspot.com",
+  messagingSenderId: "194906792996",
+  appId: "1:194906792996:web:7560022676a7f7161b24b1",
+  measurementId: "G-3ESESXD7K5"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+//for test propose, remove if login function is fully developed
+firebase.auth().signInAnonymously();
 
 const theme = createMuiTheme({
   palette: {
