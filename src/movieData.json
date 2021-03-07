@@ -164,16 +164,106 @@
     "movieReleaseDate": "1999"
 },{
     "id": "16",
-    "title": "Soul",
-    "description": "",
-    "Director": [""],
-    "cast": [""],
-    "trailerURL": "",
-    "imdbReview": "8.1",
-    "movieLength": "1 hour 40 minutes",
-    "movieReleaseDate": "2020"
+    "title": "Spider-Man: Into the Spider-Verse",
+    "description": "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+    "Director": ["Bob Persichetti", "Peter Ramsey"],
+    "cast": [" Shameik Moore", "Jake Johnson", "Hailee Steinfeld"],
+    "trailerURL": "https://www.youtube.com/watch?v=g4Hbz2jLxvQ",
+    "imdbReview": "8.4",
+    "movieLength": "1 hour 57 minutes",
+    "movieReleaseDate": "2018"
 },{
-    "id": "12",
+    "id": "17",
+    "title": "Django Unchained",
+    "description": "With the help of a German bounty-hunter, a freed slave sets out to rescue his wife from a brutal plantation-owner in Mississippi.",
+    "Director": "Quentin Tarantino",
+    "cast": [" Jamie Foxx", "Christoph Waltz", "Leonardo DiCaprio"],
+    "trailerURL": "https://www.youtube.com/watch?v=0fUCuvNlOCg",
+    "imdbReview": "8.4",
+    "movieLength": "2 hour 45 minutes",
+    "movieReleaseDate": "2012"
+},{
+    "id": "18",
+    "title": "Forrest Gump",
+    "description": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.",
+    "Director": "Robert Zemeckis",
+    "cast": [" Tom Hanks", "Robin Wright", "Gary Sinise"],
+    "trailerURL": "https://www.youtube.com/watch?v=bLvqoHBptjg",
+    "imdbReview": "8.8",
+    "movieLength": "2 hour 22 minutes",
+    "movieReleaseDate": "1994"
+},{
+    "id": "19",
+    "title": "The Green Mile",
+    "description": "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.",
+    "Director": " Frank Darabont",
+    "cast": ["Tom Hanks", "Michael Clarke Duncan", "David Morse"],
+    "trailerURL": "https://www.youtube.com/watch?v=Ki4haFrqSrw",
+    "imdbReview": "8.6",
+    "movieLength": "3 hour 9 minutes",
+    "movieReleaseDate": "1999"
+},{
+    "id": "20",
+    "title": "John Wick: Chapter 3 - Parabellum",
+    "description": "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
+    "Director": " Chad Stahelski",
+    "cast": [" Keanu Reeves", "Halle Berr", "Ian McShane"],
+    "trailerURL": "https://www.youtube.com/watch?v=pU8-7BX9uxs",
+    "imdbReview": "7.4",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2019"
+},{
+    "id": "21",
+    "title": "Deadpool 2",
+    "description": "Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.",
+    "Director": [""],
+    "cast": " David Leitch",
+    "trailerURL": "https://www.youtube.com/watch?v=D86RtevtfrA",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 59 minutes",
+    "movieReleaseDate": "2018"
+},{
+    "id": "22",
+    "title": "Doctor Strange",
+    "description": "While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.",
+    "Director": " Scott Derrickson",
+    "cast": [" Benedict Cumberbatch", "Chiwetel Ejiofor", "Rachel McAdams"],
+    "trailerURL": "https://www.youtube.com/watch?v=HSzx-zryEgM",
+    "imdbReview": "7.5",
+    "movieLength": "1 hour 55 minutes",
+    "movieReleaseDate": "2016"
+},{
+    "id": "23",
+    "title": "Iron Man 3",
+    "description": "When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.",
+    "Director": " Shane Black",
+    "cast": ["Robert Downey Jr.", "Guy Pearce", "Gwyneth Paltrow"],
+    "trailerURL": "https://www.youtube.com/watch?v=Ke1Y3P9D0Bc",
+    "imdbReview": "7.1",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2013"
+},{
+    "id": "24",
+    "title": "The Big Short",
+    "description": "In 2006-2007 a group of investors bet against the US mortgage market. In their research they discover how flawed and corrupt the market is.",
+    "Director": " Adam McKay",
+    "cast": [" Christian Bale", "Steve Carell", "Ryan Gosling"],
+    "trailerURL": "https://www.youtube.com/watch?v=vgqG3ITMv1Q",
+    "imdbReview": "7.8",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2015"
+},{
+    "id": "25",
+    "title": "American Psycho",
+    "description": "A wealthy New York City investment banking executive, Patrick Bateman, hides his alternate psychopathic ego from his co-workers and friends as he delves deeper into his violent, hedonistic fantasies.",
+    "Director": "Mary Harron",
+    "cast": [" Christian Bale", "Justin Theroux", "Josh Lucas"],
+    "trailerURL": "https://www.youtube.com/watch?v=5YnGhW4UEhc",
+    "imdbReview": "7.6",
+    "movieLength": "1 hour 41 minutes",
+    "movieReleaseDate": "2000"
+},{
+    "id": "26",
     "title": "Soul",
     "description": "",
     "Director": [""],
