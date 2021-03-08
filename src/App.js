@@ -19,6 +19,7 @@ import {
   Home,
   Profile,
   Play,
+  Series
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -89,6 +90,9 @@ function App() {
             </Route>
             <Route path="/play">
               <Play />
+            </Route>
+            <Route path="/series">
+              <Series />
             </Route>
             <Route path="/setting/profile">
               <SettingProfile />
