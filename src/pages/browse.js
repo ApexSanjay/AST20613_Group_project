@@ -12,6 +12,8 @@ import styled from 'styled-components';
 //Should be array
 import moviePoster from "./img/soul_poster.jpg";
 
+import LoginModules from "./modules/LoginModules";
+
 export function Browse(props) {
 
     const MenuBar = () => {
@@ -42,12 +44,18 @@ export function Browse(props) {
                     history.push("/setting");
                     break;
                 case "logout":
-                    history.push("/signup");
+                    history.push("/home");
                     break;
                 default:
                     break;
             }
         };
+
+        const logout = () => {
+            LoginModules.logout().then(()=>{
+                history.push("/home");
+            });
+        }
 
         return (
             <div>
