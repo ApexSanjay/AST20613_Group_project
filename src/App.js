@@ -15,6 +15,7 @@ import {
   SignupPlan,
   SignupAccount,
   SignupPayment,
+  Login
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -73,6 +74,9 @@ function App() {
                   pathname: "/signup/plan",
                 }}
               />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route path="/setting/profile">
               <SettingProfile />

@@ -7,3 +7,4 @@ export { default as SettingPayment } from './settingPayment';
 export { default as SignupPlan } from './signupPlan';
 export { default as SignupAccount } from './signupAccount';
 export { default as SignupPayment } from './signupPayment';
+export { default as Login } from './login';
