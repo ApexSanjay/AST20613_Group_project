@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/storage";
 
-const signup = (email, password) => {
+const login = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
 };   // .then().catch() is available
 
@@ -61,7 +61,7 @@ const getUserProfile = () => {
 }
 
 const LoginModules = {
-    signup,
+    login,
     register,
     logout,
     updateName,

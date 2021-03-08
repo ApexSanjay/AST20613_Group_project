@@ -44,8 +44,8 @@ const [copiedLink] = React.useState(0);
                 </Grid>
             </div>
         );
-    } 
-    
+    }
+
     const Container = styled.div`
         margin: auto;
         padding: 0;
@@ -129,10 +129,15 @@ const [copiedLink] = React.useState(0);
     }
 
     const PlayButton = () => {
+        var history = useHistory();
+        const play = () => {
+            history.push("/play");
+        }
+
         return (
             <p>
                 <center>
-                    <Button fullWidth onClick='#'>
+                    <Button fullWidth onClick={play}>
                         <img src={playbtn} width="60%" alt="Play"></img>
                     </Button>
                 </center>
@@ -154,7 +159,7 @@ const [copiedLink] = React.useState(0);
                         <ShareLink />
                         <PlayButton />
                         <p>
-                           {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
+                            {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
                         </p>
                     </Grid>
                     <Grid item xs={9}>
@@ -167,7 +172,7 @@ const [copiedLink] = React.useState(0);
                     <Grid item xs={3}>
                         <Director></Director>
                         <Cast>
-                           
+
                         </Cast>
                     </Grid>
                     <Grid item xs={9}>

@@ -7,3 +7,8 @@ export { default as SettingPayment } from './settingPayment';
 export { default as SignupPlan } from './signupPlan';
 export { default as SignupAccount } from './signupAccount';
 export { default as SignupPayment } from './signupPayment';
+export { default as Login } from './login';
+export { default as Home } from './home';
+export { default as Profile } from './profile';
+export { default as Play } from './play';
+export { default as Series } from './series';
