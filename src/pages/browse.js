@@ -11,6 +11,7 @@ import styled from 'styled-components';
 
 //Should be array
 import moviePoster from "./img/soul_poster.jpg";
+import { MovieCreationSharp } from '@material-ui/icons';
 
 export function Browse(props) {
 
@@ -93,9 +94,9 @@ export function Browse(props) {
         `;
         return (
             <Card>
-
                 <a href="movie">
-                    <Movie src={moviePoster}></Movie>
+                    <Movie 
+                    src={moviePoster}></Movie>
                 </a>
             </Card>
         );

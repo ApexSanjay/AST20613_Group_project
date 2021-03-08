@@ -10,7 +10,7 @@ import LinkIcon from '@material-ui/icons/Link';
 
 import styled from 'styled-components';
 
-import moviePoster from "./img/soul_poster.jpg";
+import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import playbtn from "./img/playbtn.svg";
 
 import ReactPlayer from 'react-player'
@@ -19,8 +19,11 @@ import ReactPlayer from 'react-player'
 import moviesN from './movieData.json';
 
 function Movie(props) {
+//For sharing link
+const [copiedLink] = React.useState(0);
 
     const movies = moviesN[0];
+
     const MenuBar = () => {
 
         var history = useHistory();
@@ -118,7 +121,7 @@ function Movie(props) {
     const ShareLink = () => {
         return (
             <div>
-                <Button onClick =''>
+                <Button onClick ={()=>navigator.clipboard.writeText('Should be url')}>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>
