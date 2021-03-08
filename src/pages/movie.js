@@ -41,8 +41,8 @@ function Movie(props) {
                 </Grid>
             </div>
         );
-    } 
-    
+    }
+
     const Container = styled.div`
         margin: auto;
         padding: 0;
@@ -118,7 +118,7 @@ function Movie(props) {
     const ShareLink = () => {
         return (
             <div>
-                <Button onClick =''>
+                <Button onClick=''>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>
@@ -126,10 +126,15 @@ function Movie(props) {
     }
 
     const PlayButton = () => {
+        var history = useHistory();
+        const play = () => {
+            history.push("/play");
+        }
+
         return (
             <p>
                 <center>
-                    <Button fullWidth onClick='#'>
+                    <Button fullWidth onClick={play}>
                         <img src={playbtn} width="60%" alt="Play"></img>
                     </Button>
                 </center>
@@ -151,7 +156,7 @@ function Movie(props) {
                         <ShareLink />
                         <PlayButton />
                         <p>
-                           {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
+                            {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
                         </p>
                     </Grid>
                     <Grid item xs={9}>
@@ -164,7 +169,7 @@ function Movie(props) {
                     <Grid item xs={3}>
                         <Director></Director>
                         <Cast>
-                           
+
                         </Cast>
                     </Grid>
                     <Grid item xs={9}>
