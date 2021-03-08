@@ -130,7 +130,7 @@ function SignupPlan(props) {
         return (
             <div>
                 <p>✔️No commitments, cancel anytime.</p>
-                <p>✔️Everything on Netflix for one low price.</p>
+                <p>✔️Everything on RedStream for one low price.</p>
                 <p>✔️Unlimited viewing on all your devices.</p>
             </div>
         );
@@ -139,7 +139,7 @@ function SignupPlan(props) {
     const PlanSelectField = () => {
         return (
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="demo-simple-select-outlined-label">Plan</InputLabel>
+                <InputLabel id="plan">Plan</InputLabel>
                 <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
