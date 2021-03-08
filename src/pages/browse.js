@@ -38,7 +38,7 @@ export function Browse(props) {
                     history.push("/series");
                     break;
                 case "myLib":
-                    history.push("/lib");
+                    history.push("/profile");
                     break;
                 case "manage":
                     history.push("/setting");
