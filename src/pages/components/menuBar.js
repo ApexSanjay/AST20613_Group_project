@@ -1,5 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import {
+    Link,
+} from "react-router-dom";
+
+import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -51,12 +56,26 @@ const MenuBar = () => {
         });
     }
 
+    const Logo = (props) => {
+        const StyledLink = styled(Link)`
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+        `;
+
+        return (
+            <StyledLink to="/browse">
+                {props.children}
+            </StyledLink>
+        );
+    };
+
     return (
         <div>
             <Grid container>
                 <Grid item xs={11}>
                     {/* <img src="#" alt="RedStream"></img> */}
-                    <b>RedStream</b>
+                    <Logo>RedStream</Logo>
                     <Button onClick={() => { btnHandler("movie") }}>Movie</Button>
                     <Button onClick={() => { btnHandler("series") }}>Series</Button>
                     <Button onClick={() => { btnHandler("myLib") }}>My Library</Button>
