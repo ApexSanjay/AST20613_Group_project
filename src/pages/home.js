@@ -2,11 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
-import SettingsIcon from '@material-ui/icons/Settings';
 import Grid from '@material-ui/core/Grid';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
 
@@ -14,31 +10,22 @@ import backgroundImage from "./img/home_background.jpg";
 
 export function Home(props) {
 
+    //btn handler
+    const history = useHistory();
+    const btnHandler = (btnName) => {
+        switch (btnName) {
+            case "signup":
+                history.push("/signup");
+                break;
+            case "login":
+                history.push("/login");
+                break;
+            default:
+                break;
+        }
+    };
+
     const MenuBar = () => {
-        const [anchorEl, setAnchorEl] = React.useState(null);
-
-        const handleClick = (event) => {
-            setAnchorEl(event.currentTarget);
-        };
-
-        const handleClose = () => {
-            setAnchorEl(null);
-        };
-
-        //btn handler
-        const history = useHistory();
-        const btnHandler = (btnName) => {
-            switch (btnName) {
-                case "signup":
-                    history.push("/signup");
-                    break;
-                case "login":
-                    history.push("/login");
-                    break;
-                default:
-                    break;
-            }
-        };
 
         return (
             <div>
@@ -136,23 +123,25 @@ export function Home(props) {
                     <p>✔️Everything on RedStream for one low price.</p>
                     <p>✔️Unlimited viewing on all your devices.</p>
                     <ButtonContainer>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                    >
-                        Login
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { btnHandler("login") }}
+                            fullWidth
+                        >
+                            Login
                             </Button>
                     </ButtonContainer>
-                    
+
                     <ButtonContainer>
 
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                    >
-                        SIGNUP
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { btnHandler("signup") }}
+                            fullWidth
+                        >
+                            SIGNUP
                             </Button>
                     </ButtonContainer>
                 </FormBackground>
