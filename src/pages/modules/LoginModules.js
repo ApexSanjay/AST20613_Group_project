@@ -64,7 +64,7 @@ const getUserProfile = () => {
 
 const getLoginStatus = () => {
     var user = firebase.auth().currentUser;
-    if(user != null){
+    if (user != null) {
         return true;
     } else {
         return false;
@@ -85,17 +85,25 @@ const createCardInfo = (userID, cvv, cardNum, explorationDate, firstName, lastNa
     return firebase.firestore().collection("cardInfo").add(info);
 }
 
-const updateCardInfo = (userID, cvv, cardNum, explorationDate, firstName, lastName) => {
+const updateCardInfo = (cardID, userID, cvv, cardNum, explorationDate, firstName, lastName) => {
     const info = {
-        "UserID": userID,
-        "CVV": cvv,
-        "CardNumber": cardNum,
-        "ExplorationDate": explorationDate,
-        "FirstName": firstName,
-        "LastName": lastName,
+        UserID: userID,
+        CVV: cvv,
+        CardNumber: cardNum,
+        ExplorationDate: explorationDate,
+        FirstName: firstName,
+        LastName: lastName,
     }
+    console.log(info);
+    return firebase.firestore().collection("cardInfo").doc(cardID).update(info);
+}
 
-    return firebase.firestore().collection("cardInfo").where("UserID", "==", userID);
+const getCardInfo = (userID) => {
+    return firebase.firestore().collection("cardInfo").where("UserID", "==", userID).get();
+    //(querySnapshot) => {
+        // querySnapshot.forEach((doc) => {
+        //     console.log(doc.id, " => ", doc.data());
+        // });
 }
 
 const LoginModules = {
@@ -108,7 +116,8 @@ const LoginModules = {
     getUserProfile,
     getLoginStatus,
     createCardInfo,
-    updateCardInfo
+    updateCardInfo,
+    getCardInfo
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;
