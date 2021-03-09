@@ -20,7 +20,7 @@ function SignupAccount(props) {
         margin: auto;
         width: 80%;
     `;
-    
+
     const history = useHistory();
 
     //onchange handler
@@ -103,7 +103,6 @@ function SignupAccount(props) {
             <Button
                 variant="contained"
                 color="primary"
-                // onClick={() => { btnHandler("continue") }}
                 fullWidth
                 type="submit"
             >
