@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import face from "./img/face.svg";
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBar";
 
 function Profile(props) {
 
@@ -89,8 +89,11 @@ function Profile(props) {
 
     return (
         <Container>
-            <MenuBar>Profile</MenuBar>
+            <MenuBar />
             <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <h2>Profile</h2>
+                </Grid>
                 <Grid item xs={3}>
                     <Icon />
                     <Name />
