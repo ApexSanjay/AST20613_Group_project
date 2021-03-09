@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -7,28 +6,14 @@ import styled from 'styled-components';
 
 import face from "./img/face.svg";
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBar";
 
 function Profile(props) {
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
-
-    //btn handler
-    const history = useHistory();
-    const btnHandler = (btnName) => {
-        switch (btnName) {
-            case "continue":
-                history.push("/signup/payment");
-                break;
-            default:
-                break;
-        }
-    }
 
     const Icon = () => {
 
@@ -89,8 +74,11 @@ function Profile(props) {
 
     return (
         <Container>
-            <MenuBar>Profile</MenuBar>
+            <MenuBar />
             <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <h2>Profile</h2>
+                </Grid>
                 <Grid item xs={3}>
                     <Icon />
                     <Name />

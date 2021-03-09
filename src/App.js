@@ -116,7 +116,7 @@ function App() {
             <Route path="/">
               <Redirect
                 to={{
-                  pathname: "/browse",
+                  pathname: "/home",
                 }}
               />
             </Route>

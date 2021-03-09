@@ -11,7 +11,7 @@ import Select from '@material-ui/core/Select';
 
 import styled from 'styled-components';
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBarBeforeSignin";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -40,10 +40,8 @@ function SignupPlan(props) {
     };
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
 
 
@@ -170,8 +168,11 @@ function SignupPlan(props) {
 
     return (
         <Container>
-            <MenuBar>Sign Up Page - Choose Your Plan</MenuBar>
+            <MenuBar/>
             <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <h2>Sign Up Page - Choose Your Plan</h2>
+                </Grid>
                 <Grid item xs={12}>
                     <PlanDetails />
                 </Grid>
@@ -180,7 +181,6 @@ function SignupPlan(props) {
                 </Grid>
                 <Grid items xs={5}>
                     <PlanSelectField />
-
                 </Grid>
                 <Grid items xs={11}></Grid>
                 <Grid items xs={1}>

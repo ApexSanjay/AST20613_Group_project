@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBarBeforeSignin";
 
 import LoginModules from "./modules/LoginModules";
 
@@ -18,10 +18,8 @@ function Login(props) {
     const history = useHistory();
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
 
     const login = () => {
@@ -116,8 +114,13 @@ function Login(props) {
 
     return (
         <Container>
-            <MenuBar>Login Page</MenuBar>
+            <MenuBar />
             <Grid container>
+                <Grid item xs={12}>
+                    <center>
+                        <h1>Login Page</h1>
+                    </center>
+                </Grid>
                 <Grid item xs={12}>
                     <AccountForm />
                 </Grid>

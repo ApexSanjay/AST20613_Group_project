@@ -2,65 +2,53 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
-import SettingsIcon from '@material-ui/icons/Settings';
 import Grid from '@material-ui/core/Grid';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
 
 import backgroundImage from "./img/home_background.jpg";
 
+import MenuBar from "./components/menuBarBeforeSignin";
+
 export function Home(props) {
 
-    const MenuBar = () => {
-        const [anchorEl, setAnchorEl] = React.useState(null);
+    // const MenuBar = () => {
 
-        const handleClick = (event) => {
-            setAnchorEl(event.currentTarget);
-        };
+    //     //btn handler
+    //     const history = useHistory();
+    //     const btnHandler = (btnName) => {
+    //         switch (btnName) {
+    //             case "signup":
+    //                 history.push("/signup");
+    //                 break;
+    //             case "login":
+    //                 history.push("/login");
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     };
 
-        const handleClose = () => {
-            setAnchorEl(null);
-        };
+    //     return (
+    //         <div>
+    //             <Grid container>
+    //                 <Grid item xs={10}>
+    //                     {/* <img src="#" alt="RedStream"></img> */}
+    //                     <b>RedStream</b>
+    //                 </Grid>
+    //                 <Grid item xs={2}>
+    //                     <Button onClick={() => { btnHandler("signup") }}>signup</Button>
+    //                     <Button onClick={() => { btnHandler("login") }}>login</Button>
+    //                 </Grid>
+    //             </Grid>
+    //             <hr></hr>
+    //         </div>
 
-        //btn handler
-        const history = useHistory();
-        const btnHandler = (btnName) => {
-            switch (btnName) {
-                case "signup":
-                    history.push("/signup");
-                    break;
-                case "login":
-                    history.push("/login");
-                    break;
-                default:
-                    break;
-            }
-        };
-
-        return (
-            <div>
-                <Grid container>
-                    <Grid item xs={10}>
-                        {/* <img src="#" alt="RedStream"></img> */}
-                        <b>RedStream</b>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button onClick={() => { btnHandler("signup") }}>signup</Button>
-                        <Button onClick={() => { btnHandler("login") }}>login</Button>
-                    </Grid>
-                </Grid>
-                <hr></hr>
-            </div>
-
-        );
-    }
+    //     );
+    // };
 
     const Container = styled.div`
         margin: auto;
-        padding: 0;
         width: 100%;
     `;
 
@@ -86,31 +74,35 @@ export function Home(props) {
     const Body = styled.div`
         backface-visibility: hidden;
         position: relative;
-        top: 5%;
+        top: 0%;
         margin: auto;
         width: 80%;
-        padding: 10px;
     `;
 
     const Description = () => {
+        const Container = styled.div`
+            margin: auto;
+            height: 100%;
+        `;
+
         const Title = styled.p`
             font-size: 48px;
         `;
 
         const Paragraph = styled.p`
-            font-size: 24px;
+            font-size: 20px;
         `;
 
         return (
-            <div>
+            <Container>
                 <Title>RedStream</Title>
                 <Paragraph>
                     RedStream is a website providing movie streaming services. It also has other features, such as playlist, movie review and algorithm for movie recommendation.
                 </Paragraph>
-            </div>
+            </Container>
         );
 
-    }
+    };
 
     const Form = () => {
         const FormBackground = styled.div`
@@ -128,6 +120,21 @@ export function Home(props) {
             width: 90%;
         `;
 
+        //btn handler
+        const history = useHistory();
+        const btnHandler = (btnName) => {
+            switch (btnName) {
+                case "signup":
+                    history.push("/signup");
+                    break;
+                case "login":
+                    history.push("/login");
+                    break;
+                default:
+                    break;
+            }
+        };
+
         return (
             <div>
                 <FormBackground>
@@ -136,29 +143,39 @@ export function Home(props) {
                     <p>✔️Everything on RedStream for one low price.</p>
                     <p>✔️Unlimited viewing on all your devices.</p>
                     <ButtonContainer>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                    >
-                        Login
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { btnHandler("login") }}
+                            fullWidth
+                        >
+                            Login
                             </Button>
                     </ButtonContainer>
-                    
+
                     <ButtonContainer>
 
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                    >
-                        SIGNUP
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { btnHandler("signup") }}
+                            fullWidth
+                        >
+                            SIGNUP
                             </Button>
                     </ButtonContainer>
                 </FormBackground>
             </div>
         );
-    }
+    };
+
+    const Center = styled.div`
+        position: absolute;
+        left: 5%;
+        top: 350%;
+        height: 80vh;
+        margin: auto;
+    `;
 
     return (
         <Container>
@@ -167,6 +184,7 @@ export function Home(props) {
             </BackGround>
             <Body>
                 <MenuBar />
+                <Center>
                 <Grid container spacing={0}>
                     <Grid item xs={6}>
                         <Description />
@@ -174,8 +192,9 @@ export function Home(props) {
                     <Grid item xs={6}>
                         <Form />
                     </Grid>
-
                 </Grid>
+                </Center>
+
             </Body>
 
         </Container>
