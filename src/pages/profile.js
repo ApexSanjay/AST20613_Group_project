@@ -11,10 +11,8 @@ import MenuBar from "./components/menuBar";
 function Profile(props) {
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
 
     const Icon = () => {

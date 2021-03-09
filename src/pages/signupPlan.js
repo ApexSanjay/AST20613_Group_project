@@ -40,10 +40,8 @@ function SignupPlan(props) {
     };
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
 
 

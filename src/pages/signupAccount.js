@@ -12,10 +12,8 @@ import MenuBar from "./components/menuBarBeforeSignin";
 function SignupAccount(props) {
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
 
     //btn handler
