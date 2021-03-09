@@ -61,13 +61,12 @@ const getUserProfile = () => {
 }
 
 const getLoginStatus = () => {
-    return firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            return true;
-        } else {
-            return false;
-        }
-    });
+    var user = firebase.auth().currentUser;
+    if(user != null){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 const LoginModules = {
