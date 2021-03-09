@@ -37,7 +37,7 @@ export const MenuBar = () => {
 
         return (
             <Typography style={{ paddingTop: 5 }}>
-                <StyledLink to="/home">
+                <StyledLink to="/">
                     {props.children}
                 </StyledLink>
             </Typography>

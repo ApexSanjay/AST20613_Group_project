@@ -93,6 +93,33 @@ function App() {
     }
   };
 
+  const UnprotectedRoute = (props) => {
+    console.log(loading, loggedIn);
+
+    if (loading === true) {
+      return (
+        <div>
+        </div>);
+    } else {
+      if (loggedIn === false) {
+        return (
+          <Route
+            path={props.path}>
+            {props.children}
+          </Route>
+        );
+      } else {
+        return (
+          <Redirect
+            to={{
+              pathname: "/",
+            }}
+          />
+        );
+      }
+    }
+  };
+
   const SlashRoute = (props) => {
     console.log(loading, loggedIn);
 
@@ -141,22 +168,22 @@ function App() {
             <Route path="/signup/payment">
               <SignupPayment />
             </Route>
-            <Route path="/signup">
+            <UnprotectedRoute path="/signup">
               <Redirect
                 to={{
                   pathname: "/signup/plan",
                 }}
               />
-            </Route>
-            <Route path="/login">
+            </UnprotectedRoute>
+            <UnprotectedRoute path="/login">
               <Login />
-            </Route>
+            </UnprotectedRoute>
             <ProtectedRoute path="/profile">
               <Profile />
             </ProtectedRoute>
-            <Route path="/home">
+            <UnprotectedRoute path="/home">
               <Home />
-            </Route>
+            </UnprotectedRoute>
             <ProtectedRoute path="/play">
               <Play />
             </ProtectedRoute>

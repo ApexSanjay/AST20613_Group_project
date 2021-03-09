@@ -52,7 +52,7 @@ const MenuBar = () => {
 
     const logout = () => {
         LoginModules.logout().then(() => {
-            history.push("/home");
+            history.push("/");
         });
     }
 
@@ -64,7 +64,7 @@ const MenuBar = () => {
         `;
 
         return (
-            <StyledLink to="/browse">
+            <StyledLink to="/">
                 {props.children}
             </StyledLink>
         );
