@@ -104,7 +104,7 @@ function SettingProfile(props) {
     const ProfileSetting = () => {
         const updateProfile = () => {
             LoginModules.updateName(profileName).then(() => {
-                console.log(LoginModules.getUserProfile().name);
+                // console.log(LoginModules.getUserProfile().name);
             });
         }
 
