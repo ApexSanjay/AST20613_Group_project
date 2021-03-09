@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/storage";
+import "firebase/firestore";
+import { useImperativeHandle } from 'react';
 
 const login = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -69,6 +71,33 @@ const getLoginStatus = () => {
     }
 }
 
+const createCardInfo = (userID, cvv, cardNum, explorationDate, firstName, lastName) => {
+    const info = {
+        UserID: userID,
+        CVV: cvv,
+        CardNumber: cardNum,
+        ExplorationDate: explorationDate,
+        FirstName: firstName,
+        LastName: lastName,
+    }
+    console.log(info);
+
+    return firebase.firestore().collection("cardInfo").add(info);
+}
+
+const updateCardInfo = (userID, cvv, cardNum, explorationDate, firstName, lastName) => {
+    const info = {
+        "UserID": userID,
+        "CVV": cvv,
+        "CardNumber": cardNum,
+        "ExplorationDate": explorationDate,
+        "FirstName": firstName,
+        "LastName": lastName,
+    }
+
+    return firebase.firestore().collection("cardInfo").where("UserID", "==", userID);
+}
+
 const LoginModules = {
     login,
     register,
@@ -77,7 +106,9 @@ const LoginModules = {
     updateIcon,
     updatePassword,
     getUserProfile,
-    getLoginStatus
+    getLoginStatus,
+    createCardInfo,
+    updateCardInfo
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;

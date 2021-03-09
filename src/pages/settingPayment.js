@@ -16,6 +16,8 @@ import SettingMenu from "./components/settingMenu";
 import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
 
+import LoginModules from "./modules/LoginModules";
+
 function SettingPayment(props) {
     
     const useStyles = makeStyles((theme) => ({
@@ -84,7 +86,7 @@ function SettingPayment(props) {
                 <Grid item xs={8}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="cardNum"
                             label="Card Number"
                             variant="outlined"
                             fullWidth
@@ -113,7 +115,7 @@ function SettingPayment(props) {
                 <Grid item xs={4}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="mm"
                             label="MM"
                             variant="outlined"
                             fullWidth
@@ -124,7 +126,7 @@ function SettingPayment(props) {
                 <Grid item xs={5}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="dd"
                             label="DD"
                             variant="outlined"
                             fullWidth
@@ -147,7 +149,7 @@ function SettingPayment(props) {
                 <Grid item xs={9}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="cvv"
                             label="CVV"
                             variant="outlined"
                             fullWidth
