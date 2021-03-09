@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -17,18 +16,6 @@ function Profile(props) {
         width: 80%;
         color: white;
     `;
-
-    //btn handler
-    const history = useHistory();
-    const btnHandler = (btnName) => {
-        switch (btnName) {
-            case "continue":
-                history.push("/signup/payment");
-                break;
-            default:
-                break;
-        }
-    }
 
     const Icon = () => {
 

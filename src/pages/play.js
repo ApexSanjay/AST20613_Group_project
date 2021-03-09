@@ -1,13 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-
-import Grid from '@material-ui/core/Grid';
 
 import styled from 'styled-components';
 
 import ReactPlayer from 'react-player'
-
-import MenuBar from "./components/signupBar";
 
 function Play(props) {
 
@@ -18,19 +13,6 @@ function Play(props) {
         color: white;
         padding: 0;
     `;
-
-    //btn handler
-    const history = useHistory();
-    const btnHandler = (btnName) => {
-        switch (btnName) {
-            case "continue":
-                history.push("/signup/payment");
-                break;
-            default:
-                break;
-        }
-    }
-
 
     return (
         <Container>
