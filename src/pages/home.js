@@ -75,10 +75,9 @@ export function Home(props) {
     const Body = styled.div`
         backface-visibility: hidden;
         position: relative;
-        top: 5%;
+        top: 0%;
         margin: auto;
         width: 80%;
-        padding: 10px;
     `;
 
     const Description = () => {
