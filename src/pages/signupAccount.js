@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBarBeforeSignin";
 
 function SignupAccount(props) {
 
@@ -89,8 +89,11 @@ function SignupAccount(props) {
 
     return (
         <Container>
-            <MenuBar>Sign Up Page - Account Create</MenuBar>
+            <MenuBar></MenuBar>
             <Grid container>
+                <Grid item xs={12}>
+                    <h2>Sign Up Page - Account Create</h2>
+                </Grid>
                 <Grid item xs={12}>
                     <AccountForm />
                 </Grid>
