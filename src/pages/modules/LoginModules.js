@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/storage";
+import "firebase/firestore";
+import { useImperativeHandle } from 'react';
 
 const login = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -35,8 +37,8 @@ const updateIcon = (newIcon) => {
     const iconRef = firebase.storage().ref(`/users/` + uid + `/icon`);
 
     return iconRef.put(newIcon).then(
-        ()=>{
-            return iconRef.getDownloadURL().then((url)=>{
+        () => {
+            return iconRef.getDownloadURL().then((url) => {
                 console.log(url);
                 return user.updateProfile({
                     photoURL: url
@@ -60,6 +62,50 @@ const getUserProfile = () => {
     return { name, email, icon, uid };
 }
 
+const getLoginStatus = () => {
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const createCardInfo = (userID, cvv, cardNum, explorationDate, firstName, lastName) => {
+    const info = {
+        UserID: userID,
+        CVV: cvv,
+        CardNumber: cardNum,
+        ExplorationDate: explorationDate,
+        FirstName: firstName,
+        LastName: lastName,
+    }
+    console.log(info);
+
+    return firebase.firestore().collection("cardInfo").add(info);
+}
+
+const updateCardInfo = (cardID, userID, cvv, cardNum, explorationDate, firstName, lastName) => {
+    const info = {
+        UserID: userID,
+        CVV: cvv,
+        CardNumber: cardNum,
+        ExplorationDate: explorationDate,
+        FirstName: firstName,
+        LastName: lastName,
+    }
+    console.log(info);
+    return firebase.firestore().collection("cardInfo").doc(cardID).update(info);
+}
+
+const getCardInfo = (userID) => {
+    return firebase.firestore().collection("cardInfo").where("UserID", "==", userID).get();
+    //(querySnapshot) => {
+        // querySnapshot.forEach((doc) => {
+        //     console.log(doc.id, " => ", doc.data());
+        // });
+}
+
 const LoginModules = {
     login,
     register,
@@ -68,6 +114,10 @@ const LoginModules = {
     updateIcon,
     updatePassword,
     getUserProfile,
+    getLoginStatus,
+    createCardInfo,
+    updateCardInfo,
+    getCardInfo
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;

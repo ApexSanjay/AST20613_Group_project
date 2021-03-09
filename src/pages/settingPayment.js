@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -16,28 +16,72 @@ import SettingMenu from "./components/settingMenu";
 import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
 
+import LoginModules from "./modules/LoginModules";
+import { useHistory } from 'react-router';
+
 function SettingPayment(props) {
-    
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(2),
-        },
-    }));
-    const classes = useStyles();
 
-    //data handling part
-    const cardType = [
-        "Credit Card",
-        "Debit Card",
-    ]
-    const [card, setCard] = React.useState("");
-    const handlePaymentTypeChange = (event) => {
-        setCard(event.target.value);
-    };
+    // var firstname;
+    // var lastname;
+    // var cardNum;
+    // var explorationDate;
+    // var cvv;
 
+    const [cardInfoID, setCardInfoID] = useState();
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastName] = useState("");
+    const [cardNum, setCardNum] = useState("");
+    const [explorationDate, setExplorationDate] = useState("");
+    const [cvv, setCVV] = useState("");
+    const [error, setError] = useState("");
+
+    var newData = {
+        firstname: firstname,
+        lastname: lastname,
+        cardNum: cardNum,
+        explorationDate: explorationDate,
+        cvv: cvv
+    }
+
+    const userid = LoginModules.getUserProfile().uid;
+    const history = useHistory();
+
+    LoginModules.getCardInfo(userid).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            var data = doc.data();
+            // console.log(data);
+            setFirstName(data.FirstName);
+            setLastName(data.LastName);
+            setCardNum(data.CardNumber);
+            setExplorationDate(data.ExplorationDate);
+            setCVV(data.CVV);
+            setCardInfoID(doc.id);
+        });
+    });
+
+    //onchangehandler
+    const onchangeHandler = (field, value) => {
+        switch (field) {
+            case "firstname":
+                newData.firstname = value;
+                break;
+            case "lastname":
+                newData.lastname = value;
+                break;
+            case "cardNum":
+                newData.cardNum = value;
+                break;
+            case "explorationDate":
+                newData.explorationDate = value;
+                break;
+            case "cvv":
+                newData.cvv = value;
+                break;
+            default:
+                break;
+        }
+        console.log(newData);
+    }
 
     const Container = styled.div`
         padding: 2%;
@@ -46,28 +90,51 @@ function SettingPayment(props) {
         color: white;
     `;
 
-    const PaymentTypeField = () => {
+    const FirstNameField = () => {
         return (
             <Grid container spacing={3}>
                 <Grid item xs={3}>
                     <center>
-                        Type
+                        First Name
                     </center>
                 </Grid>
                 <Grid item xs={9}>
-                    <FormControl variant="outlined" className={classes.formControl} fullWidth>
-                        <InputLabel id="paymentType">Type</InputLabel>
-                        <Select
-                            labelId="paymentType"
-                            id="paymentType"
-                            value={card}
-                            onChange={handlePaymentTypeChange}
-                            label="card"
-                        >
-                            <MenuItem value={cardType[0]}>Credit Card</MenuItem>
-                            <MenuItem value={cardType[1]}>Debit Card</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <center>
+                        <TextField
+                            id="firstname"
+                            label="First Name"
+                            variant="outlined"
+                            onChange={(e)=>{onchangeHandler("firstname", e.target.value)}}
+                            fullWidth
+                            required
+                            defaultValue={firstname}
+                        />
+                    </center>
+                </Grid>
+            </Grid>
+        );
+    }
+
+    const LastNameField = () => {
+        return (
+            <Grid container spacing={3}>
+                <Grid item xs={3}>
+                    <center>
+                        Last Name
+                    </center>
+                </Grid>
+                <Grid item xs={9}>
+                    <center>
+                        <TextField
+                            id="lastname"
+                            label="Last Name"
+                            variant="outlined"
+                            onChange={(e)=>{onchangeHandler("lastname", e.target.value)}}
+                            fullWidth
+                            required
+                            defaultValue={lastname}
+                        />
+                    </center>
                 </Grid>
             </Grid>
         );
@@ -81,22 +148,18 @@ function SettingPayment(props) {
                         Card Number
                             </center>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={9}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="cardNum"
                             label="Card Number"
                             variant="outlined"
+                            onChange={(e)=>{onchangeHandler("cardNum", e.target.value)}}
                             fullWidth
-                            defaultValue="5xxx-xxxx-xxxx-xxxx"
-                            InputProps={{
-                                readOnly: true,
-                            }}
+                            required
+                            defaultValue={cardNum}
                         />
                     </center>
-                </Grid>
-                <Grid item xs={1}>
-                    <Button variant="contained" color="secondary" fullWidth>Edit</Button>
                 </Grid>
             </Grid>
         );
@@ -107,28 +170,19 @@ function SettingPayment(props) {
             <Grid container spacing={3}>
                 <Grid item xs={3}>
                     <center>
-                        MM/YY
-                            </center>
-                </Grid>
-                <Grid item xs={4}>
-                    <center>
-                        <TextField
-                            id="outlined-basic"
-                            label="MM"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue="07"
-                        />
+                        Exploration Date
                     </center>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={9}>
                     <center>
                         <TextField
-                            id="outlined-basic"
-                            label="DD"
+                            id="explorationDate"
+                            label="Exploration Date"
                             variant="outlined"
+                            onChange={(e)=>{onchangeHandler("explorationDate", e.target.value)}}
                             fullWidth
-                            defaultValue="25"
+                            required
+                            defaultValue={explorationDate}
                         />
                     </center>
                 </Grid>
@@ -147,11 +201,13 @@ function SettingPayment(props) {
                 <Grid item xs={9}>
                     <center>
                         <TextField
-                            id="outlined-basic"
+                            id="cvv"
                             label="CVV"
                             variant="outlined"
+                            onChange={(e)=>{onchangeHandler("cvv", e.target.value)}}
                             fullWidth
-                            defaultValue=""
+                            required
+                            defaultValue={cvv}
                         />
                     </center>
                 </Grid>
@@ -159,20 +215,45 @@ function SettingPayment(props) {
         );
     }
 
+    const onSubmitHandler = (e) => {
+
+        e.preventDefault();
+        LoginModules.updateCardInfo(
+            cardInfoID,
+            userid,
+            newData.cvv,
+            newData.cardNum,
+            newData.explorationDate,
+            newData.firstname,
+            newData.lastname
+        ).then(()=>{
+            setError("update success");
+            history.push("/setting/payment");
+        }).catch((e)=>{
+            setError(e.code + ": " + e.message);
+        });
+    }
+
     const PaymentSetting = () => {
         return (
-            <Grid container spacing={0}>
-                <Grid item xs={12}>
-                    <SettingTitle>Payment</SettingTitle>
+            <form onSubmit={onSubmitHandler}>
+                <Grid container spacing={0}>
+                    <Grid item xs={12}>
+                        <SettingTitle>Payment</SettingTitle>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FirstNameField />
+                        <LastNameField />
+                        <CardNumberField />
+                        <ExpiringDateField />
+                        <CVVField />
+                        <SaveButton />
+                    </Grid>
+                    <Grid item xs={12}>
+                        {error}
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <PaymentTypeField />
-                    <CardNumberField />
-                    <ExpiringDateField />
-                    <CVVField />
-                    <SaveButton />
-                </Grid>
-            </Grid>
+            </form>
         );
     }
 

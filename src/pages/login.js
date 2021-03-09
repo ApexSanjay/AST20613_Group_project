@@ -22,14 +22,14 @@ function Login(props) {
         width: 80%;
     `;
 
-    const login = () => {
-        // console.log(email,password);
-        LoginModules.login(email, password).then(() => {
-            history.push("/browse");
-        }).catch((e) => {
-            setError(e.code + ": " + e.message);
-        });
-    };
+    // const login = () => {
+    //     // console.log(email,password);
+    //     LoginModules.login(email, password).then(() => {
+    //         history.push("/browse");
+    //     }).catch((e) => {
+    //         setError(e.code + ": " + e.message);
+    //     });
+    // };
 
     // onChange handler
     const onEmailChange = (e) => {
@@ -40,62 +40,44 @@ function Login(props) {
         password = e.target.value;
     };
 
-    //btn handler
-    const btnHandler = (btnName) => {
-        switch (btnName) {
-            case "login":
-                // history.push("/");
-                login();
-                break;
-
-            default:
-                break;
-        }
-    }
-
     const AccountForm = () => {
-
-        const Form = styled.form`
+        const Table = styled.table`
             margin: auto;
             padding: 5%;
             text-align: center;
             width: 40%;
         `;
 
-        const Table = styled.table`
-            width: 100%;
-        `;
-
         return (
-            <Form>
-                <Table>
-                    <tr>
-                        <td>Email</td>
-                        <td>
-                            <TextField
-                                id="email"
-                                label="Email"
-                                variant="outlined"
-                                onChange={onEmailChange}
-                                fullWidth
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>
-                            <TextField
-                                id="password"
-                                label="Password"
-                                variant="outlined"
-                                type="password"
-                                onChange={onPasswordChange}
-                                fullWidth
-                            />
-                        </td>
-                    </tr>
-                </Table>
-            </Form>
+            <Table>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <TextField
+                            id="email"
+                            label="Email"
+                            variant="outlined"
+                            onChange={onEmailChange}
+                            fullWidth
+                            required
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <TextField
+                            id="password"
+                            label="Password"
+                            variant="outlined"
+                            type="password"
+                            onChange={onPasswordChange}
+                            fullWidth
+                            required
+                        />
+                    </td>
+                </tr>
+            </Table>
         );
     }
 
@@ -104,7 +86,7 @@ function Login(props) {
             <Button
                 variant="contained"
                 color="primary"
-                onClick={() => { btnHandler("login") }}
+                type="submit"
                 fullWidth
             >
                 Login
@@ -112,28 +94,39 @@ function Login(props) {
         );
     }
 
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        LoginModules.login(email, password).then(() => {
+            history.push("/browse");
+        }).catch((e) => {
+            setError(e.code + ": " + e.message);
+        });
+    }
+
     return (
         <Container>
             <MenuBar />
-            <Grid container>
-                <Grid item xs={12}>
-                    <center>
-                        <h1>Login Page</h1>
-                    </center>
+            <form onSubmit={onSubmitHandler}>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <center>
+                            <h1>Login Page</h1>
+                        </center>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <AccountForm />
+                    </Grid>
+                    <Grid item xs={11}></Grid>
+                    <Grid item xs={1}>
+                        <LoginButton />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <center>
+                            {error}
+                        </center>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <AccountForm />
-                </Grid>
-                <Grid item xs={11}></Grid>
-                <Grid item xs={1}>
-                    <LoginButton />
-                </Grid>
-                <Grid item xs={12}>
-                    <center>
-                        {error}
-                    </center>
-                </Grid>
-            </Grid>
+            </form>
         </Container>
     );
 }

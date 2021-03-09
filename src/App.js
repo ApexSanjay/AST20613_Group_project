@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Switch,
@@ -41,7 +41,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 //for test propose, remove if login function is fully developed
-firebase.auth().signInAnonymously();
+// firebase.auth().signInAnonymously();
 
 const theme = createMuiTheme({
   palette: {
@@ -50,19 +50,115 @@ const theme = createMuiTheme({
 });
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState();
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+      setLoading(false);
+    });
+  });
+
+  const ProtectedRoute = (props) => {
+    console.log(loading, loggedIn);
+
+    if (loading === true) {
+      return (
+        <div>
+        </div>);
+    } else {
+      if (loggedIn === true) {
+        return (
+          <Route
+            path={props.path}>
+            {props.children}
+          </Route>
+        );
+      } else {
+        return (
+          <Redirect
+            to={{
+              pathname: "/login",
+            }}
+          />
+        );
+      }
+    }
+  };
+
+  const UnprotectedRoute = (props) => {
+    console.log(loading, loggedIn);
+
+    if (loading === true) {
+      return (
+        <div>
+        </div>);
+    } else {
+      if (loggedIn === false) {
+        return (
+          <Route
+            path={props.path}>
+            {props.children}
+          </Route>
+        );
+      } else {
+        return (
+          <Redirect
+            to={{
+              pathname: "/",
+            }}
+          />
+        );
+      }
+    }
+  };
+
+  const SlashRoute = (props) => {
+    console.log(loading, loggedIn);
+
+    if (loading === true) {
+      return (
+        <div>
+        </div>);
+    } else {
+      if (loggedIn === true) {
+        return (
+          <Redirect
+            to={{
+              pathname: "/browse",
+            }}
+          />
+        );
+      } else {
+        return (
+          <Redirect
+            to={{
+              pathname: "/home",
+            }}
+          />
+        );
+      }
+    }
+  };
+
   return (
     <div id="app">
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
-            <Route path="/movie">
+            <ProtectedRoute path="/movie">
               <Movie />
-            </Route>
-            <Route path="/browse">
+            </ProtectedRoute>
+            <ProtectedRoute path="/browse">
               <Browse />
-            </Route>
-            <Route path="/account">
-            </Route>
+            </ProtectedRoute>
             <Route path="/signup/plan">
               <SignupPlan />
             </Route>
@@ -72,54 +168,54 @@ function App() {
             <Route path="/signup/payment">
               <SignupPayment />
             </Route>
-            <Route path="/signup">
+            <UnprotectedRoute path="/signup">
               <Redirect
                 to={{
                   pathname: "/signup/plan",
                 }}
               />
-            </Route>
-            <Route path="/login">
+            </UnprotectedRoute>
+            <UnprotectedRoute path="/login">
               <Login />
-            </Route>
-            <Route path="/profile">
+            </UnprotectedRoute>
+            <ProtectedRoute path="/profile">
               <Profile />
-            </Route>
-            <Route path="/home">
+            </ProtectedRoute>
+            <UnprotectedRoute path="/home">
               <Home />
-            </Route>
-            <Route path="/play">
+            </UnprotectedRoute>
+            <ProtectedRoute path="/play">
               <Play />
-            </Route>
-            <Route path="/series">
+            </ProtectedRoute>
+            <ProtectedRoute path="/series">
               <Series />
-            </Route>
-            <Route path="/setting/profile">
+            </ProtectedRoute>
+            <ProtectedRoute path="/setting/profile">
               <SettingProfile />
-            </Route>
-            <Route path="/setting/membership">
+            </ProtectedRoute>
+            <ProtectedRoute path="/setting/membership">
               <SettingMembership />
-            </Route>
-            <Route path="/setting/payment">
+            </ProtectedRoute>
+            <ProtectedRoute path="/setting/payment">
               <SettingPayment />
-            </Route>
-            <Route path="/setting/password">
+            </ProtectedRoute>
+            <ProtectedRoute path="/setting/password">
               <SettingPassword />
-            </Route>
-            <Route path="/setting">
+            </ProtectedRoute>
+            <ProtectedRoute path="/setting">
               <Redirect
                 to={{
                   pathname: "/setting/profile",
                 }}
               />
-            </Route>
-            <Route path="/">
-              <Redirect
+            </ProtectedRoute>
+            <SlashRoute path="/">
+              {/* <Redirect
                 to={{
                   pathname: "/home",
                 }}
-              />
-            </Route>
+              /> */}
+            </SlashRoute>
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
