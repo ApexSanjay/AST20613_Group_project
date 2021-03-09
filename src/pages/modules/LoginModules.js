@@ -35,8 +35,8 @@ const updateIcon = (newIcon) => {
     const iconRef = firebase.storage().ref(`/users/` + uid + `/icon`);
 
     return iconRef.put(newIcon).then(
-        ()=>{
-            return iconRef.getDownloadURL().then((url)=>{
+        () => {
+            return iconRef.getDownloadURL().then((url) => {
                 console.log(url);
                 return user.updateProfile({
                     photoURL: url
@@ -60,6 +60,16 @@ const getUserProfile = () => {
     return { name, email, icon, uid };
 }
 
+const getLoginStatus = () => {
+    return firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+}
+
 const LoginModules = {
     login,
     register,
@@ -68,6 +78,7 @@ const LoginModules = {
     updateIcon,
     updatePassword,
     getUserProfile,
+    getLoginStatus
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;
