@@ -7,15 +7,13 @@ import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBarBeforeSignin";
 
 function SignupPayment(props) {
 
     const Container = styled.div`
-        padding: 2%;
         margin: auto;
         width: 80%;
-        color: white;
     `;
 
     const history = useHistory();
@@ -32,12 +30,10 @@ function SignupPayment(props) {
         }
     }
 
-
-
     const CardBar = styled.div`
         border: 1px solid white;
         padding: 16px;
-        margin: 5% auto 0px auto;
+        margin: 3% auto 0px auto;
         width: 40%;
         text-align: center;
     `;
@@ -133,8 +129,11 @@ function SignupPayment(props) {
 
     return (
         <Container>
-            <MenuBar>Sign Up Page - Set up your Payment</MenuBar>
+            <MenuBar></MenuBar>
             <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <h2>Sign Up Page - Set up your Payment</h2>
+                </Grid>
                 <Grid item xs={12}>
                     <CardBar>
                         Credit card or Debit card
