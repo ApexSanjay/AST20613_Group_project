@@ -116,8 +116,13 @@ function Login(props) {
 
     return (
         <Container>
-            <MenuBar>Login Page</MenuBar>
+            <MenuBar />
             <Grid container>
+                <Grid item xs={12}>
+                    <center>
+                        <h1>Login Page</h1>
+                    </center>
+                </Grid>
                 <Grid item xs={12}>
                     <AccountForm />
                 </Grid>
