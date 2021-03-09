@@ -1,8 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import styled from 'styled-components';
+
+import {
+    Link,
+} from "react-router-dom";
+
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 export const MenuBar = () => {
 
@@ -21,12 +28,29 @@ export const MenuBar = () => {
         }
     };
 
+    const Logo = (props) => {
+        const StyledLink = styled(Link)`
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+        `;
+
+        return (
+            <Typography style={{ paddingTop: 5 }}>
+                <StyledLink to="/home">
+                    {props.children}
+                </StyledLink>
+            </Typography>
+        );
+    };
+
+
     return (
         <div>
             <Grid container>
                 <Grid item xs={10}>
                     {/* <img src="#" alt="RedStream"></img> */}
-                    <b>RedStream</b>
+                    <Logo>RedStream</Logo>
                 </Grid>
                 <Grid item xs={2}>
                     <Button onClick={() => { btnHandler("signup") }}>signup</Button>
@@ -35,7 +59,6 @@ export const MenuBar = () => {
             </Grid>
             <hr></hr>
         </div>
-
     );
 };
 
