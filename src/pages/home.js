@@ -8,42 +8,44 @@ import styled from 'styled-components';
 
 import backgroundImage from "./img/home_background.jpg";
 
+import MenuBar from "./components/menuBarBeforeSignin";
+
 export function Home(props) {
 
-    //btn handler
-    const history = useHistory();
-    const btnHandler = (btnName) => {
-        switch (btnName) {
-            case "signup":
-                history.push("/signup");
-                break;
-            case "login":
-                history.push("/login");
-                break;
-            default:
-                break;
-        }
-    };
+    // const MenuBar = () => {
 
-    const MenuBar = () => {
+    //     //btn handler
+    //     const history = useHistory();
+    //     const btnHandler = (btnName) => {
+    //         switch (btnName) {
+    //             case "signup":
+    //                 history.push("/signup");
+    //                 break;
+    //             case "login":
+    //                 history.push("/login");
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     };
 
-        return (
-            <div>
-                <Grid container>
-                    <Grid item xs={10}>
-                        {/* <img src="#" alt="RedStream"></img> */}
-                        <b>RedStream</b>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button onClick={() => { btnHandler("signup") }}>signup</Button>
-                        <Button onClick={() => { btnHandler("login") }}>login</Button>
-                    </Grid>
-                </Grid>
-                <hr></hr>
-            </div>
+    //     return (
+    //         <div>
+    //             <Grid container>
+    //                 <Grid item xs={10}>
+    //                     {/* <img src="#" alt="RedStream"></img> */}
+    //                     <b>RedStream</b>
+    //                 </Grid>
+    //                 <Grid item xs={2}>
+    //                     <Button onClick={() => { btnHandler("signup") }}>signup</Button>
+    //                     <Button onClick={() => { btnHandler("login") }}>login</Button>
+    //                 </Grid>
+    //             </Grid>
+    //             <hr></hr>
+    //         </div>
 
-        );
-    }
+    //     );
+    // };
 
     const Container = styled.div`
         margin: auto;
@@ -97,7 +99,7 @@ export function Home(props) {
             </div>
         );
 
-    }
+    };
 
     const Form = () => {
         const FormBackground = styled.div`
@@ -114,6 +116,21 @@ export function Home(props) {
             padding: 2% 5%;
             width: 90%;
         `;
+
+        //btn handler
+        const history = useHistory();
+        const btnHandler = (btnName) => {
+            switch (btnName) {
+                case "signup":
+                    history.push("/signup");
+                    break;
+                case "login":
+                    history.push("/login");
+                    break;
+                default:
+                    break;
+            }
+        };
 
         return (
             <div>
@@ -147,7 +164,7 @@ export function Home(props) {
                 </FormBackground>
             </div>
         );
-    }
+    };
 
     return (
         <Container>
