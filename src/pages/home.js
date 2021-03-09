@@ -49,7 +49,6 @@ export function Home(props) {
 
     const Container = styled.div`
         margin: auto;
-        padding: 0;
         width: 100%;
     `;
 
@@ -81,21 +80,26 @@ export function Home(props) {
     `;
 
     const Description = () => {
+        const Container = styled.div`
+            margin: auto;
+            height: 100%;
+        `;
+
         const Title = styled.p`
             font-size: 48px;
         `;
 
         const Paragraph = styled.p`
-            font-size: 24px;
+            font-size: 20px;
         `;
 
         return (
-            <div>
+            <Container>
                 <Title>RedStream</Title>
                 <Paragraph>
                     RedStream is a website providing movie streaming services. It also has other features, such as playlist, movie review and algorithm for movie recommendation.
                 </Paragraph>
-            </div>
+            </Container>
         );
 
     };
@@ -165,6 +169,14 @@ export function Home(props) {
         );
     };
 
+    const Center = styled.div`
+        position: absolute;
+        left: 5%;
+        top: 350%;
+        height: 80vh;
+        margin: auto;
+    `;
+
     return (
         <Container>
             <BackGround>
@@ -172,6 +184,7 @@ export function Home(props) {
             </BackGround>
             <Body>
                 <MenuBar />
+                <Center>
                 <Grid container spacing={0}>
                     <Grid item xs={6}>
                         <Description />
@@ -179,8 +192,9 @@ export function Home(props) {
                     <Grid item xs={6}>
                         <Form />
                     </Grid>
-
                 </Grid>
+                </Center>
+
             </Body>
 
         </Container>
