@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
 
-import MenuBar from "./components/signupBar";
+import MenuBar from "./components/menuBarBeforeSignin";
 
 import LoginModules from "./modules/LoginModules";
 
