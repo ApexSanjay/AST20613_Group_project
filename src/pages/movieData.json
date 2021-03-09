@@ -524,6 +524,294 @@
     "imdbReview": "7.0",
     "movieLength": "1 hour 50 minutes",
     "movieReleaseDate": "2013"
-}
+},
+{
+    "id": "51",
+    "title": "Parasite",
+    "description": "An unemployed family of four slips into the lives of the crazy wealthy Park family. Then, there's an incident that can’t entirely be cleaned up in a cleaning shift. Long after the credits roll, you’ll be questioning the ending and mulling over the tough, important themes.",
+    "Director": "Bong Joon-ho",
+    "cast": [ " Song Kang-ho", "Lee Sun-kyun", " Cho Yeo-jeong", "Choi Woo-shik", "Park So-dam", "Lee Jung-eun", "Jang Hye-jin" ],
+    "trailerURL": "https://www.youtube.com/watch?v=5xH0HfJHsaY",
+    "imdbReview": "8.6",
+    "movieLength": "2 hour 12 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "52",
+    "title": "Titanic ",
+    "description": "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+    "Director": "James Cameron",
+    "cast": [ "Leonardo DiCaprio", "Kate Winslet", "Billy Zane" ],
+    "trailerURL": "https://www.youtube.com/watch?v=kVrqfYjkTdQ",
+    "imdbReview": "7.8",
+    "movieLength": "3 hour 14 minutes",
+    "movieReleaseDate": "1997"
+  },
+  {
+    "id": "53",
+    "title": "Casablanca",
+    "description": "A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco.",
+    "Director": [ "Michael Curtiz" ],
+    "cast": [ " Humphrey Bogart", " Ingrid Bergman", " Paul Henreid" ],
+    "trailerURL": "https://www.youtube.com/watch?v=BkL9l7qovsE",
+    "imdbReview": "8.5",
+    "movieLength": "1 hour 42 minutes",
+    "movieReleaseDate": "1942"
+  },
+  {
+    "id": "54",
+    "title": "Spirited Away",
+    "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
+    "Director": [ "Hayao Miyazaki" ],
+    "cast": [ " Daveigh Chase", "Suzanne Pleshette", " Miyu Irino" ],
+    "trailerURL": "https://www.youtube.com/watch?v=ByXuk9QqQkk",
+    "imdbReview": "8.6",
+    "movieLength": "2 hour 5 minutes",
+    "movieReleaseDate": "2001"
+  },
+  {
+    "id": "55",
+    "title": "The Devil Wears Prada",
+    "description": "A smart but sensible new graduate lands a job as an assistant to Miranda Priestly, the demanding editor-in-chief of a high fashion magazine.",
+    "Director": "David Frankel",
+    "cast": [ " Anne Hathaway", " Meryl Streep", "Adrian Grenier" ],
+    "trailerURL": "https://www.youtube.com/watch?v=LG0xYJJbko8",
+    "imdbReview": "6.9",
+    "movieLength": "1 hour 49 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "56",
+    "title": "Dilwale Dulhania Le Jayenge",
+    "description": "When Raj meets Simran in Europe, it isn't love at first sight but when Simran moves to India for an arranged marriage, love makes its presence felt.",
+    "Director": "Aditya Chopra",
+    "cast": [ "Shah Rukh Khan", "Kajol", "Amrish Puri" ],
+    "trailerURL": "https://www.youtube.com/watch?v=cmax1C1p660",
+    "imdbReview": "8.1",
+    "movieLength": "3 hour 9 minutes",
+    "movieReleaseDate": "1995"
+  },
+  {
+    "id": "57",
+    "title": "The Farewell",
+    "description": "A Chinese family discovers their grandmother has only a short while left to live and decide to keep her in the dark, scheduling a wedding to gather before she dies.",
+    "Director": [ "Lulu Wang" ],
+    "cast": [ "Shuzhen Zhao", "Awkwafina", "X Mayo" ],
+    "trailerURL": "https://www.youtube.com/watch?v=RofpAjqwMa8",
+    "imdbReview": "7.6",
+    "movieLength": "1 hour 40 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "58",
+    "title": "Scream",
+    "description": "A year after the murder of her mother, a teenage girl is terrorized by a new killer, who targets the girl and her friends by using horror films as part of a deadly game.",
+    "Director": [ "Wes Craven" ],
+    "cast": [ "Neve Campbell", "Courteney Cox", "David Arquette " ],
+    "trailerURL": "https://www.youtube.com/watch?v=AWm_mkbdpCA",
+    "imdbReview": "7.3",
+    "movieLength": "1 hour 51 minutes",
+    "movieReleaseDate": "1996"
+  },
+  {
+    "id": "59",
+    "title": "Grease",
+    "description": "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
+    "Director": "Randal Kleiser",
+    "cast": [ "John Travolta", "Olivia Newton-John", "Stockard Channing" ],
+    "trailerURL": "https://www.youtube.com/watch?v=THd96gHV7Tg",
+    "imdbReview": "9.0",
+    "movieLength": "2 hour 32 minutes",
+    "movieReleaseDate": "2008"
+  },
+  {
+
+    "id": "60",
+    "title": "The Dark Knight Rises",
+    "description": "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City from the brutal guerrilla terrorist Bane.",
+    "Director": "Christopher Nolan",
+    "cast": [ " Christian Bale", "Tom Hardy", "Anne Hathaway" ],
+    "trailerURL": "https://www.youtube.com/watch?v=GokKUqLcvD8",
+    "imdbReview": "7.2",
+    "movieLength": "1 hour 50 minutes",
+    "movieReleaseDate": "1978"
+  },
+  {
+
+    "id": "61",
+    "title": "Slumdog Millionare",
+    "description": [ "A Mumbai teenager reflects on his life after being accused of cheating on the Indian version of (Who Wants to be a Millionaire?). " ],
+    "Director": [ "Danny Boyle", "Loveleen Tandan" ],
+    "cast": [ " Dev Patel", " Freida Pinto", "Saurabh Shukla" ],
+    "trailerURL": "https://www.youtube.com/watch?v=AIzbwV7on6Q",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour",
+    "movieReleaseDate": "2008"
+  },
+  {
+    "id": "62",
+    "title": "Boyz n' The Hood",
+    "description": "Follows the lives of three young males living in the Crenshaw ghetto of Los Angeles, dissecting questions of race, relationships, violence, and future prospects.",
+    "Director": " John Singleton",
+    "cast": [ " Cuba Gooding Jr.", "Laurence Fishburne", "Hudhail Al-Amir" ],
+    "trailerURL": "https://www.youtube.com/watch?v=J4sKiGkzKJo",
+    "imdbReview": "7.8",
+    "movieLength": "1 hour 52 minutes",
+    "movieReleaseDate": "1991"
+  },
+  {
+    "id": "63",
+    "title": "Lost In Translation",
+    "description": "A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.",
+    "Director": "Sofia Coppola",
+    "cast": [ "Bill Murray", "Scarlett Johansson", "Giovanni Ribisi" ],
+    "trailerURL": "https://www.youtube.com/watch?v=W6iVPCRflQM",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 42 minutes",
+    "movieReleaseDate": "2003"
+  },
+  {
+    "id": "64",
+    "title": "Black Panther",
+    "description": "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+    "Director": "Ryan Coogler",
+    "cast": [ "Ryan Coogler", "Michael B. Jordan", "Lupita Nyong'o" ],
+    "trailerURL": "https://www.youtube.com/watch?v=xjDjIWPwcPU",
+    "imdbReview": "7.3",
+    "movieLength": "2 hours 14 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "65",
+    "title": "The Departed",
+    "description": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.",
+    "Director": "Martin Scorsese",
+    "cast": [ " Leonardo DiCaprio", "Matt Damon", "Jack Nicholson" ],
+    "trailerURL": "https://www.youtube.com/watch?v=iojhqm0JTW4",
+    "imdbReview": "8.5",
+    "movieLength": "2 hour 31 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "66",
+    "title": "The Grand Budapest Hotel",
+    "description": "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
+    "Director": [ "Wes Anderson" ],
+    "cast": [ "Ralph Fiennes", "F. Murray Abraham", "Mathieu Amalric " ],
+    "trailerURL": "https://www.youtube.com/watch?v=1Fg5iWmQjwk",
+    "imdbReview": "8.1",
+    "movieLength": "1 hour 39 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "67",
+    "title": "Dreamgirls",
+    "description": "A trio of black female soul singers cross over to the pop charts in the early 1960s, facing their own personal struggles along the way.",
+    "Director": [ "Bill Condon" ],
+    "cast": [ "Beyonce", "Jamie Foxx", "Eddie Murphy" ],
+    "trailerURL": "https://www.youtube.com/watch?v=4m2dSs0HgSk",
+    "imdbReview": "6.4",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "68",
+    "title": "Set It Off",
+    "description": "Desperation drives four inner-city women to bank robbery in Los Angeles, then they start mistrusting each other.",
+    "Director": [ "F. Gary Gray" ],
+    "cast": [ "Jada Pinkett Smith", "Queen Latifah", "Vivica A. Fox" ],
+    "trailerURL": "https://www.youtube.com/watch?v=dJpmpAE9lw4",
+    "imdbReview": "6.9",
+    "movieLength": "2 hour 3 minutes",
+    "movieReleaseDate": "1996"
+  },
+  {
+    "id": "69",
+    "title": "Something's Gotta Give",
+    "description": "A swinger on the cusp of being a senior citizen with a taste for young women falls in love with an accomplished woman closer to his age.",
+    "Director": [ "Nancy Meyers" ],
+    "cast": [ "Jack Nicholson", "Diane Keaton", "Keanu Reeves" ],
+    "trailerURL": "https://www.youtube.com/watch?v=6zVzIaEuXS4",
+    "imdbReview": "6.7",
+    "movieLength": "2 hour 8 minutes",
+    "movieReleaseDate": "2003"
+  },
+  {
+    "id": "70",
+    "title": "Bridesmaids",
+    "description": "Competition between the maid of honor and a bridesmaid, over who is the bride's best friend, threatens to upend the life of an out-of-work pastry chef.",
+    "Director": [ "Paul Feig" ],
+    "cast": [ "Kristen Wiig", "Maya Rudolph", "Rose Byrne" ],
+    "trailerURL": "https://www.youtube.com/results?search_query=Bridesmaids+trailer",
+    "imdbReview": "6.8",
+    "movieLength": "2 hour 5 minutes",
+    "movieReleaseDate": "2011"
+  },
+  {
+    "id": "71",
+    "title": "She's the Man",
+    "description": "When her brother decides to ditch for a couple weeks, Viola heads over to his elite boarding school, disguised as him, and proceeds to fall for his school's star soccer player, and soon learns she's not the only one with romantic troubles.",
+    "Director": [ "Andy Fickman" ],
+    "cast": [ "Amanda Bynes", "Laura Ramsey", "Channing Tatum" ],
+    "trailerURL": "https://www.youtube.com/watch?v=BSLvjZD0LLU",
+    "imdbReview": "6.3",
+    "movieLength": "1 hour 45 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "72",
+    "title": "Rocky",
+    "description": "A small-time boxer gets a supremely rare chance to fight a heavyweight champion in a bout in which he strives to go the distance for his self-respect.",
+    "Director": [ "John G. Avildsen" ],
+    "cast": [ "Sylvester Stallone", "Talia Shire", "Burt Young" ],
+    "trailerURL": "https://www.youtube.com/watch?v=7RYpJAUMo2M",
+    "imdbReview": "8.1",
+    "movieLength": "2 hour",
+    "movieReleaseDate": "1976"
+  },
+  {
+    "id": "73",
+    "title": "Selma ",
+    "description": "A chronicle of Dr. Martin Luther King, Jr.'s campaign to secure equal voting rights via an epic march from Selma to Montgomery, Alabama, in 1965.",
+    "Director": [ "Ava DuVernay" ],
+    "cast": [ "David Oyelowo", "Carmen Ejogo", "Oprah Winfrey" ],
+    "trailerURL": "https://www.youtube.com/watch?v=J-NhCOYTKHw",
+    "imdbReview": "7.5",
+    "movieLength": "2 hour 8 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "74",
+    "title": "Tenet",
+    "description": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
+    "Director": [ "Christopher Nolan" ],
+    "cast": [ "John David Washington", "Robert Pattinson", "Elizabeth Debicki" ],
+    "trailerURL": "https://www.youtube.com/watch?v=LdOM0x0XDMo",
+    "imdbReview": "7.5",
+    "movieLength": "2 hour 30 minutes",
+    "movieReleaseDate": "2020"
+  },
+  {
+    "id": "75",
+    "title": "1917",
+    "description": "April 6th, 1917. As a regiment assembles to wage war deep in enemy territory, two soldiers are assigned to race against time and deliver a message that will stop 1,600 men from walking straight into a deadly trap.",
+    "Director": [ "Sam Mendes" ],
+    "cast": [ "Dean-Charles Chapman", "George MacKay", "Daniel Mays" ],
+    "trailerURL": "https://www.youtube.com/watch?v=YqNYrYUiMfg",
+    "imdbReview": "8.3",
+    "movieLength": "1 hour 59 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "76",
+    "title": "Get Out",
+    "description": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.",
+    "Director": [ "Jordan Peele" ],
+    "cast": [ " Daniel Kaluuya", "Allison Williams", "Bradley Whitford" ],
+    "trailerURL": "https://www.youtube.com/watch?v=DzfpyUB60YY",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 44 minutes",
+    "movieReleaseDate": "2017"
+  }
 
 ]

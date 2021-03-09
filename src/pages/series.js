@@ -12,6 +12,15 @@ export function Series(props) {
         margin: auto;
     `;
 
+    const SeriesRow = () =>{
+        //Make row style
+        return(
+            <Grid>
+                
+            </Grid>
+        );
+    };
+
     return (
         <Container>
             {/* app bar */}
