@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -8,7 +8,12 @@ import face from "./img/face.svg";
 
 import MenuBar from "./components/menuBar";
 
+import LoginModules from "./modules/LoginModules";
+
 function Profile(props) {
+
+    var profile = LoginModules.getUserProfile();
+    const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
 
     const Container = styled.div`
         margin: auto;
@@ -22,7 +27,7 @@ function Profile(props) {
         `;
 
         return (
-            <Pic src={face} />
+            <Pic src={icon} />
         );
     }
 
@@ -30,7 +35,7 @@ function Profile(props) {
         return (
             <center>
                 <h1>
-                    User123456
+                    {profile.name}
                 </h1>
             </center>
         );
