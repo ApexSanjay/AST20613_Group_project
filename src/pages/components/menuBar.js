@@ -39,6 +39,9 @@ const MenuBar = () => {
             case "myLib":
                 history.push("/profile");
                 break;
+            case "upload":
+                history.push("/upload");
+                break;
             case "manage":
                 history.push("/setting");
                 break;
@@ -89,6 +92,7 @@ const MenuBar = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
+                        <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem>
                         <MenuItem onClick={() => { btnHandler("manage") }}>Manage</MenuItem>
                         <MenuItem onClick={() => { btnHandler("logout") }}>Logout</MenuItem>
                     </Menu>
