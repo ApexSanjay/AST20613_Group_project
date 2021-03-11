@@ -53,32 +53,48 @@ function Playlist(props) {
 
         const WatchButton = () => {
 
+            const Container = styled.div`
+                display: inline;
+                margin: 5px;
+            `;
+
             const onclickHandler = () => {
             }
 
             return (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onclickHandler}
-                >
-                    Watch
-                </Button>
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Watch
+                    </Button>
+                </Container>
+
             );
         };
         const RemoveButton = () => {
+
+            const Container = styled.div`
+                display: inline;
+                margin: 5px;
+            `;
+
             const onclickHandler = () => {
 
             }
 
             return (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onclickHandler}
-                >
-                    Remove
-                </Button>
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Remove
+                    </Button>
+                </Container>
             );
         };
 
@@ -123,7 +139,7 @@ function Playlist(props) {
 
     return (
         <Container>
-            <ErrorSnackBar show={()=>{if(playlistID){return false;} else {return true;}}}>No Playlist ID in URL.</ErrorSnackBar>
+            <ErrorSnackBar show={() => { if (playlistID) { return false; } else { return true; } }}>No Playlist ID in URL.</ErrorSnackBar>
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={12}>
