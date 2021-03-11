@@ -21,12 +21,6 @@ import { useHistory } from 'react-router';
 
 function SettingPayment(props) {
 
-    // var firstname;
-    // var lastname;
-    // var cardNum;
-    // var explorationDate;
-    // var cvv;
-
     const [cardInfoID, setCardInfoID] = useState();
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
