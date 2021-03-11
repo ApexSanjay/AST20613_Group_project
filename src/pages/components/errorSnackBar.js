@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton' ;
 import CloseIcon from '@material-ui/icons/Close';
 
 const ErrorSnackBar = (props) => {
-    const [open, setOpen] = React.useState(props.error != null ? true : false);
+    const [open, setOpen] = React.useState(props.show != null ? props.show : false);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

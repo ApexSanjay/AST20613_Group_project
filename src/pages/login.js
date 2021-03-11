@@ -133,7 +133,7 @@ function Login(props) {
 
     return (
         <Container>
-            <ErrorSnackBar error={urlError}>Please Login.</ErrorSnackBar>
+            <ErrorSnackBar show={urlError != null}>Please Login.</ErrorSnackBar>
             <MenuBar />
             <form onSubmit={onSubmitHandler}>
                 <Grid container>

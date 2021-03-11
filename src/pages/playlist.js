@@ -15,6 +15,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+import ErrorSnackBar from "./components/errorSnackBar";
+
 function Playlist(props) {
 
     const params = useParams();
@@ -121,6 +123,7 @@ function Playlist(props) {
 
     return (
         <Container>
+            <ErrorSnackBar show={()=>{if(playlistID){return false;} else {return true;}}}>No Playlist ID in URL.</ErrorSnackBar>
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={12}>
