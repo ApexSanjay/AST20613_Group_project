@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+    Link,
+} from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 //Should be array
@@ -22,10 +25,10 @@ export function Browse(props) {
         `;
         return (
             <Card>
-                <a href="movie">
+                <Link to="/movie/1">
                     <Movie 
                     src={moviePoster}></Movie>
-                </a>
+                </Link>
             </Card>
         );
     };
