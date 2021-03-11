@@ -29,6 +29,7 @@ const removePlaylist = (playlistID) => {
 };  //.then().catch() is available
 
 const getPlaylist = (playlistID) => {
+    console.log("getPlaylist");
     return firebase.firestore().collection("playlists").doc(playlistID).get();
 };  //.then().catch() is available
 
