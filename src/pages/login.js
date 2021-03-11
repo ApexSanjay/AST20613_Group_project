@@ -22,15 +22,6 @@ function Login(props) {
         width: 80%;
     `;
 
-    // const login = () => {
-    //     // console.log(email,password);
-    //     LoginModules.login(email, password).then(() => {
-    //         history.push("/browse");
-    //     }).catch((e) => {
-    //         setError(e.code + ": " + e.message);
-    //     });
-    // };
-
     // onChange handler
     const onEmailChange = (e) => {
         email = e.target.value;
