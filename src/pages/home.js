@@ -12,41 +12,6 @@ import MenuBar from "./components/menuBarBeforeSignin";
 
 export function Home(props) {
 
-    // const MenuBar = () => {
-
-    //     //btn handler
-    //     const history = useHistory();
-    //     const btnHandler = (btnName) => {
-    //         switch (btnName) {
-    //             case "signup":
-    //                 history.push("/signup");
-    //                 break;
-    //             case "login":
-    //                 history.push("/login");
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     };
-
-    //     return (
-    //         <div>
-    //             <Grid container>
-    //                 <Grid item xs={10}>
-    //                     {/* <img src="#" alt="RedStream"></img> */}
-    //                     <b>RedStream</b>
-    //                 </Grid>
-    //                 <Grid item xs={2}>
-    //                     <Button onClick={() => { btnHandler("signup") }}>signup</Button>
-    //                     <Button onClick={() => { btnHandler("login") }}>login</Button>
-    //                 </Grid>
-    //             </Grid>
-    //             <hr></hr>
-    //         </div>
-
-    //     );
-    // };
-
     const Container = styled.div`
         margin: auto;
         width: 100%;
@@ -154,7 +119,6 @@ export function Home(props) {
                     </ButtonContainer>
 
                     <ButtonContainer>
-
                         <Button
                             variant="contained"
                             color="primary"
