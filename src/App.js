@@ -25,6 +25,8 @@ import {
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import blue from '@material-ui/core/colors/blue';
+import orange from '@material-ui/core/colors/orange';
 
 import firebase from 'firebase/app';
 import "firebase/auth";
@@ -47,6 +49,8 @@ firebase.initializeApp(firebaseConfig);
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: blue,
+    secondary: orange,
   },
 });
 
