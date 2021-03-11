@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import moviePoster from "./img/soul_poster.jpg";
 import { MovieCreationSharp } from '@material-ui/icons';
 import MenuBar from "./components/menuBar";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 export function Browse(props) {
 
@@ -26,28 +28,82 @@ export function Browse(props) {
         return (
             <Card>
                 <Link to="/movie/1">
-                    <Movie 
-                    src={moviePoster}></Movie>
+                    <Movie
+                        src={moviePoster}></Movie>
                 </Link>
             </Card>
         );
     };
 
     const MovieCardRow = () => {
+
+        const secondaryOptions = {
+            type: 'slide',
+            rewind: true,
+            gap: '1rem',
+            pagination: false,
+            fixedWidth: 400,
+            fixedHeight: 600,
+            cover: true,
+            focus: 'center',
+            isNavigation: true,
+            updateOnMove: true,
+        };
+
+        const MovieCard = (props) => {
+
+            const link = "/movie/" + props.id;
+            const img = props.img;
+
+            const MoviePoster = styled.img`
+                border-radius: 16px;
+            `;
+
+            return (
+                <SplideSlide>
+                    <Link to={link}>
+                        <MoviePoster
+                            src={img}
+                            alt="Image 1"
+                            height="100%"
+                            width="100%"
+                        />
+                    </Link>
+                </SplideSlide>
+            );
+        }
+
         return (
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={4}>
-                    <MovieCard />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <MovieCard />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <MovieCard />
-                </Grid>
-            </Grid>
+            <div>
+                <Splide options={secondaryOptions}>
+                    <MovieCard id="1" img={moviePoster} />
+                    <MovieCard id="2" img={moviePoster} />
+                    <MovieCard id="3" img={moviePoster} />
+                    <MovieCard id="4" img={moviePoster} />
+                    <MovieCard id="5" img={moviePoster} />
+                    <MovieCard id="6" img={moviePoster} />
+                    <MovieCard id="7" img={moviePoster} />
+                    <MovieCard id="8" img={moviePoster} />
+                    <MovieCard id="9" img={moviePoster} />
+                </Splide>
+            </div>
         );
     }
+    // const MovieCardRow = () => {
+    //     return (
+    //         <Grid container spacing={3}>
+    //             <Grid item xs={12} sm={4}>
+    //                 <MovieCard />
+    //             </Grid>
+    //             <Grid item xs={12} sm={4}>
+    //                 <MovieCard />
+    //             </Grid>
+    //             <Grid item xs={12} sm={4}>
+    //                 <MovieCard />
+    //             </Grid>
+    //         </Grid>
+    //     );
+    // }
 
     const Container = styled.div`
         width: 80%;
@@ -59,7 +115,7 @@ export function Browse(props) {
             {/* app bar */}
             <MenuBar />
             <Grid container spacing={0}>
-                
+
                 <Grid item xs={12}>
                     <h2>Movies</h2>
                 </Grid>
