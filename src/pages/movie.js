@@ -1,5 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import {
+    useHistory,
+    useParams
+} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -13,10 +16,15 @@ import ReactPlayer from 'react-player'
 import moviesN from './movieData.json';
 
 function Movie(props) {
-//For sharing link
-const [copiedLink] = React.useState(0);
 
-    const movies = moviesN[0];
+    var params = useParams();
+    var id = params.id;     // id of url "/movie/{id}" 
+    // console.log(params.id);
+
+    //For sharing link
+    const [copiedLink] = React.useState(0);
+
+    const movies = moviesN[id - 1];
 
     const MenuBar = () => {
 
@@ -38,7 +46,7 @@ const [copiedLink] = React.useState(0);
                 </Grid>
             </div>
         );
-    }
+    };
 
     const Container = styled.div`
         margin: auto;
@@ -115,7 +123,7 @@ const [copiedLink] = React.useState(0);
     const ShareLink = () => {
         return (
             <div>
-                <Button onClick ={()=>navigator.clipboard.writeText('Should be url')}>
+                <Button onClick={() => navigator.clipboard.writeText('Should be url')}>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>

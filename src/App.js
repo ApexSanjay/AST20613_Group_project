@@ -154,6 +154,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
+            <ProtectedRoute path="/movie/:id">
+              <Movie />
+            </ProtectedRoute>
             <ProtectedRoute path="/movie">
               <Movie />
             </ProtectedRoute>
