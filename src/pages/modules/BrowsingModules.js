@@ -32,10 +32,12 @@ const getPlaylist = (playlistID) => {
     return firebase.firestore().collection("playlists").doc(playlistID).get();
 };  //.then().catch() is available
 
-const createReview = (movieID, review) => {
+const createReview = (movieID, userID, review) => {
     return firebase.firestore().collection("reviews").add({
         movieID: movieID,
         review: review,
+        userID: userID,
+        timestamp: new Date()
     });  //.then().catch() is available
 };
 
