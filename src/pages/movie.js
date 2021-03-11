@@ -11,7 +11,9 @@ import LinkIcon from '@material-ui/icons/Link';
 import styled from 'styled-components';
 import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import playbtn from "./img/playbtn.svg";
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
+import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
 //Movie database
 import moviesN from './movieData.json';
 
@@ -24,7 +26,7 @@ function Movie(props) {
     //For sharing link
     const [copiedLink] = React.useState(0);
 
-    const movies = (id != null ? moviesN[id - 1]: moviesN[0]);
+    const movies = (id != null ? moviesN[id - 1] : moviesN[0]);
 
     const MenuBar = () => {
 
@@ -147,6 +149,35 @@ function Movie(props) {
         );
     }
 
+    const Review = () => {
+        return (
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <hr />
+                </Grid>
+                <Grid item xs={12}>
+                    <h2>Review</h2>
+                </Grid>
+                <Grid item xs={1}>
+                    <Avatar
+                        alt=""
+                        src=""
+                    />
+                </Grid>
+                <Grid item xs={11}>
+                    <TextField
+                        label="Write Down Your Review"
+                        variant="filled"
+                        fullWidth
+                    />
+                </Grid>
+
+                <Grid item xs={12}>
+
+                </Grid>
+            </Grid>);
+    }
+
     return (
         <Container>
             <BackGround>
@@ -180,6 +211,9 @@ function Movie(props) {
                     <Grid item xs={9}>
                         <Description>
                         </Description>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Review />
                     </Grid>
                 </Grid>
             </Body>
