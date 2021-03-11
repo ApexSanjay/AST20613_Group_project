@@ -74,7 +74,7 @@ function Profile(props) {
             return (
                 <Grid item xs={4}>
                     <Card>
-                        <CardActionArea>
+                        <CardActionArea onClick={()=>{onclickHandler("view");}}>
                             <CardMedia
                                 className={classes.media}
                                 image={moviePoster}
