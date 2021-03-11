@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 import styled from 'styled-components';
-
 import MenuBar from "./components/menuBarBeforeSignin";
-
 import LoginModules from "./modules/LoginModules";
 
 function SignupPayment(props) {
@@ -28,19 +24,7 @@ function SignupPayment(props) {
     `;
 
     const history = useHistory();
-
-    //btn handler
-    const btnHandler = (btnName) => {
-        switch (btnName) {
-            case "continue":
-                history.push("/browse");
-                break;
-
-            default:
-                break;
-        }
-    }
-
+    
     //onchange handler
     const onchangeHandler = (field, value) => {
         switch (field) {
@@ -160,7 +144,6 @@ function SignupPayment(props) {
                 variant="contained"
                 color="primary"
                 type="submit"
-                // onClick={() => { btnHandler("continue") }}
                 fullWidth
             >
                 Finish

@@ -1,11 +1,7 @@
 import React from 'react';
-
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
-
 import styled from 'styled-components';
-
 import SettingMenu from "./components/settingMenu";
 import MenuBar from "./components/settingMenuBar";
 import SettingTitle from "./components/settingTitle";

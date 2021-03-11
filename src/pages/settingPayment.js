@@ -8,14 +8,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
-
 import styled from 'styled-components';
-
 import MenuBar from "./components/settingMenuBar";
 import SettingMenu from "./components/settingMenu";
 import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
-
 import LoginModules from "./modules/LoginModules";
 import { useHistory } from 'react-router';
 

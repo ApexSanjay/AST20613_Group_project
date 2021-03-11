@@ -1,13 +1,9 @@
 import React from 'react';
-
 import Grid from '@material-ui/core/Grid';
-
 import styled from 'styled-components';
-
 //Should be array
 import moviePoster from "./img/soul_poster.jpg";
 import { MovieCreationSharp } from '@material-ui/icons';
-
 import MenuBar from "./components/menuBar";
 
 export function Browse(props) {

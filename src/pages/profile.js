@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
-
 import Grid from '@material-ui/core/Grid';
-
 import styled from 'styled-components';
-
 import face from "./img/face.svg";
-
 import MenuBar from "./components/menuBar";
-
 import LoginModules from "./modules/LoginModules";
 
 function Profile(props) {

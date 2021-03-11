@@ -1,20 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import LinkIcon from '@material-ui/icons/Link';
-
 import styled from 'styled-components';
-
 import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import playbtn from "./img/playbtn.svg";
-
 import ReactPlayer from 'react-player'
-
 //Movie database
 import moviesN from './movieData.json';
 
