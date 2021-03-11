@@ -19,12 +19,12 @@ function Movie(props) {
 
     var params = useParams();
     var id = params.id;     // id of url "/movie/{id}" 
-    // console.log(params.id);
+    console.log(params.id);
 
     //For sharing link
     const [copiedLink] = React.useState(0);
 
-    const movies = moviesN[id - 1];
+    const movies = (id != null ? moviesN[id - 1]: moviesN[0]);
 
     const MenuBar = () => {
 
