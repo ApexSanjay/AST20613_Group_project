@@ -20,11 +20,14 @@ import {
   Profile,
   Play,
   Series,
-  Upload
+  Upload,
+  Playlist
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import blue from '@material-ui/core/colors/blue';
+import orange from '@material-ui/core/colors/orange';
 
 import firebase from 'firebase/app';
 import "firebase/auth";
@@ -47,6 +50,8 @@ firebase.initializeApp(firebaseConfig);
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: blue,
+    secondary: orange,
   },
 });
 
@@ -86,7 +91,7 @@ function App() {
         return (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/login/protected",
             }}
           />
         );
@@ -154,6 +159,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Switch>
+            <ProtectedRoute path="/movie/:id">
+              <Movie />
+            </ProtectedRoute>
             <ProtectedRoute path="/movie">
               <Movie />
             </ProtectedRoute>
@@ -176,11 +184,20 @@ function App() {
                 }}
               />
             </UnprotectedRoute>
+            <UnprotectedRoute path="/login/:error">
+              <Login />
+            </UnprotectedRoute>
             <UnprotectedRoute path="/login">
               <Login />
             </UnprotectedRoute>
             <ProtectedRoute path="/profile">
               <Profile />
+            </ProtectedRoute>
+            <ProtectedRoute path="/playlist/:id">
+              <Playlist />
+            </ProtectedRoute>
+            <ProtectedRoute path="/playlist">
+              <Playlist />
             </ProtectedRoute>
             <UnprotectedRoute path="/home">
               <Home />

@@ -1,28 +1,32 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-
+import {
+    useHistory,
+    useParams
+} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import LinkIcon from '@material-ui/icons/Link';
-
 import styled from 'styled-components';
-
 import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import playbtn from "./img/playbtn.svg";
-
-import ReactPlayer from 'react-player'
-
+import ReactPlayer from 'react-player';
+import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
 //Movie database
 import moviesN from './movieData.json';
 
 function Movie(props) {
-//For sharing link
-const [copiedLink] = React.useState(0);
 
-    const movies = moviesN[0];
+    var params = useParams();
+    var id = params.id;     // id of url "/movie/{id}" 
+    console.log(params.id);
+
+    //For sharing link
+    const [copiedLink] = React.useState(0);
+
+    const movies = (id != null ? moviesN[id - 1] : moviesN[0]);
 
     const MenuBar = () => {
 
@@ -44,7 +48,7 @@ const [copiedLink] = React.useState(0);
                 </Grid>
             </div>
         );
-    }
+    };
 
     const Container = styled.div`
         margin: auto;
@@ -121,7 +125,7 @@ const [copiedLink] = React.useState(0);
     const ShareLink = () => {
         return (
             <div>
-                <Button onClick ={()=>navigator.clipboard.writeText('Should be url')}>
+                <Button onClick={() => navigator.clipboard.writeText('Should be url')}>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>
@@ -143,6 +147,35 @@ const [copiedLink] = React.useState(0);
                 </center>
             </p>
         );
+    }
+
+    const Review = () => {
+        return (
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <hr />
+                </Grid>
+                <Grid item xs={12}>
+                    <h2>Review</h2>
+                </Grid>
+                <Grid item xs={1}>
+                    <Avatar
+                        alt=""
+                        src=""
+                    />
+                </Grid>
+                <Grid item xs={11}>
+                    <TextField
+                        label="Write Down Your Review"
+                        variant="filled"
+                        fullWidth
+                    />
+                </Grid>
+
+                <Grid item xs={12}>
+
+                </Grid>
+            </Grid>);
     }
 
     return (
@@ -178,6 +211,9 @@ const [copiedLink] = React.useState(0);
                     <Grid item xs={9}>
                         <Description>
                         </Description>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Review />
                     </Grid>
                 </Grid>
             </Body>
