@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import face from "./img/face.svg";
@@ -18,6 +19,8 @@ function Profile(props) {
 
     var profile = LoginModules.getUserProfile();
     const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
+
+    const history = useHistory();
 
     const Container = styled.div`
         margin: auto;
@@ -55,6 +58,19 @@ function Profile(props) {
     const Playlist = () => {
 
         const ListCard = () => {
+
+            const onclickHandler = (name) => {
+                switch (name) {
+                    case "view":
+                        history.push("/playlist/123");
+                        break;
+                    case "remove":
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             return (
                 <Grid item xs={4}>
                     <Card>
@@ -70,7 +86,7 @@ function Profile(props) {
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
-                            <Button size="small" color="primary">
+                            <Button size="small" color="primary" onClick={()=>{onclickHandler("view");}}>
                                 View
                         </Button>
                             <Button size="small" color="primary">
