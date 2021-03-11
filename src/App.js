@@ -86,7 +86,7 @@ function App() {
         return (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/login/protected",
             }}
           />
         );
@@ -178,6 +178,9 @@ function App() {
                   pathname: "/signup/plan",
                 }}
               />
+            </UnprotectedRoute>
+            <UnprotectedRoute path="/login/:error">
+              <Login />
             </UnprotectedRoute>
             <UnprotectedRoute path="/login">
               <Login />
