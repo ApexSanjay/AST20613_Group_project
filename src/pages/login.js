@@ -9,6 +9,7 @@ import LoginModules from "./modules/LoginModules";
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import ErrorSnackBar from "./components/errorSnackBar"
 
 function Login(props) {
 
@@ -20,39 +21,38 @@ function Login(props) {
     const [error, setError] = useState("");
     const history = useHistory();
 
-    //handle url error redirecting
-    const URLErrorMessage = () => {
-        const [open, setOpen] = React.useState(urlError != null ? true : false);
+    // const ErrorSnackBar = () => {
+    //     const [open, setOpen] = React.useState(urlError != null ? true : false);
 
-        const handleClose = (event, reason) => {
-            if (reason === 'clickaway') {
-                return;
-            }
-            setOpen(false);
-        };
+    //     const handleClose = (event, reason) => {
+    //         if (reason === 'clickaway') {
+    //             return;
+    //         }
+    //         setOpen(false);
+    //     };
 
-        return (
-            <div>
-                <Snackbar
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    open={open}
-                    autoHideDuration={6000}
-                    onClose={handleClose}
-                    message="Please Login."
-                    action={
-                        <React.Fragment>
-                            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </React.Fragment>
-                    }
-                />
-            </div>
-        );
-    }
+    //     return (
+    //         <div>
+    //             <Snackbar
+    //                 anchorOrigin={{
+    //                     vertical: 'bottom',
+    //                     horizontal: 'left',
+    //                 }}
+    //                 open={open}
+    //                 autoHideDuration={6000}
+    //                 onClose={handleClose}
+    //                 message="Please Login."
+    //                 action={
+    //                     <React.Fragment>
+    //                         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+    //                             <CloseIcon fontSize="small" />
+    //                         </IconButton>
+    //                     </React.Fragment>
+    //                 }
+    //             />
+    //         </div>
+    //     );
+    // }
 
     const Container = styled.div`
         margin: auto;
@@ -133,7 +133,7 @@ function Login(props) {
 
     return (
         <Container>
-            <URLErrorMessage />
+            <ErrorSnackBar error={urlError}>Please Login.</ErrorSnackBar>
             <MenuBar />
             <form onSubmit={onSubmitHandler}>
                 <Grid container>

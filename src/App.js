@@ -193,6 +193,9 @@ function App() {
             <ProtectedRoute path="/profile">
               <Profile />
             </ProtectedRoute>
+            <ProtectedRoute path="/playlist/:id">
+              <Playlist />
+            </ProtectedRoute>
             <ProtectedRoute path="/playlist">
               <Playlist />
             </ProtectedRoute>
