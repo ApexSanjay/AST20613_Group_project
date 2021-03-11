@@ -38,51 +38,53 @@ export function Browse(props) {
     const MovieCardRow = () => {
 
         const secondaryOptions = {
-			type        : 'slide',
-			rewind      : true,
-			gap         : '1rem',
-			pagination  : false,
-			fixedWidth  : 500,
-			fixedHeight : 700,
-			cover       : true,
-			focus       : 'center',
-			isNavigation: true,
-			updateOnMove: true,
-		};
+            type: 'slide',
+            rewind: true,
+            gap: '1rem',
+            pagination: false,
+            fixedWidth: 400,
+            fixedHeight: 600,
+            cover: true,
+            focus: 'center',
+            isNavigation: true,
+            updateOnMove: true,
+        };
+
+        const MovieCard = (props) => {
+
+            const link = "/movie/" + props.id;
+            const img = props.img;
+
+            const MoviePoster = styled.img`
+                border-radius: 16px;
+            `;
+
+            return (
+                <SplideSlide>
+                    <Link to={link}>
+                        <MoviePoster
+                            src={img}
+                            alt="Image 1"
+                            height="100%"
+                            width="100%"
+                        />
+                    </Link>
+                </SplideSlide>
+            );
+        }
 
         return (
             <div>
-                <Splide options={ secondaryOptions }>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 1" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <img src={moviePoster} alt="Image 2" />
-                    </SplideSlide>
+                <Splide options={secondaryOptions}>
+                    <MovieCard id="1" img={moviePoster} />
+                    <MovieCard id="2" img={moviePoster} />
+                    <MovieCard id="3" img={moviePoster} />
+                    <MovieCard id="4" img={moviePoster} />
+                    <MovieCard id="5" img={moviePoster} />
+                    <MovieCard id="6" img={moviePoster} />
+                    <MovieCard id="7" img={moviePoster} />
+                    <MovieCard id="8" img={moviePoster} />
+                    <MovieCard id="9" img={moviePoster} />
                 </Splide>
             </div>
         );
