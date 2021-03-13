@@ -9,7 +9,7 @@ import LoginModules from "./modules/LoginModules";
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import ErrorSnackBar from "./components/errorSnackBar"
+import SnackBar from "./components/snackBar"
 
 function Login(props) {
 
@@ -20,7 +20,7 @@ function Login(props) {
     var email, password;
     const [error, setError] = useState("");
     const history = useHistory();
-    
+
     const Container = styled.div`
         margin: auto;
         width: 80%;
@@ -100,7 +100,7 @@ function Login(props) {
 
     return (
         <Container>
-            <ErrorSnackBar show={urlError != null}>Please Login.</ErrorSnackBar>
+            <SnackBar show={urlError != null}>Please Login.</SnackBar>
             <MenuBar />
             <form onSubmit={onSubmitHandler}>
                 <Grid container>

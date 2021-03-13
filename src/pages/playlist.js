@@ -15,7 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-import ErrorSnackBar from "./components/errorSnackBar";
+import SnackBar from "./components/snackBar";
 
 function Playlist(props) {
 
