@@ -131,6 +131,15 @@ const getPlanDetails = (plan) => {
     return firebase.firestore().collection("plan").doc(plan).get();
 }
 
+const vertifyPassword = (pwd) => {
+    var user = firebase.auth().currentUser;
+    var credential = firebase.auth.EmailAuthProvider.credential(
+        firebase.auth().currentUser.email, pwd
+    );
+
+    return user.reauthenticateWithCredential(credential);   //then catch
+}
+
 const LoginModules = {
     login,
     register,
@@ -145,7 +154,8 @@ const LoginModules = {
     getCardInfo,
     getAdminUser,
     getUserPlan,
-    getPlanDetails
+    getPlanDetails,
+    vertifyPassword
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;
