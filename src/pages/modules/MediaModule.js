@@ -17,24 +17,34 @@ const transcodeMovie = (movieFiles) => {
     return;
 };
 
-const movieInfo = (title, director, cast, description) => {
+const movieInfo = (
+    id,
+    title,
+    description,
+    director,
+    cast,
+    trailerURL,
+    imdbReview,
+    movieLength,
+    movieReleaseDate
+) => {
     //todo: add movie ref
     var res = {
+        id: id,
         title: title,
-        director: director,
-        cast: cast,
         description: description,
+        Director: director,
+        cast: cast,
+        trailerURL: trailerURL,
+        imdbReview: imdbReview,
+        movieLength: movieLength,
+        movieReleaseDate: movieReleaseDate,
     }
     return res;
 };   //an container for movie info
 
 const createMovieInfo = (movieInfo) => {
-    return firebase.firestore().collection("movies").add({
-        title: movieInfo.title,
-        director: movieInfo.director,
-        cast: movieInfo.cast,
-        description: movieInfo.description,
-    }); //.then(docRef).catch(); is available
+    return firebase.firestore().collection("movies").add(movieInfo); //.then(docRef).catch(); is available
 };
 
 const updateMovieInfo = (id, movieInfo) => {
