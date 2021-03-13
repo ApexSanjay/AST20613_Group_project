@@ -139,7 +139,7 @@ function Playlist(props) {
 
     return (
         <Container>
-            <ErrorSnackBar show={() => { if (playlistID) { return false; } else { return true; } }}>No Playlist ID in URL.</ErrorSnackBar>
+            <SnackBar show={() => { if (playlistID) { return false; } else { return true; } }}>No Playlist ID in URL.</SnackBar>
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={12}>
