@@ -54,8 +54,8 @@ function SettingMembership(props) {
                                 <br />
                                 <br />
                                 <br />
-                                <h1>{plan}</h1>
-                                <h2>HK$ {planDetails.price} </h2>
+                                <h1>{(plan? plan : "")}</h1>
+                                <h2>HK$ {(planDetails ? planDetails.price : "")} </h2>
                                 <h4>Current Plan</h4>
                                 <br />
                                 <br />
