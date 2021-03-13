@@ -18,3 +18,6 @@ A Movie Streaming Website
 email: admin@redstream.com
 pwd: redstream
 
+## Demo User Account
+email: test@test.com
+pwd: testes
