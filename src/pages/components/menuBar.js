@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
     Link,
@@ -16,6 +16,20 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import LoginModules from "../modules/LoginModules";
 
 const MenuBar = () => {
+
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    const userID = LoginModules.getUserProfile().uid;
+    if (userID) {
+        LoginModules.getAdminUser(userID).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // console.log(doc.id, " => ", doc.data());
+                setIsAdmin(true);
+            })
+        });
+    }
+
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -92,7 +106,7 @@ const MenuBar = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem>
+                        {(isAdmin == true? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)}
                         <MenuItem onClick={() => { btnHandler("manage") }}>Manage</MenuItem>
                         <MenuItem onClick={() => { btnHandler("logout") }}>Logout</MenuItem>
                     </Menu>

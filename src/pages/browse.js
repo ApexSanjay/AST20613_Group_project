@@ -10,8 +10,11 @@ import { MovieCreationSharp } from '@material-ui/icons';
 import MenuBar from "./components/menuBar";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+import LoginModules from './modules/LoginModules';
 
 export function Browse(props) {
+
+
 
     const MovieCardRow = () => {
 

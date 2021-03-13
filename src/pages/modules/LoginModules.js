@@ -100,9 +100,17 @@ const updateCardInfo = (cardID, userID, cvv, cardNum, explorationDate, firstName
 const getCardInfo = (userID) => {
     return firebase.firestore().collection("cardInfo").where("UserID", "==", userID).get();
     //(querySnapshot) => {
-        // querySnapshot.forEach((doc) => {
-        //     console.log(doc.id, " => ", doc.data());
-        // });
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data());
+    // });
+}
+
+const getAdminUser = (userID) => {
+    return firebase.firestore().collection("admins").where("userID", "==", userID).get();
+        //(querySnapshot) => {
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data());
+    // });
 }
 
 const LoginModules = {
@@ -116,7 +124,8 @@ const LoginModules = {
     getLoginStatus,
     createCardInfo,
     updateCardInfo,
-    getCardInfo
+    getCardInfo,
+    getAdminUser
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;
