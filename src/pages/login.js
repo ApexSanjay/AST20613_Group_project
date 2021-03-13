@@ -6,16 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
 import LoginModules from "./modules/LoginModules";
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import SnackBar from "./components/snackBar"
 
 function Login(props) {
 
     var params = useParams();
     var urlError = params.error;
-    console.log(urlError);
 
     var email, password;
     const [error, setError] = useState("");
