@@ -8,9 +8,9 @@ const login = (email, password) => {
 };   // .then().catch() is available
 
 const register = (email, password, plan) => {
-    return firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential)=>{
+    return firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
         var uid = userCredential.user.uid;
-        return firebase.firestore().collection("plan").add({
+        return firebase.firestore().collection("subscription").add({
             userID: uid,
             plan: plan
         });
@@ -113,10 +113,22 @@ const getCardInfo = (userID) => {
 
 const getAdminUser = (userID) => {
     return firebase.firestore().collection("admins").where("userID", "==", userID).get();
-        //(querySnapshot) => {
+    //(querySnapshot) => {
     // querySnapshot.forEach((doc) => {
     //     console.log(doc.id, " => ", doc.data());
     // });
+}
+
+const getUserPlan = () => {
+    const uid = getUserProfile().uid;
+    return firebase.firestore().collection("subscription").where("userID", "==", uid).get();
+    //(querySnapshot) => {
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data());
+}
+
+const getPlanDetails = (plan) => {
+    return firebase.firestore().collection("plan").doc(plan).get();
 }
 
 const LoginModules = {
@@ -131,7 +143,9 @@ const LoginModules = {
     createCardInfo,
     updateCardInfo,
     getCardInfo,
-    getAdminUser
+    getAdminUser,
+    getUserPlan,
+    getPlanDetails
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;

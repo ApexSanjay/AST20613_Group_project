@@ -93,12 +93,6 @@ function SignupPlan(props) {
                     <TD>Best</TD>
                 </TR>
                 <TR>
-                    <TD>Resolution</TD>
-                    <TD>480p</TD>
-                    <TD>1080p</TD>
-                    <TD>4k+HDR</TD>
-                </TR>
-                <TR>
                     <TD>Screens you can watch on at the same time</TD>
                     <TD>1</TD>
                     <TD>2</TD>

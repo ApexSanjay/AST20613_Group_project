@@ -14,7 +14,7 @@ import LoginModules from './modules/LoginModules';
 
 export function Browse(props) {
 
-
+    console.log(LoginModules.getUserProfile().uid);
 
     const MovieCardRow = () => {
 
