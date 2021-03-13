@@ -16,6 +16,8 @@ import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import MediaModule from "./modules/MediaModule";
 import SendIcon from '@material-ui/icons/Send';
+import Paper from '@material-ui/core/Paper';
+
 
 function Movie(props) {
 
@@ -198,17 +200,36 @@ function Movie(props) {
 
                 </Grid>
                 <Grid item xs={1}>
-                    <Button
-                        
-                    >
+                    <Button>
                         <SendIcon />
                         Send
                     </Button>
                 </Grid>
 
+
                 <Grid item xs={12}>
+                    <Paper elevation={3}>
+                        <Grid container>
+                            <Grid item xs={1}>
+
+                                <Avatar
+                                    alt=""
+                                    src=""
+                                />
+                            </Grid>
+                            <Grid item xs={11}>
+                                <b>User 123456</b><br />
+                                <small>{Date()}</small>
+                            </Grid>
+                            <Grid item xs={12}>
+                                Very Good!!!!!!!!
+                            </Grid>
+                        </Grid>
+
+                    </Paper>
 
                 </Grid>
+
             </Grid>);
     }
 
