@@ -2,7 +2,6 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/storage";
 import "firebase/firestore";
-import { useImperativeHandle } from 'react';
 
 const login = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
