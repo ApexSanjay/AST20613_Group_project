@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     useHistory,
     useParams
@@ -14,19 +14,42 @@ import playbtn from "./img/playbtn.svg";
 import ReactPlayer from 'react-player';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
-//Movie database
-import moviesN from './movieData.json';
+import MediaModule from "./modules/MediaModule";
 
 function Movie(props) {
 
+    const history = useHistory();
     var params = useParams();
-    var id = params.id;     // id of url "/movie/{id}" 
+    var movieID = params.id;     // id of url "/movie/{id}" 
     console.log(params.id);
 
     //For sharing link
     const [copiedLink] = React.useState(0);
 
-    const movies = (id != null ? moviesN[id - 1] : moviesN[0]);
+    //get movie info
+    const [loadingMovies, setLoadingMovies] = useState(true);
+    const [movies, setMovies] = useState({
+        title: "",
+        description: "",
+        Director: "",
+        cast: [],
+        trailerURL: "",
+        imdbReview: "",
+        movieLength: "",
+        movieReleaseDate: "",
+    });
+
+    if (loadingMovies) {
+        MediaModule.getMovieInfo(movieID).then((doc) => {
+            if(doc.exists){
+                setMovies(doc.data());
+                setLoadingMovies(false);
+            } else {
+                history.push("/browse");
+            }
+        });
+    }
+
 
     const MenuBar = () => {
 
