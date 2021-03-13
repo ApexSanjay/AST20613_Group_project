@@ -44,12 +44,6 @@ function Playlist(props) {
         console.log("??");
     }
 
-
-    // const Container = styled.div`
-    //     margin: auto;
-    //     width: 80%;
-    // `;
-
     const PlaylistTable = () => {
 
         const WatchButton = () => {
