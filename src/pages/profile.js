@@ -14,6 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import moviePoster from "./img/moviePoster/soul_poster.jpg";
+import Container from "./components/container";
 
 function Profile(props) {
 
@@ -21,11 +22,6 @@ function Profile(props) {
     const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
 
     const history = useHistory();
-
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
 
     const useStyles = makeStyles({
         media: {

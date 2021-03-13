@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
+import Container from "./components/container";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -35,12 +36,6 @@ function SignupPlan(props) {
     const handleChange = (event) => {
         setPlanSelected(event.target.value);
     };
-
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
-
 
     const history = useHistory();
 

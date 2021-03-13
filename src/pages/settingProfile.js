@@ -11,15 +11,10 @@ import SaveButton from "./components/settingSaveButton";
 
 import LoginModules from "./modules/LoginModules";
 
+import Container from "./components/container";
+
 function SettingProfile(props) {
     var profileName = LoginModules.getUserProfile().name;
-
-    const Container = styled.div`
-        padding: 2%;
-        margin: auto;
-        width: 80%;
-        color: white;
-    `;
 
     const NameField = () => {
         const updateNameState = (e) => {

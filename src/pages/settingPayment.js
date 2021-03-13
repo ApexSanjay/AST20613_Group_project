@@ -15,6 +15,7 @@ import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
 import LoginModules from "./modules/LoginModules";
 import { useHistory } from 'react-router';
+import Container from "./components/container";
 
 function SettingPayment(props) {
 
@@ -73,13 +74,6 @@ function SettingPayment(props) {
         }
         console.log(newData);
     }
-
-    const Container = styled.div`
-        padding: 2%;
-        margin: auto;
-        width: 80%;
-        color: white;
-    `;
 
     const FirstNameField = () => {
         return (

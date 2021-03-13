@@ -6,16 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
 import LoginModules from "./modules/LoginModules";
+import Container from "./components/container";
 
 function SignupAccount(props) {
 
     var name = "", email = "", password = "";
     const [error, setError] = useState("");
-
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
 
     const history = useHistory();
 

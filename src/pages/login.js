@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
 import LoginModules from "./modules/LoginModules";
 import SnackBar from "./components/snackBar"
+import Container from "./components/container";
 
 function Login(props) {
 
@@ -17,10 +18,10 @@ function Login(props) {
     const [error, setError] = useState("");
     const history = useHistory();
 
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
+    // const Container = styled.div`
+    //     margin: auto;
+    //     width: 80%;
+    // `;
 
     // onChange handler
     const onEmailChange = (e) => {

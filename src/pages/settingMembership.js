@@ -7,16 +7,10 @@ import styled from 'styled-components';
 import SettingMenu from "./components/settingMenu";
 import MenuBar from "./components/settingMenuBar";
 import SettingTitle from "./components/settingTitle";
+import Container from "./components/container";
 
 
 function SettingMembership(props) {
-    const Container = styled.div`
-        padding: 2%;
-        margin: auto;
-        width: 80%;
-        color: white;
-    `;
-
     const PlanField = () => {
         return (
             <Grid container spacing={3}>

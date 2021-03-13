@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
 import { useHistory } from 'react-router';
+import Container from "./components/container";
 
 export function Upload(props) {
 
@@ -31,11 +32,6 @@ export function Upload(props) {
         movieReleaseDate: ""
     });
     const history = useHistory();
-
-    const Container = styled.div`
-        width: 80%;
-        margin: auto;
-    `;
 
     var data = input;
 

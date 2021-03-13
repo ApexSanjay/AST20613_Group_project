@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 import SnackBar from "./components/snackBar";
+import Container from "./components/container";
 
 function Playlist(props) {
 
@@ -44,10 +45,10 @@ function Playlist(props) {
     }
 
 
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
+    // const Container = styled.div`
+    //     margin: auto;
+    //     width: 80%;
+    // `;
 
     const PlaylistTable = () => {
 
