@@ -13,40 +13,18 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 export function Browse(props) {
 
-    const MovieCard = () => {
-
-        const Card = styled.div`
-            width: 100%;
-        `;
-
-        const Movie = styled.img`
-            height: 480px;
-            border-radius: 10px;
-            width: 100%;
-            height: auto;
-        `;
-        return (
-            <Card>
-                <Link to="/movie/1">
-                    <Movie
-                        src={moviePoster}></Movie>
-                </Link>
-            </Card>
-        );
-    };
-
     const MovieCardRow = () => {
 
-        const secondaryOptions = {
+        const Options = {
             type: 'slide',
-            rewind: true,
+            rewind: false,
             gap: '1rem',
             pagination: false,
             fixedWidth: 400,
             fixedHeight: 600,
             cover: true,
-            focus: 'center',
-            isNavigation: true,
+            focus: 'right',
+            isNavigation: false,
             updateOnMove: true,
         };
 
@@ -75,7 +53,7 @@ export function Browse(props) {
 
         return (
             <div>
-                <Splide options={secondaryOptions}>
+                <Splide options={Options}>
                     <MovieCard id="1" img={moviePoster} />
                     <MovieCard id="2" img={moviePoster} />
                     <MovieCard id="3" img={moviePoster} />
@@ -88,22 +66,7 @@ export function Browse(props) {
                 </Splide>
             </div>
         );
-    }
-    // const MovieCardRow = () => {
-    //     return (
-    //         <Grid container spacing={3}>
-    //             <Grid item xs={12} sm={4}>
-    //                 <MovieCard />
-    //             </Grid>
-    //             <Grid item xs={12} sm={4}>
-    //                 <MovieCard />
-    //             </Grid>
-    //             <Grid item xs={12} sm={4}>
-    //                 <MovieCard />
-    //             </Grid>
-    //         </Grid>
-    //     );
-    // }
+    };
 
     const Container = styled.div`
         width: 80%;
@@ -112,7 +75,6 @@ export function Browse(props) {
 
     return (
         <Container>
-            {/* app bar */}
             <MenuBar />
             <Grid container spacing={0}>
 
