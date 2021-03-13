@@ -11,9 +11,12 @@ import SaveButton from "./components/settingSaveButton";
 import LoginModules from "./modules/LoginModules";
 
 import Container from "./components/container";
+import SnackBar from "./components/snackBar";
 
 function SettingProfile(props) {
     var profileName = LoginModules.getUserProfile().name;
+
+    const [message, setMessage] = useState();
 
     const NameField = () => {
         const updateNameState = (e) => {
@@ -61,8 +64,8 @@ function SettingProfile(props) {
             }
             LoginModules.updateIcon(imageAsFile).then(() => {
                 var newIcon = LoginModules.getUserProfile().icon;
-                console.log(newIcon);
                 setIcon(newIcon);
+                setMessage(<SnackBar show={true}>Icon Updated.</SnackBar>);
             }
             );
         }
@@ -92,6 +95,7 @@ function SettingProfile(props) {
         const updateProfile = () => {
             LoginModules.updateName(profileName).then(() => {
                 // console.log(LoginModules.getUserProfile().name);
+                setMessage(<SnackBar show={true}>Profile Updated.</SnackBar>);
             });
         }
 
@@ -112,6 +116,7 @@ function SettingProfile(props) {
     return (
         <Container>
             <MenuBar />
+            {message}
             <Grid container>
                 <Grid item xs={3}><SettingMenu selected={0} /></Grid>
                 <Grid item xs={9}><ProfileSetting /></Grid>
