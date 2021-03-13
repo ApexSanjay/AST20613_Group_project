@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import Container from "./components/container";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 function Profile(props) {
 
@@ -25,7 +26,7 @@ function Profile(props) {
 
     const useStyles = makeStyles({
         media: {
-            height: 360,
+            height: 400,
         },
     });
     const classes = useStyles();
@@ -68,9 +69,9 @@ function Profile(props) {
             }
 
             return (
-                <Grid item xs={4}>
+                <SplideSlide>
                     <Card>
-                        <CardActionArea onClick={()=>{onclickHandler("view");}}>
+                        <CardActionArea onClick={() => { onclickHandler("view"); }}>
                             <CardMedia
                                 className={classes.media}
                                 image={moviePoster}
@@ -82,7 +83,7 @@ function Profile(props) {
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
-                            <Button size="small" color="primary" onClick={()=>{onclickHandler("view");}}>
+                            <Button size="small" color="primary" onClick={() => { onclickHandler("view"); }}>
                                 View
                         </Button>
                             <Button size="small" color="primary">
@@ -90,33 +91,33 @@ function Profile(props) {
                         </Button>
                         </CardActions>
                     </Card>
-                </Grid>
+                </SplideSlide>
             );
         }
 
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <p>
-                        <center>
-                            <h2>
-                                Playlist
-                            </h2>
-                        </center>
-                    </p>
+                    <h3>Playlist</h3>
                 </Grid>
                 {/* user playlist goes here */}
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
-                <ListCard />
+                <Grid item xs={12}>
+                    <Splide options={{
+                        rewind: true,
+                        perPage: 3,
+                        gap: '1rem',
+                    }}>
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                        <ListCard />
+                    </Splide>
+                </Grid>
             </Grid>
         );
     };
