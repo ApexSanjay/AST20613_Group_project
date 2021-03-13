@@ -68,7 +68,6 @@ function SignupPayment(props) {
                     <td>First Name</td>
                     <td>
                         <TextField
-                            id="outlined-basic"
                             label="First Name"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("firstname", e.target.value) }}
@@ -81,7 +80,6 @@ function SignupPayment(props) {
                     <td>Last Name</td>
                     <td>
                         <TextField
-                            id="outlined-basic"
                             label="Last Name"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("lastname", e.target.value) }}
@@ -94,7 +92,6 @@ function SignupPayment(props) {
                     <td>Card Number</td>
                     <td>
                         <TextField
-                            id="outlined-basic"
                             label="Card Number"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("cardNum", e.target.value) }}
@@ -107,7 +104,6 @@ function SignupPayment(props) {
                     <td>Exploration Date</td>
                     <td>
                         <TextField
-                            id="outlined-basic"
                             label="DDYY"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("explorationDate", e.target.value) }}
@@ -120,7 +116,6 @@ function SignupPayment(props) {
                     <td>Security Code</td>
                     <td>
                         <TextField
-                            id="outlined-basic"
                             label="CVV"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("cvv", e.target.value) }}
