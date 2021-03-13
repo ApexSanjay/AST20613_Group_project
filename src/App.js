@@ -44,9 +44,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-//for test propose, remove if login function is fully developed
-// firebase.auth().signInAnonymously();
-
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
