@@ -15,13 +15,13 @@ import ReactPlayer from 'react-player';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import MediaModule from "./modules/MediaModule";
+import SendIcon from '@material-ui/icons/Send';
 
 function Movie(props) {
 
     const history = useHistory();
     var params = useParams();
     var movieID = params.id;     // id of url "/movie/{id}" 
-    console.log(params.id);
 
     //For sharing link
     const [copiedLink] = React.useState(0);
@@ -41,7 +41,7 @@ function Movie(props) {
 
     if (loadingMovies) {
         MediaModule.getMovieInfo(movieID).then((doc) => {
-            if(doc.exists){
+            if (doc.exists) {
                 setMovies(doc.data());
                 setLoadingMovies(false);
             } else {
@@ -192,7 +192,18 @@ function Movie(props) {
                         label="Write Down Your Review"
                         variant="filled"
                         fullWidth
-                    />
+                    ></TextField>
+                </Grid>
+                <Grid item xs={11}>
+
+                </Grid>
+                <Grid item xs={1}>
+                    <Button
+                        
+                    >
+                        <SendIcon />
+                        Send
+                    </Button>
                 </Grid>
 
                 <Grid item xs={12}>
