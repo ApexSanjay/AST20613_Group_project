@@ -20,40 +20,7 @@ function Login(props) {
     var email, password;
     const [error, setError] = useState("");
     const history = useHistory();
-
-    // const ErrorSnackBar = () => {
-    //     const [open, setOpen] = React.useState(urlError != null ? true : false);
-
-    //     const handleClose = (event, reason) => {
-    //         if (reason === 'clickaway') {
-    //             return;
-    //         }
-    //         setOpen(false);
-    //     };
-
-    //     return (
-    //         <div>
-    //             <Snackbar
-    //                 anchorOrigin={{
-    //                     vertical: 'bottom',
-    //                     horizontal: 'left',
-    //                 }}
-    //                 open={open}
-    //                 autoHideDuration={6000}
-    //                 onClose={handleClose}
-    //                 message="Please Login."
-    //                 action={
-    //                     <React.Fragment>
-    //                         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-    //                             <CloseIcon fontSize="small" />
-    //                         </IconButton>
-    //                     </React.Fragment>
-    //                 }
-    //             />
-    //         </div>
-    //     );
-    // }
-
+    
     const Container = styled.div`
         margin: auto;
         width: 80%;
