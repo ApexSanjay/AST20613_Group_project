@@ -3,7 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton' ;
 import CloseIcon from '@material-ui/icons/Close';
 
-const ErrorSnackBar = (props) => {
+const SnackBar = (props) => {
     const [open, setOpen] = React.useState(props.show != null ? props.show : false);
 
     const handleClose = (event, reason) => {
@@ -36,4 +36,4 @@ const ErrorSnackBar = (props) => {
     );
 }
 
-export default ErrorSnackBar;
+export default SnackBar;

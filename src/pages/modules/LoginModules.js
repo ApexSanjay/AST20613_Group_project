@@ -2,14 +2,19 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/storage";
 import "firebase/firestore";
-import { useImperativeHandle } from 'react';
 
 const login = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
 };   // .then().catch() is available
 
-const register = (email, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+const register = (email, password, plan) => {
+    return firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+        var uid = userCredential.user.uid;
+        return firebase.firestore().collection("subscription").add({
+            userID: uid,
+            plan: plan
+        });
+    });
 };   // .then().catch() is available
 
 const logout = () => {
@@ -101,9 +106,38 @@ const updateCardInfo = (cardID, userID, cvv, cardNum, explorationDate, firstName
 const getCardInfo = (userID) => {
     return firebase.firestore().collection("cardInfo").where("UserID", "==", userID).get();
     //(querySnapshot) => {
-        // querySnapshot.forEach((doc) => {
-        //     console.log(doc.id, " => ", doc.data());
-        // });
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data());
+    // });
+}
+
+const getAdminUser = (userID) => {
+    return firebase.firestore().collection("admins").where("userID", "==", userID).get();
+    //(querySnapshot) => {
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data());
+    // });
+}
+
+const getUserPlan = () => {
+    const uid = getUserProfile().uid;
+    return firebase.firestore().collection("subscription").where("userID", "==", uid).get();
+    //(querySnapshot) => {
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data());
+}
+
+const getPlanDetails = (plan) => {
+    return firebase.firestore().collection("plan").doc(plan).get();
+}
+
+const vertifyPassword = (pwd) => {
+    var user = firebase.auth().currentUser;
+    var credential = firebase.auth.EmailAuthProvider.credential(
+        firebase.auth().currentUser.email, pwd
+    );
+
+    return user.reauthenticateWithCredential(credential);   //then catch
 }
 
 const LoginModules = {
@@ -117,7 +151,11 @@ const LoginModules = {
     getLoginStatus,
     createCardInfo,
     updateCardInfo,
-    getCardInfo
+    getCardInfo,
+    getAdminUser,
+    getUserPlan,
+    getPlanDetails,
+    vertifyPassword
 };  // after importing this file, use LoginModules.method_name() to access above methods
 
 export default LoginModules;

@@ -13,9 +13,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
 import { useHistory } from 'react-router';
+import Container from "./components/container";
 
 export function Upload(props) {
 
@@ -31,11 +31,6 @@ export function Upload(props) {
         movieReleaseDate: ""
     });
     const history = useHistory();
-
-    const Container = styled.div`
-        width: 80%;
-        margin: auto;
-    `;
 
     var data = input;
 

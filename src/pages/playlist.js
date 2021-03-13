@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
@@ -15,7 +15,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-import ErrorSnackBar from "./components/errorSnackBar";
+import SnackBar from "./components/snackBar";
+import Container from "./components/container";
 
 function Playlist(props) {
 
@@ -42,12 +43,6 @@ function Playlist(props) {
     } else {
         console.log("??");
     }
-
-
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
 
     const PlaylistTable = () => {
 
@@ -139,7 +134,7 @@ function Playlist(props) {
 
     return (
         <Container>
-            <ErrorSnackBar show={() => { if (playlistID) { return false; } else { return true; } }}>No Playlist ID in URL.</ErrorSnackBar>
+            <SnackBar show={() => { if (playlistID) { return false; } else { return true; } }}>No Playlist ID in URL.</SnackBar>
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={12}>

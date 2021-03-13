@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
 import LoginModules from "./modules/LoginModules";
+import Container from "./components/container";
 
 function SignupAccount(props) {
+    const history = useHistory();
+
+    const params = useParams();
+    const planSelected = params.plan;
+    if (planSelected) {
+        console.log(planSelected);
+    } else {
+        history.push("/signup/plan/error");
+    }
 
     var name = "", email = "", password = "";
     const [error, setError] = useState("");
 
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
-
-    const history = useHistory();
 
     //onchange handler
     const onChangeHandler = (field, value) => {
@@ -109,7 +113,7 @@ function SignupAccount(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        LoginModules.register(email, password).then(() => {
+        LoginModules.register(email, password, planSelected).then(() => {
             LoginModules.updateName(name).then(() => {
                 history.push("/signup/payment");
             });

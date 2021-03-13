@@ -1,20 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import styled from 'styled-components';
 import SettingMenu from "./components/settingMenu";
 import MenuBar from "./components/settingMenuBar";
 import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
+import Container from "./components/container";
 
+import LoginModules from "./modules/LoginModules";
+import SnackBar from "./components/snackBar"
 
 function SettingPassword(props) {
-    const Container = styled.div`
-        padding: 2%;
-        margin: auto;
-        width: 80%;
-        color: white;
-    `;
+
+    var oldPwd = "", newPwd = "", confirmPwd = "";
+
+    const [message, setMessage] = useState();
+
+    const onchangeHandler = (name, value) => {
+        switch (name) {
+            case "oldPwd":
+                oldPwd = value;
+                break;
+            case "newPwd":
+                newPwd = value;
+                break;
+            case "confirmPwd":
+                confirmPwd = value;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    const onClickHandler = (btnName) => {
+        switch (btnName) {
+            case "save":
+                reset(oldPwd, newPwd, confirmPwd);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+    const reset = (oldPwd, newPwd, confirmPwd) => {
+
+        const isConfirmedPassword = (pwd1, pwd2) => {
+            return (pwd1 === pwd2);
+        }
+
+        LoginModules.vertifyPassword(oldPwd).then(() => {
+            console.log("checkOldPassword success")
+            if (isConfirmedPassword(newPwd, confirmPwd)) {
+                console.log("confirm pwd success");
+                LoginModules.updatePassword(newPwd).then(()=>{
+                    setMessage(<SnackBar show={true}>Password update success.</SnackBar>);
+                }
+                );
+            } else {
+                setMessage(<SnackBar show={true}>New Password Invalid. Please try agian.</SnackBar>);
+            }
+        }).catch((e) => {
+            console.log(e.message);
+            setMessage(<SnackBar show={true}>{e.message}</SnackBar>);
+        });
+    }
 
     const OldPasswordField = () => {
         return (
@@ -22,19 +74,17 @@ function SettingPassword(props) {
                 <Grid item xs={3}>
                     <center>
                         Old Password
-                            </center>
+                    </center>
                 </Grid>
                 <Grid item xs={9}>
-                    <center>
-                        <TextField
-                            id="outlined-basic"
-                            label="Old Password"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue=""
-                            type="password"
-                        />
-                    </center>
+                    <TextField
+                        label="Old Password"
+                        variant="outlined"
+                        defaultValue=""
+                        type="password"
+                        onChange={(e) => { onchangeHandler("oldPwd", e.target.value) }}
+                        fullWidth
+                    />
                 </Grid>
             </Grid>
         );
@@ -49,18 +99,15 @@ function SettingPassword(props) {
                     </center>
                 </Grid>
                 <Grid item xs={9}>
-                    <center>
-                        <TextField
-                            id="outlined-basic"
-                            label="New Password"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue=""
-                            type="password"
-                        />
-                    </center>
+                    <TextField
+                        label="New Password"
+                        variant="outlined"
+                        defaultValue=""
+                        type="password"
+                        onChange={(e) => { onchangeHandler("newPwd", e.target.value) }}
+                        fullWidth
+                    />
                 </Grid>
-
             </Grid>
         );
     }
@@ -71,19 +118,17 @@ function SettingPassword(props) {
                 <Grid item xs={3}>
                     <center>
                         Confirm New Password
-                            </center>
+                    </center>
                 </Grid>
                 <Grid item xs={9}>
-                    <center>
-                        <TextField
-                            id="outlined-basic"
-                            label="Confirm New Password"
-                            variant="outlined"
-                            fullWidth
-                            defaultValue=""
-                            type="password"
-                        />
-                    </center>
+                    <TextField
+                        label="Confirm New Password"
+                        variant="outlined"
+                        defaultValue=""
+                        type="password"
+                        onChange={(e) => { onchangeHandler("confirmPwd", e.target.value) }}
+                        fullWidth
+                    />
                 </Grid>
             </Grid>
         );
@@ -99,7 +144,7 @@ function SettingPassword(props) {
                     <OldPasswordField />
                     <NewPasswordField />
                     <ConfirmPasswordField />
-                    <SaveButton />
+                    <SaveButton onClick={() => { onClickHandler("save") }} />
                 </Grid>
             </Grid>
         );
@@ -108,6 +153,7 @@ function SettingPassword(props) {
     return (
         <Container>
             <MenuBar />
+            {message ? message : <></>}
             <Grid container>
                 <Grid item xs={3}><SettingMenu selected={3} /></Grid>
                 <Grid item xs={9}><PasswordSetting /></Grid>

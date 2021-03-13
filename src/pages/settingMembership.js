@@ -1,21 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import styled from 'styled-components';
 import SettingMenu from "./components/settingMenu";
 import MenuBar from "./components/settingMenuBar";
 import SettingTitle from "./components/settingTitle";
-
+import Container from "./components/container";
+import LoginModules from "./modules/LoginModules";
 
 function SettingMembership(props) {
-    const Container = styled.div`
-        padding: 2%;
-        margin: auto;
-        width: 80%;
-        color: white;
-    `;
+
+    const [plan, setPlan] = useState();
+
+    const [planDetails, setPlanDetails] = useState();
+
+    if (!plan) {
+        LoginModules.getUserPlan().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // console.log(doc.id, " => ", doc.data().plan);
+                setPlan(doc.data().plan);
+            })
+        })
+    }
+
+    if (!planDetails) {
+        if (plan) {
+            LoginModules.getPlanDetails(plan).then((doc) => {
+                // console.log(doc.id, " => ", doc.data());
+                setPlanDetails({
+                    price: doc.data().Price,
+                    quality: doc.data().Quality,
+                    maxScreens: doc.data().MaxScreens,
+                });
+            });
+        }
+    }
+
+    console.log(planDetails);
 
     const PlanField = () => {
         return (
@@ -32,8 +54,8 @@ function SettingMembership(props) {
                                 <br />
                                 <br />
                                 <br />
-                                <h1>Basic Membership</h1>
-                                <h2>HK$ 29.99 / Year</h2>
+                                <h1>{(plan? plan : "")}</h1>
+                                <h2>HK$ {(planDetails ? planDetails.price : "")} </h2>
                                 <h4>Current Plan</h4>
                                 <br />
                                 <br />

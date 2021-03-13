@@ -168,8 +168,14 @@ function App() {
             <ProtectedRoute path="/browse">
               <Browse />
             </ProtectedRoute>
+            <Route path="/signup/plan/:error">
+              <SignupPlan />
+            </Route>
             <Route path="/signup/plan">
               <SignupPlan />
+            </Route>
+            <Route path="/signup/account/:plan">
+              <SignupAccount />
             </Route>
             <Route path="/signup/account">
               <SignupAccount />

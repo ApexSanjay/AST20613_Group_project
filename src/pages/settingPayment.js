@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
-
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
-import styled from 'styled-components';
 import MenuBar from "./components/settingMenuBar";
 import SettingMenu from "./components/settingMenu";
 import SettingTitle from "./components/settingTitle";
 import SaveButton from "./components/settingSaveButton";
 import LoginModules from "./modules/LoginModules";
 import { useHistory } from 'react-router';
+import Container from "./components/container";
 
 function SettingPayment(props) {
 
@@ -73,13 +66,6 @@ function SettingPayment(props) {
         }
         console.log(newData);
     }
-
-    const Container = styled.div`
-        padding: 2%;
-        margin: auto;
-        width: 80%;
-        color: white;
-    `;
 
     const FirstNameField = () => {
         return (

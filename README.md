@@ -13,3 +13,11 @@ A Movie Streaming Website
 - FAN Tsz Kin
 - KO Chun Kit
 - SZE Chun
+
+## Demo Admin Account
+email: admin@redstream.com
+pwd: redstream
+
+## Demo User Account
+email: test@test.com
+pwd: testes

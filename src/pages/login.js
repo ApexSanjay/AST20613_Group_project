@@ -6,58 +6,22 @@ import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
 import LoginModules from "./modules/LoginModules";
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import ErrorSnackBar from "./components/errorSnackBar"
+import SnackBar from "./components/snackBar"
+import Container from "./components/container";
 
 function Login(props) {
 
     var params = useParams();
     var urlError = params.error;
-    console.log(urlError);
 
     var email, password;
     const [error, setError] = useState("");
     const history = useHistory();
 
-    // const ErrorSnackBar = () => {
-    //     const [open, setOpen] = React.useState(urlError != null ? true : false);
-
-    //     const handleClose = (event, reason) => {
-    //         if (reason === 'clickaway') {
-    //             return;
-    //         }
-    //         setOpen(false);
-    //     };
-
-    //     return (
-    //         <div>
-    //             <Snackbar
-    //                 anchorOrigin={{
-    //                     vertical: 'bottom',
-    //                     horizontal: 'left',
-    //                 }}
-    //                 open={open}
-    //                 autoHideDuration={6000}
-    //                 onClose={handleClose}
-    //                 message="Please Login."
-    //                 action={
-    //                     <React.Fragment>
-    //                         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-    //                             <CloseIcon fontSize="small" />
-    //                         </IconButton>
-    //                     </React.Fragment>
-    //                 }
-    //             />
-    //         </div>
-    //     );
-    // }
-
-    const Container = styled.div`
-        margin: auto;
-        width: 80%;
-    `;
+    // const Container = styled.div`
+    //     margin: auto;
+    //     width: 80%;
+    // `;
 
     // onChange handler
     const onEmailChange = (e) => {
@@ -133,7 +97,7 @@ function Login(props) {
 
     return (
         <Container>
-            <ErrorSnackBar show={urlError != null}>Please Login.</ErrorSnackBar>
+            <SnackBar show={urlError != null}>Please Login.</SnackBar>
             <MenuBar />
             <form onSubmit={onSubmitHandler}>
                 <Grid container>

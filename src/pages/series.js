@@ -2,13 +2,9 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
+import Container from "./components/container";
 
 export function Series(props) {
-
-    const Container = styled.div`
-        width: 80%;
-        margin: auto;
-    `;
 
     const SeriesRow = () =>{
         //Make row style
