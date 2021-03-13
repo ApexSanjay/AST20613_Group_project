@@ -1,5 +1,5 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useState} from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBarBeforeSignin";
 import Container from "./components/container";
+import SnackBar from "./components/snackBar";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
 
 function SignupPlan(props) {
     const classes = useStyles();
+
+    const params = useParams();
+    const errorRedirected = params.error;
 
     //data handling part
     const plan = [
@@ -43,7 +47,7 @@ function SignupPlan(props) {
     const btnHandler = (btnName) => {
         switch (btnName) {
             case "continue":
-                history.push("/signup/account");
+                history.push("/signup/account/" + planSelected);
                 break;
 
             default:
@@ -131,8 +135,6 @@ function SignupPlan(props) {
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="plan">Plan</InputLabel>
                 <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
                     value={planSelected}
                     onChange={handleChange}
                     label="planSelected"
@@ -161,6 +163,7 @@ function SignupPlan(props) {
     return (
         <Container>
             <MenuBar/>
+            {(errorRedirected ? <SnackBar show={true}>Please selected a plan.</SnackBar> : <></>)}
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <h2>Sign Up Page - Choose Your Plan</h2>

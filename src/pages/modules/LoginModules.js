@@ -7,8 +7,14 @@ const login = (email, password) => {
     return firebase.auth().signInWithEmailAndPassword(email, password);
 };   // .then().catch() is available
 
-const register = (email, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+const register = (email, password, plan) => {
+    return firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential)=>{
+        var uid = userCredential.user.uid;
+        return firebase.firestore().collection("plan").add({
+            userID: uid,
+            plan: plan
+        });
+    });
 };   // .then().catch() is available
 
 const logout = () => {
