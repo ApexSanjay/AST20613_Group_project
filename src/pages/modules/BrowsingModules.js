@@ -1,5 +1,7 @@
 import firebase from 'firebase/app';
 import "firebase/firestore";
+import "firebase/auth";
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 const searchMovie = (keywords) => {
     //todo
@@ -11,16 +13,18 @@ const suggestMovie = () => {
     return;
 };
 
-const createPlaylist = (name, list) => {
+const createPlaylist = (name, movieIDList) => {
+    const uid = firebase.auth().currentUser.uid;
     return firebase.firestore().collection("playlists").add({
+        userID: uid,
         title: name,
-        list: list,
+        movieID: movieIDList,
     });
 };  //list is an array of movie id  //.then(docRef).catch is available
 
-const updatePlaylist = (playlistID, list) => {
-    return firebase.firestore().collection("playlists").doc(playlistID).set({
-        list: list,
+const updatePlaylist = (playlistID, movieIDList) => {
+    return firebase.firestore().collection("playlists").doc(playlistID).update({
+        movieID: movieIDList,
     });
 };  //.then().catch() is available
 
@@ -29,9 +33,13 @@ const removePlaylist = (playlistID) => {
 };  //.then().catch() is available
 
 const getPlaylist = (playlistID) => {
-    console.log("getPlaylist");
     return firebase.firestore().collection("playlists").doc(playlistID).get();
 };  //.then().catch() is available
+
+const getAllPlaylist = () => {
+    const uid = firebase.auth().currentUser.uid;
+    return firebase.firestore().collection("playlists").where("userID", "==", uid).get();
+}
 
 const createReview = (movieID, userID, review) => {
     return firebase.firestore().collection("reviews").add({
@@ -63,6 +71,7 @@ const BrowsingModules = {
     updatePlaylist,
     removePlaylist,
     getPlaylist,
+    getAllPlaylist,
     createReview,
     removeReview,
     getReviewSnapshot,
