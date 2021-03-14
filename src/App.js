@@ -70,7 +70,7 @@ function App() {
   });
 
   const ProtectedRoute = (props) => {
-    console.log(loading, loggedIn);
+    // console.log(loading, loggedIn);
 
     if (loading === true) {
       return (

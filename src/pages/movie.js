@@ -17,7 +17,17 @@ import Avatar from '@material-ui/core/Avatar';
 import MediaModule from "./modules/MediaModule";
 import SendIcon from '@material-ui/icons/Send';
 import Paper from '@material-ui/core/Paper';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import BrowsingModules from "./modules/BrowsingModules";
 
 function Movie(props) {
 
@@ -29,7 +39,8 @@ function Movie(props) {
     const [copiedLink] = React.useState(0);
 
     //get movie info
-    const [loadingMovies, setLoadingMovies] = useState(true);
+    const [loadingMovie, setLoadingMovie] = useState(true);
+    const [loadingLib, setLoadingLib] = useState(true);
     const [movies, setMovies] = useState({
         title: "",
         description: "",
@@ -41,17 +52,38 @@ function Movie(props) {
         movieReleaseDate: "",
     });
 
-    if (loadingMovies) {
+    const [userLibraryState, setUserLibraryState] = useState([]);
+    // console.log(userLibraryState);
+
+    if (loadingMovie) {
         MediaModule.getMovieInfo(movieID).then((doc) => {
             if (doc.exists) {
                 setMovies(doc.data());
-                setLoadingMovies(false);
+                // setLoading(false);
+
             } else {
                 history.push("/browse");
             }
+            setLoadingMovie(false);
         });
     }
 
+    if (loadingLib) {
+        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+            var userLibrary = [];
+            querySnapshot.forEach((doc) => {
+                if (userLibraryState != []) {
+                    var playlist = {
+                        title: doc.data().title,
+                        playlistID: doc.id,
+                    }
+                    userLibrary.push(playlist);
+                }
+            });
+            setLoadingLib(false);
+            setUserLibraryState(userLibrary);
+        });
+    }
 
     const MenuBar = () => {
 
@@ -137,11 +169,152 @@ function Movie(props) {
     }
 
     const AddToLibrary = () => {
+        const [openDialog, setOpenDialog] = React.useState(false);
+
+        const useStyles = makeStyles((theme) => ({  //for LibMenu
+            container: {
+                display: 'flex',
+                flexWrap: 'wrap',
+            },
+            formControl: {
+                margin: theme.spacing(1),
+                minWidth: 120,
+            },
+        }));
+
+        const LibMenu = () => {
+            const [selectedPlaylist, setSelectedPlaylist] = React.useState('');
+            const classes = useStyles();
+            var newPlaylist = "";
+
+            const handleClose = () => {  //for <Dialog> and cancel btn
+                setOpenDialog(false);
+            };
+
+            const onclickHandler = (name) => {
+                switch (name) {
+                    case "ok":
+                        if (selectedPlaylist === "new") {
+                            if (newPlaylist === "") {
+                                newPlaylist = "New Playlist";
+                            }
+                            // create playlist
+                            BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
+                                console.log("BM: created playlist");
+                            }).catch((e) => {
+                                console.log(e.message);
+                            });
+                        } else {
+                            console.log(selectedPlaylist);
+                            // add item to exist playlist
+                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc)=>{
+                                // console.log(doc.data());
+                                var newMovieIDList = doc.data().movieID;
+                                newMovieIDList.push(movieID);
+                                BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(()=>{
+                                    console.log("update playlist success");
+                                });
+                            });
+                        }
+                        handleClose();
+                        break;
+                    case "cancel":
+                        handleClose();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            const handleChange = (value) => {
+                // console.log(value);
+                setSelectedPlaylist(value || '');
+            }
+
+            const NewPlaylistField = () => {
+
+                const onchangeHandler = (value) => {
+                    newPlaylist = value;
+                    // console.log(newPlaylist);
+                }
+
+                const Container = styled.div`
+                    margin: 10px 0;
+                `;
+
+                if (selectedPlaylist === "new") {
+                    return (
+                        <Container>
+                            <TextField
+                                label="New Playlist"
+                                variant="outlined"
+                                onChange={(e) => { onchangeHandler(e.target.value); }}
+                                fullWidth
+                                required
+                            />
+                        </Container>
+
+                    );
+                } else {
+                    return (<></>);
+                }
+            }
+
+            const UserPlaylistMenuItem = () => {
+                const res = userLibraryState.map((list) => (
+                    <MenuItem value={list.playlistID}>{list.title}</MenuItem>
+                ));
+                return (res);
+            }
+
+            return (
+                <Dialog disableBackdropClick disableEscapeKeyDown open={openDialog} onClose={handleClose}>
+                    <DialogTitle>Add To Library</DialogTitle>
+                    <DialogContent>
+                        Please select a playlist.
+                        <form className={classes.container}>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel>Playlist</InputLabel>
+                                <Select
+                                    value={selectedPlaylist}
+                                    onChange={(e) => { handleChange(e.target.value); }}
+                                    input={<Input />}
+                                >
+                                    <MenuItem value="new">New Playlist</MenuItem>
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    {/* show user's playlist */}
+                                    {UserPlaylistMenuItem()}
+                                </Select>
+                                <NewPlaylistField />
+                            </FormControl>
+                        </form>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => { onclickHandler("cancel"); }} color="primary">
+                            Cancel
+                  </Button>
+                        <Button onClick={() => { onclickHandler("ok"); }} color="primary">
+                            Ok
+                  </Button>
+                    </DialogActions>
+                </Dialog>
+            )
+        }
+
+        const onclickHandler = () => {
+            // movieID
+            setOpenDialog(true);
+        }
+
         return (
             <div>
-                <Button>
+                <Button onClick={() => { onclickHandler(); }}>
                     <LibraryAddIcon fontSize="small" /> Add to Library
                 </Button>
+                <LibMenu />
             </div>
         );
     }
