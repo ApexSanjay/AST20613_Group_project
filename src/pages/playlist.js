@@ -24,7 +24,10 @@ function Playlist(props) {
     const [loadingPlaylist, setLoadingPlaylist] = useState(true);
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
-    const [movieTitleList, setMovieTItleList] = useState([]);
+    const [movieListState, setMovieListState] = useState([]);
+    const [loadingMovieInfo, setLoadingMovieInfo] = useState(true);
+
+    var movieList = movieListState;
 
     const useStyles = makeStyles({
         table: {
@@ -54,31 +57,31 @@ function Playlist(props) {
     if (loadingPlaylist === false) {
         //get movie title
         for (var i in playlist) {
-            console.log(playlist[i]);
+            // console.log(playlist[i]);
             MediaModule.getMovieInfo(playlist[i]).then((doc) => {
                 if (doc.exists) {
                     // console.log(doc.data().id);
                     var movieAlreadyExist = false;
-                    for (var j in movieTitleList) {
-                        if (movieTitleList[j].id === doc.data().id) {
+                    for (var j in movieList) {
+                        if (movieList[j].id === doc.data().id) {
                             movieAlreadyExist = true;
                         }
                     }
                     if (!movieAlreadyExist) {
-                        movieTitleList.push(
+                        movieList.push(
                             {
                                 id: doc.data().id,
                                 title: doc.data().title,
                             }
                         );
-                    }
 
-                    // console.log(movieTitleList);
+                        setMovieListState(movieList);
+                        setLoadingMovieInfo(false);
+                    }
                 }
             });
         }
     }
-
 
     const PlaylistTable = () => {
 
@@ -129,19 +132,26 @@ function Playlist(props) {
             );
         };
 
-        const createRow = (name) => {
-            return { name };
-        };
 
-        const rows = [
-            createRow('Hello World Movie 1'),
-            createRow('Hello World Movie 1'),
-            createRow('Hello World Movie 1'),
-            createRow('Hello World Movie 1'),
-            createRow('Hello World Movie 1'),
-            createRow('Hello World Movie 1'),
-            createRow('Hello World Movie 1'),
-        ];
+        const showMovieInfo = () => {
+
+            // var res = (<></>);
+            var res;
+
+            // if (!loadingMovieInfo) {
+            res = movieList.map((movie, i) => (
+                    <TableRow key={movie.title}>
+                        <TableCell component="th" scope="row">
+                            {movie.title}
+                        </TableCell>
+                        <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
+                    </TableRow>
+                ));
+            // }
+
+
+            return res;
+        }
 
         return (
             <TableContainer component={Paper}>
@@ -153,14 +163,7 @@ function Playlist(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
-                            </TableRow>
-                        ))}
+                        {showMovieInfo()}
                     </TableBody>
                 </Table>
             </TableContainer>
