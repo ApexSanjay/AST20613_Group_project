@@ -23,7 +23,7 @@ const createPlaylist = (name, movieIDList) => {
 };  //list is an array of movie id  //.then(docRef).catch is available
 
 const updatePlaylist = (playlistID, movieIDList) => {
-    return firebase.firestore().collection("playlists").doc(playlistID).set({
+    return firebase.firestore().collection("playlists").doc(playlistID).update({
         movieID: movieIDList,
     });
 };  //.then().catch() is available
