@@ -16,13 +16,34 @@ import Typography from '@material-ui/core/Typography';
 import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import Container from "./components/container";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import BrowsingModules from "./modules/BrowsingModules";
 
 function Profile(props) {
 
     var profile = LoginModules.getUserProfile();
     const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
-
     const history = useHistory();
+    const [Lib, setLib] = useState([]);
+    const [loadingLib, setLoadingLib] = useState(true);
+
+    console.log(Lib);
+
+    if (loadingLib) {
+        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+            var allPlaylist = [];
+            querySnapshot.forEach((doc) => {
+                // console.log(doc.id, " => ", doc.data());
+                var playlist = {
+                    playlistTitle: doc.data().title,
+                    playlistID: doc.id,
+                };
+                allPlaylist.push(playlist);
+            });
+            setLoadingLib(false);
+            setLib(allPlaylist);
+        });
+    }
+
 
     const useStyles = makeStyles({
         media: {
@@ -30,6 +51,8 @@ function Profile(props) {
         },
     });
     const classes = useStyles();
+
+
 
     const Icon = () => {
 
@@ -54,12 +77,20 @@ function Profile(props) {
 
     const Playlist = () => {
 
-        const ListCard = () => {
+        const showAllCard = () => {
+            // Lib.map((list)=>({ListCard(list.playlistTitle, list.playlistID)}))
+            const res = Lib.map((list) => (
+                <ListCard name={list.playlistTitle} playlistID={list.playlistID} />
+            ));
+            return res;
+        }
+
+        const ListCard = (props) => {
 
             const onclickHandler = (name) => {
                 switch (name) {
                     case "view":
-                        history.push("/playlist/123");
+                        history.push("/playlist/" + props.playlistID);
                         break;
                     case "remove":
                         break;
@@ -78,8 +109,8 @@ function Profile(props) {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Playlist 1
-                            </Typography>
+                                    {props.name}
+                                </Typography>
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
@@ -107,15 +138,7 @@ function Profile(props) {
                         perPage: 3,
                         gap: '1rem',
                     }}>
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
-                        <ListCard />
+                        {showAllCard()}
                     </Splide>
                 </Grid>
             </Grid>
