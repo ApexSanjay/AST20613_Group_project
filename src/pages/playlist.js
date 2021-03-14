@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
 import { useParams } from 'react-router-dom';
 import BrowsingModules from "./modules/BrowsingModules"
-
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,14 +13,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-
 import SnackBar from "./components/snackBar";
 import Container from "./components/container";
+import MediaModule from "./modules/MediaModule";
 
 function Playlist(props) {
 
     const params = useParams();
     const playlistID = params.id;
+    const [loadingPlaylist, setLoadingPlaylist] = useState(true);
+    const [playlist, setPlaylist] = useState();
+    const [playlistTitle, setPlaylistTitle] = useState("");
+    const [movieTitleList, setMovieTItleList] = useState([]);
 
     const useStyles = makeStyles({
         table: {
@@ -30,19 +33,52 @@ function Playlist(props) {
     });
     const classes = useStyles();
 
-
-    if (playlistID != null) {
-        BrowsingModules.getPlaylist(playlistID).then((doc) => {
-            if (doc.exists) {
-                console.log(doc.data());
-            } else {
-                //doc not exist
-                console.log(doc.exists);
-            }
-        });
-    } else {
-        console.log("??");
+    if (loadingPlaylist) {
+        if (playlistID != null) {
+            BrowsingModules.getPlaylist(playlistID).then((doc) => {
+                if (doc.exists) {
+                    // console.log(doc.data());
+                    setPlaylistTitle(doc.data().title);
+                    setPlaylist(doc.data().movieID);
+                    setLoadingPlaylist(false);
+                } else {
+                    //doc not exist
+                    console.log(doc.exists);
+                }
+            });
+        } else {
+            console.log("??");
+        }
     }
+
+    if (loadingPlaylist === false) {
+        //get movie title
+        for (var i in playlist) {
+            console.log(playlist[i]);
+            MediaModule.getMovieInfo(playlist[i]).then((doc) => {
+                if (doc.exists) {
+                    // console.log(doc.data().id);
+                    var movieAlreadyExist = false;
+                    for (var j in movieTitleList) {
+                        if (movieTitleList[j].id === doc.data().id) {
+                            movieAlreadyExist = true;
+                        }
+                    }
+                    if (!movieAlreadyExist) {
+                        movieTitleList.push(
+                            {
+                                id: doc.data().id,
+                                title: doc.data().title,
+                            }
+                        );
+                    }
+
+                    // console.log(movieTitleList);
+                }
+            });
+        }
+    }
+
 
     const PlaylistTable = () => {
 
@@ -138,7 +174,7 @@ function Playlist(props) {
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <h2>Playlist</h2>
+                    <h2>{playlistTitle}</h2>
                 </Grid>
                 <Grid item xs={12}>
                     <PlaylistTable />
