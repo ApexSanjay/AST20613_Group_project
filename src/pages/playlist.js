@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
@@ -21,11 +21,9 @@ function Playlist(props) {
 
     const params = useParams();
     const playlistID = params.id;
-    const [loadingPlaylist, setLoadingPlaylist] = useState(true);
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
     const [movieListState, setMovieListState] = useState([]);
-    const [loadingMovieInfo, setLoadingMovieInfo] = useState(true);
 
     var movieList = movieListState;
 
@@ -36,14 +34,13 @@ function Playlist(props) {
     });
     const classes = useStyles();
 
-    if (loadingPlaylist) {
+    useEffect(() => {
         if (playlistID != null) {
             BrowsingModules.getPlaylist(playlistID).then((doc) => {
                 if (doc.exists) {
                     // console.log(doc.data());
                     setPlaylistTitle(doc.data().title);
                     setPlaylist(doc.data().movieID);
-                    setLoadingPlaylist(false);
                 } else {
                     //doc not exist
                     console.log(doc.exists);
@@ -52,9 +49,7 @@ function Playlist(props) {
         } else {
             console.log("??");
         }
-    }
 
-    if (loadingPlaylist === false) {
         //get movie title
         for (var i in playlist) {
             // console.log(playlist[i]);
@@ -76,12 +71,11 @@ function Playlist(props) {
                         );
 
                         setMovieListState(movieList);
-                        setLoadingMovieInfo(false);
                     }
                 }
             });
         }
-    }
+    }, []);
 
     const PlaylistTable = () => {
 
@@ -135,19 +129,16 @@ function Playlist(props) {
 
         const showMovieInfo = () => {
 
-            // var res = (<></>);
             var res;
 
-            // if (!loadingMovieInfo) {
             res = movieList.map((movie, i) => (
-                    <TableRow key={movie.title}>
-                        <TableCell component="th" scope="row">
-                            {movie.title}
-                        </TableCell>
-                        <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
-                    </TableRow>
-                ));
-            // }
+                <TableRow key={movie.title}>
+                    <TableCell component="th" scope="row">
+                        {movie.title}
+                    </TableCell>
+                    <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
+                </TableRow>
+            ));
 
 
             return res;

@@ -18,11 +18,6 @@ function Login(props) {
     const [error, setError] = useState("");
     const history = useHistory();
 
-    // const Container = styled.div`
-    //     margin: auto;
-    //     width: 80%;
-    // `;
-
     // onChange handler
     const onEmailChange = (e) => {
         email = e.target.value;

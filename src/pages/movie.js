@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     useHistory,
     useParams
@@ -39,8 +39,6 @@ function Movie(props) {
     const [copiedLink] = React.useState(0);
 
     //get movie info
-    const [loadingMovie, setLoadingMovie] = useState(true);
-    const [loadingLib, setLoadingLib] = useState(true);
     const [movies, setMovies] = useState({
         title: "",
         description: "",
@@ -53,22 +51,16 @@ function Movie(props) {
     });
 
     const [userLibraryState, setUserLibraryState] = useState([]);
-    // console.log(userLibraryState);
 
-    if (loadingMovie) {
+    useEffect(() => {
         MediaModule.getMovieInfo(movieID).then((doc) => {
             if (doc.exists) {
                 setMovies(doc.data());
-                // setLoading(false);
-
             } else {
                 history.push("/browse");
             }
-            setLoadingMovie(false);
         });
-    }
 
-    if (loadingLib) {
         BrowsingModules.getAllPlaylist().then((querySnapshot) => {
             var userLibrary = [];
             querySnapshot.forEach((doc) => {
@@ -80,10 +72,9 @@ function Movie(props) {
                     userLibrary.push(playlist);
                 }
             });
-            setLoadingLib(false);
             setUserLibraryState(userLibrary);
         });
-    }
+    }, []);
 
     const MenuBar = () => {
 
@@ -207,11 +198,11 @@ function Movie(props) {
                         } else {
                             console.log(selectedPlaylist);
                             // add item to exist playlist
-                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc)=>{
+                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
                                 // console.log(doc.data());
                                 var newMovieIDList = doc.data().movieID;
                                 newMovieIDList.push(movieID);
-                                BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(()=>{
+                                BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
                                     console.log("update playlist success");
                                 });
                             });
