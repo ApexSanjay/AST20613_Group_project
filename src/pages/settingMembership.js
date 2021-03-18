@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -15,29 +15,27 @@ function SettingMembership(props) {
 
     const [planDetails, setPlanDetails] = useState();
 
-    if (!plan) {
-        LoginModules.getUserPlan().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(doc.id, " => ", doc.data().plan);
-                setPlan(doc.data().plan);
-            })
-        })
-    }
-
-    if (!planDetails) {
-        if (plan) {
-            LoginModules.getPlanDetails(plan).then((doc) => {
-                // console.log(doc.id, " => ", doc.data());
-                setPlanDetails({
-                    price: doc.data().Price,
-                    quality: doc.data().Quality,
-                    maxScreens: doc.data().MaxScreens,
-                });
+    useEffect(() => {
+        if (!plan) {
+            LoginModules.getUserPlan().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setPlan(doc.data().plan);
+                })
             });
         }
-    }
 
-    console.log(planDetails);
+        if (plan) {
+            LoginModules.getPlanDetails(plan).then((doc) => {
+                if (doc.exists) {
+                    setPlanDetails({
+                        price: doc.data().Price,
+                        quality: doc.data().Quality,
+                        maxScreens: doc.data().MaxScreens,
+                    });
+                }
+            });
+        }
+    }, [plan]);
 
     const PlanField = () => {
         return (
@@ -54,7 +52,7 @@ function SettingMembership(props) {
                                 <br />
                                 <br />
                                 <br />
-                                <h1>{(plan? plan : "")}</h1>
+                                <h1>{(plan ? plan : "")}</h1>
                                 <h2>HK$ {(planDetails ? planDetails.price : "")} </h2>
                                 <h4>Current Plan</h4>
                                 <br />

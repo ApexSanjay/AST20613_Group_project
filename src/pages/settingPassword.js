@@ -43,8 +43,6 @@ function SettingPassword(props) {
         }
     }
 
-
-
     const reset = (oldPwd, newPwd, confirmPwd) => {
 
         const isConfirmedPassword = (pwd1, pwd2) => {

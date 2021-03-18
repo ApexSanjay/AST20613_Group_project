@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuBar from "./components/settingMenuBar";
@@ -30,18 +30,20 @@ function SettingPayment(props) {
     const userid = LoginModules.getUserProfile().uid;
     const history = useHistory();
 
-    LoginModules.getCardInfo(userid).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            var data = doc.data();
-            // console.log(data);
-            setFirstName(data.FirstName);
-            setLastName(data.LastName);
-            setCardNum(data.CardNumber);
-            setExplorationDate(data.ExplorationDate);
-            setCVV(data.CVV);
-            setCardInfoID(doc.id);
+    useEffect(() => {
+        LoginModules.getCardInfo(userid).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var data = doc.data();
+                // console.log(data);
+                setFirstName(data.FirstName);
+                setLastName(data.LastName);
+                setCardNum(data.CardNumber);
+                setExplorationDate(data.ExplorationDate);
+                setCVV(data.CVV);
+                setCardInfoID(doc.id);
+            });
         });
-    });
+    }, []);
 
     //onchangehandler
     const onchangeHandler = (field, value) => {
@@ -81,7 +83,7 @@ function SettingPayment(props) {
                             id="firstname"
                             label="First Name"
                             variant="outlined"
-                            onChange={(e)=>{onchangeHandler("firstname", e.target.value)}}
+                            onChange={(e) => { onchangeHandler("firstname", e.target.value) }}
                             fullWidth
                             required
                             defaultValue={firstname}
@@ -106,7 +108,7 @@ function SettingPayment(props) {
                             id="lastname"
                             label="Last Name"
                             variant="outlined"
-                            onChange={(e)=>{onchangeHandler("lastname", e.target.value)}}
+                            onChange={(e) => { onchangeHandler("lastname", e.target.value) }}
                             fullWidth
                             required
                             defaultValue={lastname}
@@ -131,7 +133,7 @@ function SettingPayment(props) {
                             id="cardNum"
                             label="Card Number"
                             variant="outlined"
-                            onChange={(e)=>{onchangeHandler("cardNum", e.target.value)}}
+                            onChange={(e) => { onchangeHandler("cardNum", e.target.value) }}
                             fullWidth
                             required
                             defaultValue={cardNum}
@@ -156,7 +158,7 @@ function SettingPayment(props) {
                             id="explorationDate"
                             label="Exploration Date"
                             variant="outlined"
-                            onChange={(e)=>{onchangeHandler("explorationDate", e.target.value)}}
+                            onChange={(e) => { onchangeHandler("explorationDate", e.target.value) }}
                             fullWidth
                             required
                             defaultValue={explorationDate}
@@ -181,7 +183,7 @@ function SettingPayment(props) {
                             id="cvv"
                             label="CVV"
                             variant="outlined"
-                            onChange={(e)=>{onchangeHandler("cvv", e.target.value)}}
+                            onChange={(e) => { onchangeHandler("cvv", e.target.value) }}
                             fullWidth
                             required
                             defaultValue={cvv}
@@ -203,10 +205,10 @@ function SettingPayment(props) {
             newData.explorationDate,
             newData.firstname,
             newData.lastname
-        ).then(()=>{
+        ).then(() => {
             setError("update success");
             history.push("/setting/payment");
-        }).catch((e)=>{
+        }).catch((e) => {
             setError(e.code + ": " + e.message);
         });
     }

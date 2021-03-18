@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
@@ -24,11 +24,8 @@ function Profile(props) {
     const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
     const history = useHistory();
     const [Lib, setLib] = useState([]);
-    const [loadingLib, setLoadingLib] = useState(true);
 
-    console.log(Lib);
-
-    if (loadingLib) {
+    useEffect(() => {
         BrowsingModules.getAllPlaylist().then((querySnapshot) => {
             var allPlaylist = [];
             querySnapshot.forEach((doc) => {
@@ -39,11 +36,9 @@ function Profile(props) {
                 };
                 allPlaylist.push(playlist);
             });
-            setLoadingLib(false);
             setLib(allPlaylist);
         });
-    }
-
+    }, []);
 
     const useStyles = makeStyles({
         media: {
@@ -51,8 +46,6 @@ function Profile(props) {
         },
     });
     const classes = useStyles();
-
-
 
     const Icon = () => {
 
@@ -78,7 +71,6 @@ function Profile(props) {
     const Playlist = () => {
 
         const showAllCard = () => {
-            // Lib.map((list)=>({ListCard(list.playlistTitle, list.playlistID)}))
             const res = Lib.map((list) => (
                 <ListCard name={list.playlistTitle} playlistID={list.playlistID} />
             ));

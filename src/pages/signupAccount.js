@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -13,15 +13,18 @@ function SignupAccount(props) {
 
     const params = useParams();
     const planSelected = params.plan;
-    if (planSelected) {
-        console.log(planSelected);
-    } else {
-        history.push("/signup/plan/error");
-    }
+
+    useEffect(() => {
+        if (planSelected) {
+            console.log(planSelected);
+        } else {
+            history.push("/signup/plan/error");
+        }
+    }, []);
+
 
     var name = "", email = "", password = "";
     const [error, setError] = useState("");
-
 
     //onchange handler
     const onChangeHandler = (field, value) => {

@@ -42,7 +42,6 @@ function SignupPayment(props) {
             default:
                 break;
         }
-        console.log(firstname, lastname, cardNum, explorationDate, cvv);
     }
 
     const CardBar = styled.div`
