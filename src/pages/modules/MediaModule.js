@@ -59,6 +59,10 @@ const getMovieInfo = (id) => {
     return firebase.firestore().collection("movies").doc(id).get();
 };  //.then(doc).catch() is available
 
+const getMovieInfos = (IDList) => {
+    return firebase.firestore().collection("movies").where("id", "in", IDList).get();
+};
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -67,6 +71,7 @@ const MediaModule = {
     updateMovieInfo,
     removeMovieInfo,
     getMovieInfo,
+    getMovieInfos,
     transcodeMovie,
 }
 export default MediaModule;

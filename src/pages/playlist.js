@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import BrowsingModules from "./modules/BrowsingModules"
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -23,9 +24,10 @@ function Playlist(props) {
     const playlistID = params.id;
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
-    const [movieListState, setMovieListState] = useState([]);
+    const [movieListState, setMovieListState] = useState();
+    var movieList = [];
 
-    var movieList = movieListState;
+    const history = useHistory();
 
     const useStyles = makeStyles({
         table: {
@@ -34,52 +36,48 @@ function Playlist(props) {
     });
     const classes = useStyles();
 
-    useEffect(() => {
-        if (playlistID != null) {
+    useEffect(() => {   //init loading
+        if (playlistID != null && !playlist) {
             BrowsingModules.getPlaylist(playlistID).then((doc) => {
                 if (doc.exists) {
-                    // console.log(doc.data());
                     setPlaylistTitle(doc.data().title);
                     setPlaylist(doc.data().movieID);
                 } else {
-                    //doc not exist
-                    console.log(doc.exists);
+                    console.log("doc not exist");
                 }
             });
-        } else {
-            console.log("??");
         }
 
         //get movie title
-        for (var i in playlist) {
-            // console.log(playlist[i]);
-            MediaModule.getMovieInfo(playlist[i]).then((doc) => {
-                if (doc.exists) {
-                    // console.log(doc.data().id);
-                    var movieAlreadyExist = false;
-                    for (var j in movieList) {
-                        if (movieList[j].id === doc.data().id) {
-                            movieAlreadyExist = true;
-                        }
-                    }
-                    if (!movieAlreadyExist) {
-                        movieList.push(
-                            {
-                                id: doc.data().id,
-                                title: doc.data().title,
-                            }
-                        );
+        if (playlist) {
+            var formattedPlaylist = [];
 
-                        setMovieListState(movieList);
-                    }
+            for (var i in playlist) {
+                formattedPlaylist.push(parseInt(playlist[i]))
+            }
+
+            MediaModule.getMovieInfos(formattedPlaylist).then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    console.log("empty");
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        movieList.push(doc.data());
+                        if (movieList.length === playlist.length) {
+                            setMovieListState(movieList);
+                        }
+                    });
                 }
+            }).catch((e) => {
+                console.log(e.message);
             });
         }
-    }, []);
+    }, [playlist]);
+
+
+
 
     const PlaylistTable = () => {
-
-        const WatchButton = () => {
+        const WatchButton = (props) => {
 
             const Container = styled.div`
                 display: inline;
@@ -87,6 +85,8 @@ function Playlist(props) {
             `;
 
             const onclickHandler = () => {
+                const id = props.id;
+                history.push("/movie/" + id);
             }
 
             return (
@@ -102,6 +102,7 @@ function Playlist(props) {
 
             );
         };
+
         const RemoveButton = () => {
 
             const Container = styled.div`
@@ -126,20 +127,22 @@ function Playlist(props) {
             );
         };
 
-
         const showMovieInfo = () => {
-
             var res;
 
-            res = movieList.map((movie, i) => (
-                <TableRow key={movie.title}>
-                    <TableCell component="th" scope="row">
-                        {movie.title}
-                    </TableCell>
-                    <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
-                </TableRow>
-            ));
-
+            if (movieListState) {
+                res = movieListState.map((movie, i) => (
+                    <TableRow key={movie.title}>
+                        <TableCell component="th" scope="row">
+                            {movie.title}
+                        </TableCell>
+                        <TableCell align="right">
+                            <WatchButton id={movie.id}/>
+                            <RemoveButton />
+                        </TableCell>
+                    </TableRow>
+                ));
+            }
 
             return res;
         }
