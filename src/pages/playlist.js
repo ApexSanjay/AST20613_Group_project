@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import MenuBar from "./components/menuBar";
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import BrowsingModules from "./modules/BrowsingModules"
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -25,6 +26,8 @@ function Playlist(props) {
     const [playlistTitle, setPlaylistTitle] = useState("");
     const [movieListState, setMovieListState] = useState();
     var movieList = [];
+
+    const history = useHistory();
 
     const useStyles = makeStyles({
         table: {
@@ -74,7 +77,7 @@ function Playlist(props) {
 
 
     const PlaylistTable = () => {
-        const WatchButton = () => {
+        const WatchButton = (props) => {
 
             const Container = styled.div`
                 display: inline;
@@ -82,6 +85,8 @@ function Playlist(props) {
             `;
 
             const onclickHandler = () => {
+                const id = props.id;
+                history.push("/movie/" + id);
             }
 
             return (
@@ -131,7 +136,10 @@ function Playlist(props) {
                         <TableCell component="th" scope="row">
                             {movie.title}
                         </TableCell>
-                        <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
+                        <TableCell align="right">
+                            <WatchButton id={movie.id}/>
+                            <RemoveButton />
+                        </TableCell>
                     </TableRow>
                 ));
             }
