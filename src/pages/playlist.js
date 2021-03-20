@@ -23,9 +23,10 @@ function Playlist(props) {
     const playlistID = params.id;
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
-    const [movieListState, setMovieListState] = useState([]);
+    const [movieListState, setMovieListState] = useState();
+    var movieList = [];
 
-    var movieList = movieListState;
+    console.log(movieListState);
 
     const useStyles = makeStyles({
         table: {
@@ -34,8 +35,8 @@ function Playlist(props) {
     });
     const classes = useStyles();
 
-    useEffect(() => {
-        if (playlistID != null) {
+    useEffect(() => {   //init loading
+        if (playlistID != null && !playlist) {
             BrowsingModules.getPlaylist(playlistID).then((doc) => {
                 if (doc.exists) {
                     // console.log(doc.data());
@@ -43,95 +44,93 @@ function Playlist(props) {
                     setPlaylist(doc.data().movieID);
                 } else {
                     //doc not exist
-                    console.log(doc.exists);
+                    console.log("doc not exist");
                 }
             });
-        } else {
-            console.log("??");
         }
 
         //get movie title
-        for (var i in playlist) {
-            // console.log(playlist[i]);
-            MediaModule.getMovieInfo(playlist[i]).then((doc) => {
-                if (doc.exists) {
-                    // console.log(doc.data().id);
-                    var movieAlreadyExist = false;
-                    for (var j in movieList) {
-                        if (movieList[j].id === doc.data().id) {
-                            movieAlreadyExist = true;
-                        }
-                    }
-                    if (!movieAlreadyExist) {
-                        movieList.push(
-                            {
-                                id: doc.data().id,
-                                title: doc.data().title,
-                            }
-                        );
+        if (playlist) {
+            // console.log(parseInt(playlist[1]));
 
-                        setMovieListState(movieList);
-                    }
+            var formattedPlaylist = [];
+
+            for(var i in playlist){
+                formattedPlaylist.push(parseInt(playlist[i]))
+            }
+
+            MediaModule.getMovieInfos(formattedPlaylist).then((querySnapshot) => {
+                if(querySnapshot.empty){
+                    console.log("empty");
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        // console.log(doc.id, " => ", doc.data());
+                        movieList.push(doc.data());
+                        if(movieList.length === playlist.length){
+                            setMovieListState(movieList);
+                        }
+                    });
                 }
+            }).catch((e) => {
+                console.log(e.message);
             });
         }
-    }, []);
 
-    const PlaylistTable = () => {
-
-        const WatchButton = () => {
-
-            const Container = styled.div`
-                display: inline;
-                margin: 5px;
-            `;
-
-            const onclickHandler = () => {
-            }
-
-            return (
-                <Container>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={onclickHandler}
-                    >
-                        Watch
-                    </Button>
-                </Container>
-
-            );
-        };
-        const RemoveButton = () => {
-
-            const Container = styled.div`
-                display: inline;
-                margin: 5px;
-            `;
-
-            const onclickHandler = () => {
-
-            }
-
-            return (
-                <Container>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={onclickHandler}
-                    >
-                        Remove
-                    </Button>
-                </Container>
-            );
-        };
+    }, [playlist]);
 
 
-        const showMovieInfo = () => {
+    const WatchButton = () => {
 
-            var res;
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
 
-            res = movieList.map((movie, i) => (
+        const onclickHandler = () => {
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Watch
+                </Button>
+            </Container>
+
+        );
+    };
+    const RemoveButton = () => {
+
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
+
+        const onclickHandler = () => {
+
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Remove
+                </Button>
+            </Container>
+        );
+    };
+
+    const showMovieInfo = () => {
+        var res;
+
+        if (movieListState) {
+            res = movieListState.map((movie, i) => (
                 <TableRow key={movie.title}>
                     <TableCell component="th" scope="row">
                         {movie.title}
@@ -139,10 +138,16 @@ function Playlist(props) {
                     <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
                 </TableRow>
             ));
-
-
-            return res;
         }
+
+
+        return res;
+    }
+
+    const PlaylistTable = () => {
+
+
+
 
         return (
             <TableContainer component={Paper}>
