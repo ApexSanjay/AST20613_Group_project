@@ -26,8 +26,6 @@ function Playlist(props) {
     const [movieListState, setMovieListState] = useState();
     var movieList = [];
 
-    console.log(movieListState);
-
     const useStyles = makeStyles({
         table: {
             minWidth: 650,
@@ -39,11 +37,9 @@ function Playlist(props) {
         if (playlistID != null && !playlist) {
             BrowsingModules.getPlaylist(playlistID).then((doc) => {
                 if (doc.exists) {
-                    // console.log(doc.data());
                     setPlaylistTitle(doc.data().title);
                     setPlaylist(doc.data().movieID);
                 } else {
-                    //doc not exist
                     console.log("doc not exist");
                 }
             });
@@ -51,22 +47,19 @@ function Playlist(props) {
 
         //get movie title
         if (playlist) {
-            // console.log(parseInt(playlist[1]));
-
             var formattedPlaylist = [];
 
-            for(var i in playlist){
+            for (var i in playlist) {
                 formattedPlaylist.push(parseInt(playlist[i]))
             }
 
             MediaModule.getMovieInfos(formattedPlaylist).then((querySnapshot) => {
-                if(querySnapshot.empty){
+                if (querySnapshot.empty) {
                     console.log("empty");
                 } else {
                     querySnapshot.forEach((doc) => {
-                        // console.log(doc.id, " => ", doc.data());
                         movieList.push(doc.data());
-                        if(movieList.length === playlist.length){
+                        if (movieList.length === playlist.length) {
                             setMovieListState(movieList);
                         }
                     });
@@ -75,79 +68,76 @@ function Playlist(props) {
                 console.log(e.message);
             });
         }
-
     }, [playlist]);
 
 
-    const WatchButton = () => {
 
-        const Container = styled.div`
-            display: inline;
-            margin: 5px;
-        `;
-
-        const onclickHandler = () => {
-        }
-
-        return (
-            <Container>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onclickHandler}
-                >
-                    Watch
-                </Button>
-            </Container>
-
-        );
-    };
-    const RemoveButton = () => {
-
-        const Container = styled.div`
-            display: inline;
-            margin: 5px;
-        `;
-
-        const onclickHandler = () => {
-
-        }
-
-        return (
-            <Container>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onclickHandler}
-                >
-                    Remove
-                </Button>
-            </Container>
-        );
-    };
-
-    const showMovieInfo = () => {
-        var res;
-
-        if (movieListState) {
-            res = movieListState.map((movie, i) => (
-                <TableRow key={movie.title}>
-                    <TableCell component="th" scope="row">
-                        {movie.title}
-                    </TableCell>
-                    <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
-                </TableRow>
-            ));
-        }
-
-
-        return res;
-    }
 
     const PlaylistTable = () => {
+        const WatchButton = () => {
 
+            const Container = styled.div`
+                display: inline;
+                margin: 5px;
+            `;
 
+            const onclickHandler = () => {
+            }
 
+            return (
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Watch
+                    </Button>
+                </Container>
+
+            );
+        };
+
+        const RemoveButton = () => {
+
+            const Container = styled.div`
+                display: inline;
+                margin: 5px;
+            `;
+
+            const onclickHandler = () => {
+
+            }
+
+            return (
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Remove
+                    </Button>
+                </Container>
+            );
+        };
+
+        const showMovieInfo = () => {
+            var res;
+
+            if (movieListState) {
+                res = movieListState.map((movie, i) => (
+                    <TableRow key={movie.title}>
+                        <TableCell component="th" scope="row">
+                            {movie.title}
+                        </TableCell>
+                        <TableCell align="right"><WatchButton /><RemoveButton /></TableCell>
+                    </TableRow>
+                ));
+            }
+
+            return res;
+        }
 
         return (
             <TableContainer component={Paper}>
