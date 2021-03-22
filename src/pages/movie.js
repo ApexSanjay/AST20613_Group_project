@@ -409,7 +409,7 @@ function Movie(props) {
                         // console.log(data.timestamp.toDate().toString());
                         var date = data.timestamp.toDate().toString();
                         return (
-                            <Comment user={data.userID} date={date} review={data.review} />
+                            <Comment user={data.userName} date={date} review={data.review} />
                         );
                     });
                 } else {
@@ -431,7 +431,7 @@ function Movie(props) {
             const SendButton = () => {
                 const onclickHandler = () => {
                     if (review.length !== 0) {
-                        BrowsingModules.createReview(movieID, review);
+                        BrowsingModules.createReview(movieID, review, LoginModules.getUserProfile().name);
                     }
                 }
 

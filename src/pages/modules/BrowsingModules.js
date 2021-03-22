@@ -41,13 +41,14 @@ const getAllPlaylist = () => {
     return firebase.firestore().collection("playlists").where("userID", "==", uid).get();
 }
 
-const createReview = (movieID, review) => {
+const createReview = (movieID, review, userName) => {
     var userID = firebase.auth().currentUser.uid;
 
     return firebase.firestore().collection("reviews").add({
         movieID: movieID,
         review: review,
         userID: userID,
+        userName: userName,
         timestamp: new Date()
     });  //.then().catch() is available
 };
