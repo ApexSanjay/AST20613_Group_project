@@ -81,12 +81,11 @@ function Movie(props) {
             setUserLibraryState(userLibrary);
         });
 
-        BrowsingModules.getReviewSnapshot("1")
+        BrowsingModules.getReviewSnapshot(movieID)
             .onSnapshot(
                 (querySnapshot) => {
                     var reviewList = [];
                     querySnapshot.forEach((doc) => {
-                        console.log(doc.data());
                         reviewList.push(doc.data());
                         setreviewListState(reviewList);
                     });

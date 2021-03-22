@@ -57,6 +57,7 @@ const removeReview = (reviewID) => {
 };  //.then().catch() is available
 
 const getReviewSnapshot = (movieID) => {
+    console.log(movieID);
     return firebase.firestore().collection("reviews").where("movieID", "==", movieID)
         // .onSnapshot(
         //     (querySnapshot) => {
