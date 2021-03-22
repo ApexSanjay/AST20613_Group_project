@@ -26,6 +26,20 @@ const updateName = (newName) => {
 
     return user.updateProfile({
         displayName: newName,
+    }).then(() => {
+        return firebase.firestore().collection("users").doc(user.uid).set(
+            {
+                userID: user.uid,
+                username: newName
+            }
+        ).catch((e) => {
+            return firebase.firestore().collection("users").doc(user.uid).add(
+                {
+                    userID: user.uid,
+                    username: newName
+                }
+            )
+        });
     });     // .then().catch() is available
 }
 

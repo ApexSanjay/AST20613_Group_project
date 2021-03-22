@@ -29,7 +29,6 @@ function Profile(props) {
         BrowsingModules.getAllPlaylist().then((querySnapshot) => {
             var allPlaylist = [];
             querySnapshot.forEach((doc) => {
-                // console.log(doc.id, " => ", doc.data());
                 var playlist = {
                     playlistTitle: doc.data().title,
                     playlistID: doc.id,

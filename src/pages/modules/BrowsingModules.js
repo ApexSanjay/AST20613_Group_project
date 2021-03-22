@@ -41,11 +41,14 @@ const getAllPlaylist = () => {
     return firebase.firestore().collection("playlists").where("userID", "==", uid).get();
 }
 
-const createReview = (movieID, userID, review) => {
+const createReview = (movieID, review, userName) => {
+    var userID = firebase.auth().currentUser.uid;
+
     return firebase.firestore().collection("reviews").add({
         movieID: movieID,
         review: review,
         userID: userID,
+        userName: userName,
         timestamp: new Date()
     });  //.then().catch() is available
 };
@@ -55,14 +58,24 @@ const removeReview = (reviewID) => {
 };  //.then().catch() is available
 
 const getReviewSnapshot = (movieID) => {
-    return firebase.firestore().collection("reviews").where("movieID", "==", movieID).onSnapshot((doc) => {
-        return doc;
-    });;
+    console.log(movieID);
+    return firebase.firestore().collection("reviews").where("movieID", "==", movieID)
+        // .onSnapshot(
+        //     (querySnapshot) => {
+        //         querySnapshot.forEach((doc) => {
+        //             doc.data();
+        //         });
+        //     }
+        // )
+        ;
 };  //
 
 const getReviewOnce = (movieID) => {
     return firebase.firestore().collection("reviews").where("movieID", "==", movieID);
 };  //.then().catch() is available
+
+const getUserName = (userID) => {
+}
 
 const BrowsingModules = {
     searchMovie,
@@ -75,7 +88,8 @@ const BrowsingModules = {
     createReview,
     removeReview,
     getReviewSnapshot,
-    getReviewOnce
+    getReviewOnce,
+    getUserName,
 };
 
 export default BrowsingModules;
