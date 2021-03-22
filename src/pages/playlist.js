@@ -73,9 +73,6 @@ function Playlist(props) {
         }
     }, [playlist]);
 
-
-
-
     const PlaylistTable = () => {
         const WatchButton = (props) => {
 

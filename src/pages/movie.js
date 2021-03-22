@@ -28,6 +28,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import BrowsingModules from "./modules/BrowsingModules";
+import LoginModules from "./modules/LoginModules";
 
 function Movie(props) {
 
@@ -52,7 +53,12 @@ function Movie(props) {
 
     const [userLibraryState, setUserLibraryState] = useState([]);
 
-    useEffect(() => {
+    const [Icon, setIcon] = useState(LoginModules.getUserProfile().icon);
+
+    const [reviewListState, setreviewListState] = useState([]);
+
+
+    useEffect(() => {   //init loading
         MediaModule.getMovieInfo(movieID).then((doc) => {
             if (doc.exists) {
                 setMovies(doc.data());
@@ -74,6 +80,19 @@ function Movie(props) {
             });
             setUserLibraryState(userLibrary);
         });
+
+        BrowsingModules.getReviewSnapshot("1")
+            .onSnapshot(
+                (querySnapshot) => {
+                    var reviewList = [];
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.data());
+                        reviewList.push(doc.data());
+                        setreviewListState(reviewList);
+                    });
+                }
+            )
+            ;
     }, []);
 
     const MenuBar = () => {
@@ -339,6 +358,134 @@ function Movie(props) {
     }
 
     const Review = () => {
+
+        const CommentContainer = styled.div`
+            margin-left: 16px;
+        `;
+
+        const Comment = (props) => {
+            return (
+                <Grid item xs={12}>
+                    <Paper elevation={3}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={1}>
+                                {/* icon */}
+                                <Avatar
+                                    alt=""
+                                    src=""
+                                />
+                            </Grid>
+                            <Grid item xs={11}>
+                                {/* username */}
+                                <b>{props.user}</b><br />
+                                {/* date */}
+                                <small>{props.date}</small>
+                            </Grid>
+                            <Grid item xs={12}>
+                                {/* comment */}
+                                <CommentContainer>
+                                    {props.review}
+                                </CommentContainer>
+                            </Grid>
+                        </Grid>
+
+                    </Paper>
+
+                </Grid>
+            );
+        }
+
+        const CommentSection = () => {
+            const showComments = () => {
+                var res;
+
+                if (reviewListState) {
+                    // console.log(reviewListState);
+
+                    // res = reviewListState.map((data) => (
+                    //     <Comment user={data.userID} date={Date(data.timestamp)} review={data.review} />
+                    // ));
+
+                    res = reviewListState.map((data) => {
+                        // console.log(data.timestamp.toDate().toString());
+                        var date = data.timestamp.toDate().toString();
+                        return (
+                            <Comment user={data.userID} date={date} review={data.review} />
+                        );
+                    });
+                } else {
+                    res = <></>;
+                }
+
+                return res;
+            }
+
+            return showComments();
+        }
+
+
+
+        const ReviewField = () => {
+
+            var review = "";
+
+            const SendButton = () => {
+                const onclickHandler = () => {
+                    if (review.length !== 0) {
+                        BrowsingModules.createReview(movieID, review);
+                    }
+                }
+
+                return (
+                    <Button onClick={() => { onclickHandler(); }}>
+                        <SendIcon />
+                        Send
+                    </Button>
+                );
+            }
+
+            const CommentTextField = () => {
+
+                const onChangeHandler = (value) => {
+                    review = value;
+                }
+
+                return (
+                    <TextField
+                        label="Write Down Your Review"
+                        variant="filled"
+                        onChange={(e) => { onChangeHandler(e.target.value) }}
+                        fullWidth
+                    ></TextField>
+                );
+            }
+
+            return (
+                <Grid container spacing={3}>
+                    <Grid item xs={1}>
+                        <Avatar
+                            alt=""
+                            src={Icon}
+                        />
+                    </Grid>
+                    <Grid item xs={11}>
+                        {/* <TextField
+                            label="Write Down Your Review"
+                            variant="filled"
+                            fullWidth
+                        ></TextField> */}
+                        <CommentTextField />
+                    </Grid>
+                    <Grid item xs={11}>
+
+                    </Grid>
+                    <Grid item xs={1}>
+                        <SendButton />
+                    </Grid>
+                </Grid>
+            );
+        }
+
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -347,57 +494,12 @@ function Movie(props) {
                 <Grid item xs={12}>
                     <h2>Review</h2>
                 </Grid>
-                <Grid item xs={1}>
-                    <Avatar
-                        alt=""
-                        src=""
-                    />
-                </Grid>
-                <Grid item xs={11}>
-                    <TextField
-                        label="Write Down Your Review"
-                        variant="filled"
-                        fullWidth
-                    ></TextField>
-                </Grid>
-                <Grid item xs={11}>
-
-                </Grid>
-                <Grid item xs={1}>
-                    <Button>
-                        <SendIcon />
-                        Send
-                    </Button>
-                </Grid>
-
-
-                <Grid item xs={12}>
-                    <Paper elevation={3}>
-                        <Grid container>
-                            <Grid item xs={1}>
-
-                                <Avatar
-                                    alt=""
-                                    src=""
-                                />
-                            </Grid>
-                            <Grid item xs={11}>
-                                <b>User 123456</b><br />
-                                <small>{Date()}</small>
-                            </Grid>
-                            <Grid item xs={12}>
-                                Very Good!!!!!!!!
-                            </Grid>
-                        </Grid>
-
-                    </Paper>
-
-                </Grid>
-
+                <ReviewField />
+                <CommentSection />
             </Grid>);
     }
 
-    return (
+    return (    //render part of this page
         <Container>
             <BackGround>
                 <Blur />
