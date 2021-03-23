@@ -74,7 +74,8 @@ const getReviewOnce = (movieID) => {
     return firebase.firestore().collection("reviews").where("movieID", "==", movieID);
 };  //.then().catch() is available
 
-const getUserName = (userID) => {
+const getUser = (email) => {
+    return firebase.firestore().collection("users").where("userEmail", "==", email).get();
 }
 
 const BrowsingModules = {
@@ -89,7 +90,7 @@ const BrowsingModules = {
     removeReview,
     getReviewSnapshot,
     getReviewOnce,
-    getUserName,
+    getUser,
 };
 
 export default BrowsingModules;
