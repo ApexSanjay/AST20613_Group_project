@@ -399,11 +399,6 @@ function Movie(props) {
                 var res;
 
                 if (reviewListState) {
-                    // console.log(reviewListState);
-
-                    // res = reviewListState.map((data) => (
-                    //     <Comment user={data.userID} date={Date(data.timestamp)} review={data.review} />
-                    // ));
 
                     res = reviewListState.map((data) => {
                         // console.log(data.timestamp.toDate().toString());
