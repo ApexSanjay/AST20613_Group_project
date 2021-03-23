@@ -30,12 +30,14 @@ const updateName = (newName) => {
         return firebase.firestore().collection("users").doc(user.uid).set(
             {
                 userID: user.uid,
+                userEmail: user.email,
                 username: newName
             }
         ).catch((e) => {
             return firebase.firestore().collection("users").doc(user.uid).add(
                 {
                     userID: user.uid,
+                    userEmail: user.email,
                     username: newName
                 }
             )
