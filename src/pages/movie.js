@@ -9,7 +9,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import LinkIcon from '@material-ui/icons/Link';
 import styled from 'styled-components';
-import moviePoster from "./img/moviePoster/soul_poster.jpg";
+import defaultMoviePoster from "./img/moviePoster/soul_poster.jpg";
 import playbtn from "./img/playbtn.svg";
 import ReactPlayer from 'react-player';
 import TextField from '@material-ui/core/TextField';
@@ -31,6 +31,8 @@ import BrowsingModules from "./modules/BrowsingModules";
 import LoginModules from "./modules/LoginModules";
 
 function Movie(props) {
+
+    const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
 
     const history = useHistory();
     var params = useParams();
@@ -59,6 +61,11 @@ function Movie(props) {
 
 
     useEffect(() => {   //init loading
+
+        MediaModule.getMoviePoster(movieID).then((url)=>{
+            setMoviePoster(url);
+        })
+
         MediaModule.getMovieInfo(movieID).then((doc) => {
             if (doc.exists) {
                 setMovies(doc.data());
@@ -399,11 +406,6 @@ function Movie(props) {
                 var res;
 
                 if (reviewListState) {
-                    // console.log(reviewListState);
-
-                    // res = reviewListState.map((data) => (
-                    //     <Comment user={data.userID} date={Date(data.timestamp)} review={data.review} />
-                    // ));
 
                     res = reviewListState.map((data) => {
                         // console.log(data.timestamp.toDate().toString());

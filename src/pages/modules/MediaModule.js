@@ -63,6 +63,10 @@ const getMovieInfos = (IDList) => {
     return firebase.firestore().collection("movies").where("id", "in", IDList).get();
 };
 
+const getMoviePoster = (movieID) => {
+    return firebase.storage().ref("posters/" + movieID + ".jpg").getDownloadURL();  //.then.catch
+}
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -73,5 +77,6 @@ const MediaModule = {
     getMovieInfo,
     getMovieInfos,
     transcodeMovie,
+    getMoviePoster,
 }
 export default MediaModule;
