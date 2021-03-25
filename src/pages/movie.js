@@ -212,7 +212,7 @@ function Movie(props) {
         }));
 
         const LibMenu = () => {
-            const [selectedPlaylist, setSelectedPlaylist] = React.useState('');
+            const [selectedPlaylist, setSelectedPlaylist] = React.useState("new");
             const classes = useStyles();
             var newPlaylist = "";
 
@@ -309,9 +309,6 @@ function Movie(props) {
                                     input={<Input />}
                                 >
                                     <MenuItem value="new">New Playlist</MenuItem>
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
                                     {/* show user's playlist */}
                                     {UserPlaylistMenuItem()}
                                 </Select>
