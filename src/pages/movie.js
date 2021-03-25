@@ -42,9 +42,6 @@ function Movie(props) {
     var params = useParams();
     var movieID = params.id;     // id of url "/movie/{id}" 
 
-    //For sharing link
-    const [copiedLink] = React.useState(0);
-
     //get movie info
     const [movies, setMovies] = useState({
         title: "",
@@ -186,7 +183,6 @@ function Movie(props) {
         return (
             <div>
                 <h3>Cast</h3>
-                {/* {movies.cast} */}
                 {displayCast()}
             </div>
         );
@@ -241,11 +237,9 @@ function Movie(props) {
                             console.log(selectedPlaylist);
                             // add item to exist playlist
                             BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
-                                // console.log(doc.data());
                                 var newMovieIDList = doc.data().movieID;
                                 newMovieIDList.push(movieID);
                                 BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
-                                    // console.log("update playlist success");
                                     setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
@@ -429,7 +423,6 @@ function Movie(props) {
                 if (reviewListState) {
 
                     res = reviewListState.map((data) => {
-                        // console.log(data.timestamp.toDate().toString());
                         var date = data.timestamp.toDate().toString();
                         return (
                             <Comment user={data.userName} date={date} review={data.review} />
@@ -491,11 +484,6 @@ function Movie(props) {
                         />
                     </Grid>
                     <Grid item xs={11}>
-                        {/* <TextField
-                            label="Write Down Your Review"
-                            variant="filled"
-                            fullWidth
-                        ></TextField> */}
                         <CommentTextField />
                     </Grid>
                     <Grid item xs={11}>
