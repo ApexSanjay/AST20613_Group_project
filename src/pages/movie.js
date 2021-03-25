@@ -62,7 +62,7 @@ function Movie(props) {
 
     useEffect(() => {   //init loading
 
-        MediaModule.getMoviePoster(movieID).then((url)=>{
+        MediaModule.getMoviePoster(movieID).then((url) => {
             setMoviePoster(url);
         })
 
@@ -167,10 +167,23 @@ function Movie(props) {
     }
 
     const Cast = () => {
+
+        const displayCast = () => {
+            var res = "";
+            for (var i in movies.cast) {
+                res += movies.cast[i];
+                if(i != (movies.cast.length - 1)){
+                    res += ", ";
+                }
+            }
+            return res;
+        }
+
         return (
             <div>
                 <h3>Cast</h3>
-                {movies.cast}
+                {/* {movies.cast} */}
+                {displayCast()}
             </div>
         );
     }
