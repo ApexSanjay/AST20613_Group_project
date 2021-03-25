@@ -78,6 +78,10 @@ const getUser = (email) => {
     return firebase.firestore().collection("users").where("userEmail", "==", email).get();
 }
 
+const getUserIcon = (userID) => {
+    return firebase.storage().ref("users/" + userID + "/icon").getDownloadURL();
+}
+
 const BrowsingModules = {
     searchMovie,
     suggestMovie,
@@ -91,6 +95,7 @@ const BrowsingModules = {
     getReviewSnapshot,
     getReviewOnce,
     getUser,
+    getUserIcon,
 };
 
 export default BrowsingModules;

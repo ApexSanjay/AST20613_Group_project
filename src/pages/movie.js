@@ -29,17 +29,18 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import BrowsingModules from "./modules/BrowsingModules";
 import LoginModules from "./modules/LoginModules";
+import SnackBar from "./components/snackBar";
 
 function Movie(props) {
+
+    const [shareSnackBarOpen, setShareSnackBarOpen] = useState(false);
+    const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
     const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
 
     const history = useHistory();
     var params = useParams();
     var movieID = params.id;     // id of url "/movie/{id}" 
-
-    //For sharing link
-    const [copiedLink] = React.useState(0);
 
     //get movie info
     const [movies, setMovies] = useState({
@@ -62,7 +63,7 @@ function Movie(props) {
 
     useEffect(() => {   //init loading
 
-        MediaModule.getMoviePoster(movieID).then((url)=>{
+        MediaModule.getMoviePoster(movieID).then((url) => {
             setMoviePoster(url);
         })
 
@@ -94,7 +95,7 @@ function Movie(props) {
                     var reviewList = [];
                     querySnapshot.forEach((doc) => {
                         reviewList.push(doc.data());
-                        setreviewListState(reviewList);
+                        setreviewListState([...reviewList]);
                     });
                 }
             )
@@ -167,10 +168,22 @@ function Movie(props) {
     }
 
     const Cast = () => {
+
+        const displayCast = () => {
+            var res = "";
+            for (var i in movies.cast) {
+                res += movies.cast[i];
+                if(i != (movies.cast.length - 1)){
+                    res += ", ";
+                }
+            }
+            return res;
+        }
+
         return (
             <div>
                 <h3>Cast</h3>
-                {movies.cast}
+                {displayCast()}
             </div>
         );
     }
@@ -199,7 +212,7 @@ function Movie(props) {
         }));
 
         const LibMenu = () => {
-            const [selectedPlaylist, setSelectedPlaylist] = React.useState('');
+            const [selectedPlaylist, setSelectedPlaylist] = React.useState("new");
             const classes = useStyles();
             var newPlaylist = "";
 
@@ -216,7 +229,8 @@ function Movie(props) {
                             }
                             // create playlist
                             BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
-                                console.log("BM: created playlist");
+                                // console.log("BM: created playlist");
+                                setUpdatePlaylistSnackBarOpen(true);
                             }).catch((e) => {
                                 console.log(e.message);
                             });
@@ -224,11 +238,10 @@ function Movie(props) {
                             console.log(selectedPlaylist);
                             // add item to exist playlist
                             BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
-                                // console.log(doc.data());
                                 var newMovieIDList = doc.data().movieID;
                                 newMovieIDList.push(movieID);
                                 BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
-                                    console.log("update playlist success");
+                                    setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
                         }
@@ -244,7 +257,6 @@ function Movie(props) {
             }
 
             const handleChange = (value) => {
-                // console.log(value);
                 setSelectedPlaylist(value || '');
             }
 
@@ -252,7 +264,6 @@ function Movie(props) {
 
                 const onchangeHandler = (value) => {
                     newPlaylist = value;
-                    // console.log(newPlaylist);
                 }
 
                 const Container = styled.div`
@@ -298,9 +309,6 @@ function Movie(props) {
                                     input={<Input />}
                                 >
                                     <MenuItem value="new">New Playlist</MenuItem>
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
                                     {/* show user's playlist */}
                                     {UserPlaylistMenuItem()}
                                 </Select>
@@ -321,7 +329,6 @@ function Movie(props) {
         }
 
         const onclickHandler = () => {
-            // movieID
             setOpenDialog(true);
         }
 
@@ -337,9 +344,15 @@ function Movie(props) {
 
 
     const ShareLink = () => {
+
+        const onClickHandler = () => {
+            navigator.clipboard.writeText(window.location.href);
+            setShareSnackBarOpen(true);
+        }
+
         return (
             <div>
-                <Button onClick={() => navigator.clipboard.writeText('Should be url')}>
+                <Button onClick={() => onClickHandler()}>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>
@@ -370,6 +383,17 @@ function Movie(props) {
         `;
 
         const Comment = (props) => {
+
+            const userID = props.userID;
+
+            const [UserIcon, setUserIcon] = useState();
+
+            useEffect(()=>{
+                BrowsingModules.getUserIcon(userID).then((url)=>{
+                    setUserIcon(url);
+                });
+            },[]);
+
             return (
                 <Grid item xs={12}>
                     <Paper elevation={3}>
@@ -378,7 +402,7 @@ function Movie(props) {
                                 {/* icon */}
                                 <Avatar
                                     alt=""
-                                    src=""
+                                    src={UserIcon}
                                 />
                             </Grid>
                             <Grid item xs={11}>
@@ -406,12 +430,10 @@ function Movie(props) {
                 var res;
 
                 if (reviewListState) {
-
                     res = reviewListState.map((data) => {
-                        // console.log(data.timestamp.toDate().toString());
                         var date = data.timestamp.toDate().toString();
                         return (
-                            <Comment user={data.userName} date={date} review={data.review} />
+                            <Comment userID={data.userID} user={data.userName} date={date} review={data.review} />
                         );
                     });
                 } else {
@@ -470,11 +492,6 @@ function Movie(props) {
                         />
                     </Grid>
                     <Grid item xs={11}>
-                        {/* <TextField
-                            label="Write Down Your Review"
-                            variant="filled"
-                            fullWidth
-                        ></TextField> */}
                         <CommentTextField />
                     </Grid>
                     <Grid item xs={11}>
@@ -505,6 +522,8 @@ function Movie(props) {
             <BackGround>
                 <Blur />
             </BackGround>
+            <SnackBar show={shareSnackBarOpen}>Link Copied.</SnackBar>
+            <SnackBar show={updatePlaylistSnackBarOpen}>Update Success.</SnackBar>
             <Body>
                 <MenuBar />
                 {<h1>{movies.title}</h1>}
