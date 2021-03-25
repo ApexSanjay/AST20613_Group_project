@@ -78,12 +78,19 @@ function Profile(props) {
 
         const ListCard = (props) => {
 
+            const removePlayList = () => {
+                BrowsingModules.removePlaylist(props.playlistID).then(() => {
+                    window.location.reload();   //reload page
+                });
+            }
+
             const onclickHandler = (name) => {
                 switch (name) {
                     case "view":
                         history.push("/playlist/" + props.playlistID);
                         break;
                     case "remove":
+                        removePlayList();
                         break;
                     default:
                         break;
@@ -108,7 +115,7 @@ function Profile(props) {
                             <Button size="small" color="primary" onClick={() => { onclickHandler("view"); }}>
                                 View
                         </Button>
-                            <Button size="small" color="primary">
+                            <Button size="small" color="primary" onClick={() => { onclickHandler("remove") }}>
                                 Delete
                         </Button>
                         </CardActions>
