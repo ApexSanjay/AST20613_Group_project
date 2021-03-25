@@ -262,7 +262,6 @@ function Movie(props) {
             }
 
             const handleChange = (value) => {
-                // console.log(value);
                 setSelectedPlaylist(value || '');
             }
 
@@ -270,7 +269,6 @@ function Movie(props) {
 
                 const onchangeHandler = (value) => {
                     newPlaylist = value;
-                    // console.log(newPlaylist);
                 }
 
                 const Container = styled.div`
