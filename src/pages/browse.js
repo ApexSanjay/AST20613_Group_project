@@ -13,7 +13,6 @@ import MediaModule from './modules/MediaModule';
 
 export function Browse(props) {
 
-    console.log(LoginModules.getUserProfile().uid);
 
     const [ids, setIds] = useState();
     const [movieCardInfoState, setMovieCardInfoState] = useState([]);
@@ -33,8 +32,9 @@ export function Browse(props) {
     }
 
     useEffect(() => {
-        console.log("useEffect");
 
+        console.log(LoginModules.getUserProfile().uid);
+        
         if (!ids) {
             var random = getRandomIds(10);
             setIds(random);
@@ -42,10 +42,8 @@ export function Browse(props) {
             if (movieCardInfoState.length === 0) {
                 for (var i in ids) {
                     MediaModule.getMoviePoster(ids[i]).then((url) => {
-                        // console.log(url);
                         for (var j in ids) {
                             if (url.includes(ids[j] + ".jpg")) {
-                                // console.log(ids[j], url);
                                 var movieCardInfo = movieCardInfoState;
                                 movieCardInfo.push({ id: ids[j], url: url });
                                 setMovieCardInfoState([...movieCardInfo]);
