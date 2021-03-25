@@ -94,7 +94,7 @@ function Movie(props) {
                     var reviewList = [];
                     querySnapshot.forEach((doc) => {
                         reviewList.push(doc.data());
-                        setreviewListState(reviewList);
+                        setreviewListState([...reviewList]);
                     });
                 }
             )
