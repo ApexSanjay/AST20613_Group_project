@@ -59,7 +59,7 @@ const removeReview = (reviewID) => {
 
 const getReviewSnapshot = (movieID) => {
     console.log(movieID);
-    return firebase.firestore().collection("reviews").where("movieID", "==", movieID).orderBy("timestamp", "desc")
+    return firebase.firestore().collection("reviews").where("movieID", "==", movieID)
         // .onSnapshot(
         //     (querySnapshot) => {
         //         querySnapshot.forEach((doc) => {
