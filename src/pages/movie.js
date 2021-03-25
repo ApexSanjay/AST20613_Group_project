@@ -229,7 +229,8 @@ function Movie(props) {
                             }
                             // create playlist
                             BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
-                                console.log("BM: created playlist");
+                                // console.log("BM: created playlist");
+                                setUpdatePlaylistSnackBarOpen(true);
                             }).catch((e) => {
                                 console.log(e.message);
                             });
