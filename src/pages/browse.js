@@ -4,9 +4,7 @@ import {
 } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
-//Should be array
-import moviePoster from "./img/soul_poster.jpg";
-import { MovieCreationSharp } from '@material-ui/icons';
+// import moviePoster from "./img/soul_poster.jpg";
 import MenuBar from "./components/menuBar";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
@@ -19,9 +17,6 @@ export function Browse(props) {
 
     const [ids, setIds] = useState();
     const [movieCardInfoState, setMovieCardInfoState] = useState([]);
-    // const [refresh, setRefresh] = useState(false);
-
-
 
     const getRandomIds = (num) => {
         var ids = [];
@@ -39,7 +34,6 @@ export function Browse(props) {
 
     useEffect(() => {
         console.log("useEffect");
-        // console.log(ids);
 
         if (!ids) {
             var random = getRandomIds(10);
@@ -57,14 +51,9 @@ export function Browse(props) {
                                 setMovieCardInfoState([...movieCardInfo]);
                             }
                         }
-                    }).catch((e) => {
-                        // console.log("no url");
                     });
                 }
             }
-            //     console.log(movieCardInfoState);
-            //     // setRefresh(refresh);
-            // }
         }
 
 
@@ -109,12 +98,6 @@ export function Browse(props) {
         }
 
         const showMovieCards = () => {
-            // var ids = getRandomIds(10);
-
-            // console.log();
-            // console.log(movieCardInfoState);
-
-
             var res = movieCardInfoState.map((info) => (
                 <MovieCard id={info.id} img={info.url} />
             ));
