@@ -29,8 +29,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import BrowsingModules from "./modules/BrowsingModules";
 import LoginModules from "./modules/LoginModules";
+import SnackBar from "./components/snackBar";
 
 function Movie(props) {
+
+    const [snackBarOpen, setSnackBarOpen] = useState(false);
 
     const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
 
@@ -350,9 +353,15 @@ function Movie(props) {
 
 
     const ShareLink = () => {
+
+        const onClickHandler = () => {
+            navigator.clipboard.writeText(window.location.href);
+            setSnackBarOpen(true)
+        }
+
         return (
             <div>
-                <Button onClick={() => navigator.clipboard.writeText('Should be url')}>
+                <Button onClick={() => onClickHandler()}>
                     <LinkIcon fontSize="small" /> Share Link
                 </Button>
             </div>
@@ -518,6 +527,7 @@ function Movie(props) {
             <BackGround>
                 <Blur />
             </BackGround>
+            <SnackBar show={snackBarOpen}>Link Copied</SnackBar>
             <Body>
                 <MenuBar />
                 {<h1>{movies.title}</h1>}
