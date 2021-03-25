@@ -383,6 +383,17 @@ function Movie(props) {
         `;
 
         const Comment = (props) => {
+
+            const userID = props.userID;
+
+            const [UserIcon, setUserIcon] = useState();
+
+            useEffect(()=>{
+                BrowsingModules.getUserIcon(userID).then((url)=>{
+                    setUserIcon(url);
+                });
+            },[]);
+
             return (
                 <Grid item xs={12}>
                     <Paper elevation={3}>
@@ -391,7 +402,7 @@ function Movie(props) {
                                 {/* icon */}
                                 <Avatar
                                     alt=""
-                                    src=""
+                                    src={UserIcon}
                                 />
                             </Grid>
                             <Grid item xs={11}>
@@ -419,11 +430,10 @@ function Movie(props) {
                 var res;
 
                 if (reviewListState) {
-
                     res = reviewListState.map((data) => {
                         var date = data.timestamp.toDate().toString();
                         return (
-                            <Comment user={data.userName} date={date} review={data.review} />
+                            <Comment userID={data.userID} user={data.userName} date={date} review={data.review} />
                         );
                     });
                 } else {
