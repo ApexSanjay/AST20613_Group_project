@@ -100,7 +100,7 @@ function Playlist(props) {
             );
         };
 
-        const RemoveButton = () => {
+        const RemoveButton = (props) => {
 
             const Container = styled.div`
                 display: inline;
@@ -108,7 +108,18 @@ function Playlist(props) {
             `;
 
             const onclickHandler = () => {
-
+                const movieID = props.id;
+                const list = playlist;
+                console.log(list, movieID);
+                for (var i in list) {
+                    if(list[i] == movieID){
+                        list.splice(i, 1);
+                        BrowsingModules.updatePlaylist(playlistID, list).then(()=>{
+                            window.location.reload();   //reload page
+                        });
+                        break;
+                    }
+                }
             }
 
             return (
@@ -134,8 +145,8 @@ function Playlist(props) {
                             {movie.title}
                         </TableCell>
                         <TableCell align="right">
-                            <WatchButton id={movie.id}/>
-                            <RemoveButton />
+                            <WatchButton id={movie.id} />
+                            <RemoveButton id={movie.id} />
                         </TableCell>
                     </TableRow>
                 ));
