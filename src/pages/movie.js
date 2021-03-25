@@ -33,7 +33,8 @@ import SnackBar from "./components/snackBar";
 
 function Movie(props) {
 
-    const [snackBarOpen, setSnackBarOpen] = useState(false);
+    const [shareSnackBarOpen, setShareSnackBarOpen] = useState(false);
+    const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
     const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
 
@@ -244,7 +245,8 @@ function Movie(props) {
                                 var newMovieIDList = doc.data().movieID;
                                 newMovieIDList.push(movieID);
                                 BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
-                                    console.log("update playlist success");
+                                    // console.log("update playlist success");
+                                    setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
                         }
@@ -337,7 +339,6 @@ function Movie(props) {
         }
 
         const onclickHandler = () => {
-            // movieID
             setOpenDialog(true);
         }
 
@@ -356,7 +357,7 @@ function Movie(props) {
 
         const onClickHandler = () => {
             navigator.clipboard.writeText(window.location.href);
-            setSnackBarOpen(true)
+            setShareSnackBarOpen(true);
         }
 
         return (
@@ -527,7 +528,8 @@ function Movie(props) {
             <BackGround>
                 <Blur />
             </BackGround>
-            <SnackBar show={snackBarOpen}>Link Copied</SnackBar>
+            <SnackBar show={shareSnackBarOpen}>Link Copied.</SnackBar>
+            <SnackBar show={updatePlaylistSnackBarOpen}>Update Success.</SnackBar>
             <Body>
                 <MenuBar />
                 {<h1>{movies.title}</h1>}
