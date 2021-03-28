@@ -61,6 +61,20 @@ function Movie(props) {
 
     const [reviewListState, setreviewListState] = useState([]);
 
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    const userID = LoginModules.getUserProfile().uid;
+
+    useEffect(() => { //init loading
+        if (userID) {
+            LoginModules.getAdminUser(userID).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setIsAdmin(true);
+                })
+            });
+        }
+    }, []);
+
 
     useEffect(() => {   //init loading
 
@@ -95,7 +109,7 @@ function Movie(props) {
                 (querySnapshot) => {
                     var reviewList = [];
                     querySnapshot.forEach((doc) => {
-                        reviewList.push({id: doc.id, data: doc.data()});
+                        reviewList.push({ id: doc.id, data: doc.data() });
                         setreviewListState([...reviewList]);
                     });
                 }
@@ -385,12 +399,12 @@ function Movie(props) {
 
         const Comment = (props) => {
 
-            const userID = props.userID;
-
             const [UserIcon, setUserIcon] = useState();
 
+            const CommentUserID = props.userID;
+
             useEffect(() => {
-                BrowsingModules.getUserIcon(userID).then((url) => {
+                BrowsingModules.getUserIcon(props.userID).then((url) => {
                     setUserIcon(url);
                 });
             }, []);
@@ -400,23 +414,30 @@ function Movie(props) {
                 const commentID = props.id;
 
                 const onclickHandler = () => {
-                    BrowsingModules.removeReview(commentID).then(()=>{
+                    BrowsingModules.removeReview(commentID).then(() => {
                         console.log("Success");
                         setRemoveCommentSnackBar(true);
-                    }).catch((e)=>{
+                    }).catch((e) => {
                         console.log(e.message);
                     });
                 }
 
-                return (
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={()=>{onclickHandler(commentID)}}
-                    >
-                        Remove
-                    </Button>
-                );
+                console.log(userID, CommentUserID, userID === CommentUserID);
+                if (isAdmin || userID === CommentUserID) {
+                    return (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { onclickHandler(commentID) }}
+                        >
+                            Remove
+                        </Button>
+                    );
+                } else {
+                    return (<div></div>);
+                }
+
+
             }
 
             return (
