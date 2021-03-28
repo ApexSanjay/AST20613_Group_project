@@ -24,7 +24,8 @@ function Playlist(props) {
     const playlistID = params.id;
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
-    const [movieListState, setMovieListState] = useState();
+    const [movieListState, setMovieListState] = useState([]);
+
     var movieList = [];
 
     const history = useHistory();
@@ -62,9 +63,7 @@ function Playlist(props) {
                 } else {
                     querySnapshot.forEach((doc) => {
                         movieList.push(doc.data());
-                        if (movieList.length === playlist.length) {
-                            setMovieListState(movieList);
-                        }
+                        setMovieListState([...movieList]);
                     });
                 }
             }).catch((e) => {
@@ -112,9 +111,9 @@ function Playlist(props) {
                 const list = playlist;
                 console.log(list, movieID);
                 for (var i in list) {
-                    if(list[i] == movieID){
+                    if (list[i] == movieID) {
                         list.splice(i, 1);
-                        BrowsingModules.updatePlaylist(playlistID, list).then(()=>{
+                        BrowsingModules.updatePlaylist(playlistID, list).then(() => {
                             window.location.reload();   //reload page
                         });
                         break;
