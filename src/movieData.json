@@ -721,6 +721,17 @@
     "movieReleaseDate": "2013"
   },
   {
+    "id": "47",
+    "title": "Horrible Bosses 2",
+    "description": "Dale, Kurt and Nick decide to start their own business but things don't go as planned because of a slick investor, prompting the trio to pull off a harebrained and misguided kidnapping scheme.",
+    "Director": "Sean Anders",
+    "cast": [" Jason Bateman", "Jason Sudeikis", "Charlie Day"],
+    "trailerURL": "https://www.youtube.com/watch?v=utriEZFno0E",
+    "imdbReview": "6.3",
+    "movieLength": "1 hour 48 minutes",
+    "movieReleaseDate": "2014"
+},
+  {
     "id": "48",
     "title": "The Hangover Part III",
     "description": "When one of their own is kidnapped by an angry gangster, the Wolf Pack must track down Mr. Chow, who has escaped from prison and is on the run.",
