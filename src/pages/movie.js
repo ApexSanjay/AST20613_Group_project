@@ -37,6 +37,7 @@ function Movie(props) {
     const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
     const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
+    const [removeCommentSnackBar, setRemoveCommentSnackBar] = useState(false);
 
     const history = useHistory();
     var params = useParams();
@@ -94,7 +95,7 @@ function Movie(props) {
                 (querySnapshot) => {
                     var reviewList = [];
                     querySnapshot.forEach((doc) => {
-                        reviewList.push(doc.data());
+                        reviewList.push({id: doc.id, data: doc.data()});
                         setreviewListState([...reviewList]);
                     });
                 }
@@ -173,7 +174,7 @@ function Movie(props) {
             var res = "";
             for (var i in movies.cast) {
                 res += movies.cast[i];
-                if(i != (movies.cast.length - 1)){
+                if (i != (movies.cast.length - 1)) {
                     res += ", ";
                 }
             }
@@ -388,11 +389,35 @@ function Movie(props) {
 
             const [UserIcon, setUserIcon] = useState();
 
-            useEffect(()=>{
-                BrowsingModules.getUserIcon(userID).then((url)=>{
+            useEffect(() => {
+                BrowsingModules.getUserIcon(userID).then((url) => {
                     setUserIcon(url);
                 });
-            },[]);
+            }, []);
+
+            const RemoveCommentButton = (props) => {
+
+                const commentID = props.id;
+
+                const onclickHandler = () => {
+                    BrowsingModules.removeReview(commentID).then(()=>{
+                        console.log("Success");
+                        setRemoveCommentSnackBar(true);
+                    }).catch((e)=>{
+                        console.log(e.message);
+                    });
+                }
+
+                return (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={()=>{onclickHandler(commentID)}}
+                    >
+                        Remove
+                    </Button>
+                );
+            }
 
             return (
                 <Grid item xs={12}>
@@ -411,11 +436,14 @@ function Movie(props) {
                                 {/* date */}
                                 <small>{props.date}</small>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={11}>
                                 {/* comment */}
                                 <CommentContainer>
                                     {props.review}
                                 </CommentContainer>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <RemoveCommentButton id={props.commentID} />
                             </Grid>
                         </Grid>
 
@@ -431,9 +459,9 @@ function Movie(props) {
 
                 if (reviewListState) {
                     res = reviewListState.map((data) => {
-                        var date = data.timestamp.toDate().toString();
+                        var date = data.data.timestamp.toDate().toString();
                         return (
-                            <Comment userID={data.userID} user={data.userName} date={date} review={data.review} />
+                            <Comment userID={data.data.userID} user={data.data.userName} date={date} review={data.data.review} commentID={data.id} />
                         );
                     });
                 } else {
@@ -524,6 +552,7 @@ function Movie(props) {
             </BackGround>
             <SnackBar show={shareSnackBarOpen}>Link Copied.</SnackBar>
             <SnackBar show={updatePlaylistSnackBarOpen}>Update Success.</SnackBar>
+            <SnackBar show={removeCommentSnackBar}>Update Success.</SnackBar>
             <Body>
                 <MenuBar />
                 {<h1>{movies.title}</h1>}
