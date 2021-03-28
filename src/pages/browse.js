@@ -4,7 +4,6 @@ import {
 } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
-// import moviePoster from "./img/soul_poster.jpg";
 import MenuBar from "./components/menuBar";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
