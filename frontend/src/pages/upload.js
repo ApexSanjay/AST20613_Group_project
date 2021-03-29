@@ -64,15 +64,22 @@ export function Upload(props) {
                 <Grid container>
                     <Grid item xs={12}>
                         <h2>Select Movie File</h2>
-                        <input
-                            type="file"
-                            onChange={(e) => {
-                                // file = e.target.files;
-                                // setFile(e.target.files);
-                                console.log(e.target.files);
-                            }}
-                            defaultValue={file}
-                        />
+                        <form
+                            action="http://localhost:4000/upload"
+                            method="post"
+                            enctype="multipart/form-data">
+                            <input
+                                name="movie"
+                                type="file"
+                                onChange={(e) => {
+                                    // file = e.target.files;
+                                    // setFile(e.target.files);
+                                    console.log(e.target.files);
+                                }}
+                                defaultValue={file}
+                            />
+                            <input type="submit" />
+                        </form>
                     </Grid>
                 </Grid>
             );
@@ -267,7 +274,7 @@ export function Upload(props) {
             };
 
             return (
-                <form>
+                <div>
                     <h2>Input Movie Data</h2>
                     <TitleField />
                     <DescriptionField />
@@ -277,7 +284,7 @@ export function Upload(props) {
                     <IMDBReviewField />
                     <MovieLengthField />
                     <MovieReleaseDateField />
-                </form>
+                </div>
             );
         };
 

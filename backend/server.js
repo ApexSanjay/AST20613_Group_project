@@ -10,7 +10,7 @@ const port = 4000;
 
 var storage = multer.diskStorage(
     {
-        destination: './uploads/',
+        destination: './data/uploads/',
         filename: function (req, file, cb) {
             cb(null, file.originalname);
         }
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 })
 
 //upload single file
-app.post('/profile', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
+app.post('/upload', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
     console.log(req.file, req.body);
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
@@ -40,14 +40,14 @@ app.post('/profile', upload.single('movie'), function (req, res, next) {   //mov
     // }).run();
     
     console.log("Start encoding...");
-    ffmpeg('uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
+    ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
         '-profile:v baseline',
         '-level 3.0',
         '-start_number 0',
         '-hls_time 10',
         '-hls_list_size 0',
         '-f hls'
-    ]).output('encoded/'+ req.file.filename + '.m3u8').on('end', () => {
+    ]).output('data/encoded/'+ req.file.filename + '.m3u8').on('end', () => {
         console.log("End of encoding.");
     }).run();
 })
