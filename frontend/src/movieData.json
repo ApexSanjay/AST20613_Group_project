@@ -1,0 +1,1568 @@
+[
+  {
+    "id": "1",
+    "title": "Space Sweepers",
+    "description": "Set in the year 2092 and follows the crew of a space junk collector ship called The Victory. When they discover a humanoid robot named Dorothy that's known to be a weapon of mass destruction, they get involved in a risky business deal.",
+    "Director": "Sung-hee jo",
+    "cast": [
+      " Song Joong-Ki ,",
+      "Seon-kyu Jin ,",
+      " Kim Tae-ri"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=H1WYnJF1Pwo",
+    "imdbReview": "6.6",
+    "movieLength": "2 hour 16 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "2",
+    "title": "Jarhead",
+    "description": "A psychological study of a soldier's state of mind during the Gulf War. Told through the eyes of a U.S. Marine sniper who struggles to cope with boredom, a sense of isolation, and other issues back home.",
+    "Director": "Sam Mendes",
+    "cast": [
+      " Jake Gyllenhaal",
+      "Jamie Foxx",
+      "Lucas Black"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=-aBP-c28_1M",
+    "imdbReview": "7.0",
+    "movieLength": "2 hour 5 minutes",
+    "movieReleaseDate": "2005"
+  },
+  {
+    "id": "3",
+    "title": "Soul",
+    "description": "After landing the gig of a lifetime, a New York jazz pianist suddenly finds himself trapped in a strange land between Earth and the afterlife.",
+    "Director": [
+      " Pete Docter",
+      "Kemp Powers"
+    ],
+    "cast": [
+      "Jamie Foxx",
+      "Tina Fey",
+      "Graham Norton"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=xOsLIiBStEs",
+    "imdbReview": "8.1",
+    "movieLength": "1 hour 40 minutes",
+    "movieReleaseDate": "2020"
+  },
+  {
+    "id": "4",
+    "title": "Coco",
+    "description": "Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer.",
+    "Director": [
+      " Lee Unkrich",
+      "Adrian Molina"
+    ],
+    "cast": [
+      " Anthony Gonzalez",
+      "Gael García Bernal",
+      "Benjamin Bratt"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=Ga6RYejo6Hk",
+    "imdbReview": "8.4",
+    "movieLength": "1 hour 45 minutes",
+    "movieReleaseDate": "2017"
+  },
+  {
+    "id": "5",
+    "title": "WALL·E",
+    "description": "In the distant future, a small waste-collecting robot inadvertently embarks on a space journey that will ultimately decide the fate of mankind.",
+    "Director": "Andrew Stanton",
+    "cast": [
+      " Ben Burtt",
+      "Elissa Knight",
+      "Jeff Garlin"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=9pyBKj5-jVk",
+    "imdbReview": "8.4",
+    "movieLength": "1 hour 38 minutes",
+    "movieReleaseDate": "2008"
+  },
+  {
+    "id": "6",
+    "title": "Avengers: Age of Ultron",
+    "description": "When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it's up to Earth's mightiest heroes to stop the villainous Ultron from enacting his terrible plan.",
+    "Director": "Joss Whedon",
+    "cast": [
+      " Robert Downey Jr.",
+      "Chris Evans",
+      "Mark Ruffalo"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=tmeOjFno6Do",
+    "imdbReview": "7.3",
+    "movieLength": "2 hour 21 minutes",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "7",
+    "title": "Avengers: Endgame",
+    "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+    "Director": [
+      " Anthony Russo",
+      "Joe Russo"
+    ],
+    "cast": [
+      " Robert Downey Jr.",
+      "Chris Evans",
+      "Mark Ruffalo"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=TcMBFSGVi1c",
+    "imdbReview": "8.4",
+    "movieLength": "3 hour 1 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "8",
+    "title": "Avengers: Infinity War",
+    "description": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+    "Director": [
+      "Anthony Russo",
+      "Joe Russo"
+    ],
+    "cast": [
+      " Robert Downey Jr.",
+      "Chris Hemsworth",
+      "Mark Ruffalo"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=6ZfuNTqbHE8",
+    "imdbReview": "8.4",
+    "movieLength": "2 hour 29 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "9",
+    "title": "The Dark Knight",
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "Director": " Christopher Nolan",
+    "cast": [
+      "Christian Bale",
+      "Heath Ledger",
+      "Aaron Eckhart"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+    "imdbReview": "9.0",
+    "movieLength": "2 hour 32 minutes",
+    "movieReleaseDate": "2008"
+  },
+  {
+    "id": "9",
+    "title": "The Dark Knight Rises",
+    "description": "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City from the brutal guerrilla terrorist Bane.",
+    "Director": "Christopher Nolan",
+    "cast": [
+      " Christian Bale",
+      "Tom Hardy",
+      "Anne Hathaway"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=GokKUqLcvD8",
+    "imdbReview": "8.4",
+    "movieLength": "2 hour 44 minutes",
+    "movieReleaseDate": "2012"
+  },
+  {
+    "id": "10",
+    "title": "Batman Begins",
+    "description": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
+    "Director": "Christopher Nolan",
+    "cast": [
+      " Christian Bale",
+      "Michael Caine",
+      "Ken Watanabe "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=neY2xVmOfUM",
+    "imdbReview": "8.2",
+    "movieLength": "2 hour 20 minutes",
+    "movieReleaseDate": "2005"
+  },
+  {
+    "id": "11",
+    "title": "Interstellar",
+    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "Director": " Christopher Nolan",
+    "cast": [
+      " Matthew McConaughey",
+      "Anne Hathaway",
+      "Jessica Chastain"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+    "imdbReview": "8.6",
+    "movieLength": "2 hour 49 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "12",
+    "title": "Joker",
+    "description": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.",
+    "Director": "Todd Phillips",
+    "cast": [
+      "Joaquin Phoenix",
+      "Robert De Niro",
+      "Zazie Beetz"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=zAGVQLHvwOY",
+    "imdbReview": "8.4",
+    "movieLength": "2 hour 2 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "13",
+    "title": "The Wolf of Wall Street",
+    "description": "Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.",
+    "Director": "Martin Scorsese",
+    "cast": [
+      "Leonardo DiCaprio",
+      "Jonah Hill",
+      "Margot Robbie"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=pabEtIERlic",
+    "imdbReview": "8.2",
+    "movieLength": "3 hours",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "14",
+    "title": "Inglourious Basterds",
+    "description": "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
+    "Director": " Quentin Tarantino",
+    "cast": [
+      "Brad Pitt",
+      "Diane Kruger",
+      "Eli Roth"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=KnrRy6kSFF0",
+    "imdbReview": "8.3",
+    "movieLength": "2 hour 33 minutes",
+    "movieReleaseDate": "2009"
+  },
+  {
+    "id": "15",
+    "title": "The Matrix",
+    "description": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+    "Director": [
+      "Lana Wachowski",
+      "Lilly Wachowski"
+    ],
+    "cast": [
+      "Keanu Reeves",
+      "Laurence Fishburne",
+      "Carrie-Anne Moss"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=vKQi3bBA1y8",
+    "imdbReview": "8.7",
+    "movieLength": "2 hour 16 minutes",
+    "movieReleaseDate": "1999"
+  },
+  {
+    "id": "16",
+    "title": "Spider-Man: Into the Spider-Verse",
+    "description": "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+    "Director": [
+      "Bob Persichetti",
+      "Peter Ramsey"
+    ],
+    "cast": [
+      " Shameik Moore",
+      "Jake Johnson",
+      "Hailee Steinfeld"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=g4Hbz2jLxvQ",
+    "imdbReview": "8.4",
+    "movieLength": "1 hour 57 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "17",
+    "title": "Django Unchained",
+    "description": "With the help of a German bounty-hunter, a freed slave sets out to rescue his wife from a brutal plantation-owner in Mississippi.",
+    "Director": "Quentin Tarantino",
+    "cast": [
+      " Jamie Foxx",
+      "Christoph Waltz",
+      "Leonardo DiCaprio"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=0fUCuvNlOCg",
+    "imdbReview": "8.4",
+    "movieLength": "2 hour 45 minutes",
+    "movieReleaseDate": "2012"
+  },
+  {
+    "id": "18",
+    "title": "Forrest Gump",
+    "description": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.",
+    "Director": "Robert Zemeckis",
+    "cast": [
+      " Tom Hanks",
+      "Robin Wright",
+      "Gary Sinise"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=bLvqoHBptjg",
+    "imdbReview": "8.8",
+    "movieLength": "2 hour 22 minutes",
+    "movieReleaseDate": "1994"
+  },
+  {
+    "id": "19",
+    "title": "The Green Mile",
+    "description": "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.",
+    "Director": " Frank Darabont",
+    "cast": [
+      "Tom Hanks",
+      "Michael Clarke Duncan",
+      "David Morse"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=Ki4haFrqSrw",
+    "imdbReview": "8.6",
+    "movieLength": "3 hour 9 minutes",
+    "movieReleaseDate": "1999"
+  },
+  {
+    "id": "20",
+    "title": "John Wick: Chapter 3 - Parabellum",
+    "description": "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
+    "Director": " Chad Stahelski",
+    "cast": [
+      " Keanu Reeves",
+      "Halle Berr",
+      "Ian McShane"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=pU8-7BX9uxs",
+    "imdbReview": "7.4",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "21",
+    "title": "Deadpool 2",
+    "description": "Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.",
+    "Director": [
+      ""
+    ],
+    "cast": " David Leitch",
+    "trailerURL": "https://www.youtube.com/watch?v=D86RtevtfrA",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 59 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "22",
+    "title": "Doctor Strange",
+    "description": "While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.",
+    "Director": " Scott Derrickson",
+    "cast": [
+      " Benedict Cumberbatch",
+      "Chiwetel Ejiofor",
+      "Rachel McAdams"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=HSzx-zryEgM",
+    "imdbReview": "7.5",
+    "movieLength": "1 hour 55 minutes",
+    "movieReleaseDate": "2016"
+  },
+  {
+    "id": "23",
+    "title": "Iron Man 3",
+    "description": "When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.",
+    "Director": " Shane Black",
+    "cast": [
+      "Robert Downey Jr.",
+      "Guy Pearce",
+      "Gwyneth Paltrow"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=Ke1Y3P9D0Bc",
+    "imdbReview": "7.1",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "24",
+    "title": "The Big Short",
+    "description": "In 2006-2007 a group of investors bet against the US mortgage market. In their research they discover how flawed and corrupt the market is.",
+    "Director": " Adam McKay",
+    "cast": [
+      " Christian Bale",
+      "Steve Carell",
+      "Ryan Gosling"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=vgqG3ITMv1Q",
+    "imdbReview": "7.8",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "25",
+    "title": "American Psycho",
+    "description": "A wealthy New York City investment banking executive, Patrick Bateman, hides his alternate psychopathic ego from his co-workers and friends as he delves deeper into his violent, hedonistic fantasies.",
+    "Director": "Mary Harron",
+    "cast": [
+      " Christian Bale",
+      "Justin Theroux",
+      "Josh Lucas"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=5YnGhW4UEhc",
+    "imdbReview": "7.6",
+    "movieLength": "1 hour 41 minutes",
+    "movieReleaseDate": "2000"
+  },
+  {
+    "id": "26",
+    "title": "The Theory of Everything",
+    "description": "A look at the relationship between the famous physicist Stephen Hawking and his wife.",
+    "Director": "James Marsh",
+    "cast": [
+      "Eddie Redmayne",
+      " Felicity Jones",
+      " Tom Prior"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=Salz7uGp72c",
+    "imdbReview": "7.7",
+    "movieLength": "2 hour 3 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "27",
+    "title": "The Imitation Game",
+    "description": "During World War II, the English mathematical genius Alan Turing tries to crack the German Enigma code with help from fellow mathematicians.",
+    "Director": "Morten Tyldum",
+    "cast": [
+      "Benedict Cumberbatch",
+      " Keira Knightley",
+      "Matthew Goode"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=nuPZUUED5uk",
+    "imdbReview": "8.0",
+    "movieLength": "1 hour 54 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "28",
+    "title": "The Revenant",
+    "description": "A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.",
+    "Director": "Alejandro G. Iñárritu",
+    "cast": [
+      "Leonardo DiCaprio",
+      " Tom Hardy",
+      "Will Poulter"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=LoebZZ8K5N0",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour 36 minutes",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "29",
+    "title": "The Martian",
+    "description": "An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive.",
+    "Director": "Ridley Scott",
+    "cast": [
+      " Matt Damon",
+      " Jessica Chastain",
+      " Kristen Wiig"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=ej3ioOneTy8",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour 24 minutes",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "30",
+    "title": "The Platform",
+    "description": "A vertical prison with one cell per level. Two people per cell. Only one food platform and two minutes per day to feed. An endless nightmare trapped in The Hole.",
+    "Director": "Galder Gaztelu-Urrutia",
+    "cast": [
+      "Ivan Massagué",
+      " Zorion Eguileor",
+      "Antonia San Juan"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=RlfooqeZcdY",
+    "imdbReview": "7.0",
+    "movieLength": "1 hour 34 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "31",
+    "title": "The Help",
+    "description": "An aspiring author during the civil rights movement of the 1960s decides to write a book detailing the African American maids' point of view on the white families for which they work, and the hardships they go through on a daily basis.",
+    "Director": "Tate Taylor",
+    "cast": [
+      " Emma Stone",
+      " Viola Davis",
+      " Octavia Spencer "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=aT9eWGjLv6s",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour 26 minutes",
+    "movieReleaseDate": "2011"
+  },
+  {
+    "id": "32",
+    "title": "Fury",
+    "description": "A grizzled tank commander makes tough decisions as he and his crew fight their way across Germany in April, 1945.",
+    "Director": "David Ayer",
+    "cast": [
+      " Brad Pitt",
+      "Shia LaBeouf",
+      "Logan Lerman"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=DNHuK1rteF4",
+    "imdbReview": "7.6",
+    "movieLength": "2 hour 14 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "33",
+    "title": "The Equalizer",
+    "description": "A man who believes he has put his mysterious past behind him cannot stand idly by when he meets a young girl under the control of ultra-violent Russian gangsters.",
+    "Director": "Antoine Fuqua",
+    "cast": [
+      " Denzel Washington",
+      " Marton Csokas",
+      "Chloë Grace Moretz"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=VjctHUEmutw",
+    "imdbReview": "7.2",
+    "movieLength": "2 hour 12 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "34",
+    "title": "Unforgiven",
+    "description": "Retired Old West gunslinger William Munny reluctantly takes on one last job, with the help of his old partner Ned Logan and a young man, The Schofield Kid.",
+    "Director": "Clint Eastwood",
+    "cast": [
+      "Clint Eastwood",
+      " Gene Hackman",
+      " Morgan Freeman"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=ftTX4FoBWlE",
+    "imdbReview": "8.2",
+    "movieLength": "2 hour 10 minute",
+    "movieReleaseDate": "1992"
+  },
+  {
+    "id": "35",
+    "title": "Sheeple",
+    "description": "The story of a gang of drug dealers in the south of Tehran who has sheltered many youngsters and orphans from the streets.",
+    "Director": "Houman Seyyedi",
+    "cast": [
+      " Navid Mohammadzadeh",
+      " Farhad Aslani",
+      "Farid Sajjadi Hosseini"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=NBWziZsBlSg",
+    "imdbReview": "7.6",
+    "movieLength": "1 hour 43 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "36",
+    "title": "Irrational Man",
+    "description": "A tormented philosophy professor finds a will to live when he commits an existential act.",
+    "Director": "Woody Allen",
+    "cast": [
+      " Joaquin Phoenix",
+      " Emma Stone",
+      " Parker Posey"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=hP8mPkyBntw",
+    "imdbReview": "6.6",
+    "movieLength": "1 hour 35 minutes",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "37",
+    "title": "The Hateful Eight",
+    "description": "In the dead of a Wyoming winter, a bounty hunter and his prisoner find shelter in a cabin currently inhabited by a collection of nefarious characters.",
+    "Director": "Quentin Tarantino",
+    "cast": [
+      "Samuel L. Jackson",
+      "Kurt Russell",
+      "Jennifer Jason Leigh"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=nIOmotayDMY",
+    "imdbReview": "7.8",
+    "movieLength": "2 hour 48 minutes",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "38",
+    "title": "Kill Bill: Vol. 1",
+    "description": "After awakening from a four-year coma, a former assassin wreaks vengeance on the team of assassins who betrayed her.",
+    "Director": "Quentin Tarantino",
+    "cast": [
+      " Uma Thurman",
+      "David Carradine",
+      " Daryl Hannah"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=7kSuas6mRpk",
+    "imdbReview": "8.1",
+    "movieLength": "1 hour 51 minutes",
+    "movieReleaseDate": "2003"
+  },
+  {
+    "id": "39",
+    "title": "G.I. Joe: The Rise of Cobra",
+    "description": "An elite military unit comprised of special operatives known as G.I. Joe, operating out of The Pit, takes on an evil organization led by a notorious arms dealer.",
+    "Director": "Stephen Sommers",
+    "cast": [
+      "Dennis Quaid",
+      "Channing Tatum",
+      "Marlon Wayans "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=lDVvFUbnqEM",
+    "imdbReview": "5.8",
+    "movieLength": "1 hour 58 minutes",
+    "movieReleaseDate": "209"
+  },
+  {
+    "id": "40",
+    "title": "G.I. Joe: Retaliation",
+    "description": "The G.I. Joes are not only fighting their mortal enemy Cobra; they are forced to contend with threats from within the government that jeopardize their very existence.",
+    "Director": "Jon M. Chu",
+    "cast": [
+      " Dwayne Johnson",
+      "Channing Tatum",
+      "Adrianne Palicki "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=bd3JmlIxQXM",
+    "imdbReview": "5.8",
+    "movieLength": "1 hour 50 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "41",
+    "title": "Monsters University",
+    "description": "A look at the relationship between Mike Wazowski (Billy Crystal) and James P. Sully Sullivan (John Goodman) during their days at Monsters University, when they weren't necessarily the best of friends.",
+    "Director": "Dan Scanlon",
+    "cast": [
+      "Billy Crystal",
+      "John Goodman",
+      "Steve Buscemi"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=QxrQ6BaijAY",
+    "imdbReview": "7.3",
+    "movieLength": "1 hour 44 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "42",
+    "title": "Star Trek Into Darkness",
+    "description": "After the crew of the Enterprise find an unstoppable force of terror from within their own organization, Captain Kirk leads a manhunt to a war-zone world to capture a one-man weapon of mass destruction.",
+    "Director": "J.J. Abrams",
+    "cast": [
+      "Chris Pine",
+      "Zachary Quinto",
+      "Zoe Saldana "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=QAEkuVgt6Aw",
+    "imdbReview": "7.7",
+    "movieLength": "2 hour 12 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "43",
+    "title": "Identity Thief",
+    "description": "Mild mannered businessman Sandy Patterson travels from Denver to Florida to confront the deceptively harmless looking woman who has been living it up after stealing Sandy's identity.",
+    "Director": "Seth Gordon",
+    "cast": [
+      " Jason Bateman",
+      "Melissa McCarthy",
+      "John Cho "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=uO12W35DpsQ",
+    "imdbReview": "5.7",
+    "movieLength": "1 hour 51",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "44",
+    "title": "Epic",
+    "description": "A teenager finds herself transported to a deep forest setting where a battle between the forces of good and the forces of evil is taking place. She bands together with a rag-tag group of characters in order to save their world -- and ours.",
+    "Director": "Chris Wedge",
+    "cast": [
+      "Amanda Seyfried",
+      "Josh Hutcherson",
+      "Beyoncé "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=BJVkoq_wK80",
+    "imdbReview": "6.7",
+    "movieLength": "1 hour 42 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "45",
+    "title": "Grown Ups 2",
+    "description": "After moving his family back to his hometown to be with his friends and their kids, Lenny finds out that between old bullies, new bullies, schizo bus drivers, drunk cops on skis, and four hundred costumed party crashers sometimes crazy follows you.",
+    "Director": "Dennis Dugan",
+    "cast": [
+      "Adam Sandler",
+      "Kevin James",
+      "Chris Rock"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=a_c3hW0Uyvc",
+    "imdbReview": "5.4",
+    "movieLength": "1 hour 41 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "46",
+    "title": "The Great Gatsby",
+    "description": "A writer and wall street trader, Nick, finds himself drawn to the past and lifestyle of his millionaire neighbor, Jay Gatsby.",
+    "Director": "Baz Luhrmann",
+    "cast": [
+      "Leonardo DiCaprio",
+      "Carey Mulligan",
+      "Joel Edgerton"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=rARN6agiW7o",
+    "imdbReview": "7.2",
+    "movieLength": "2 hour 23 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "47",
+    "title": "Horrible Bosses 2",
+    "description": "Dale, Kurt and Nick decide to start their own business but things don't go as planned because of a slick investor, prompting the trio to pull off a harebrained and misguided kidnapping scheme.",
+    "Director": "Sean Anders",
+    "cast": [" Jason Bateman", "Jason Sudeikis", "Charlie Day"],
+    "trailerURL": "https://www.youtube.com/watch?v=utriEZFno0E",
+    "imdbReview": "6.3",
+    "movieLength": "1 hour 48 minutes",
+    "movieReleaseDate": "2014"
+},
+  {
+    "id": "48",
+    "title": "The Hangover Part III",
+    "description": "When one of their own is kidnapped by an angry gangster, the Wolf Pack must track down Mr. Chow, who has escaped from prison and is on the run.",
+    "Director": "Todd Phillips",
+    "cast": [
+      "Bradley Cooper,",
+      "Zach Galifianakis",
+      "Ed Helms"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=96TelFMZwHc",
+    "imdbReview": "5.8",
+    "movieLength": "1 hour 40 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "49",
+    "title": "The Wolverine",
+    "description": "Wolverine comes to Japan to meet an old friend whose life he saved years ago, and gets embroiled in a conspiracy involving yakuza and mutants.",
+    "Director": "James Mangold ",
+    "cast": [
+      "Hugh Jackman",
+      " Tao Okamoto",
+      "Rila Fukushima"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=toLpchTUYk8",
+    "imdbReview": "6.7",
+    "movieLength": "2 hour 6 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "50",
+    "title": " We're the Millers ",
+    "description": "A veteran pot dealer creates a fake family as part of his plan to move a huge shipment of weed into the U.S. from Mexico.",
+    "Director": " Rawson Marshall Thurber",
+    "cast": [
+      " Jason Sudeikis",
+      "Jennifer Aniston",
+      "Emma Roberts"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=0Vsy5KzsieQ",
+    "imdbReview": "7.0",
+    "movieLength": "1 hour 50 minutes",
+    "movieReleaseDate": "2013"
+  },
+  {
+    "id": "51",
+    "title": "Parasite",
+    "description": "An unemployed family of four slips into the lives of the crazy wealthy Park family. Then, there's an incident that can’t entirely be cleaned up in a cleaning shift. Long after the credits roll, you’ll be questioning the ending and mulling over the tough, important themes.",
+    "Director": "Bong Joon-ho",
+    "cast": [
+      " Song Kang-ho",
+      "Lee Sun-kyun",
+      " Cho Yeo-jeong",
+      "Choi Woo-shik",
+      "Park So-dam",
+      "Lee Jung-eun",
+      "Jang Hye-jin"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=5xH0HfJHsaY",
+    "imdbReview": "8.6",
+    "movieLength": "2 hour 12 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "52",
+    "title": "Titanic ",
+    "description": "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+    "Director": "James Cameron",
+    "cast": [
+      "Leonardo DiCaprio",
+      "Kate Winslet",
+      "Billy Zane"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=kVrqfYjkTdQ",
+    "imdbReview": "7.8",
+    "movieLength": "3 hour 14 minutes",
+    "movieReleaseDate": "1997"
+  },
+  {
+    "id": "53",
+    "title": "Casablanca",
+    "description": "A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco.",
+    "Director": [
+      "Michael Curtiz"
+    ],
+    "cast": [
+      " Humphrey Bogart",
+      " Ingrid Bergman",
+      " Paul Henreid"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=BkL9l7qovsE",
+    "imdbReview": "8.5",
+    "movieLength": "1 hour 42 minutes",
+    "movieReleaseDate": "1942"
+  },
+  {
+    "id": "54",
+    "title": "Spirited Away",
+    "description": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
+    "Director": [
+      "Hayao Miyazaki"
+    ],
+    "cast": [
+      " Daveigh Chase",
+      "Suzanne Pleshette",
+      " Miyu Irino"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=ByXuk9QqQkk",
+    "imdbReview": "8.6",
+    "movieLength": "2 hour 5 minutes",
+    "movieReleaseDate": "2001"
+  },
+  {
+    "id": "55",
+    "title": "The Devil Wears Prada",
+    "description": "A smart but sensible new graduate lands a job as an assistant to Miranda Priestly, the demanding editor-in-chief of a high fashion magazine.",
+    "Director": "David Frankel",
+    "cast": [
+      " Anne Hathaway",
+      " Meryl Streep",
+      "Adrian Grenier"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=LG0xYJJbko8",
+    "imdbReview": "6.9",
+    "movieLength": "1 hour 49 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "56",
+    "title": "Dilwale Dulhania Le Jayenge",
+    "description": "When Raj meets Simran in Europe, it isn't love at first sight but when Simran moves to India for an arranged marriage, love makes its presence felt.",
+    "Director": "Aditya Chopra",
+    "cast": [
+      "Shah Rukh Khan",
+      "Kajol",
+      "Amrish Puri"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=cmax1C1p660",
+    "imdbReview": "8.1",
+    "movieLength": "3 hour 9 minutes",
+    "movieReleaseDate": "1995"
+  },
+  {
+    "id": "57",
+    "title": "The Farewell",
+    "description": "A Chinese family discovers their grandmother has only a short while left to live and decide to keep her in the dark, scheduling a wedding to gather before she dies.",
+    "Director": [
+      "Lulu Wang"
+    ],
+    "cast": [
+      "Shuzhen Zhao",
+      "Awkwafina",
+      "X Mayo"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=RofpAjqwMa8",
+    "imdbReview": "7.6",
+    "movieLength": "1 hour 40 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "58",
+    "title": "Scream",
+    "description": "A year after the murder of her mother, a teenage girl is terrorized by a new killer, who targets the girl and her friends by using horror films as part of a deadly game.",
+    "Director": [
+      "Wes Craven"
+    ],
+    "cast": [
+      "Neve Campbell",
+      "Courteney Cox",
+      "David Arquette "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=AWm_mkbdpCA",
+    "imdbReview": "7.3",
+    "movieLength": "1 hour 51 minutes",
+    "movieReleaseDate": "1996"
+  },
+  {
+    "id": "59",
+    "title": "Grease",
+    "description": "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
+    "Director": "Randal Kleiser",
+    "cast": [
+      "John Travolta",
+      "Olivia Newton-John",
+      "Stockard Channing"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=THd96gHV7Tg",
+    "imdbReview": "9.0",
+    "movieLength": "2 hour 32 minutes",
+    "movieReleaseDate": "2008"
+  },
+  {
+    "id": "60",
+    "title": "The Dark Knight Rises",
+    "description": "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City from the brutal guerrilla terrorist Bane.",
+    "Director": "Christopher Nolan",
+    "cast": [
+      " Christian Bale",
+      "Tom Hardy",
+      "Anne Hathaway"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=GokKUqLcvD8",
+    "imdbReview": "7.2",
+    "movieLength": "1 hour 50 minutes",
+    "movieReleaseDate": "1978"
+  },
+  {
+    "id": "61",
+    "title": "Slumdog Millionare",
+    "description": [
+      "A Mumbai teenager reflects on his life after being accused of cheating on the Indian version of (Who Wants to be a Millionaire?). "
+    ],
+    "Director": [
+      "Danny Boyle",
+      "Loveleen Tandan"
+    ],
+    "cast": [
+      " Dev Patel",
+      " Freida Pinto",
+      "Saurabh Shukla"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=AIzbwV7on6Q",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour",
+    "movieReleaseDate": "2008"
+  },
+  {
+    "id": "62",
+    "title": "Boyz n' The Hood",
+    "description": "Follows the lives of three young males living in the Crenshaw ghetto of Los Angeles, dissecting questions of race, relationships, violence, and future prospects.",
+    "Director": " John Singleton",
+    "cast": [
+      " Cuba Gooding Jr.",
+      "Laurence Fishburne",
+      "Hudhail Al-Amir"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=J4sKiGkzKJo",
+    "imdbReview": "7.8",
+    "movieLength": "1 hour 52 minutes",
+    "movieReleaseDate": "1991"
+  },
+  {
+    "id": "63",
+    "title": "Lost In Translation",
+    "description": "A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.",
+    "Director": "Sofia Coppola",
+    "cast": [
+      "Bill Murray",
+      "Scarlett Johansson",
+      "Giovanni Ribisi"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=W6iVPCRflQM",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 42 minutes",
+    "movieReleaseDate": "2003"
+  },
+  {
+    "id": "64",
+    "title": "Black Panther",
+    "description": "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+    "Director": "Ryan Coogler",
+    "cast": [
+      "Ryan Coogler",
+      "Michael B. Jordan",
+      "Lupita Nyong'o"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=xjDjIWPwcPU",
+    "imdbReview": "7.3",
+    "movieLength": "2 hours 14 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "65",
+    "title": "The Departed",
+    "description": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston.",
+    "Director": "Martin Scorsese",
+    "cast": [
+      " Leonardo DiCaprio",
+      "Matt Damon",
+      "Jack Nicholson"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=iojhqm0JTW4",
+    "imdbReview": "8.5",
+    "movieLength": "2 hour 31 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "66",
+    "title": "The Grand Budapest Hotel",
+    "description": "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
+    "Director": [
+      "Wes Anderson"
+    ],
+    "cast": [
+      "Ralph Fiennes",
+      "F. Murray Abraham",
+      "Mathieu Amalric "
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=1Fg5iWmQjwk",
+    "imdbReview": "8.1",
+    "movieLength": "1 hour 39 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "67",
+    "title": "Dreamgirls",
+    "description": "A trio of black female soul singers cross over to the pop charts in the early 1960s, facing their own personal struggles along the way.",
+    "Director": [
+      "Bill Condon"
+    ],
+    "cast": [
+      "Beyonce",
+      "Jamie Foxx",
+      "Eddie Murphy"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=4m2dSs0HgSk",
+    "imdbReview": "6.4",
+    "movieLength": "2 hour 10 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "68",
+    "title": "Set It Off",
+    "description": "Desperation drives four inner-city women to bank robbery in Los Angeles, then they start mistrusting each other.",
+    "Director": [
+      "F. Gary Gray"
+    ],
+    "cast": [
+      "Jada Pinkett Smith",
+      "Queen Latifah",
+      "Vivica A. Fox"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=dJpmpAE9lw4",
+    "imdbReview": "6.9",
+    "movieLength": "2 hour 3 minutes",
+    "movieReleaseDate": "1996"
+  },
+  {
+    "id": "69",
+    "title": "Something's Gotta Give",
+    "description": "A swinger on the cusp of being a senior citizen with a taste for young women falls in love with an accomplished woman closer to his age.",
+    "Director": [
+      "Nancy Meyers"
+    ],
+    "cast": [
+      "Jack Nicholson",
+      "Diane Keaton",
+      "Keanu Reeves"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=6zVzIaEuXS4",
+    "imdbReview": "6.7",
+    "movieLength": "2 hour 8 minutes",
+    "movieReleaseDate": "2003"
+  },
+  {
+    "id": "70",
+    "title": "Bridesmaids",
+    "description": "Competition between the maid of honor and a bridesmaid, over who is the bride's best friend, threatens to upend the life of an out-of-work pastry chef.",
+    "Director": [
+      "Paul Feig"
+    ],
+    "cast": [
+      "Kristen Wiig",
+      "Maya Rudolph",
+      "Rose Byrne"
+    ],
+    "trailerURL": "https://www.youtube.com/results?search_query=Bridesmaids+trailer",
+    "imdbReview": "6.8",
+    "movieLength": "2 hour 5 minutes",
+    "movieReleaseDate": "2011"
+  },
+  {
+    "id": "71",
+    "title": "She's the Man",
+    "description": "When her brother decides to ditch for a couple weeks, Viola heads over to his elite boarding school, disguised as him, and proceeds to fall for his school's star soccer player, and soon learns she's not the only one with romantic troubles.",
+    "Director": [
+      "Andy Fickman"
+    ],
+    "cast": [
+      "Amanda Bynes",
+      "Laura Ramsey",
+      "Channing Tatum"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=BSLvjZD0LLU",
+    "imdbReview": "6.3",
+    "movieLength": "1 hour 45 minutes",
+    "movieReleaseDate": "2006"
+  },
+  {
+    "id": "72",
+    "title": "Rocky",
+    "description": "A small-time boxer gets a supremely rare chance to fight a heavyweight champion in a bout in which he strives to go the distance for his self-respect.",
+    "Director": [
+      "John G. Avildsen"
+    ],
+    "cast": [
+      "Sylvester Stallone",
+      "Talia Shire",
+      "Burt Young"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=7RYpJAUMo2M",
+    "imdbReview": "8.1",
+    "movieLength": "2 hour",
+    "movieReleaseDate": "1976"
+  },
+  {
+    "id": "73",
+    "title": "Selma ",
+    "description": "A chronicle of Dr. Martin Luther King, Jr.'s campaign to secure equal voting rights via an epic march from Selma to Montgomery, Alabama, in 1965.",
+    "Director": [
+      "Ava DuVernay"
+    ],
+    "cast": [
+      "David Oyelowo",
+      "Carmen Ejogo",
+      "Oprah Winfrey"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=J-NhCOYTKHw",
+    "imdbReview": "7.5",
+    "movieLength": "2 hour 8 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "74",
+    "title": "Tenet",
+    "description": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
+    "Director": [
+      "Christopher Nolan"
+    ],
+    "cast": [
+      "John David Washington",
+      "Robert Pattinson",
+      "Elizabeth Debicki"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=LdOM0x0XDMo",
+    "imdbReview": "7.5",
+    "movieLength": "2 hour 30 minutes",
+    "movieReleaseDate": "2020"
+  },
+  {
+    "id": "75",
+    "title": "1917",
+    "description": "April 6th, 1917. As a regiment assembles to wage war deep in enemy territory, two soldiers are assigned to race against time and deliver a message that will stop 1,600 men from walking straight into a deadly trap.",
+    "Director": [
+      "Sam Mendes"
+    ],
+    "cast": [
+      "Dean-Charles Chapman",
+      "George MacKay",
+      "Daniel Mays"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=YqNYrYUiMfg",
+    "imdbReview": "8.3",
+    "movieLength": "1 hour 59 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "76",
+    "title": "Get Out",
+    "description": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.",
+    "Director": [
+      "Jordan Peele"
+    ],
+    "cast": [
+      " Daniel Kaluuya",
+      "Allison Williams",
+      "Bradley Whitford"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=DzfpyUB60YY",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 44 minutes",
+    "movieReleaseDate": "2017"
+  },
+  {
+    "id": "77",
+    "title": "Mad Max: Fury Road",
+    "description": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max.",
+    "Director": " George Miller",
+    "cast": [
+      "Tom Hardy",
+      "Charlize Theron",
+      "Nicholas Hoult"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=hEJnMQG9ev8&t=6s",
+    "imdbReview": "6.8",
+    "movieLength": "2 hour",
+    "movieReleaseDate": "2015"
+  },
+  {
+    "id": "78",
+    "title": "The Godfather",
+    "description": " ",
+    "Director": "Francis Ford Coppola",
+    "cast": [
+      "Mario Puzo",
+      "Al Pacino",
+      "James Cann"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=sY1S34973zA",
+    "imdbReview": "7.0",
+    "movieLength": "2 hour 57 minutes",
+    "movieReleaseDate": "1972"
+  },
+  {
+    "id": "79",
+    "title": "Moonlight",
+    "description": "A young African-American man grapples with his identity and sexuality while experiencing the everyday struggles of childhood, adolescence, and burgeoning adulthood.",
+    "Director": "Barry Jenkins",
+    "cast": [
+      "Mahershala Ali",
+      "Alex Hibbert",
+      "Janelle Monáe"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=9NJj12tJzqc",
+    "imdbReview": "7.4",
+    "movieLength": "1 hour 50 minutes",
+    "movieReleaseDate": "2016"
+  },
+  {
+    "id": "80",
+    "title": "Brokeback Mountain",
+    "description": "Ennis and Jack are two shepherds who develop a sexual and emotional relationship. Their relationship becomes complicated when both of them get married to their respective girlfriends.",
+    "Director": "Ang Lee",
+    "cast": [
+      "Jake Gyllenhaal",
+      "Heath Ledger",
+      "Michelle Williams"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=kMA30rThECg",
+    "imdbReview": "7.7",
+    "movieLength": "2 hour 14 minutes",
+    "movieReleaseDate": "2005"
+  },
+  {
+    "id": "81",
+    "title": "Jaws",
+    "description": "When a killer shark unleashes chaos on a beach community, it's up to a local sheriff, a marine biologist, and an old seafarer to hunt the beast down.",
+    "Director": "Steven Spielberg",
+    "cast": [
+      "Roy Scheider",
+      "Robert Shaw",
+      "Richard Dreyfuss"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=U1fu_sA7XhE",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour 4 minutes",
+    "movieReleaseDate": "1975"
+  },
+  {
+    "id": "82",
+    "title": "In the Heat of the Night",
+    "description": "A black police detective is asked to investigate a murder in a racially hostile southern town.",
+    "Director": "Norman Jewison",
+    "cast": [
+      "Sidney Poitier",
+      "Rod Steiger",
+      "Warren Oates"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=VIlxY-LUhkE",
+    "imdbReview": "7.9",
+    "movieLength": "1 hour 50 minutes",
+    "movieReleaseDate": "1967"
+  },
+  {
+    "id": "83",
+    "title": "Iron Man",
+    "description": "",
+    "Director": "Jon Favreau",
+    "cast": [
+      "Robert Downey Jr.",
+      "Gwyneth Paltrow",
+      "Terrence Howard"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=JxdRFr8gaLk",
+    "imdbReview": "7.9",
+    "movieLength": "2 hour 6 minutes",
+    "movieReleaseDate": "2008"
+  },
+  {
+    "id": "84",
+    "title": "Mean Girls",
+    "description": "Cady Heron is a hit with The Plastics, the A-list girl clique at her new school, until she makes the mistake of falling for Aaron Samuels, the ex-boyfriend of alpha Plastic Regina George.",
+    "Director": "Mark Waters",
+    "cast": [
+      "Lindsay Lohan",
+      "Jonathan Bennett",
+      "Rachel McAdams"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=oDU84nmSDZY",
+    "imdbReview": "7.0",
+    "movieLength": "1 hour  37 minutes",
+    "movieReleaseDate": "2004"
+  },
+  {
+    "id": "85",
+    "title": "Parasite",
+    "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    "Director": "Bong Joon Ho",
+    "cast": [
+      "Kang-ho Song",
+      "Lee Sun-kyun",
+      "Yeo-jeong Cho"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=isOGD_7hNIY",
+    "imdbReview": "8.6",
+    "movieLength": "2 hour 12 minutes",
+    "movieReleaseDate": "2019"
+  },
+  {
+    "id": "86",
+    "title": "Save the Tiger",
+    "description": "A disillusioned war veteran has two days to let go of his shaken morals if he wants his small fashion company to survive.",
+    "Director": "",
+    "cast": [
+      "Jack Lemmon",
+      "Jack Gilford",
+      " Laurie Heineman"
+    ],
+    "trailerURL": "John G. Avildsen",
+    "imdbReview": "6.9",
+    "movieLength": "1 hour 40 minutes",
+    "movieReleaseDate": "1973"
+  },
+  {
+    "id": "87",
+    "title": "12 Angry Men",
+    "description": "A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.",
+    "Director": "Sidney Lumet",
+    "cast": [
+      "Henry Fonda",
+      "Lee J. Cobb",
+      "Martin Balsam"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=iWh0pONVnjc",
+    "imdbReview": "9.0",
+    "movieLength": "1 hour 36 minutes",
+    "movieReleaseDate": "1957"
+  },
+  {
+    "id": "88",
+    "title": "Roma",
+    "description": "A year in the life of a middle-class family's maid in Mexico City in the early 1970s.",
+    "Director": "Alfonso Cuarón",
+    "cast": [
+      "Yalitza Aparicio",
+      "Marina de Tavira",
+      "Diego Cortina Autrey"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=OIClGSY5_tY",
+    "imdbReview": "7.7",
+    "movieLength": "2 hour 15 minutes",
+    "movieReleaseDate": "2018"
+  },
+  {
+    "id": "89",
+    "title": "Fitzcarraldo",
+    "description": "The story of Brian Sweeney Fitzgerald, an extremely determined man who intends to build an opera house in the middle of a jungle.",
+    "Director": "Werner Herzog",
+    "cast": [
+      "Klaus Kinski",
+      "Claudia Cardinale",
+      "José Lewgoy"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=H_OgtTZMSXI",
+    "imdbReview": "8.1",
+    "movieLength": "2 hour 38 minutes",
+    "movieReleaseDate": "1982"
+  },
+  {
+    "id": "90",
+    "title": "Selma",
+    "description": "A chronicle of Dr. Martin Luther King, Jr.'s campaign to secure equal voting rights via an epic march from Selma to Montgomery, Alabama, in 1965.",
+    "Director": "Ava DuVernay",
+    "cast": [
+      "David Oyelowo",
+      "Carmen Ejogo",
+      "Oprah Winfrey"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=x6t7vVTxaic&feature=emb_logo",
+    "imdbReview": "7.5",
+    "movieLength": "2 hour 8 minutes",
+    "movieReleaseDate": "2014"
+  },
+  {
+    "id": "91",
+    "title": "Ghostbusters",
+    "description": "Three former parapsychology professors set up shop as a unique ghost removal service.",
+    "Director": "Ivan Reitman",
+    "cast": [
+      "Bill Murray",
+      "Dan Aykroyd",
+      "Sigourney Weaver"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=6hDkhw5Wkas",
+    "imdbReview": "7.8",
+    "movieLength": "1 hour 45 minutes",
+    "movieReleaseDate": "1984"
+  },
+  {
+    "id": "92",
+    "title": "Days of Heaven",
+    "description": "A hot-tempered farm laborer convinces the woman he loves to marry their rich but dying boss so that they can have a claim to his fortune.",
+    "Director": "Terrence Malick",
+    "cast": [
+      "Richard Gere",
+      "Brooke Adams",
+      "Sam Shepard"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=LlZDsMCW0U4&feature=emb_logo",
+    "imdbReview": "7.8",
+    "movieLength": "1 hour 34 minutes",
+    "movieReleaseDate": "1978"
+  },
+  {
+    "id": "93",
+    "title": "Get Out",
+    "description": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.",
+    "Director": "Jordan Peele",
+    "cast": [
+      "Daniel Kaluuya",
+      "Allison Williams",
+      "Bradley Whitford"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=sRfnevzM9kQ",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 44 minutes",
+    "movieReleaseDate": "2017"
+  },
+  {
+    "id": "94",
+    "title": "Glory",
+    "description": "Robert Gould Shaw leads the U.S. Civil War's first all-black volunteer company, fighting prejudices from both his own Union Army, and the Confederates.",
+    "Director": "Edward Zwick",
+    "cast": [
+      "Matthew Broderick",
+      "Denzel Washington",
+      "Cary Elwes"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=CvmuHfSgra8",
+    "imdbReview": "7.8",
+    "movieLength": "2 hour 2 minutes",
+    "movieReleaseDate": "1989"
+  },
+  {
+    "id": "95",
+    "title": "North by Northwest",
+    "description": "A New York City advertising executive goes on the run after being mistaken for a government agent by a group of foreign spies.",
+    "Director": "Alfred Hitchcock",
+    "cast": [
+      "Cary Grant",
+      "Eva Marie Saint",
+      "James Mason"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=ek7T9Gyl_J4",
+    "imdbReview": "8.3",
+    "movieLength": "2 hour 16 minutes",
+    "movieReleaseDate": "1959"
+  },
+  {
+    "id": "96",
+    "title": "The Good, the Bad and the Ugly",
+    "description": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
+    "Director": "Sergio Leone",
+    "cast": [
+      "Clint Eastwood",
+      "Eli Wallach",
+      "Lee Van Cleef"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=WCN5JJY_wiA",
+    "imdbReview": "8.8",
+    "movieLength": "2 hour  41 minutes",
+    "movieReleaseDate": "1996"
+  },
+  {
+    "id": "97",
+    "title": "The Exorcist",
+    "description": "When a 12-year-old girl is possessed by a mysterious entity, her mother seeks the help of two priests to save her.",
+    "Director": "William Friedkin",
+    "cast": [
+      "Ellen Burstyn",
+      "Max von Sydow",
+      "Linda Blair"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=YDGw1MTEe9k&t=1s",
+    "imdbReview": "8.0",
+    "movieLength": "2 hour 2 minutes",
+    "movieReleaseDate": "1973"
+  },
+  {
+    "id": "98",
+    "title": "Miller's Crossing",
+    "description": "Tom Reagan, an advisor to a Prohibition-era crime boss, tries to keep the peace between warring mobs but gets caught in divided loyalties.",
+    "Director": "Joel Coen",
+    "cast": [
+      "Gabriel Byrne",
+      "Albert Finney",
+      "John Turturro"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=hkJIcFMN_pc",
+    "imdbReview": "7.7",
+    "movieLength": "1 hour 55 minutes",
+    "movieReleaseDate": "1990"
+  },
+  {
+    "id": "99",
+    "title": "The Great Escape",
+    "description": "Allied prisoners of war plan for several hundred of their number to escape from a German camp during World War II.",
+    "Director": "John Sturges",
+    "cast": [
+      "Steve McQueen",
+      "James Garner",
+      "Richard Attenborough"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=r9Q_WESQUVw",
+    "imdbReview": "8.2",
+    "movieLength": "2 hour 52 minutes",
+    "movieReleaseDate": "1963"
+  },
+  {
+    "id": "100",
+    "title": "Dawn of the Dead",
+    "description": "https://www.youtube.com/watch?v=xvpwZidhcT8",
+    "Director": "Zack Snyder",
+    "cast": [
+      "Sarah Polley",
+      "Ving Rhames",
+      "Mekhi Phifer"
+    ],
+    "trailerURL": "https://www.youtube.com/watch?v=Y_EviQj5tvA&feature=emb_logo",
+    "imdbReview": "7.3",
+    "movieLength": "1 hour 41 minutes",
+    "movieReleaseDate": "2004"
+  }
+]
