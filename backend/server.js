@@ -3,6 +3,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const multer = require('multer');
 const http = require('http');
 const fs = require('fs');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
@@ -38,7 +39,7 @@ app.post('/upload', upload.single('movie'), function (req, res, next) {   //movi
     // ]).output('encoded/example.m3u8').on('end', () => {
     //     console.log('end');
     // }).run();
-    
+
     console.log("Start encoding...");
     ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
         '-profile:v baseline',
@@ -47,10 +48,19 @@ app.post('/upload', upload.single('movie'), function (req, res, next) {   //movi
         '-hls_time 10',
         '-hls_list_size 0',
         '-f hls'
-    ]).output('data/encoded/'+ req.file.filename + '.m3u8').on('end', () => {
+    ]).output('data/encoded/' + req.file.filename + '.m3u8').on('end', () => {
         console.log("End of encoding.");
     }).run();
+});
+
+app.use("/test", createProxyMiddleware({
+    target: "http://localhost:8000/encoded/",
+    changeOrigin: true,
+    pathRewrite: {
+        [`^/test`]: '',
+    },
 })
+);
 
 app.listen(port, () => {
     console.log("Upload server listening at http://localhost:4000")
@@ -58,12 +68,12 @@ app.listen(port, () => {
 //-------------------
 
 http.createServer(function (request, response) {
-    console.log('request starting...');
+    console.log(request.url + " request starting...");
 
     var filePath = './data/' + request.url;
 
     fs.readFile(filePath, function (error, content) {
-        response.writeHead(200, { 'Access-Control-Allow-Origin': '*' });    //permission for player
+        response.writeHead(200, { "Access-Control-Allow-Origin": "*" });    //permission for player
         if (error) {
             if (error.code == 'ENOENT') {
                 // fs.readFile('./404.html', function (error, content) {
@@ -72,7 +82,7 @@ http.createServer(function (request, response) {
             }
             else {
                 response.writeHead(500);
-                response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
+                response.end("Sorry, check with the site admin for error: " + error.code + " ..\n");
                 response.end();
             }
         }

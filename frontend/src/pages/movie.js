@@ -377,7 +377,7 @@ function Movie(props) {
     const PlayButton = () => {
         var history = useHistory();
         const play = () => {
-            history.push("/play");
+            history.push("/play/" + movieID);
         }
 
         return (

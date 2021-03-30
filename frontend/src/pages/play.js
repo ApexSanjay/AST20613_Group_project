@@ -15,7 +15,7 @@ function Play(props) {
     return (
         <Container>
             <ReactPlayer 
-            url='http://localhost:8000/encoded/example.mp4.m3u8' 
+            url="http://localhost:4000/test/example.mp4.m3u8"
             width="100%"
             height="100%"
             controls='true'
@@ -24,5 +24,7 @@ function Play(props) {
         </Container>
     );
 }
+
+// http://localhost:8000/encoded/example.mp4.m3u8
 
 export default Play;
