@@ -7,14 +7,14 @@ const getMovieStream = () => {
     return;
 };
 
-const uploadMovie = (movieFiles) => {
+const uploadMovie = (files) => {
     //todo
     return;
 };
 
-const transcodeMovie = (movieFiles) => {
-    //may do
-    return;
+const uploadPoster = (movieID, file) => {
+    return firebase.storage().ref("posters/" + movieID + ".jpg").put(file);
+    //.then .catch
 };
 
 const movieInfo = (
@@ -43,8 +43,8 @@ const movieInfo = (
     return res;
 };   //an container for movie info
 
-const createMovieInfo = (movieInfo) => {
-    return firebase.firestore().collection("movies").add(movieInfo); //.then(docRef).catch(); is available
+const createMovieInfo = (movieID, movieInfo) => {
+    return firebase.firestore().collection("movies").doc(movieID).set(movieInfo); //.then(docRef).catch(); is available
 };
 
 const updateMovieInfo = (id, movieInfo) => {
@@ -67,6 +67,10 @@ const getMoviePoster = (movieID) => {
     return firebase.storage().ref("posters/" + movieID + ".jpg").getDownloadURL();  //.then.catch
 }
 
+const getNewMovieID = () => {
+    return firebase.firestore().collection("movies").orderBy("id", "desc").get();
+}
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -76,7 +80,8 @@ const MediaModule = {
     removeMovieInfo,
     getMovieInfo,
     getMovieInfos,
-    transcodeMovie,
+    uploadPoster,
     getMoviePoster,
+    getNewMovieID,
 }
 export default MediaModule;

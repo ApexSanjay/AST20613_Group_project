@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuBar from "./components/menuBar";
 import { useHistory } from 'react-router';
 import Container from "./components/container";
+import MediaModule from "./modules/MediaModule";
 
 export function Upload(props) {
 
     // const [file, setFile] = useState(null);
-    var file = null;
+    var movieFile = null;
+    var posterFile = null;
     const [input, setInput] = useState({
         title: "",
         description: "",
@@ -20,9 +22,28 @@ export function Upload(props) {
         movieLength: "",
         movieReleaseDate: ""
     });
+    const [newID, setNewID] = useState();
+    console.log(newID);
+
     const history = useHistory();
 
     var data = input;
+
+    useEffect(() => {
+        MediaModule.getNewMovieID().then(
+            (querySnapshot) => {
+                var newID = -1;
+                querySnapshot.forEach((doc) => {
+                    if (newID < doc.data().id) {
+                        newID = doc.data().id;
+                    }
+                    if (newID !== -1) {
+                        setNewID(newID + 1);
+                    }
+                });
+            }
+        );
+    }, []);
 
     const SelectFile = () => {
         return (
@@ -38,9 +59,35 @@ export function Upload(props) {
                         type="file"
                         onChange={(e) => {
                             console.log(e.target.files[0]);
-                            file = e.target.files[0];
+                            movieFile = e.target.files[0];
                         }}
-                        defaultValue={file}
+                        defaultValue={movieFile}
+                        required
+                    />
+                    {/* </form> */}
+                </Grid>
+            </Grid>
+        );
+    };
+
+    const SelectPoster = () => {
+        return (
+            <Grid container>
+                <Grid item xs={12}>
+                    <h2>Select Movie Poster</h2>
+                    {/* <form
+                        action="http://localhost:4000/upload"
+                        method="post"
+                        enctype="multipart/form-data"> */}
+                    <input
+                        name="movie"
+                        type="file"
+                        onChange={(e) => {
+                            console.log(e.target.files[0]);
+                            posterFile = e.target.files[0];
+                        }}
+                        defaultValue={posterFile}
+                        required
                     />
                     {/* </form> */}
                 </Grid>
@@ -230,6 +277,7 @@ export function Upload(props) {
                             onChange={(e) => { onchangeHandler("movieReleaseDate", e.target.value) }}
                             defaultValue={data.movieReleaseDate}
                             fullWidth
+                            required
                         />
                     </Grid>
                 </Grid>
@@ -266,7 +314,34 @@ export function Upload(props) {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         // console.log("submit");
-        
+
+        //upload movie
+
+        //upload poster
+        MediaModule.uploadPoster(newID, posterFile).then(() => {
+
+            console.log("poster upload success");
+
+            //upload movie data
+            var movieData = {
+                ...data,
+                id: newID
+            }
+            // console.log(movieData);
+
+            MediaModule.createMovieInfo(newID.toString(), movieData).then(() => {
+                console.log("movie info upload success");
+                history.push("/movie/" + newID);
+            }).catch((e) => {
+                console.log(e.message);
+            });
+
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
+
+
     }
 
     return (
@@ -279,6 +354,9 @@ export function Upload(props) {
                     </Grid>
                     <Grid item xs={12}>
                         <SelectFile />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SelectPoster />
                     </Grid>
                     <Grid item xs={12}>
                         <InputData />
