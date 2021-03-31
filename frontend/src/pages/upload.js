@@ -316,37 +316,36 @@ export function Upload(props) {
         // console.log("submit");
 
         //upload movie
-        MediaModule.uploadMovie(newID, movieFile).then(()=>{
+        MediaModule.uploadMovie(newID, movieFile).then(() => {
             console.log("movie upload success");
-        }).catch((e)=>{
+
+            //upload poster
+            MediaModule.uploadPoster(newID, posterFile).then(() => {
+
+                console.log("poster upload success");
+
+                //upload movie data
+                var movieData = {
+                    ...data,
+                    id: newID
+                }
+                // console.log(movieData);
+
+                MediaModule.createMovieInfo(newID.toString(), movieData).then(() => {
+                    console.log("movie info upload success");
+                    history.push("/movie/" + newID);
+
+                }).catch((e) => {
+                    console.log(e.message);
+                });
+
+            }).catch((e) => {
+                console.log(e.message);
+            });
+
+        }).catch((e) => {
             console.log(e.message);
         });
-
-        // //upload poster
-        // MediaModule.uploadPoster(newID, posterFile).then(() => {
-
-        //     console.log("poster upload success");
-
-        //     //upload movie data
-        //     var movieData = {
-        //         ...data,
-        //         id: newID
-        //     }
-        //     // console.log(movieData);
-
-        //     MediaModule.createMovieInfo(newID.toString(), movieData).then(() => {
-        //         console.log("movie info upload success");
-        //         history.push("/movie/" + newID);
-        //     }).catch((e) => {
-        //         console.log(e.message);
-        //     });
-
-        // }).catch((e) => {
-        //     console.log(e.message);
-        // });
-
-
-
     }
 
     return (
