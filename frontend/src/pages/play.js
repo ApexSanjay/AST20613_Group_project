@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player'
+import { useParams } from 'react-router';
 
 function Play(props) {
+
+    const params = useParams();
+    const movieID = params.id;
+    console.log(movieID);
 
     const Container = styled.div`
         margin: auto;
@@ -12,10 +17,12 @@ function Play(props) {
         padding: 0;
     `;
 
+    const movieURL = "http://localhost:4000/play/" + movieID + "/" + movieID + ".m3u8";
+
     return (
         <Container>
             <ReactPlayer 
-            url="http://localhost:4000/test/example.mp4.m3u8"
+            url={movieURL}
             width="100%"
             height="100%"
             controls='true'

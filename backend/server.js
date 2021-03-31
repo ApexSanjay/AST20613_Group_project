@@ -55,11 +55,11 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
     }).run();
 });
 
-app.use("/test", createProxyMiddleware({
+app.use("/play", createProxyMiddleware({
     target: "http://localhost:8000/encoded/",
     changeOrigin: true,
     pathRewrite: {
-        [`^/test`]: '',
+        [`^/play`]: '',
     },
 })
 );

@@ -205,7 +205,7 @@ function App() {
             <UnprotectedRoute path="/home">
               <Home />
             </UnprotectedRoute>
-            <ProtectedRoute path="/play">
+            <ProtectedRoute path="/play/:id">
               <Play />
             </ProtectedRoute>
             <ProtectedRoute path="/series">
