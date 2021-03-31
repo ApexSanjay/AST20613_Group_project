@@ -32,13 +32,15 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
     console.log(req.file, req.body);
     console.log(req.params.id);
 
-    res.sendStatus(200);    //success message
 
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
     var dir = "data/encoded/" + req.params.id;
 
     if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    } else {
+        fs.rmdirSync(dir, { recursive: true });
         fs.mkdirSync(dir);
     }
 
@@ -52,7 +54,9 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
         '-f hls'
     ]).output('data/encoded/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
         console.log("End of encoding.");
+        res.sendStatus(200);    //success message
     }).run();
+
 });
 
 app.use("/play", createProxyMiddleware({

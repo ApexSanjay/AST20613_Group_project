@@ -203,7 +203,7 @@ function App() {
             <ProtectedRoute path="/playlist">
               <Playlist />
             </ProtectedRoute>
-            <ProtectedRoute path="/editMovie">
+            <ProtectedRoute path="/editMovie/:id">
               <EditMovie />
             </ProtectedRoute>
             <UnprotectedRoute path="/home">

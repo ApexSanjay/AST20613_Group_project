@@ -3,9 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuBar from "./components/menuBar";
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import Container from "./components/container";
 import MediaModule from "./modules/MediaModule";
+import ReactPlayer from 'react-player'
 
 export function EditMovie(props) {
 
@@ -22,38 +23,47 @@ export function EditMovie(props) {
         movieLength: "",
         movieReleaseDate: ""
     });
-    const [newID, setNewID] = useState();
-    console.log(newID);
 
+    const [currentPoster, setCurrentPoster] = useState();
+    const [currentMovie, setCurrentMovie] = useState();
     const history = useHistory();
 
     var data = input;
 
+    const params = useParams();
+    const movieID = params.id;
+
     useEffect(() => {
-        MediaModule.getNewMovieID().then(
-            (querySnapshot) => {
-                var newID = -1;
-                querySnapshot.forEach((doc) => {
-                    if (newID < doc.data().id) {
-                        newID = doc.data().id;
-                    }
-                    if (newID !== -1) {
-                        setNewID(newID + 1);
-                    }
-                });
+        MediaModule.getMovieInfo(movieID).then((doc) => {
+            if (doc.exists) {
+                setInput(doc.data());
             }
-        );
+        });
+
+        MediaModule.getMoviePoster(movieID).then((url) => {
+            setCurrentPoster(url);
+        });
+
+        setCurrentMovie(MediaModule.getMovieStream(movieID));
+
     }, []);
 
     const SelectFile = () => {
         return (
             <Grid container>
-                <Grid item xs={12}>
-                    <h2>Select Movie File</h2>
-                    {/* <form
-                        action="http://localhost:4000/upload"
-                        method="post"
-                        enctype="multipart/form-data"> */}
+                <Grid item xs={6}>
+                    <h2>Current Movie File</h2>
+                    <ReactPlayer
+                        url={currentMovie}
+                        width="80%"
+                        height="80%"
+                        controls='true'
+                        playing='true'
+                    />
+
+                </Grid>
+                <Grid item xs={6}>
+                    <h2>New Movie File</h2>
                     <input
                         name="movie"
                         type="file"
@@ -62,9 +72,7 @@ export function EditMovie(props) {
                             movieFile = e.target.files[0];
                         }}
                         defaultValue={movieFile}
-                        required
                     />
-                    {/* </form> */}
                 </Grid>
             </Grid>
         );
@@ -73,12 +81,13 @@ export function EditMovie(props) {
     const SelectPoster = () => {
         return (
             <Grid container>
-                <Grid item xs={12}>
-                    <h2>Select Movie Poster</h2>
-                    {/* <form
-                        action="http://localhost:4000/upload"
-                        method="post"
-                        enctype="multipart/form-data"> */}
+                <Grid item xs={6}>
+                    <h2>Current Movie Poster</h2>
+                    <img src={currentPoster} width="80%" />
+                    <br />
+                </Grid>
+                <Grid item xs={6}>
+                    <h2>New Movie Poster</h2>
                     <input
                         name="movie"
                         type="file"
@@ -87,9 +96,7 @@ export function EditMovie(props) {
                             posterFile = e.target.files[0];
                         }}
                         defaultValue={posterFile}
-                        required
                     />
-                    {/* </form> */}
                 </Grid>
             </Grid>
         );
@@ -313,39 +320,45 @@ export function EditMovie(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        // console.log("submit");
 
-        //upload movie
-        MediaModule.uploadMovie(newID, movieFile).then(() => {
-            console.log("movie upload success");
+        const redirect = () => {
+            history.push("/movie/" + movieID);
+        }
 
-            //upload poster
-            MediaModule.uploadPoster(newID, posterFile).then(() => {
+        MediaModule.updateMovieInfo(movieID.toString(), data).then(() => {
+            console.log("movie info update success");
 
-                console.log("poster upload success");
+            // console.log(!movieFile, !posterFile);
+            if (movieFile && posterFile) {
+                console.log("upload movie and poster");
+                MediaModule.uploadMovie(movieID, movieFile).then(() => {
+                    console.log("upload movie success");
 
-                //upload movie data
-                var movieData = {
-                    ...data,
-                    id: newID
-                }
-                // console.log(movieData);
-
-                MediaModule.createMovieInfo(newID.toString(), movieData).then(() => {
-                    console.log("movie info upload success");
-                    history.push("/movie/" + newID);
-
-                }).catch((e) => {
-                    console.log(e.message);
+                    MediaModule.uploadPoster(movieID, posterFile).then(() => {
+                        console.log("upload poster success");
+                        redirect();
+                    });
                 });
-
-            }).catch((e) => {
-                console.log(e.message);
-            });
+            } else if (!movieFile && posterFile) {
+                console.log("upload poster");
+                MediaModule.uploadPoster(movieID, posterFile).then(() => {
+                    console.log("upload poster success");
+                    redirect();
+                });
+            } else if (movieFile && !posterFile) {
+                console.log("upload movie");
+                MediaModule.uploadMovie(movieID, movieFile).then(() => {
+                    console.log("upload movie success");
+                    redirect();
+                });
+            } else {
+                redirect();
+            }
 
         }).catch((e) => {
             console.log(e.message);
         });
+
     }
 
     return (

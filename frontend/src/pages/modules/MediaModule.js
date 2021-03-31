@@ -3,9 +3,11 @@ import "firebase/firestore";
 import "firebase/storage";
 import axios from 'axios';
 
-const getMovieStream = () => {
+const getMovieStream = (movieID) => {
     //todo
-    return;
+    const movieURL = "http://localhost:4000/play/" + movieID + "/" + movieID + ".m3u8";
+
+    return movieURL;
 };
 
 const uploadMovie = (movieID, file) => {
