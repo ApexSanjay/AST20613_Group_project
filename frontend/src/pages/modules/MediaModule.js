@@ -1,15 +1,20 @@
 import firebase from 'firebase/app';
 import "firebase/firestore";
 import "firebase/storage";
+import axios from 'axios';
 
 const getMovieStream = () => {
     //todo
     return;
 };
 
-const uploadMovie = (files) => {
-    //todo
-    return;
+const uploadMovie = (movieID, file) => {
+    const data = new FormData();
+    data.append("movie", file);
+    return axios.post("http://localhost:4000/upload/" + movieID, data)
+        // .then(res => { // then print response status
+        //     console.log(res.statusText);
+        // })
 };
 
 const uploadPoster = (movieID, file) => {

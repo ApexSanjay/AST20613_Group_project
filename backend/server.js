@@ -9,6 +9,9 @@ const app = express();
 const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
 const port = 4000;
 
+var cors = require('cors');
+app.use(cors());
+
 var storage = multer.diskStorage(
     {
         destination: './data/uploads/',
@@ -25,9 +28,13 @@ app.get('/', (req, res) => {
 })
 
 //upload single file
-app.post('/upload', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
+app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
     console.log(req.file, req.body);
-    ffmpeg.setFfmpegPath(ffmpegInstaller.path);
+    console.log(req.params.id);
+
+    res.sendStatus(200);    //success message
+
+    // ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
     // ffmpeg('uploads/example.mp4', { timeout: 432000 }).addOptions([
     //     '-profile:v baseline',
@@ -40,17 +47,17 @@ app.post('/upload', upload.single('movie'), function (req, res, next) {   //movi
     //     console.log('end');
     // }).run();
 
-    console.log("Start encoding...");
-    ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
-        '-profile:v baseline',
-        '-level 3.0',
-        '-start_number 0',
-        '-hls_time 10',
-        '-hls_list_size 0',
-        '-f hls'
-    ]).output('data/encoded/' + req.file.filename + '.m3u8').on('end', () => {
-        console.log("End of encoding.");
-    }).run();
+    // console.log("Start encoding...");
+    // ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
+    //     '-profile:v baseline',
+    //     '-level 3.0',
+    //     '-start_number 0',
+    //     '-hls_time 10',
+    //     '-hls_list_size 0',
+    //     '-f hls'
+    // ]).output('data/encoded/' + req.file.filename + '.m3u8').on('end', () => {
+    //     console.log("End of encoding.");
+    // }).run();
 });
 
 app.use("/test", createProxyMiddleware({
