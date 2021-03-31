@@ -34,30 +34,25 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
 
     res.sendStatus(200);    //success message
 
-    // ffmpeg.setFfmpegPath(ffmpegInstaller.path);
+    ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-    // ffmpeg('uploads/example.mp4', { timeout: 432000 }).addOptions([
-    //     '-profile:v baseline',
-    //     '-level 3.0',
-    //     '-start_number 0',
-    //     '-hls_time 10',
-    //     '-hls_list_size 0',
-    //     '-f hls'
-    // ]).output('encoded/example.m3u8').on('end', () => {
-    //     console.log('end');
-    // }).run();
+    var dir = "data/encoded/" + req.params.id;
 
-    // console.log("Start encoding...");
-    // ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
-    //     '-profile:v baseline',
-    //     '-level 3.0',
-    //     '-start_number 0',
-    //     '-hls_time 10',
-    //     '-hls_list_size 0',
-    //     '-f hls'
-    // ]).output('data/encoded/' + req.file.filename + '.m3u8').on('end', () => {
-    //     console.log("End of encoding.");
-    // }).run();
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+
+    console.log("Start encoding...");
+    ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
+        '-profile:v baseline',
+        '-level 3.0',
+        '-start_number 0',
+        '-hls_time 10',
+        '-hls_list_size 0',
+        '-f hls'
+    ]).output('data/encoded/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
+        console.log("End of encoding.");
+    }).run();
 });
 
 app.use("/test", createProxyMiddleware({
