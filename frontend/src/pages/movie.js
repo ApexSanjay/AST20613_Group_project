@@ -30,6 +30,7 @@ import Input from '@material-ui/core/Input';
 import BrowsingModules from "./modules/BrowsingModules";
 import LoginModules from "./modules/LoginModules";
 import SnackBar from "./components/snackBar";
+import EditIcon from '@material-ui/icons/Edit';
 
 function Movie(props) {
 
@@ -374,6 +375,21 @@ function Movie(props) {
         );
     }
 
+    const EditMovie = () => {
+
+        const onClickHandler = () => {
+            history.push("/editMovie/" + movieID);
+        }
+
+        return (
+            <div>
+                <Button onClick={() => onClickHandler()}>
+                    <EditIcon fontSize="small" /> Edit Movie
+                </Button>
+            </div>
+        );
+    }
+
     const PlayButton = () => {
         var history = useHistory();
         const play = () => {
@@ -581,6 +597,8 @@ function Movie(props) {
                     <Grid item xs={3}>
                         <AddToLibrary />
                         <ShareLink />
+                        {(isAdmin? <EditMovie/> : <></>)}
+                        {/* <EditMovie /> */}
                         <PlayButton />
                         <p>
                             {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
