@@ -14,3 +14,4 @@ export { default as Play } from './play';
 export { default as Series } from './series';
 export { default as Upload } from './upload';
 export { default as Playlist } from './playlist';
+export { default as EditMovie } from './editMovie';

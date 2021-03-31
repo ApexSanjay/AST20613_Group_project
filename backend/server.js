@@ -3,10 +3,14 @@ const ffmpeg = require('fluent-ffmpeg');
 const multer = require('multer');
 const http = require('http');
 const fs = require('fs');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
 const port = 4000;
+
+var cors = require('cors');
+app.use(cors());
 
 var storage = multer.diskStorage(
     {
@@ -24,21 +28,22 @@ app.get('/', (req, res) => {
 })
 
 //upload single file
-app.post('/upload', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
+app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
     console.log(req.file, req.body);
+    console.log(req.params.id);
+
+
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-    // ffmpeg('uploads/example.mp4', { timeout: 432000 }).addOptions([
-    //     '-profile:v baseline',
-    //     '-level 3.0',
-    //     '-start_number 0',
-    //     '-hls_time 10',
-    //     '-hls_list_size 0',
-    //     '-f hls'
-    // ]).output('encoded/example.m3u8').on('end', () => {
-    //     console.log('end');
-    // }).run();
-    
+    var dir = "data/encoded/" + req.params.id;
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    } else {
+        fs.rmdirSync(dir, { recursive: true });
+        fs.mkdirSync(dir);
+    }
+
     console.log("Start encoding...");
     ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
         '-profile:v baseline',
@@ -47,10 +52,21 @@ app.post('/upload', upload.single('movie'), function (req, res, next) {   //movi
         '-hls_time 10',
         '-hls_list_size 0',
         '-f hls'
-    ]).output('data/encoded/'+ req.file.filename + '.m3u8').on('end', () => {
+    ]).output('data/encoded/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
         console.log("End of encoding.");
+        res.sendStatus(200);    //success message
     }).run();
+
+});
+
+app.use("/play", createProxyMiddleware({
+    target: "http://localhost:8000/encoded/",
+    changeOrigin: true,
+    pathRewrite: {
+        [`^/play`]: '',
+    },
 })
+);
 
 app.listen(port, () => {
     console.log("Upload server listening at http://localhost:4000")
@@ -58,12 +74,12 @@ app.listen(port, () => {
 //-------------------
 
 http.createServer(function (request, response) {
-    console.log('request starting...');
+    console.log(request.url + " request starting...");
 
     var filePath = './data/' + request.url;
 
     fs.readFile(filePath, function (error, content) {
-        response.writeHead(200, { 'Access-Control-Allow-Origin': '*' });    //permission for player
+        response.writeHead(200, { "Access-Control-Allow-Origin": "*" });    //permission for player
         if (error) {
             if (error.code == 'ENOENT') {
                 // fs.readFile('./404.html', function (error, content) {
@@ -72,7 +88,7 @@ http.createServer(function (request, response) {
             }
             else {
                 response.writeHead(500);
-                response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
+                response.end("Sorry, check with the site admin for error: " + error.code + " ..\n");
                 response.end();
             }
         }

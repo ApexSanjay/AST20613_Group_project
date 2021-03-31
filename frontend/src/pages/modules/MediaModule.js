@@ -1,20 +1,27 @@
 import firebase from 'firebase/app';
 import "firebase/firestore";
 import "firebase/storage";
+import axios from 'axios';
 
-const getMovieStream = () => {
+const getMovieStream = (movieID) => {
     //todo
-    return;
+    const movieURL = "http://localhost:4000/play/" + movieID + "/" + movieID + ".m3u8";
+
+    return movieURL;
 };
 
-const uploadMovie = (movieFiles) => {
-    //todo
-    return;
+const uploadMovie = (movieID, file) => {
+    const data = new FormData();
+    data.append("movie", file);
+    return axios.post("http://localhost:4000/upload/" + movieID, data)
+        // .then(res => { // then print response status
+        //     console.log(res.statusText);
+        // })
 };
 
-const transcodeMovie = (movieFiles) => {
-    //may do
-    return;
+const uploadPoster = (movieID, file) => {
+    return firebase.storage().ref("posters/" + movieID + ".jpg").put(file);
+    //.then .catch
 };
 
 const movieInfo = (
@@ -43,8 +50,8 @@ const movieInfo = (
     return res;
 };   //an container for movie info
 
-const createMovieInfo = (movieInfo) => {
-    return firebase.firestore().collection("movies").add(movieInfo); //.then(docRef).catch(); is available
+const createMovieInfo = (movieID, movieInfo) => {
+    return firebase.firestore().collection("movies").doc(movieID).set(movieInfo); //.then(docRef).catch(); is available
 };
 
 const updateMovieInfo = (id, movieInfo) => {
@@ -67,6 +74,10 @@ const getMoviePoster = (movieID) => {
     return firebase.storage().ref("posters/" + movieID + ".jpg").getDownloadURL();  //.then.catch
 }
 
+const getNewMovieID = () => {
+    return firebase.firestore().collection("movies").orderBy("id", "desc").get();
+}
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -76,7 +87,8 @@ const MediaModule = {
     removeMovieInfo,
     getMovieInfo,
     getMovieInfos,
-    transcodeMovie,
+    uploadPoster,
     getMoviePoster,
+    getNewMovieID,
 }
 export default MediaModule;

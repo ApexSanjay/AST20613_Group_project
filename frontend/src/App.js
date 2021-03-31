@@ -21,7 +21,8 @@ import {
   Play,
   Series,
   Upload,
-  Playlist
+  Playlist,
+  EditMovie
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -202,10 +203,13 @@ function App() {
             <ProtectedRoute path="/playlist">
               <Playlist />
             </ProtectedRoute>
+            <ProtectedRoute path="/editMovie/:id">
+              <EditMovie />
+            </ProtectedRoute>
             <UnprotectedRoute path="/home">
               <Home />
             </UnprotectedRoute>
-            <ProtectedRoute path="/play">
+            <ProtectedRoute path="/play/:id">
               <Play />
             </ProtectedRoute>
             <ProtectedRoute path="/series">
