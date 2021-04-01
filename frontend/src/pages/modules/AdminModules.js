@@ -13,9 +13,14 @@ const getAllAdmin = () => {
     return firebase.firestore().collection("admins").get();
 }
 
+const getAdminEmail = (adminUserID) => {
+    return firebase.firestore().collection("users").where("userID", "==", adminUserID).get();
+}
+
 const AdminModules = {
     addAdmin,
-    getAllAdmin
+    getAllAdmin,
+    getAdminEmail
 };
 
 export default AdminModules;

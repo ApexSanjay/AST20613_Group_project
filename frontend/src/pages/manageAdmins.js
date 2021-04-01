@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuBar from "./components/menuBar";
 import Container from "./components/container";
@@ -35,13 +35,33 @@ export function ManageAdmins(props) {
 
     const [openAdminDialog, setOpenAdminDialog] = React.useState(false);
 
+    const [adminDataState, setAdminDataState] = useState([]);
+    var adminData = adminDataState;
 
-    useEffect(()=>{
+    useEffect(() => {
         AdminModules.getAllAdmin().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
+                // doc.data().userID
+                adminData.push({ id: doc.id, data: doc.data() });
             });
+            for (var i in adminData) {
+                AdminModules.getAdminEmail(adminData[i].data.userID).then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // console.log(doc.id, " => ", doc.data().userEmail);
+                        for (var j in adminData) {
+                            if (adminData[j].data.userID === doc.data().userID) {
+                                adminData[j].data["email"] = doc.data().userEmail;
+                            }
+                        }
+                    });
+                    setAdminDataState([...adminData]);
+
+                });
+
+            }
         });
+
     }, []);
 
     const AddAdminButton = (props) => {
@@ -63,7 +83,7 @@ export function ManageAdmins(props) {
                     onClick={onclickHandler}
                     fullWidth
                 >
-                    Upload a new movie
+                    Add a new Admin
                 </Button>
             </Container>
 
@@ -141,15 +161,59 @@ export function ManageAdmins(props) {
         );
     };
 
+    const RemoveAdminButton = () => {
+
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
+
+        const onclickHandler = () => {
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Remove
+                </Button>
+            </Container>
+        );
+    }
+
+    const showAdminRows = () => {
+
+        return adminDataState.map((data) => {
+
+            return (
+                <TableRow key={data.id}>
+                    <TableCell component="th" scope="row">
+                        {data.data.email}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                        {data.data.role}
+                    </TableCell>
+                    <TableCell align="right">
+                        <RemoveAdminButton />
+                    </TableCell>
+                </TableRow>
+            );
+        });
+    }
+
     return (
         <Container>
             <MenuBar />
             <Grid container spacing={3}>
-                <Grid item xs={11}>
+                <Grid item xs={10}>
                     <h2>Manage Admins</h2>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                     {/* button */}
+                    <AddAdminButton />
                 </Grid>
                 <Grid item xs={12}>
                     <TableContainer component={Paper}>
@@ -157,19 +221,20 @@ export function ManageAdmins(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Admins</TableCell>
+                                    <TableCell>Role</TableCell>
                                     <TableCell align="right">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
 
+                                {showAdminRows()}
 
-
-                                <TableRow key="row name">
+                                {/* <TableRow key="row name">
                                     <TableCell component="th" scope="row">
                                         Row Name
                                         </TableCell>
                                     <TableCell align="right">Button here</TableCell>
-                                </TableRow>
+                                </TableRow> */}
 
 
 
