@@ -111,6 +111,7 @@ export function ManageAdmins(props) {
                             AdminModules.addAdmin(uid, role).then(() => {
                                 handleClose();
                                 console.log("done");
+                                window.location.reload();   //reload page
                             });
                         });
                     } else {
@@ -161,7 +162,7 @@ export function ManageAdmins(props) {
         );
     };
 
-    const RemoveAdminButton = () => {
+    const RemoveAdminButton = (props) => {
 
         const Container = styled.div`
             display: inline;
@@ -169,6 +170,7 @@ export function ManageAdmins(props) {
         `;
 
         const onclickHandler = () => {
+            AdminModules.removeAdmin(props.id);
         }
 
         return (
@@ -197,7 +199,8 @@ export function ManageAdmins(props) {
                         {data.data.role}
                     </TableCell>
                     <TableCell align="right">
-                        <RemoveAdminButton />
+                        {adminDataState.length <= 1? <></> :<RemoveAdminButton id={data.data.userID}/>}
+                        
                     </TableCell>
                 </TableRow>
             );

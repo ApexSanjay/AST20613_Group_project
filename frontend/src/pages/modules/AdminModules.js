@@ -13,7 +13,10 @@ const removeAdmin = (userID) => {
     return firebase.firestore().collection("admins").where("userID", "==", userID).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             var docID = doc.id;
-            return firebase.firestore().collection("admins").doc(docID).delete();
+            return firebase.firestore().collection("admins").doc(docID).delete().then(()=>{
+                console.log("remove success");
+                window.location.reload();   //reload page
+            });
         });
     })
 }
