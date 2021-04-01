@@ -40,20 +40,20 @@ const MenuBar = () => {
     }, []);
 
     const [anchorEl, setAnchorEl] = React.useState(null);   // for setting icon
-
-    const handleClick = (event) => {    // for setting icon
-        setAnchorEl(event.currentTarget);
-    };
+    const [adminAnchorEl, setAdminAnchorEl] = React.useState(null);   
 
     const handleClose = () => { // for setting icon
         setAnchorEl(null);
+    };
+    const handleAdminClose = () => { // for setting icon
+        setAdminAnchorEl(null);
     };
 
     const [openAdminDialog, setOpenAdminDialog] = React.useState(false);  //for 
 
     //btn handler
     const history = useHistory();
-    const btnHandler = (btnName) => {
+    const btnHandler = (btnName, e = null) => {
         switch (btnName) {
             case "movie":
                 history.push("/browse");
@@ -75,6 +75,18 @@ const MenuBar = () => {
                 break;
             case "logout":
                 logout();
+                break;
+            case "settingIcon":
+                setAnchorEl(e.currentTarget);
+                break;
+            case "AdminButton":
+                setAdminAnchorEl(e.currentTarget);
+                break;
+            case "manageAdmins":
+                history.push("/manage/admins");
+                break;
+            case "manageMovies":
+                history.push("/manage/movies");
                 break;
             default:
                 break;
@@ -180,18 +192,27 @@ const MenuBar = () => {
                     <Button onClick={() => { btnHandler("movie") }}>Movie</Button>
                     <Button onClick={() => { btnHandler("series") }}>Series</Button>
                     <Button onClick={() => { btnHandler("myLib") }}>My Library</Button>
+                    {isAdmin === true? <Button aria-haspopup="true" onClick={(e) => { btnHandler("AdminButton", e) }}>Admin</Button> : <></>}
+                    <Menu
+                        anchorEl={adminAnchorEl}
+                        keepMounted
+                        open={Boolean(adminAnchorEl)}
+                        onClose={handleAdminClose}
+                    >
+                        <MenuItem onClick={() => { btnHandler("manageAdmins") }}>Manage Admins</MenuItem>
+                        <MenuItem onClick={() => { btnHandler("manageMovies") }}>Manage Movies</MenuItem>
+                    </Menu>
                 </Grid>
                 <Grid item xs={1}>
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}><SettingsIcon /></Button>
+                    <Button aria-haspopup="true" onClick={(e)=>{btnHandler("settingIcon", e)}}><SettingsIcon /></Button>
                     <Menu
-                        id="simple-menu"
                         anchorEl={anchorEl}
                         keepMounted
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)}
-                        {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("addAdmin") }}>Add a new Admin</MenuItem> : <></>)}
+                        {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)} */}
+                        {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("addAdmin") }}>Add a new Admin</MenuItem> : <></>)} */}
                         <MenuItem onClick={() => { btnHandler("manage") }}>Manage</MenuItem>
                         <MenuItem onClick={() => { btnHandler("logout") }}>Logout</MenuItem>
                     </Menu>

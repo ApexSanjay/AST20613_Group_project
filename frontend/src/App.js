@@ -22,7 +22,9 @@ import {
   Series,
   Upload,
   Playlist,
-  EditMovie
+  EditMovie,
+  ManageAdmins,
+  ManageMovies
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -205,6 +207,12 @@ function App() {
             </ProtectedRoute>
             <ProtectedRoute path="/editMovie/:id">
               <EditMovie />
+            </ProtectedRoute>
+            <ProtectedRoute path="/manage/admins">
+              <ManageAdmins />
+            </ProtectedRoute>
+            <ProtectedRoute path="/manage/movies">
+              <ManageMovies />
             </ProtectedRoute>
             <UnprotectedRoute path="/home">
               <Home />
