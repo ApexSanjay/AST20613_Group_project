@@ -9,6 +9,15 @@ const addAdmin = (userID, role) => {
     });
 }
 
+const removeAdmin = (userID) => {
+    return firebase.firestore().collection("admins").where("userID", "==", userID).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            var docID = doc.id;
+            return firebase.firestore().collection("admins").doc(docID).delete();
+        });
+    })
+}
+
 const getAllAdmin = () => {
     return firebase.firestore().collection("admins").get();
 }
@@ -19,6 +28,7 @@ const getAdminEmail = (adminUserID) => {
 
 const AdminModules = {
     addAdmin,
+    removeAdmin,
     getAllAdmin,
     getAdminEmail
 };
