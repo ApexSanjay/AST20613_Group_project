@@ -83,8 +83,10 @@ const MenuBar = () => {
                 setAdminAnchorEl(e.currentTarget);
                 break;
             case "manageAdmins":
+                history.push("/manage/admins");
                 break;
             case "manageMovies":
+                history.push("/manage/movies");
                 break;
             default:
                 break;
