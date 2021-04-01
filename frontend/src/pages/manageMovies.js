@@ -38,17 +38,22 @@ export function ManageMovies(props) {
 
     const [movieDataState, setMovieDataState] = useState([]);
 
+    const [loadMovieCount, setLoadMovieCount] = useState(0);
+
+
     var movieData = movieDataState;
 
     useEffect(() => {
-        MediaModule.getAllMovies().then((querySnapshot) => {
+        MediaModule.getAllMovies(loadMovieCount).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(doc.id, " => ", doc.data());
                 movieData.push(doc.data());
-                setMovieDataState([...movieData]);
             });
+            setMovieDataState([...movieData]);
+
         });
-    }, [])
+
+    }, [loadMovieCount])
 
     const UploadMovieButton = (props) => {
 
@@ -147,21 +152,84 @@ export function ManageMovies(props) {
         );
     };
 
+    const OpenButton = (props) => {
+
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
+
+        const onclickHandler = () => {
+            history.push("/movie/" + props.id);
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Open
+                </Button>
+            </Container>
+
+        );
+    };
+
     const showMovieRow = () => {
+
+        console.log("showMovieRow", loadMovieCount);
+
         return movieDataState.map((data) => {
+
+            console.log(data.id);
+
             return (
-                <TableRow key={data.id}>
-                    <TableCell component="th" scope="row">
-                        {data.id}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                        {data.title}
-                    </TableCell>
-                    <TableCell align="right">Button here</TableCell>
-                </TableRow>
+                <>
+                    <TableRow key={data.id}>
+                        <TableCell component="th" scope="row">
+                            {data.id}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                            {data.title}
+                        </TableCell>
+                        <TableCell align="right">
+                            <OpenButton id={data.id} />
+                        </TableCell>
+                    </TableRow>
+                </>
             );
         })
     }
+
+
+    const LoadMoreButton = (props) => {
+
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
+
+        const onclickHandler = () => {
+            var count = loadMovieCount + 10;
+            setLoadMovieCount(count);
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Load More
+                </Button>
+            </Container>
+
+        );
+    };
+
 
     return (
         <Container>
@@ -187,6 +255,7 @@ export function ManageMovies(props) {
 
 
                                 {showMovieRow()}
+                                <LoadMoreButton />
 
                                 {/* <TableRow key="row name">
                                     <TableCell component="th" scope="row">

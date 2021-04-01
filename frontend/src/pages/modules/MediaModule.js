@@ -78,8 +78,8 @@ const getNewMovieID = () => {
     return firebase.firestore().collection("movies").orderBy("id", "desc").get();
 }
 
-const getAllMovies = () => {
-    return firebase.firestore().collection("movies").orderBy("id", "asc").get();
+const getAllMovies = (startFrom) => {
+    return firebase.firestore().collection("movies").orderBy("id", "asc").startAt(startFrom).endAt(startFrom + 10 - 1).get();
 }
 
 const MediaModule = {
