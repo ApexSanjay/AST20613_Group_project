@@ -201,6 +201,31 @@ export function ManageMovies(props) {
         );
     };
 
+    const RemoveButton = (props) => {
+
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
+
+        const onclickHandler = () => {
+
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Remove
+                </Button>
+            </Container>
+
+        );
+    };
+
     const showMovieRow = () => {
 
         console.log("showMovieRow", loadMovieCount);
@@ -219,8 +244,9 @@ export function ManageMovies(props) {
                             {data.title}
                         </TableCell>
                         <TableCell align="right">
-                            <OpenButton id={data.id} />
+                            <OpenButton id={data.id} /> 
                             <EditButton id={data.id} />
+                            <RemoveButton id={data.id} />
                         </TableCell>
                     </TableRow>
                 </>
