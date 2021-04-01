@@ -50,7 +50,6 @@ export function ManageMovies(props) {
                 movieData.push(doc.data());
             });
             setMovieDataState([...movieData]);
-
         });
 
     }, [loadMovieCount])
@@ -177,6 +176,31 @@ export function ManageMovies(props) {
         );
     };
 
+    const EditButton = (props) => {
+
+        const Container = styled.div`
+            display: inline;
+            margin: 5px;
+        `;
+
+        const onclickHandler = () => {
+            history.push("/editMovie/" + props.id);
+        }
+
+        return (
+            <Container>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onclickHandler}
+                >
+                    Edit
+                </Button>
+            </Container>
+
+        );
+    };
+
     const showMovieRow = () => {
 
         console.log("showMovieRow", loadMovieCount);
@@ -196,6 +220,7 @@ export function ManageMovies(props) {
                         </TableCell>
                         <TableCell align="right">
                             <OpenButton id={data.id} />
+                            <EditButton id={data.id} />
                         </TableCell>
                     </TableRow>
                 </>
@@ -217,15 +242,18 @@ export function ManageMovies(props) {
         }
 
         return (
-            <Container>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onclickHandler}
-                >
-                    Load More
+            <center>
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Load More
                 </Button>
-            </Container>
+                </Container>
+            </center>
+
 
         );
     };
@@ -255,7 +283,6 @@ export function ManageMovies(props) {
 
 
                                 {showMovieRow()}
-                                <LoadMoreButton />
 
                                 {/* <TableRow key="row name">
                                     <TableCell component="th" scope="row">
@@ -272,6 +299,7 @@ export function ManageMovies(props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <LoadMoreButton />
                 </Grid>
                 <AdminDialog />
             </Grid>
