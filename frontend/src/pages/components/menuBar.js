@@ -192,7 +192,7 @@ const MenuBar = () => {
                     <Button onClick={() => { btnHandler("movie") }}>Movie</Button>
                     <Button onClick={() => { btnHandler("series") }}>Series</Button>
                     <Button onClick={() => { btnHandler("myLib") }}>My Library</Button>
-                    <Button aria-haspopup="true" onClick={(e) => { btnHandler("AdminButton", e) }}>Admin</Button>
+                    {isAdmin === true? <Button aria-haspopup="true" onClick={(e) => { btnHandler("AdminButton", e) }}>Admin</Button> : <></>}
                     <Menu
                         anchorEl={adminAnchorEl}
                         keepMounted
