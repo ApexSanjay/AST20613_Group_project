@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuBar from "./components/menuBar";
 import Container from "./components/container";
@@ -21,6 +21,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import MediaModule from './modules/MediaModule';
 
 export function ManageMovies(props) {
 
@@ -33,9 +34,21 @@ export function ManageMovies(props) {
     });
     const classes = useStyles();
 
-    const [openAdminDialog, setOpenAdminDialog] = React.useState(false);  
+    const [openAdminDialog, setOpenAdminDialog] = React.useState(false);
 
-    
+    const [movieDataState, setMovieDataState] = useState([]);
+
+    var movieData = movieDataState;
+
+    useEffect(() => {
+        MediaModule.getAllMovies().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // console.log(doc.id, " => ", doc.data());
+                movieData.push(doc.data());
+                setMovieDataState([...movieData]);
+            });
+        });
+    }, [])
 
     const UploadMovieButton = (props) => {
 
@@ -77,7 +90,7 @@ export function ManageMovies(props) {
             if (email.length !== 0 && role.length !== 0) {
                 // console.log(email, role);
                 BrowsingModules.getUser(email).then((querySnapshot) => {
-                    if(!querySnapshot.empty){
+                    if (!querySnapshot.empty) {
                         var uid;
                         querySnapshot.forEach((doc) => {
                             uid = doc.data().userID;
@@ -134,6 +147,22 @@ export function ManageMovies(props) {
         );
     };
 
+    const showMovieRow = () => {
+        return movieDataState.map((data) => {
+            return (
+                <TableRow key={data.id}>
+                    <TableCell component="th" scope="row">
+                        {data.id}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                        {data.title}
+                    </TableCell>
+                    <TableCell align="right">Button here</TableCell>
+                </TableRow>
+            );
+        })
+    }
+
     return (
         <Container>
             <MenuBar />
@@ -149,20 +178,25 @@ export function ManageMovies(props) {
                         <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Movies</TableCell>
+                                    <TableCell>ID</TableCell>
+                                    <TableCell>Movies Name</TableCell>
                                     <TableCell align="right">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
 
 
+                                {showMovieRow()}
 
-                                <TableRow key="row name">
+                                {/* <TableRow key="row name">
                                     <TableCell component="th" scope="row">
-                                        Row Name
+                                        ID
+                                        </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        Movie Name
                                         </TableCell>
                                     <TableCell align="right">Button here</TableCell>
-                                </TableRow>
+                                </TableRow> */}
 
 
 

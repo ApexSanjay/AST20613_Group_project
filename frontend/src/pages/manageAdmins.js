@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuBar from "./components/menuBar";
 import Container from "./components/container";
@@ -11,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import AdminModules from "./modules/AdminModules";
 
 export function ManageAdmins(props) {
 
@@ -22,6 +23,14 @@ export function ManageAdmins(props) {
         },
     });
     const classes = useStyles();
+
+    useEffect(()=>{
+        AdminModules.getAllAdmin().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+            });
+        });
+    }, []);
 
     return (
         <Container>

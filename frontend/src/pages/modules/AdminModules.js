@@ -9,9 +9,13 @@ const addAdmin = (userID, role) => {
     });
 }
 
+const getAllAdmin = () => {
+    return firebase.firestore().collection("admins").get();
+}
+
 const AdminModules = {
     addAdmin,
-
+    getAllAdmin
 };
 
 export default AdminModules;

@@ -14,9 +14,9 @@ const uploadMovie = (movieID, file) => {
     const data = new FormData();
     data.append("movie", file);
     return axios.post("http://localhost:4000/upload/" + movieID, data)
-        // .then(res => { // then print response status
-        //     console.log(res.statusText);
-        // })
+    // .then(res => { // then print response status
+    //     console.log(res.statusText);
+    // })
 };
 
 const uploadPoster = (movieID, file) => {
@@ -78,6 +78,10 @@ const getNewMovieID = () => {
     return firebase.firestore().collection("movies").orderBy("id", "desc").get();
 }
 
+const getAllMovies = () => {
+    return firebase.firestore().collection("movies").orderBy("id", "asc").get();
+}
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -90,5 +94,6 @@ const MediaModule = {
     uploadPoster,
     getMoviePoster,
     getNewMovieID,
+    getAllMovies
 }
 export default MediaModule;
