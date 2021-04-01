@@ -211,8 +211,8 @@ const MenuBar = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)}
-                        {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("addAdmin") }}>Add a new Admin</MenuItem> : <></>)}
+                        {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)} */}
+                        {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("addAdmin") }}>Add a new Admin</MenuItem> : <></>)} */}
                         <MenuItem onClick={() => { btnHandler("manage") }}>Manage</MenuItem>
                         <MenuItem onClick={() => { btnHandler("logout") }}>Logout</MenuItem>
                     </Menu>
