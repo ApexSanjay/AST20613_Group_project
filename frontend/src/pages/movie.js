@@ -58,7 +58,7 @@ function Movie(props) {
 
     const [userLibraryState, setUserLibraryState] = useState([]);
 
-    const [Icon, setIcon] = useState(LoginModules.getUserProfile().icon);
+    const [Icon] = useState(LoginModules.getUserProfile().icon);
 
     const [reviewListState, setreviewListState] = useState([]);
 
@@ -66,7 +66,8 @@ function Movie(props) {
 
     const userID = LoginModules.getUserProfile().uid;
 
-    useEffect(() => { //init loading
+    useEffect(() => {   //init loading
+
         if (userID) {
             LoginModules.getAdminUser(userID).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
@@ -74,10 +75,6 @@ function Movie(props) {
                 })
             });
         }
-    }, []);
-
-
-    useEffect(() => {   //init loading
 
         MediaModule.getMoviePoster(movieID).then((url) => {
             setMoviePoster(url);
@@ -94,7 +91,7 @@ function Movie(props) {
         BrowsingModules.getAllPlaylist().then((querySnapshot) => {
             var userLibrary = [];
             querySnapshot.forEach((doc) => {
-                if (userLibraryState != []) {
+                if (userLibraryState !== []) {
                     var playlist = {
                         title: doc.data().title,
                         playlistID: doc.id,
@@ -189,7 +186,7 @@ function Movie(props) {
             var res = "";
             for (var i in movies.cast) {
                 res += movies.cast[i];
-                if (i != (movies.cast.length - 1)) {
+                if (i !== (movies.cast.length - 1)) {
                     res += ", ";
                 }
             }
