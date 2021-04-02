@@ -9,10 +9,14 @@ import MediaModule from "./modules/MediaModule";
 
 export function Upload(props) {
 
-    // const [file, setFile] = useState(null);
     var movieFile = null;
     var posterFile = null;
-    const [input, setInput] = useState({
+    const [newID, setNewID] = useState();
+    console.log(newID);
+
+    const history = useHistory();
+
+    var data = {
         title: "",
         description: "",
         Director: "",
@@ -21,13 +25,7 @@ export function Upload(props) {
         imdbReview: "",
         movieLength: "",
         movieReleaseDate: ""
-    });
-    const [newID, setNewID] = useState();
-    console.log(newID);
-
-    const history = useHistory();
-
-    var data = input;
+    }
 
     useEffect(() => {
         MediaModule.getNewMovieID().then(
