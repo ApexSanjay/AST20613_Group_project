@@ -32,6 +32,4 @@ function Play(props) {
     );
 }
 
-// http://localhost:8000/encoded/example.mp4.m3u8
-
 export default Play;

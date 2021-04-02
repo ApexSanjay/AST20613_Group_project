@@ -10,7 +10,6 @@ import ReactPlayer from 'react-player'
 
 export function EditMovie(props) {
 
-    // const [file, setFile] = useState(null);
     var movieFile = null;
     var posterFile = null;
     const [input, setInput] = useState({
