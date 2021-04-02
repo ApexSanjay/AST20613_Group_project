@@ -29,7 +29,7 @@ export function Search(props) {
 
     const params = useParams();
     const keywords = params.value;
-    
+
     const [searchResult, setSearchResult] = useState([]);
 
     console.log(searchResult);
@@ -107,15 +107,15 @@ export function Search(props) {
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <h2>Search Result</h2>
+                    <h2>Search Result - {keywords}</h2>
                 </Grid>
                 <Grid item xs={12}>
                     <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="simple table">
+                        <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Admins</TableCell>
-                                    <TableCell>Role</TableCell>
+                                    <TableCell>ID</TableCell>
+                                    <TableCell>Movie Title</TableCell>
                                     <TableCell align="right">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
