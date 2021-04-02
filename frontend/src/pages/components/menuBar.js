@@ -185,6 +185,26 @@ const MenuBar = () => {
         );
     };
 
+
+    const SearchField = () => {
+        
+        var searchValue = "";
+
+        const onSubmitHandler = (e) => {
+            history.push("/search/" + searchValue);
+        }
+
+        const onChangeHandler = (value) => {
+            searchValue = value;
+        }
+
+        return (
+            <form noValidate autoComplete="off" onSubmit={(e)=>{onSubmitHandler(e)}}>
+                <TextField label="Search" variant="outlined" onChange={(e)=>{onChangeHandler(e.target.value)}} />
+            </form>
+        );
+    }
+
     return (
         <div>
             <Grid container>
@@ -215,6 +235,8 @@ const MenuBar = () => {
                 <Grid item xs={6}>
 
                     <Grid container justify="flex-end">
+
+                        <SearchField />
                         <Button
                             onclick={() => { btnHandler("myLib") }}
                         >
