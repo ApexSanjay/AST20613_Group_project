@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuBar from "./components/menuBar";
 import Container from "./components/container";
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { makeStyles } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,14 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import AdminModules from "./modules/AdminModules";
-import BrowsingModules from './modules/BrowsingModules';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import BrowsingModules from "./modules/BrowsingModules";
+import Fuse from 'fuse.js';
 
 export function Search(props) {
 
@@ -33,136 +27,36 @@ export function Search(props) {
     });
     const classes = useStyles();
 
-    const [openAdminDialog, setOpenAdminDialog] = React.useState(false);
+    const params = useParams();
+    const keywords = params.value;
+    
+    const [searchResult, setSearchResult] = useState([]);
 
-    const [adminDataState, setAdminDataState] = useState([]);
-    var adminData = adminDataState;
+    console.log(searchResult);
 
     useEffect(() => {
-        AdminModules.getAllAdmin().then((querySnapshot) => {
+
+        BrowsingModules.getAllMovies().then((querySnapshot) => {
+
+            var moviesData = [];
+
             querySnapshot.forEach((doc) => {
-                // console.log(doc.id, " => ", doc.data());
-                // doc.data().userID
-                adminData.push({ id: doc.id, data: doc.data() });
+                moviesData.push(doc.data());
             });
-            for (var i in adminData) {
-                AdminModules.getAdminEmail(adminData[i].data.userID).then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        // console.log(doc.id, " => ", doc.data().userEmail);
-                        for (var j in adminData) {
-                            if (adminData[j].data.userID === doc.data().userID) {
-                                adminData[j].data["email"] = doc.data().userEmail;
-                            }
-                        }
-                    });
-                    setAdminDataState([...adminData]);
 
-                });
-
+            const options = {
+                includeScore: true,
+                keys: ['title', 'id']
             }
+
+            const fuse = new Fuse(moviesData, options);
+
+            setSearchResult(fuse.search(keywords));
+
         });
+    }, [keywords]);
 
-    }, []);
-
-    const AddAdminButton = (props) => {
-
-        const Container = styled.div`
-            display: inline;
-            margin: 5px;
-        `;
-
-        const onclickHandler = () => {
-            setOpenAdminDialog(true);
-        }
-
-        return (
-            <Container>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onclickHandler}
-                    fullWidth
-                >
-                    Add a new Admin
-                </Button>
-            </Container>
-
-        );
-    };
-
-    const AdminDialog = () => {
-
-        var email = "";
-        var role = "";
-
-        const handleClose = () => {
-            setOpenAdminDialog(false);
-        };
-
-        const onSubmitHandler = () => {
-            console.log("Clicked");
-            if (email.length !== 0 && role.length !== 0) {
-                // console.log(email, role);
-                BrowsingModules.getUser(email).then((querySnapshot) => {
-                    if (!querySnapshot.empty) {
-                        var uid;
-                        querySnapshot.forEach((doc) => {
-                            uid = doc.data().userID;
-                            AdminModules.addAdmin(uid, role).then(() => {
-                                handleClose();
-                                console.log("done");
-                                window.location.reload();   //reload page
-                            });
-                        });
-                    } else {
-                        console.log("no this user");
-                    }
-
-                }).catch((e) => {
-                    console.log(e.message);
-                });
-
-            }
-        }
-
-        return (
-            <div>
-                <Dialog open={openAdminDialog} onClose={handleClose}>
-                    <DialogTitle>Add a new Admin</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            To add a new admin to this website, please input a email address here. Please be noticed that he/she must register before becoming a admin.
-                  </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            type="text"
-                            label="Role"
-                            onChange={(e) => { role = e.target.value; }}
-                            fullWidth
-                        />
-                        <TextField
-                            margin="dense"
-                            type="email"
-                            label="Email Address"
-                            onChange={(e) => { email = e.target.value; }}
-                            fullWidth
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Cancel
-                  </Button>
-                        <Button onClick={() => { onSubmitHandler() }} color="primary">
-                            Add
-                  </Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        );
-    };
-
-    const RemoveAdminButton = (props) => {
+    const WatchButton = (props) => {
 
         const Container = styled.div`
             display: inline;
@@ -170,7 +64,7 @@ export function Search(props) {
         `;
 
         const onclickHandler = () => {
-            AdminModules.removeAdmin(props.id);
+            history.push("/movie/" + props.id);
         }
 
         return (
@@ -180,27 +74,28 @@ export function Search(props) {
                     color="primary"
                     onClick={onclickHandler}
                 >
-                    Remove
+                    Watch
                 </Button>
             </Container>
         );
     }
 
-    const showAdminRows = () => {
+    const showResultRows = () => {
 
-        return adminDataState.map((data) => {
+        // return (<></>);
+
+        return searchResult.map((result) => {
 
             return (
-                <TableRow key={data.id}>
+                <TableRow key={result.item.id}>
                     <TableCell component="th" scope="row">
-                        {data.data.email}
+                        {result.item.id}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                        {data.data.role}
+                        {result.item.title}
                     </TableCell>
                     <TableCell align="right">
-                        {adminDataState.length <= 1? <></> :<RemoveAdminButton id={data.data.userID}/>}
-                        
+                        <WatchButton id={result.item.id} />
                     </TableCell>
                 </TableRow>
             );
@@ -211,12 +106,8 @@ export function Search(props) {
         <Container>
             <MenuBar />
             <Grid container spacing={3}>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                     <h2>Search Result</h2>
-                </Grid>
-                <Grid item xs={2}>
-                    {/* button */}
-                    <AddAdminButton />
                 </Grid>
                 <Grid item xs={12}>
                     <TableContainer component={Paper}>
@@ -230,7 +121,7 @@ export function Search(props) {
                             </TableHead>
                             <TableBody>
 
-                                {showAdminRows()}
+                                {showResultRows()}
 
                                 {/* <TableRow key="row name">
                                     <TableCell component="th" scope="row">
@@ -245,8 +136,6 @@ export function Search(props) {
                         </Table>
                     </TableContainer>
                 </Grid>
-                <AdminDialog />
-
             </Grid>
         </Container>
     );
