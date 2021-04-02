@@ -21,7 +21,7 @@ import BrowsingModules from "./modules/BrowsingModules";
 function Profile(props) {
 
     var profile = LoginModules.getUserProfile();
-    const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
+    const [icon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
     const history = useHistory();
     const [Lib, setLib] = useState([]);
 

@@ -111,7 +111,7 @@ function Playlist(props) {
                 const list = playlist;
                 console.log(list, movieID);
                 for (var i in list) {
-                    if (list[i] == movieID) {
+                    if (list[i] === movieID) {
                         list.splice(i, 1);
                         BrowsingModules.updatePlaylist(playlistID, list).then(() => {
                             window.location.reload();   //reload page

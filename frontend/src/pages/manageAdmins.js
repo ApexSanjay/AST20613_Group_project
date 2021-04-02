@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuBar from "./components/menuBar";
 import Container from "./components/container";
-import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -24,8 +23,6 @@ import TextField from '@material-ui/core/TextField';
 
 export function ManageAdmins(props) {
 
-    const history = useHistory();
-
     const useStyles = makeStyles({
         table: {
             minWidth: 650,
@@ -41,14 +38,11 @@ export function ManageAdmins(props) {
     useEffect(() => {
         AdminModules.getAllAdmin().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                // console.log(doc.id, " => ", doc.data());
-                // doc.data().userID
                 adminData.push({ id: doc.id, data: doc.data() });
             });
             for (var i in adminData) {
                 AdminModules.getAdminEmail(adminData[i].data.userID).then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        // console.log(doc.id, " => ", doc.data().userEmail);
                         for (var j in adminData) {
                             if (adminData[j].data.userID === doc.data().userID) {
                                 adminData[j].data["email"] = doc.data().userEmail;
@@ -102,7 +96,6 @@ export function ManageAdmins(props) {
         const onSubmitHandler = () => {
             console.log("Clicked");
             if (email.length !== 0 && role.length !== 0) {
-                // console.log(email, role);
                 BrowsingModules.getUser(email).then((querySnapshot) => {
                     if (!querySnapshot.empty) {
                         var uid;
@@ -229,18 +222,7 @@ export function ManageAdmins(props) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-
                                 {showAdminRows()}
-
-                                {/* <TableRow key="row name">
-                                    <TableCell component="th" scope="row">
-                                        Row Name
-                                        </TableCell>
-                                    <TableCell align="right">Button here</TableCell>
-                                </TableRow> */}
-
-
-
                             </TableBody>
                         </Table>
                     </TableContainer>

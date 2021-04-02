@@ -1,12 +1,17 @@
 import firebase from 'firebase/app';
 import "firebase/firestore";
 import "firebase/auth";
-import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 const searchMovie = (keywords) => {
-    //todo
-    return;
+    return firebase.firestore().collection("movies")
+        .where("title", ">=", keywords)
+        .where("id", "==", parseInt(keywords))
+        .get();
 };
+
+const getAllMovies = () => {
+    return firebase.firestore().collection("movies").orderBy("id").get();
+}
 
 const suggestMovie = () => {
     //todo
@@ -95,6 +100,7 @@ const BrowsingModules = {
     getReviewOnce,
     getUser,
     getUserIcon,
+    getAllMovies,
 };
 
 export default BrowsingModules;

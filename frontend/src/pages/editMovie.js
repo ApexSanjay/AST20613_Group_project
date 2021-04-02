@@ -10,7 +10,6 @@ import ReactPlayer from 'react-player'
 
 export function EditMovie(props) {
 
-    // const [file, setFile] = useState(null);
     var movieFile = null;
     var posterFile = null;
     const [input, setInput] = useState({
@@ -83,7 +82,7 @@ export function EditMovie(props) {
             <Grid container>
                 <Grid item xs={6}>
                     <h2>Current Movie Poster</h2>
-                    <img src={currentPoster} width="80%" />
+                    <img src={currentPoster} width="80%" alt="Current Poster" />
                     <br />
                 </Grid>
                 <Grid item xs={6}>

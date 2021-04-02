@@ -16,6 +16,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Avatar from '@material-ui/core/Avatar';
 
 import SettingsIcon from '@material-ui/icons/Settings';
 
@@ -40,7 +41,7 @@ const MenuBar = () => {
     }, []);
 
     const [anchorEl, setAnchorEl] = React.useState(null);   // for setting icon
-    const [adminAnchorEl, setAdminAnchorEl] = React.useState(null);   
+    const [adminAnchorEl, setAdminAnchorEl] = React.useState(null);
 
     const handleClose = () => { // for setting icon
         setAnchorEl(null);
@@ -127,7 +128,7 @@ const MenuBar = () => {
             if (email.length !== 0 && role.length !== 0) {
                 // console.log(email, role);
                 BrowsingModules.getUser(email).then((querySnapshot) => {
-                    if(!querySnapshot.empty){
+                    if (!querySnapshot.empty) {
                         var uid;
                         querySnapshot.forEach((doc) => {
                             uid = doc.data().userID;
@@ -184,15 +185,35 @@ const MenuBar = () => {
         );
     };
 
+
+    const SearchField = () => {
+        
+        var searchValue = "";
+
+        const onSubmitHandler = (e) => {
+            history.push("/search/" + searchValue);
+        }
+
+        const onChangeHandler = (value) => {
+            searchValue = value;
+        }
+
+        return (
+            <form noValidate autoComplete="off" onSubmit={(e)=>{onSubmitHandler(e)}}>
+                <TextField label="Search" variant="outlined" onChange={(e)=>{onChangeHandler(e.target.value)}} />
+            </form>
+        );
+    }
+
     return (
         <div>
             <Grid container>
-                <Grid item xs={11}>
+                <Grid item xs={6}>
                     <Logo>RedStream</Logo>
                     <Button onClick={() => { btnHandler("movie") }}>Movie</Button>
                     <Button onClick={() => { btnHandler("series") }}>Series</Button>
                     <Button onClick={() => { btnHandler("myLib") }}>My Library</Button>
-                    {isAdmin === true? <Button aria-haspopup="true" onClick={(e) => { btnHandler("AdminButton", e) }}>Admin</Button> : <></>}
+                    {isAdmin === true ? <Button aria-haspopup="true" onClick={(e) => { btnHandler("AdminButton", e) }}>Admin</Button> : <></>}
                     <Menu
                         anchorEl={adminAnchorEl}
                         keepMounted
@@ -203,19 +224,39 @@ const MenuBar = () => {
                         <MenuItem onClick={() => { btnHandler("manageMovies") }}>Manage Movies</MenuItem>
                     </Menu>
                 </Grid>
-                <Grid item xs={1}>
-                    <Button aria-haspopup="true" onClick={(e)=>{btnHandler("settingIcon", e)}}><SettingsIcon /></Button>
-                    <Menu
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)} */}
-                        {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("addAdmin") }}>Add a new Admin</MenuItem> : <></>)} */}
-                        <MenuItem onClick={() => { btnHandler("manage") }}>Manage</MenuItem>
-                        <MenuItem onClick={() => { btnHandler("logout") }}>Logout</MenuItem>
-                    </Menu>
+                {/* <Grid item xs={6}> */}
+                {/* <Grid container justify="flex-end"> */}
+                {/* </Grid> */}
+                {/* <Button>
+                        <Avatar src={LoginModules.getUserProfile().icon}></Avatar>
+                        {LoginModules.getUserProfile().name}
+                    </Button> */}
+                {/* </Grid> */}
+                <Grid item xs={6}>
+
+                    <Grid container justify="flex-end">
+
+                        <SearchField />
+                        <Button
+                            onclick={() => { btnHandler("myLib") }}
+                        >
+                            <Avatar src={LoginModules.getUserProfile().icon}></Avatar>
+                            {LoginModules.getUserProfile().name}
+                        </Button>
+
+                        <Button aria-haspopup="true" onClick={(e) => { btnHandler("settingIcon", e) }}><SettingsIcon /></Button>
+                        <Menu
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("upload") }}>Upload</MenuItem> : <></>)} */}
+                            {/* {(isAdmin === true ? <MenuItem onClick={() => { btnHandler("addAdmin") }}>Add a new Admin</MenuItem> : <></>)} */}
+                            <MenuItem onClick={() => { btnHandler("manage") }}>Manage</MenuItem>
+                            <MenuItem onClick={() => { btnHandler("logout") }}>Logout</MenuItem>
+                        </Menu>
+                    </Grid>
                     <AdminDialog />
                 </Grid>
             </Grid>
