@@ -34,7 +34,7 @@ export function ManageMovies(props) {
     var movieData = movieDataState;
 
     useEffect(() => {
-        MediaModule.getAllMovies(loadMovieCount).then((querySnapshot) => {
+        MediaModule.getMovies(loadMovieCount).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 movieData.push(doc.data());
             });

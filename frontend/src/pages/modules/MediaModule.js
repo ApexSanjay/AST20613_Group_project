@@ -78,7 +78,7 @@ const getNewMovieID = () => {
     return firebase.firestore().collection("movies").orderBy("id", "desc").get();
 }
 
-const getAllMovies = (startFrom) => {
+const getMovies = (startFrom) => {
     return firebase.firestore().collection("movies").orderBy("id", "asc").startAt(startFrom).endAt(startFrom + 10 - 1).get();
 }
 
@@ -94,6 +94,6 @@ const MediaModule = {
     uploadPoster,
     getMoviePoster,
     getNewMovieID,
-    getAllMovies
+    getMovies
 }
 export default MediaModule;
