@@ -71,7 +71,7 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
         fs.mkdirSync(dir);
     }
 
-    console.log("Start encoding...");
+    console.log("Start Transcoding...");
 
     // //default
     // console.log("default");
@@ -132,7 +132,7 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
                 '-aspect 3840:2160',
             ]).output('data/movie/4k/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
 
-                console.log("End of encoding.");
+                console.log("End of Transcoding.");
                 res.sendStatus(200);    //success message
 
             }).run();
@@ -144,21 +144,32 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
 });
 
 app.get('/remove/:id', function (req, res) {
+
+    console.log("Removing movie " + req.params.id);
+
     var dir = "data/movie/4k/" + req.params.id;
 
     if (fs.existsSync(dir)) {
+        console.log("removing " + dir);
         fs.rmdirSync(dir, { recursive: true });
     }
     var dir = "data/movie/1080p/" + req.params.id;
 
     if (fs.existsSync(dir)) {
+        console.log("removing " + dir);
         fs.rmdirSync(dir, { recursive: true });
     }
     var dir = "data/movie/480p/" + req.params.id;
 
     if (fs.existsSync(dir)) {
+        console.log("removing " + dir);
         fs.rmdirSync(dir, { recursive: true });
     }
+
+    console.log("Remove movie success");
+
+    res.sendStatus(200);
+    res.end();
 });
 
 app.use("/play", createProxyMiddleware({
