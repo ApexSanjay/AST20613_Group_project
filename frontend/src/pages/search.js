@@ -74,15 +74,13 @@ export function Search(props) {
                     color="primary"
                     onClick={onclickHandler}
                 >
-                    Watch
+                    Go
                 </Button>
             </Container>
         );
     }
 
     const showResultRows = () => {
-
-        // return (<></>);
 
         return searchResult.map((result) => {
 
@@ -122,15 +120,6 @@ export function Search(props) {
                             <TableBody>
 
                                 {showResultRows()}
-
-                                {/* <TableRow key="row name">
-                                    <TableCell component="th" scope="row">
-                                        Row Name
-                                        </TableCell>
-                                    <TableCell align="right">Button here</TableCell>
-                                </TableRow> */}
-
-
 
                             </TableBody>
                         </Table>
