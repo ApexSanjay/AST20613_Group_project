@@ -16,47 +16,8 @@ export function Browse(props) {
     const [row2Movie, setRow2Movie] = useState([]);
     const [row3Movie, setRow3Movie] = useState([]);
 
-    // const getRandomIds = (num) => {
-    //     var ids = [];
-
-    //     for (var i = 0; i < num; i++) {
-    //         var id = parseInt(Math.random() * 1000);
-    //         id %= 100;
-    //         id++;
-
-    //         ids.push(id);
-    //     }
-
-    //     return ids;
-    // }
-
-    // useEffect(() => {
-
-    //     console.log(LoginModules.getUserProfile().uid);
-
-    //     if (!ids) {
-    //         var random = getRandomIds(10);
-    //         setIds(random);
-    //     } else {
-    //         if (movieCardInfoState.length === 0) {
-    //             for (var i in ids) {
-    //                 MediaModule.getMoviePoster(ids[i]).then((url) => {
-    //                     for (var j in ids) {
-    //                         if (url.includes("%2F" + ids[j] + ".jpg")) {
-    //                             var movieCardInfo = movieCardInfoState;
-    //                             movieCardInfo.push({ id: ids[j], url: url });
-    //                             setMovieCardInfoState([...movieCardInfo]);
-    //                         }
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }, [ids, movieCardInfoState]);
-
     useEffect(() => {
         BrowsingModules.suggestMovie().then((movies) => {
-            // console.log(movies);
             movies.forEach((movie) => {
                 if (movie) {
                     MediaModule.getMoviePoster(movie.id).then((url) => {
@@ -70,7 +31,6 @@ export function Browse(props) {
             });
         });
         BrowsingModules.suggestMovie().then((movies) => {
-            // console.log(movies);
             movies.forEach((movie) => {
                 if (movie) {
                     MediaModule.getMoviePoster(movie.id).then((url) => {
@@ -84,7 +44,6 @@ export function Browse(props) {
             });
         });
         BrowsingModules.suggestMovie().then((movies) => {
-            // console.log(movies);
             movies.forEach((movie) => {
                 if (movie) {
                     MediaModule.getMoviePoster(movie.id).then((url) => {
