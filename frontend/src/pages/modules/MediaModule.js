@@ -112,6 +112,22 @@ const removeMovie = async (id) => {
         });
     });
 
+    await firebase.firestore().collection("playlist").where("movieID", "array-contains", id).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // console.log(doc.id, " => ", doc.data());
+            var temp = doc.data();
+            var temp_movieID = [];
+            temp.movieID.forEach((item) => {
+                if(item !== id){
+                    temp_movieID.push(item);
+                }
+            });
+            firebase.firestore().collection("playlist").doc(doc.id).update({
+                movieID: temp_movieID
+            });
+        });
+    });
+
     return new Promise((resolve, reject) => {
         resolve();
     });
