@@ -58,7 +58,6 @@ export function ManageMovies(props) {
 
                 const options = {
                     includeScore: true,
-                    // Search in `author` and in `tags` array
                     keys: ["id", "title"]
                 }
 
