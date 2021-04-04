@@ -456,7 +456,7 @@ function Movie(props) {
             return (
                 <Grid item xs={12}>
                     <Paper elevation={3}>
-                        <Grid container spacing={3}>
+                        <Grid container spacing={4}>
                             <Grid item xs={1}>
                                 {/* icon */}
                                 <Avatar
@@ -470,14 +470,16 @@ function Movie(props) {
                                 {/* date */}
                                 <small>{props.date}</small>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={9}>
                                 {/* comment */}
                                 <CommentContainer>
                                     {props.review}
                                 </CommentContainer>
                             </Grid>
-                            <Grid item xs={1}>
-                                <RemoveCommentButton id={props.commentID} />
+                            <Grid item xs={3}>
+                                <Grid container justify="flex-end">
+                                    <RemoveCommentButton id={props.commentID} />
+                                </Grid>
                             </Grid>
                         </Grid>
 
@@ -594,7 +596,7 @@ function Movie(props) {
                     <Grid item xs={3}>
                         <AddToLibrary />
                         <ShareLink />
-                        {(isAdmin? <EditMovie/> : <></>)}
+                        {(isAdmin ? <EditMovie /> : <></>)}
                         {/* <EditMovie /> */}
                         <PlayButton />
                         <p>
