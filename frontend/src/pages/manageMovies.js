@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuBar from "./components/menuBar";
 import Container from "./components/container";
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { makeStyles } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,6 +14,9 @@ import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import MediaModule from './modules/MediaModule';
+import TextField from '@material-ui/core/TextField';
+import BrowsingModules from './modules/BrowsingModules';
+import Fuse from 'fuse.js'
 
 export function ManageMovies(props) {
 
@@ -30,18 +33,46 @@ export function ManageMovies(props) {
 
     const [loadMovieCount, setLoadMovieCount] = useState(0);
 
+    const params = useParams();
+    const searchValue = params.search;
 
     var movieData = movieDataState;
 
     useEffect(() => {
-        MediaModule.getAllMovies(loadMovieCount).then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                movieData.push(doc.data());
+        movieData = [];
+        if (!searchValue) {
+            MediaModule.getMovies(loadMovieCount).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    movieData.push(doc.data());
+                });
+                setMovieDataState([...movieData]);
             });
-            setMovieDataState([...movieData]);
-        });
+        } else {
+            // console.log("???");
+            BrowsingModules.getAllMovies().then((querySnapshot) => {
+                var allMovies = [];
+                querySnapshot.forEach((doc) => {
+                    allMovies.push(doc.data());
+                });
 
-    }, [loadMovieCount])
+                const options = {
+                    includeScore: true,
+                    keys: ["id", "title"]
+                }
+
+                const fuse = new Fuse(allMovies, options)
+
+                const result = fuse.search(searchValue);
+
+                result.forEach((item) => {
+                    movieData.push(item.item);
+                })
+                setMovieDataState([...movieData]);
+            })
+        }
+
+
+    }, [loadMovieCount, searchValue])
 
     const UploadMovieButton = (props) => {
 
@@ -127,7 +158,11 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-
+            // console.log(props.id);
+            MediaModule.removeMovie(props.id).then(()=>{
+                console.log("removed movies");
+                window.location.reload();
+            });
         }
 
         return (
@@ -146,11 +181,7 @@ export function ManageMovies(props) {
 
     const showMovieRow = () => {
 
-        console.log("showMovieRow", loadMovieCount);
-
         return movieDataState.map((data) => {
-
-            console.log(data.id);
 
             return (
                 <>
@@ -162,7 +193,7 @@ export function ManageMovies(props) {
                             {data.title}
                         </TableCell>
                         <TableCell align="right">
-                            <OpenButton id={data.id} /> 
+                            <OpenButton id={data.id} />
                             <EditButton id={data.id} />
                             <RemoveButton id={data.id} />
                         </TableCell>
@@ -202,15 +233,42 @@ export function ManageMovies(props) {
         );
     };
 
+    const SearchField = () => {
+
+        var searchValue = "";
+
+        const onSubmitHandler = () => {
+            history.push("/manage/movies/" + searchValue);
+        }
+
+        const onChangeHandler = (value) => {
+            searchValue = value;
+        }
+
+        return (
+            <form noValidate autoComplete="off" onSubmit={(e) => { onSubmitHandler(e) }}>
+                <TextField
+                    label="Search Movie"
+                    variant="outlined"
+                    onChange={(e) => { onChangeHandler(e.target.value) }}
+                    fullWidth
+                />
+            </form>
+        );
+    }
+
 
     return (
         <Container>
             <MenuBar />
             <Grid container spacing={3}>
-                <Grid item xs={10}>
-                    <h2>Manage Movies</h2>
+                <Grid item xs={6}>
+                    <h2>Manage Movies{searchValue ? "- Searching " + searchValue : ""}</h2>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
+                    <SearchField />
+                </Grid>
+                <Grid item xs={3}>
                     <UploadMovieButton />
                 </Grid>
                 <Grid item xs={12}>

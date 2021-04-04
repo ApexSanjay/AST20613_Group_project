@@ -6,13 +6,17 @@ import MenuBar from "./components/menuBar";
 import { useHistory } from 'react-router';
 import Container from "./components/container";
 import MediaModule from "./modules/MediaModule";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
 export function Upload(props) {
 
     var movieFile = null;
     var posterFile = null;
     const [newID, setNewID] = useState();
-    console.log(newID);
+    // console.log(newID);
+    const [uploading, setUploading] = useState(false);
 
     const history = useHistory();
 
@@ -26,6 +30,15 @@ export function Upload(props) {
         movieLength: "",
         movieReleaseDate: ""
     }
+
+    const useStyles = makeStyles((theme) => ({
+        backdrop: {
+            zIndex: theme.zIndex.drawer + 1,
+            color: '#fff',
+        },
+    }));
+
+    const classes = useStyles();
 
     useEffect(() => {
         MediaModule.getNewMovieID().then(
@@ -313,6 +326,8 @@ export function Upload(props) {
         e.preventDefault();
         // console.log("submit");
 
+        setUploading(true);
+
         //upload movie
         MediaModule.uploadMovie(newID, movieFile).then(() => {
             console.log("movie upload success");
@@ -331,18 +346,22 @@ export function Upload(props) {
 
                 MediaModule.createMovieInfo(newID.toString(), movieData).then(() => {
                     console.log("movie info upload success");
+                    setUploading(false);
                     history.push("/movie/" + newID);
 
                 }).catch((e) => {
                     console.log(e.message);
+                    setUploading(false);
                 });
 
             }).catch((e) => {
                 console.log(e.message);
+                setUploading(false);
             });
 
         }).catch((e) => {
             console.log(e.message);
+            setUploading(false);
         });
     }
 
@@ -370,6 +389,12 @@ export function Upload(props) {
 
                 </Grid>
             </form>
+            <Backdrop className={classes.backdrop} open={uploading}>
+                <CircularProgress color="inherit" />
+                Uploading... <br />
+                This can takes several minutes.<br />
+                Please do not close this page.<br />
+            </Backdrop>
         </Container>
     );
 }

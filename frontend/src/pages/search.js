@@ -74,7 +74,7 @@ export function Search(props) {
                     color="primary"
                     onClick={onclickHandler}
                 >
-                    Watch
+                    Go
                 </Button>
             </Container>
         );
@@ -82,17 +82,20 @@ export function Search(props) {
 
     const showResultRows = () => {
 
-        // return (<></>);
-
         return searchResult.map((result) => {
+
+            console.log(result.item);
 
             return (
                 <TableRow key={result.item.id}>
                     <TableCell component="th" scope="row">
-                        {result.item.id}
+                        {result.item.title}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                        {result.item.title}
+                        {result.item.movieReleaseDate}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                        {result.item.imdbReview}
                     </TableCell>
                     <TableCell align="right">
                         <WatchButton id={result.item.id} />
@@ -114,23 +117,15 @@ export function Search(props) {
                         <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell>Movie Title</TableCell>
-                                    <TableCell align="right">Actions</TableCell>
+                                    <TableCell><b>Movie Title</b></TableCell>
+                                    <TableCell><b>Release Date</b></TableCell>
+                                    <TableCell><b>Reviews</b></TableCell>
+                                    <TableCell align="right"><b>Actions</b></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
 
                                 {showResultRows()}
-
-                                {/* <TableRow key="row name">
-                                    <TableCell component="th" scope="row">
-                                        Row Name
-                                        </TableCell>
-                                    <TableCell align="right">Button here</TableCell>
-                                </TableRow> */}
-
-
 
                             </TableBody>
                         </Table>

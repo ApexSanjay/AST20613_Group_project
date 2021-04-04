@@ -1,0 +1,148 @@
+[
+{
+    "id": 1,
+    "title": "Sherlock ",
+    "description": "A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.",
+    "Director": [" Mark Gatiss", "Steven Moffat"],
+    "cast":[" Benedict Cumberbatch", "Martin Freeman", "Una Stubbs"],
+    "trailerURL": "https://www.youtube.com/watch?v=7hjPxUfV32Q",
+    "imdbReview": "9.1",
+    "showLength": "1 hour 28 minutes",
+    "showReleaseDate": "2010",
+    "seasonTwo":[
+        {"id":21,"title":"A Scandal in Belgravia"},
+        {"id":22,"title":"The Hounds of Baskerville"},
+        {"id":23,"title":"The Reichenbach Fall"}
+    ],
+    "seasonThree":[
+        {"id":31,"title":"The Empty Hearse"},
+        {"id":32,"titte":"The Sign of Three"},
+        {"id":33,"title":"His Last Vow"}
+    ],
+    "seasonFour":[
+        {"id":41,"title":"The Six Thatchers"},
+        {"id":42,"title":"The Lying Detective"},
+        {"id":43,"title":"The Final Problem"}
+    ]
+
+},{
+    "id": 2,
+    "title": "The Mandalorian ",
+    "description": "The travels of a lone bounty hunter in the outer reaches of the galaxy, far from the authority of the New Republic.",
+    "Director": " Jon Favreau",
+    "cast":[" Pedro Pascal", "Gina Carano", "Giancarlo Esposito"],
+    "trailerURL": "https://www.youtube.com/watch?v=aOC8E8z_ifw",
+    "imdbReview": "8.8",
+    "showLength": "40 minutes",
+    "showReleaseDate": "2019",
+    "seasonOne":[
+        {"id":11, "title":"Chapter 1: The Mandalorian" },
+        {"id":12, "title":"Chapter 2: The Child"},
+        {"id":13, "title":"Chapter 3: The Sin"},
+        {"id":14, "title":"Chapter 4: Sanctuary"},
+        {"id":15, "title":"Chapter 5: The Gunslinger"}
+    ],
+    "seasonTwo":[
+        {"id":21, "title":"Chapter 9: The Marshal"},
+        {"id":22, "title":"Chapter 10: The Passenger"},
+        {"id":23, "title":"Chapter 11: The Heiress"},
+        {"id":24, "title":"Chapter 12: The Siege"},
+        {"id":25, "title":"Chapter 13: The Jedi"}
+    ]
+
+},{
+    "id": 3,
+    "title": "Narcos ",
+    "description": "A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar, as well as the many other drug kingpins who plagued the country through the years",
+    "Director":  ["Carlo Bernard", "Chris Brancato", "Doug Miro"],
+    "cast":[ " Pedro Pascal", "Wagner Moura", "Boyd Holbrook"],
+    "trailerURL": "https://www.youtube.com/watch?v=xl8zdCY-abw",
+    "imdbReview": "8.8",
+    "showLength": "49 minutes",
+    "showReleaseDate": "2015",
+    "seasonOne":[
+        {"id":11,"title":"Descenso"},
+        {"id":12,"title":"The Sword of Simón Bolivar"},
+        {"id":13,"title":"The Men of Always"},
+        {"id":14,"title":"The Palace in Flames"},
+        {"id":15,"title":"There Will Be a Future"}
+    ],
+    "seasonTwo":[
+        {"id":21,"title":"Free at Last"},
+        {"id":22,"title":"Cambalache"},
+        {"id":23,"title":"Our Man in Madrid"},
+        {"id":24,"title":"2016The Good, the Bad, and the Dead"},
+        {"id":25,"title":"The Enemies of My Enemy"}
+    ],
+    "seasonThree":[
+        {"id":31,"title":"The Kingpin Strategy"},
+        {"id":32,"title":"The Cali KGB"},
+        {"id":33,"title":"Follow the Money"},
+        {"id":34,"title":"Checkmate"},
+        {"id":35,"title":"MRO"}
+    ]
+
+},{
+    "id": 4,
+    "title": "Black Mirror ",
+    "description": "An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.",
+    "Director": "  Charlie Brooker",
+    "cast":[" Daniel Lapaine", "Hannah John-Kamen", "Michaela Coel"],
+    "trailerURL": "https://www.youtube.com/watch?v=-qIlCo9yqpY",
+    "imdbReview": "8.8",
+    "showLength": "1 hour",
+    "showReleaseDate": "2011",
+    "seasonThree":[
+        {"id":31,"title":"Nosedive"},
+        {"id":32,"title":"Playtest"},
+        {"id":33,"title":"Shut Up and Dance"},
+        {"id":34,"title":"San Junipero"},
+        {"id":35,"title":"Men Against Fire"}
+    ],
+    "seasonFour":[
+        {"id":41,"title":"USS Callister"},
+        {"id":42,"title":"Arkangel"},
+        {"id":43,"title":"Crocodile"},
+        {"id":44,"title":"Hang the DJ"},
+        {"id":45,"title":"Metalhead"}
+    ],
+    "seasonFive":[
+        {"id":51,"title":"Striking Vipers"},
+        {"id":52,"title":"Smithereens"},
+        {"id":53,"title":"Rachel, Jack and Ashley Too"}
+    ]
+
+    },{
+    "id": 5,
+    "title": "Stranger Things ",
+    "description": "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.",
+    "Director": [" Matt Duffer", "Ross Duffer"],
+    "cast":["  Millie Bobby Brown", "Finn Wolfhard", "Winona Ryder"],
+    "trailerURL": "https://www.youtube.com/watch?v=b9EkMc79ZSU",
+    "imdbReview": "8.7",
+    "showLength": "51 minutes",
+    "showReleaseDate": "2016",
+    "seasonOne":[
+        {"id":11,"title":"Chapter One: The Vanishing of Will Byers"},
+        {"id":12,"title":"Chapter Two: The Weirdo on Maple Street"},
+        {"id":13,"title":"Chapter Three: Holly, Jolly"},
+        {"id":14,"title":"Chapter Four: The Body"},
+        {"id":15,"title":"Chapter Five: The Flea and the Acrobat"}
+    ],
+    "seasonTwo":[
+        {"id":21,"title":"Chapter One: MADMAX"},
+        {"id":22,"title":"Chapter Two: Trick or Treat, Freak"},
+        {"id":23,"title":"Chapter Three: The Pollywog"},
+        {"id":24,"title":"Chapter Four: Will the Wise"},
+        {"id":25,"title":"Chapter Five: Dig Dug"}
+    ],
+    "seasonThree":[
+        {"id":31,"title":"Chapter One: Suzie, Do You Copy?"},
+        {"id":32,"title":"Chapter Two: The Mall Rats"},
+        {"id":33,"title":"Chapter Three: The Case of the Missing Lifeguard"},
+        {"id":34,"title":"Chapter Four: The Sauna Test"},
+        {"id":35,"title":"Chapter Five: The Flayed"}
+    ]
+}
+
+]
