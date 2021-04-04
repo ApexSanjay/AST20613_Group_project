@@ -13,9 +13,34 @@ const getAllMovies = () => {
     return firebase.firestore().collection("movies").orderBy("id").get();
 }
 
-const suggestMovie = () => {
-    //todo
-    return;
+const suggestMovie = async () => {
+
+    const getRandomId = (max) => {
+
+        var id = parseInt(Math.random() * 1000);
+        id %= max;
+        id++;
+
+        return id;
+    }
+
+    var movies = [];
+    var res = [];
+
+    await getAllMovies().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            movies.push(doc.data());
+        });
+    });
+
+    for (var i = 0; i < 10; i++) {
+        res.push(movies[getRandomId(movies.length)]);
+    }
+
+    return new Promise((resolve, reject) => {
+        resolve(res);
+    });
+
 };
 
 const createPlaylist = (name, movieIDList) => {
