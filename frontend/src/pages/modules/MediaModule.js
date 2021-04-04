@@ -108,7 +108,9 @@ const removeMovie = async (id) => {
     await firebase.firestore().collection("reviews").where("movieID", "==", id).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(doc.id, " => ", doc.data());
-            firebase.firestore().collection("reviews").doc(doc.id).delete();
+            firebase.firestore().collection("reviews").doc(doc.id).delete().then(()=>{
+                console.log("removed reviews of the movies");
+            });
         });
     });
 
@@ -124,6 +126,8 @@ const removeMovie = async (id) => {
             });
             firebase.firestore().collection("playlist").doc(doc.id).update({
                 movieID: temp_movieID
+            }).then(()=>{
+                console.log("removed movie from playlist");
             });
         });
     });
