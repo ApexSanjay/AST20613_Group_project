@@ -59,6 +59,9 @@ const updateMovieInfo = (id, movieInfo) => {
 };  //.then().catch() is available
 
 const removeMovieInfo = (id) => {
+    if(!isNaN(id)){
+        id = id.toString();
+    }
     return firebase.firestore().collection("movies").doc(id).delete();
 };  //.then().catch() is available
 
@@ -82,9 +85,40 @@ const getMovies = (startFrom) => {
     return firebase.firestore().collection("movies").orderBy("id", "asc").startAt(startFrom).endAt(startFrom + 10 - 1).get();
 }
 
+const removeMovie = async (id) => {
+
+    await axios.get("http://localhost:4000/remove/" + id).then((res)=>{
+        console.log(res.data);
+        removeMovieInfo(id);
+    }).catch((e)=>{
+        console.log(e.message);
+    });
+
+    if(typeof id === 'number'){
+        id = id.toString();
+    }
+
+    await firebase.firestore().collection("reviews").where("movieID", "==", id).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // console.log(doc.id, " => ", doc.data());
+            firebase.firestore().collection("reviews").doc(doc.id).delete();
+        });
+    });
+
+    return new Promise((resolve, reject) => {
+        resolve();
+    });
+
+    // await removeMovieInfo().then(()=>{
+    //     console.log("Remove Movie Info Success.");
+    // });
+
+}
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
+    removeMovie,
     movieInfo,
     createMovieInfo,
     updateMovieInfo,

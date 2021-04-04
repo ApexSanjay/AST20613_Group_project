@@ -51,13 +51,29 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
         '-start_number 0',
         '-hls_time 10',
         '-hls_list_size 0',
-        '-f hls'
+        '-f hls',
+        '-s 640x272',
+        '-aspect 640:272',
+        '-r 23.976'
     ]).output('data/encoded/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
         console.log("End of encoding.");
         res.sendStatus(200);    //success message
     }).run();
 
 });
+
+app.get('/remove/:id', function (req, res) {
+    var dir = "data/encoded/" + req.params.id;
+
+    if (!fs.existsSync(dir)) {
+        res.sendStatus(200);
+        res.end();
+    } else {
+        fs.rmdirSync(dir, { recursive: true });
+        res.sendStatus(200);
+        res.end();
+    }
+  });
 
 app.use("/play", createProxyMiddleware({
     target: "http://localhost:8000/encoded/",

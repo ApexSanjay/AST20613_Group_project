@@ -35,7 +35,6 @@ export function ManageMovies(props) {
 
     const params = useParams();
     const searchValue = params.search;
-    console.log(searchValue);
 
     var movieData = movieDataState;
 
@@ -65,7 +64,6 @@ export function ManageMovies(props) {
 
                 const result = fuse.search(searchValue);
 
-                console.log(result);
                 result.forEach((item) => {
                     movieData.push(item.item);
                 })
@@ -160,7 +158,11 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-
+            // console.log(props.id);
+            MediaModule.removeMovie(props.id).then(()=>{
+                console.log("removed movies");
+                window.location.reload();
+            });
         }
 
         return (
@@ -179,11 +181,7 @@ export function ManageMovies(props) {
 
     const showMovieRow = () => {
 
-        console.log("showMovieRow", loadMovieCount);
-
         return movieDataState.map((data) => {
-
-            console.log(data.id);
 
             return (
                 <>
