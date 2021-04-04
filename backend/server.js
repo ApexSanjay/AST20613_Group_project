@@ -35,7 +35,7 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
 
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-    var dir = "data/encoded/" + req.params.id;
+    var dir = "data/movie/" + req.params.id;
 
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
@@ -55,7 +55,7 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
         '-s 640x272',
         '-aspect 640:272',
         '-r 23.976'
-    ]).output('data/encoded/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
+    ]).output('data/movie/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
         console.log("End of encoding.");
         res.sendStatus(200);    //success message
     }).run();
@@ -63,7 +63,7 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
 });
 
 app.get('/remove/:id', function (req, res) {
-    var dir = "data/encoded/" + req.params.id;
+    var dir = "data/movie/" + req.params.id;
 
     if (!fs.existsSync(dir)) {
         res.sendStatus(200);
@@ -76,7 +76,7 @@ app.get('/remove/:id', function (req, res) {
   });
 
 app.use("/play", createProxyMiddleware({
-    target: "http://localhost:8000/encoded/",
+    target: "http://localhost:8000/movie/",
     changeOrigin: true,
     pathRewrite: {
         [`^/play`]: '',
