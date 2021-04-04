@@ -3,10 +3,17 @@ import "firebase/firestore";
 import "firebase/storage";
 import axios from 'axios';
 
-const getMovieStream = (movieID) => {
-    //todo
-    const movieURL = "http://localhost:4000/play/" + movieID + "/" + movieID + ".m3u8";
+const getMovieStream = (movieID, plan = "Basic") => {
 
+    var movieURL = "http://localhost:4000/play/480p/" + movieID + "/" + movieID + ".m3u8";
+    if(plan === "Basic"){
+        movieURL = "http://localhost:4000/play/480p/" + movieID + "/" + movieID + ".m3u8";
+    } else if (plan === "Standard") {
+        movieURL = "http://localhost:4000/play/1080p/" + movieID + "/" + movieID + ".m3u8";
+    } else if (plan === "Premium"){
+        movieURL = "http://localhost:4000/play/4k/" + movieID + "/" + movieID + ".m3u8";
+    }
+    
     return movieURL;
 };
 
