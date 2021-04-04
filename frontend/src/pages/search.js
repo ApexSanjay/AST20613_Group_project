@@ -112,9 +112,9 @@ export function Search(props) {
                         <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell>Movie Title</TableCell>
-                                    <TableCell align="right">Actions</TableCell>
+                                    <TableCell><b>ID</b></TableCell>
+                                    <TableCell><b>Movie Title</b></TableCell>
+                                    <TableCell align="right"><b>Actions</b></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
