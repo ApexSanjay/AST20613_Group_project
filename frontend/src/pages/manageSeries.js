@@ -51,7 +51,7 @@ export function ManageSeries(props) {
         `;
 
         const onclickHandler = () => {
-            history.push("/upload");
+            history.push("/upload/series");
         }
 
         return (

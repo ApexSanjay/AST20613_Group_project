@@ -9,14 +9,18 @@ import MediaModule from "./modules/MediaModule";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 export function UploadSeries(props) {
+
 
     var movieFile = null;
     var posterFile = null;
     const [newID, setNewID] = useState();
     // console.log(newID);
     const [uploading, setUploading] = useState(false);
+
+    const [slides, setSlides] = useState();
 
     const history = useHistory();
 
