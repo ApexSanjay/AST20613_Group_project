@@ -82,7 +82,7 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            history.push("/upload");
+            history.push("/upload/movie");
         }
 
         return (
