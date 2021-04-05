@@ -17,4 +17,5 @@ export { default as Playlist } from './playlist';
 export { default as EditMovie } from './editMovie';
 export { default as ManageMovies } from './manageMovies';
 export { default as ManageAdmins } from './manageAdmins';
+export { default as ManageSeries } from './manageSeries';
 export { default as Search } from './search';
