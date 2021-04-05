@@ -62,7 +62,7 @@ export function ManageSeries(props) {
                     onClick={onclickHandler}
                     fullWidth
                 >
-                    Upload a new movie
+                    Upload a new series
                 </Button>
             </Container>
 
