@@ -60,7 +60,7 @@ const MenuBar = () => {
                 history.push("/browse");
                 break;
             case "series":
-                history.push("/series");
+                history.push("/browse/series");
                 break;
             case "myLib":
                 history.push("/profile");
@@ -88,6 +88,9 @@ const MenuBar = () => {
                 break;
             case "manageMovies":
                 history.push("/manage/movies");
+                break;
+            case "manageSeries":
+                history.push("/manage/series");
                 break;
             default:
                 break;
@@ -222,6 +225,7 @@ const MenuBar = () => {
                     >
                         <MenuItem onClick={() => { btnHandler("manageAdmins") }}>Manage Admins</MenuItem>
                         <MenuItem onClick={() => { btnHandler("manageMovies") }}>Manage Movies</MenuItem>
+                        <MenuItem onClick={() => { btnHandler("manageSeries") }}>Manage Series</MenuItem>
                     </Menu>
                 </Grid>
                 {/* <Grid item xs={6}> */}

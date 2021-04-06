@@ -1,4 +1,5 @@
 export { default as Browse } from './browse';
+export { default as BrowseSeries } from './browseSeries';
 export { default as Movie } from './movie';
 export { default as SettingProfile } from './settingProfile';
 export { default as SettingMembership } from './settingMembership';
@@ -13,8 +14,10 @@ export { default as Profile } from './profile';
 export { default as Play } from './play';
 export { default as Series } from './series';
 export { default as Upload } from './upload';
+export { default as UploadSeries } from './uploadSeries';
 export { default as Playlist } from './playlist';
 export { default as EditMovie } from './editMovie';
 export { default as ManageMovies } from './manageMovies';
 export { default as ManageAdmins } from './manageAdmins';
+export { default as ManageSeries } from './manageSeries';
 export { default as Search } from './search';

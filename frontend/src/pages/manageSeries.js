@@ -18,7 +18,7 @@ import TextField from '@material-ui/core/TextField';
 import BrowsingModules from './modules/BrowsingModules';
 import Fuse from 'fuse.js'
 
-export function ManageMovies(props) {
+export function ManageSeries(props) {
 
     const history = useHistory();
 
@@ -39,42 +39,11 @@ export function ManageMovies(props) {
     var movieData = movieDataState;
 
     useEffect(() => {
-        movieData = [];
-        if (!searchValue) {
-            MediaModule.getMovies(loadMovieCount).then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    movieData.push(doc.data());
-                });
-                setMovieDataState([...movieData]);
-            });
-        } else {
-            // console.log("???");
-            BrowsingModules.getAllMovies().then((querySnapshot) => {
-                var allMovies = [];
-                querySnapshot.forEach((doc) => {
-                    allMovies.push(doc.data());
-                });
-
-                const options = {
-                    includeScore: true,
-                    keys: ["id", "title"]
-                }
-
-                const fuse = new Fuse(allMovies, options)
-
-                const result = fuse.search(searchValue);
-
-                result.forEach((item) => {
-                    movieData.push(item.item);
-                })
-                setMovieDataState([...movieData]);
-            })
-        }
 
 
-    }, [loadMovieCount, searchValue])
+    }, [])
 
-    const UploadMovieButton = (props) => {
+    const UploadSeriesButton = (props) => {
 
         const Container = styled.div`
             display: inline;
@@ -82,7 +51,7 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            history.push("/upload/movie");
+            history.push("/upload/series");
         }
 
         return (
@@ -93,7 +62,7 @@ export function ManageMovies(props) {
                     onClick={onclickHandler}
                     fullWidth
                 >
-                    Upload a new movie
+                    Upload a new series
                 </Button>
             </Container>
 
@@ -108,7 +77,7 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            history.push("/movie/" + props.id);
+            history.push("/series/" + props.id);
         }
 
         return (
@@ -133,7 +102,7 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            history.push("/editMovie/" + props.id);
+
         }
 
         return (
@@ -158,11 +127,7 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            // console.log(props.id);
-            MediaModule.removeMovie(props.id).then(()=>{
-                console.log("removed movies");
-                window.location.reload();
-            });
+
         }
 
         return (
@@ -203,82 +168,26 @@ export function ManageMovies(props) {
         })
     }
 
-
-    const LoadMoreButton = (props) => {
-
-        const Container = styled.div`
-            display: inline;
-            margin: 5px;
-        `;
-
-        const onclickHandler = () => {
-            var count = loadMovieCount + 10;
-            setLoadMovieCount(count);
-        }
-
-        return (
-            <center>
-                <Container>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={onclickHandler}
-                    >
-                        Load More
-                </Button>
-                </Container>
-            </center>
-
-
-        );
-    };
-
-    const SearchField = () => {
-
-        var searchValue = "";
-
-        const onSubmitHandler = () => {
-            history.push("/manage/movies/" + searchValue);
-        }
-
-        const onChangeHandler = (value) => {
-            searchValue = value;
-        }
-
-        return (
-            <form noValidate autoComplete="off" onSubmit={(e) => { onSubmitHandler(e) }}>
-                <TextField
-                    label="Search Movie"
-                    variant="outlined"
-                    onChange={(e) => { onChangeHandler(e.target.value) }}
-                    fullWidth
-                />
-            </form>
-        );
-    }
-
-
     return (
         <Container>
             <MenuBar />
             <Grid container spacing={3}>
                 <Grid item xs={6}>
-                    <h2>Manage Movies{searchValue ? "- Searching " + searchValue : ""}</h2>
+                    <h2>Manage Series{searchValue ? "- Searching " + searchValue : ""}</h2>
                 </Grid>
-                <Grid item xs={3}>
-                    <SearchField />
-                </Grid>
-                <Grid item xs={3}>
-                    <UploadMovieButton />
+                <Grid item xs={6}>
+                    <Grid container justify="flex-end">
+                        <UploadSeriesButton />
+                    </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     <TableContainer component={Paper}>
                         <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell>Movies Name</TableCell>
-                                    <TableCell align="right">Actions</TableCell>
+                                    <TableCell><b>ID</b></TableCell>
+                                    <TableCell><b>Series Name</b></TableCell>
+                                    <TableCell align="right"><b>Actions</b></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -286,11 +195,10 @@ export function ManageMovies(props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <LoadMoreButton />
                 </Grid>
             </Grid>
         </Container>
     );
 }
 
-export default ManageMovies;
+export default ManageSeries;
