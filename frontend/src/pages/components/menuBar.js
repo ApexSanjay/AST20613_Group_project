@@ -60,7 +60,7 @@ const MenuBar = () => {
                 history.push("/browse");
                 break;
             case "series":
-                history.push("/series");
+                history.push("/browse/series");
                 break;
             case "myLib":
                 history.push("/profile");
