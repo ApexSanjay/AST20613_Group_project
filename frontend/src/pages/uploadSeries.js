@@ -44,6 +44,10 @@ export function UploadSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
+        MediaModule.getNewSeriesID().then((id)=>{
+            // console.log(id);
+            setNewID(id);
+        });
     }, []);
 
     const SelectFile = () => {
@@ -121,7 +125,7 @@ export function UploadSeries(props) {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <h2>Select Movie Poster</h2>
+                    <h2>Select Poster</h2>
                     <input
                         name="movie"
                         type="file"
@@ -328,7 +332,7 @@ export function UploadSeries(props) {
 
         return (
             <div>
-                <h2>Input Movie Data</h2>
+                <h2>Input Series Data</h2>
                 <TitleField />
                 <DescriptionField />
                 <DirectorField />
@@ -405,7 +409,7 @@ export function UploadSeries(props) {
                         <h1>Upload Movie</h1>
                     </Grid>
                     <Grid item xs={12}>
-                        <h2>Select Movie File</h2>
+                        <h2>Select File</h2>
                         {displayFileField()}
                         <AddMoreFileButton />
                     </Grid>

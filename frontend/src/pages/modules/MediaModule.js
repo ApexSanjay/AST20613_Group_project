@@ -6,14 +6,14 @@ import axios from 'axios';
 const getMovieStream = (movieID, plan = "Basic") => {
 
     var movieURL = "http://localhost:4000/play/480p/" + movieID + "/" + movieID + ".m3u8";
-    if(plan === "Basic"){
+    if (plan === "Basic") {
         movieURL = "http://localhost:4000/play/480p/" + movieID + "/" + movieID + ".m3u8";
     } else if (plan === "Standard") {
         movieURL = "http://localhost:4000/play/1080p/" + movieID + "/" + movieID + ".m3u8";
-    } else if (plan === "Premium"){
+    } else if (plan === "Premium") {
         movieURL = "http://localhost:4000/play/4k/" + movieID + "/" + movieID + ".m3u8";
     }
-    
+
     return movieURL;
 };
 
@@ -66,7 +66,7 @@ const updateMovieInfo = (id, movieInfo) => {
 };  //.then().catch() is available
 
 const removeMovieInfo = (id) => {
-    if(!isNaN(id)){
+    if (!isNaN(id)) {
         id = id.toString();
     }
     return firebase.firestore().collection("movies").doc(id).delete();
@@ -88,27 +88,43 @@ const getNewMovieID = () => {
     return firebase.firestore().collection("movies").orderBy("id", "desc").get();
 }
 
+const getNewSeriesID = async () => {
+
+    var id = -1;
+    await firebase.firestore().collection("series").orderBy("id", "desc").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if(doc.data().id > id) {
+                id = doc.data().id;
+            }
+        })
+    });
+
+    return new Promise((resolve, reject)=>{
+        resolve(id + 1);
+    })
+}
+
 const getMovies = (startFrom) => {
     return firebase.firestore().collection("movies").orderBy("id", "asc").startAt(startFrom).endAt(startFrom + 10 - 1).get();
 }
 
 const removeMovie = async (id) => {
 
-    await axios.get("http://localhost:4000/remove/" + id).then((res)=>{
+    await axios.get("http://localhost:4000/remove/" + id).then((res) => {
         console.log(res.data);
         removeMovieInfo(id);
-    }).catch((e)=>{
+    }).catch((e) => {
         console.log(e.message);
     });
 
-    if(typeof id === 'number'){
+    if (typeof id === 'number') {
         id = id.toString();
     }
 
     await firebase.firestore().collection("reviews").where("movieID", "==", id).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // console.log(doc.id, " => ", doc.data());
-            firebase.firestore().collection("reviews").doc(doc.id).delete().then(()=>{
+            firebase.firestore().collection("reviews").doc(doc.id).delete().then(() => {
                 console.log("removed reviews of the movies");
             });
         });
@@ -120,13 +136,13 @@ const removeMovie = async (id) => {
             var temp = doc.data();
             var temp_movieID = [];
             temp.movieID.forEach((item) => {
-                if(item !== id){
+                if (item !== id) {
                     temp_movieID.push(item);
                 }
             });
             firebase.firestore().collection("playlist").doc(doc.id).update({
                 movieID: temp_movieID
-            }).then(()=>{
+            }).then(() => {
                 console.log("removed movie from playlist");
             });
         });
@@ -155,6 +171,7 @@ const MediaModule = {
     uploadPoster,
     getMoviePoster,
     getNewMovieID,
+    getNewSeriesID,
     getMovies
 }
 export default MediaModule;
