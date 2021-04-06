@@ -27,7 +27,8 @@ import {
   ManageMovies,
   Search,
   ManageSeries,
-  UploadSeries
+  UploadSeries,
+  BrowseSeries
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -167,6 +168,9 @@ function App() {
             </ProtectedRoute>
             <ProtectedRoute path="/movie">
               <Movie />
+            </ProtectedRoute>
+            <ProtectedRoute path="/browse/series">
+              <BrowseSeries />
             </ProtectedRoute>
             <ProtectedRoute path="/browse">
               <Browse />

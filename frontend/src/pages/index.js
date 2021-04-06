@@ -1,4 +1,5 @@
 export { default as Browse } from './browse';
+export { default as BrowseSeries } from './browseSeries';
 export { default as Movie } from './movie';
 export { default as SettingProfile } from './settingProfile';
 export { default as SettingMembership } from './settingMembership';
