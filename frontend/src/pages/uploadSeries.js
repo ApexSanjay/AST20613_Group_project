@@ -9,10 +9,8 @@ import MediaModule from "./modules/MediaModule";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 export function UploadSeries(props) {
-
 
     var movieFile = null;
     var posterFile = null;
@@ -20,7 +18,8 @@ export function UploadSeries(props) {
     // console.log(newID);
     const [uploading, setUploading] = useState(false);
 
-    const [slides, setSlides] = useState();
+    const [fileNum, setFileNum] = useState(1);
+    console.log(fileNum);
 
     const history = useHistory();
 
@@ -45,14 +44,13 @@ export function UploadSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
-
-    }, []);
+        console.log("?");
+    }, [fileNum]);
 
     const SelectFile = () => {
         return (
-            <Grid container>
+            <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <h2>Select Movie File</h2>
                     <input
                         name="movie"
                         type="file"
@@ -63,11 +61,46 @@ export function UploadSeries(props) {
                         defaultValue={movieFile}
                         required
                     />
-                    {/* </form> */}
                 </Grid>
             </Grid>
         );
     };
+
+    const AddMoreFileButton = () => {
+
+        const onClickHandler = () => {
+            console.log("onClickHandler");
+            setFileNum(fileNum + 1);
+         }
+
+        return (
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={()=>{onClickHandler()}}
+                    >
+                        Add More Files
+            </Button>
+                </Grid>
+            </Grid>
+
+        );
+    }
+
+    const displayFileField = () => {
+        console.log("displayFileField");
+        var temp = [];
+        for(var i = 0; i < fileNum; i++){
+            temp.push("something");
+        }
+
+        return temp.map((item, i) => {
+            console.log("map");
+            return (<SelectFile />);
+        });
+    }
 
     const SelectPoster = () => {
         return (
@@ -357,7 +390,9 @@ export function UploadSeries(props) {
                         <h1>Upload Movie</h1>
                     </Grid>
                     <Grid item xs={12}>
-                        <SelectFile />
+                        <h2>Select Movie File</h2>
+                        {displayFileField()}
+                        <AddMoreFileButton />
                     </Grid>
                     <Grid item xs={12}>
                         <SelectPoster />
