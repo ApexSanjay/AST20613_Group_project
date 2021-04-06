@@ -44,13 +44,17 @@ export function UploadSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        console.log("?");
-    }, [fileNum]);
+    }, []);
 
     const SelectFile = () => {
+
+        const onChangeHandler = (value) => {
+
+        }
+
         return (
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <input
                         name="movie"
                         type="file"
@@ -60,6 +64,17 @@ export function UploadSeries(props) {
                         }}
                         defaultValue={movieFile}
                         required
+                    />
+
+                </Grid>
+                <Grid item xs={6}>
+                <TextField
+                        label="Title"
+                        variant="outlined"
+                        onChange={(e)=>{onChangeHandler(e.target.value)}}
+                        defaultValue={data.description}
+                        required
+                        fullWidth
                     />
                 </Grid>
             </Grid>
@@ -71,7 +86,7 @@ export function UploadSeries(props) {
         const onClickHandler = () => {
             console.log("onClickHandler");
             setFileNum(fileNum + 1);
-         }
+        }
 
         return (
             <Grid container spacing={3}>
@@ -79,7 +94,7 @@ export function UploadSeries(props) {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={()=>{onClickHandler()}}
+                        onClick={() => { onClickHandler() }}
                     >
                         Add More Files
             </Button>
@@ -92,7 +107,7 @@ export function UploadSeries(props) {
     const displayFileField = () => {
         console.log("displayFileField");
         var temp = [];
-        for(var i = 0; i < fileNum; i++){
+        for (var i = 0; i < fileNum; i++) {
             temp.push("something");
         }
 
