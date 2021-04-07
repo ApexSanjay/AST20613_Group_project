@@ -69,6 +69,7 @@ export function UploadSeries(props) {
 
         const onChangeHandler = (value) => {
             num = value;
+
         }
 
         return (
@@ -78,7 +79,6 @@ export function UploadSeries(props) {
                     type="number"
                     defaultValue={num}
                     onChange={(e) => { onChangeHandler(e.target.value) }}
-                    required
                 />
                 <Button
                     variant="contained"
@@ -93,7 +93,7 @@ export function UploadSeries(props) {
 
     const SeasonField = (props) => {
 
-        var seasonNum = props.season;
+        var seasonNum = parseInt(props.season);
 
         var contents = {
             season: 1,
@@ -102,20 +102,79 @@ export function UploadSeries(props) {
 
         const [fileNum, setFileNum] = useState(1);
 
-        const updateContents = (seasonNum, contentID, title = null, files = null) => {
-            if (seasonNum !== null) {
+        const updateContents = (contentID, title = null, files = null) => {
+            console.log("seasonNum", seasonNum);
 
+            if (seasonNum === 1) {
+                if (!data.seasonOne) {
+                    data.seasonOne = [];
+                }
+                var id = seasonNum.toString() + contentID.toString();
+                data.seasonOne[contentID - 1] = { id: id, title: title };
             }
-            if (contentID !== null) {
+            if (seasonNum === 2) {
+                if (!data.seasonTwo) {
+                    data.seasonTwo = [];
+                }
+                data.seasonTwo[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 3) {
+                if (!data.seasonThree) {
+                    data.seasonThree = [];
+                }
+                data.seasonThree[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 4) {
+                if (!data.seasonFour) {
+                    data.seasonFour = [];
+                }
+                data.seasonFour[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 5) {
+                if (!data.seasonFive) {
+                    data.seasonFive = [];
+                }
+                data.seasonFive[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 6) {
+                if (!data.seasonSix) {
+                    data.seasonSix = [];
+                }
+                data.seasonSix[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 7) {
+                if (!data.seasonSeven) {
+                    data.seasonSeven = [];
+                }
+                data.seasonSeven[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 8) {
+                if (!data.seasonEight) {
+                    data.seasonEight = [];
+                }
+                data.seasonEight[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 9) {
+                if (!data.seasonNine) {
+                    data.seasonNine = [];
+                }
+                data.seasonNine[contentID - 1] = { contentID, title };
+            }
+            if (seasonNum === 10) {
+                if (!data.seasonTen) {
+                    data.seasonTen = [];
+                }
+                data.seasonTen[contentID - 1] = { contentID, title };
+            }
+            // if (contentID !== null) {
+            //     if (title !== null) {
 
-            }
-            if (title !== null) {
+            //     }
+            //     if (files !== null) {
 
-            }
-            if (files !== null) {
-
-            }
-            console.log("contents", contents);
+            //     }
+            // }
+            console.log(data);
         }
 
         const SeasonNumberField = (props) => {
@@ -128,8 +187,6 @@ export function UploadSeries(props) {
         const SelectFile = (props) => {
 
             var file, title, id = props.id + 1;
-
-            console.log(id);
 
             const onChangeHandler = (field, value) => {
                 // file = value;
@@ -146,7 +203,7 @@ export function UploadSeries(props) {
                 }
                 // console.log(file, title);
                 // contents[id - 1] = { season, id, title };
-                updateContents(null, null, title, file);
+                updateContents(id, title, file);
             }
 
             return (
@@ -168,7 +225,6 @@ export function UploadSeries(props) {
                             label="Title"
                             variant="outlined"
                             onChange={(e) => { onChangeHandler("title", e.target.value) }}
-                            defaultValue={data.description}
                             required
                             fullWidth
                         />
@@ -222,11 +278,6 @@ export function UploadSeries(props) {
     }
 
     const displaySeasonField = () => {
-        // var temp = [];
-
-        // for (var i = 0; i < seasonNum; i++) {
-        //     temp.push("something");
-        // }
 
         return seasons.map((item, i) => {
             return (
@@ -476,7 +527,15 @@ export function UploadSeries(props) {
 
         setUploading(true);
         console.log(data, newID);
-
+        data.id = newID;
+        MediaModule.createSeriesInfo(newID.toString(), data).then((docRef)=>{
+            console.log(docRef);
+            console.log("uploaded info");
+            MediaModule.uploadSeriesPoster(newID.toString(), posterFile).then(()=>{
+                console.log("uploaded poster");
+                history.push("/series/" + newID);
+            });
+        });
 
     }
 

@@ -31,6 +31,11 @@ const uploadPoster = (movieID, file) => {
     //.then .catch
 };
 
+const uploadSeriesPoster = (id, file) => {
+    return firebase.storage().ref("seriesPosters/" + id + ".jpg").put(file);
+    //.then .catch
+};
+
 const movieInfo = (
     id,
     title,
@@ -163,6 +168,7 @@ const removeMovie = async (id) => {
 }
 
 const createSeriesInfo = (id, seriesInfo) => {
+    console.log(seriesInfo);
     return firebase.firestore().collection("series").doc(id).set(seriesInfo); //.then(docRef).catch(); is available
 };
 
@@ -222,6 +228,7 @@ const MediaModule = {
     getSeriesInfo,
     getMovieInfos,
     uploadPoster,
+    uploadSeriesPoster,
     getMoviePoster,
     getSeriesPoster,
     getNewMovieID,
