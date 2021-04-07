@@ -84,6 +84,7 @@ export function UploadSeries(props) {
                     type="number"
                     defaultValue={season}
                     onChange={(e) => { onChangeHandler(e.target.value) }}
+                    required
                 />
             );
         }
