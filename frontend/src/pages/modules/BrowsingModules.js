@@ -158,6 +158,23 @@ const removeSeriesReview = (reviewID) => {
     return firebase.firestore().collection("seriesReviews").doc(reviewID).delete();
 };  //.then().catch() is available
 
+const getAllSeries = async () => {
+
+    var res = [];
+
+    await firebase.firestore().collection("series").orderBy("id").get().then((querySnapshot)=>{
+        if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc)=>{
+                res.push(doc.data());
+            });
+        }
+    });
+
+    return new Promise((resolve, reject)=>{
+        resolve(res);
+    });
+}
+
 const BrowsingModules = {
     searchMovie,
     suggestMovie,
@@ -177,6 +194,7 @@ const BrowsingModules = {
     getSeriesReviewSnapshot,
     createSeriesReview,
     removeSeriesReview,
+    getAllSeries,
 
 };
 
