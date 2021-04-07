@@ -19,7 +19,8 @@ export function UploadSeries(props) {
     const [uploading, setUploading] = useState(false);
 
     const [fileNum, setFileNum] = useState(1);
-    console.log(fileNum);
+    // console.log(fileNum);
+    const [seasonNum, setSeasonNum] = useState(1);
 
     const history = useHistory();
 
@@ -30,8 +31,8 @@ export function UploadSeries(props) {
         cast: [],
         trailerURL: "",
         imdbReview: "",
-        movieLength: "",
-        movieReleaseDate: ""
+        showLength: "",
+        showReleaseDate: ""
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -44,7 +45,7 @@ export function UploadSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        MediaModule.getNewSeriesID().then((id)=>{
+        MediaModule.getNewSeriesID().then((id) => {
             // console.log(id);
             setNewID(id);
         });
@@ -72,10 +73,10 @@ export function UploadSeries(props) {
 
                 </Grid>
                 <Grid item xs={6}>
-                <TextField
+                    <TextField
                         label="Title"
                         variant="outlined"
-                        onChange={(e)=>{onChangeHandler(e.target.value)}}
+                        onChange={(e) => { onChangeHandler(e.target.value) }}
                         defaultValue={data.description}
                         required
                         fullWidth
@@ -109,15 +110,59 @@ export function UploadSeries(props) {
     }
 
     const displayFileField = () => {
-        console.log("displayFileField");
         var temp = [];
         for (var i = 0; i < fileNum; i++) {
             temp.push("something");
         }
 
         return temp.map((item, i) => {
-            console.log("map");
             return (<SelectFile />);
+        });
+    }
+
+    const AddSeasonButton = () => {
+
+        const onClickHandler = () => {
+            setSeasonNum(seasonNum + 1);
+        }
+
+        return (
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={() => { onClickHandler() }}
+            >
+                Add Season
+            </Button>);
+    }
+
+    const SeasonNumberField = () => {
+        return (
+            <TextField
+                label="Season"
+                type="number"
+
+            />
+        );
+    }
+
+    const displaySeasonField = () => {
+        var temp = [];
+
+        for (var i = 0; i < seasonNum; i++) {
+            temp.push("something");
+        }
+
+        return temp.map((item, i) => {
+            return (
+                <tr>
+                    <td><SeasonNumberField /></td>
+                    <td>
+                        {displayFileField()}
+                        <AddMoreFileButton />
+                    </td>
+                </tr>
+            );
         });
     }
 
@@ -410,8 +455,27 @@ export function UploadSeries(props) {
                     </Grid>
                     <Grid item xs={12}>
                         <h2>Select File</h2>
-                        {displayFileField()}
-                        <AddMoreFileButton />
+                        <table border="1" width="100%">
+                            <tr>
+                                <td><h4><center>Seasons</center></h4></td>
+                                <td><h4><center>Files</center></h4></td>
+                            </tr>
+                            {displaySeasonField()}
+                            {/* <tr>
+                                <td><SeasonNumberField /></td>
+                                <td>
+                                    {displayFileField()}
+                                    <AddMoreFileButton />
+                                </td>
+                            </tr> */}
+                            <tr>
+                                <td colspan="2">
+                                    <center>
+                                        <AddSeasonButton />
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
                     </Grid>
                     <Grid item xs={12}>
                         <SelectPoster />
