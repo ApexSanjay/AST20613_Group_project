@@ -15,13 +15,9 @@ export function UploadSeries(props) {
     var movieFile = null;
     var posterFile = null;
     const [newID, setNewID] = useState();
-    // console.log(newID);
     const [uploading, setUploading] = useState(false);
 
-    // const [fileNum, setFileNum] = useState(1);
-    // console.log(fileNum);
     const [seasonNum, setSeasonNum] = useState(1);
-
     
     const [season, setSeason] = useState([]);
 
@@ -49,7 +45,6 @@ export function UploadSeries(props) {
 
     useEffect(() => {
         MediaModule.getNewSeriesID().then((id) => {
-            // console.log(id);
             setNewID(id);
         });
     }, []);
@@ -115,7 +110,6 @@ export function UploadSeries(props) {
                                 // movieFile = e.target.files[0];
                                 onChangeHandler(e.target.files[0]);
                             }}
-                            required
                         />
 
                     </Grid>
@@ -136,7 +130,6 @@ export function UploadSeries(props) {
         const AddMoreFileButton = () => {
 
             const onClickHandler = () => {
-                // console.log("onClickHandler");
                 setFileNum(fileNum + 1);
             }
 
@@ -235,10 +228,10 @@ export function UploadSeries(props) {
                 case "imdbReview":
                     data.imdbReview = value;
                     break;
-                case "movieLength":
+                case "showLength":
                     data.movieLength = value;
                     break;
-                case "movieReleaseDate":
+                case "showReleaseDate":
                     data.movieReleaseDate = value;
                     break;
 
@@ -362,17 +355,17 @@ export function UploadSeries(props) {
                 </Grid>
             );
         };
-        const MovieLengthField = () => {
+        const ShowLengthField = () => {
             return (
                 <Grid container spacing={3}>
                     <Grid item xs={3}>
-                        Movie Length
+                        Show Length
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
-                            label="Movie Length"
+                            label="Show Length"
                             variant="outlined"
-                            onChange={(e) => { onchangeHandler("movieLength", e.target.value) }}
+                            onChange={(e) => { onchangeHandler("showLength", e.target.value) }}
                             defaultValue={data.movieLength}
                             fullWidth
                             required
@@ -381,17 +374,17 @@ export function UploadSeries(props) {
                 </Grid>
             );
         };
-        const MovieReleaseDateField = () => {
+        const ShowReleaseDateField = () => {
             return (
                 <Grid container spacing={3}>
                     <Grid item xs={3}>
-                        Movie Release Date
+                        Show Release Date
                     </Grid>
                     <Grid item xs={9}>
                         <TextField
-                            label="Movie Release Date"
+                            label="Show Release Date"
                             variant="outlined"
-                            onChange={(e) => { onchangeHandler("movieReleaseDate", e.target.value) }}
+                            onChange={(e) => { onchangeHandler("showReleaseDate", e.target.value) }}
                             defaultValue={data.movieReleaseDate}
                             fullWidth
                             required
@@ -410,8 +403,8 @@ export function UploadSeries(props) {
                 <CastField />
                 <TrailerURLField />
                 <IMDBReviewField />
-                <MovieLengthField />
-                <MovieReleaseDateField />
+                <ShowLengthField />
+                <ShowReleaseDateField />
             </div>
         );
     };
@@ -430,45 +423,10 @@ export function UploadSeries(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        // console.log("submit");
 
         setUploading(true);
 
-        //upload movie
-        MediaModule.uploadMovie(newID, movieFile).then(() => {
-            console.log("movie upload success");
-
-            //upload poster
-            MediaModule.uploadPoster(newID, posterFile).then(() => {
-
-                console.log("poster upload success");
-
-                //upload movie data
-                var movieData = {
-                    ...data,
-                    id: newID
-                }
-                // console.log(movieData);
-
-                MediaModule.createMovieInfo(newID.toString(), movieData).then(() => {
-                    console.log("movie info upload success");
-                    setUploading(false);
-                    history.push("/movie/" + newID);
-
-                }).catch((e) => {
-                    console.log(e.message);
-                    setUploading(false);
-                });
-
-            }).catch((e) => {
-                console.log(e.message);
-                setUploading(false);
-            });
-
-        }).catch((e) => {
-            console.log(e.message);
-            setUploading(false);
-        });
+        
     }
 
     return (
