@@ -42,7 +42,7 @@ function Series(props) {
 
     const history = useHistory();
     var params = useParams();
-    var movieID = params.id;     // id of url "/movie/{id}" 
+    var seriesID = params.id;     // id of url "/movie/{id}" 
 
     //get movie info
     const [movies, setMovies] = useState({
@@ -67,7 +67,9 @@ function Series(props) {
     const userID = LoginModules.getUserProfile().uid;
 
     useEffect(() => {   //init loading
-
+        MediaModule.getSeriesInfo(seriesID.toString()).then((data) => {
+            console.log(data);
+        });
     }, []);
 
     const MenuBar = () => {
@@ -196,22 +198,22 @@ function Series(props) {
                                 newPlaylist = "New Playlist";
                             }
                             // create playlist
-                            BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
-                                // console.log("BM: created playlist");
-                                setUpdatePlaylistSnackBarOpen(true);
-                            }).catch((e) => {
-                                console.log(e.message);
-                            });
+                            // BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
+                            //     // console.log("BM: created playlist");
+                            //     setUpdatePlaylistSnackBarOpen(true);
+                            // }).catch((e) => {
+                            //     console.log(e.message);
+                            // });
                         } else {
                             console.log(selectedPlaylist);
                             // add item to exist playlist
-                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
-                                var newMovieIDList = doc.data().movieID;
-                                newMovieIDList.push(movieID);
-                                BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
-                                    setUpdatePlaylistSnackBarOpen(true);
-                                });
-                            });
+                            // BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
+                            //     var newMovieIDList = doc.data().movieID;
+                            //     newMovieIDList.push(movieID);
+                            //     BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
+                            //         setUpdatePlaylistSnackBarOpen(true);
+                            //     });
+                            // });
                         }
                         handleClose();
                         break;
@@ -330,7 +332,7 @@ function Series(props) {
     const EditMovie = () => {
 
         const onClickHandler = () => {
-            history.push("/editMovie/" + movieID);
+            // history.push("/editSeries/" + seriesID);
         }
 
         return (
@@ -345,7 +347,7 @@ function Series(props) {
     const PlayButton = () => {
         var history = useHistory();
         const play = () => {
-            history.push("/play/" + movieID);
+            history.push("/play/series" + seriesID);
         }
 
         return (
@@ -474,7 +476,7 @@ function Series(props) {
             const SendButton = () => {
                 const onclickHandler = () => {
                     if (review.length !== 0) {
-                        BrowsingModules.createReview(movieID, review, LoginModules.getUserProfile().name);
+                        // BrowsingModules.createReview(movieID, review, LoginModules.getUserProfile().name);
                     }
                 }
 

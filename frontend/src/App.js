@@ -233,7 +233,7 @@ function App() {
             <ProtectedRoute path="/play/:id">
               <Play />
             </ProtectedRoute>
-            <ProtectedRoute path="/series">
+            <ProtectedRoute path="/series/:id">
               <Series />
             </ProtectedRoute>
             <ProtectedRoute path="/search/:value">

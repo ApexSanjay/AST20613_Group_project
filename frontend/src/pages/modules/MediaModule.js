@@ -173,6 +173,23 @@ const removeSeriesInfo = (id) => {
     return firebase.firestore().collection("series").doc(id).delete();
 };  //.then().catch() is available
 
+const getSeriesInfo = async (id) => {
+
+    var data = null;
+    
+    await firebase.firestore().collection("movies").doc(id).get().then((doc) => {
+        data = doc.data();
+    });
+
+    return new Promise((resolve, reject) => {
+        if(data !== null){
+            resolve(data);
+        } else {
+            reject();
+        }
+    });
+};  //.then(doc).catch() is available
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -185,6 +202,7 @@ const MediaModule = {
     updateSeriesInfo,
     removeSeriesInfo,
     getMovieInfo,
+    getSeriesInfo,
     getMovieInfos,
     uploadPoster,
     getMoviePoster,
