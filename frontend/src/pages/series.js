@@ -37,7 +37,7 @@ function Series(props) {
     const [shareSnackBarOpen, setShareSnackBarOpen] = useState(false);
     const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
-    const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
+    const [seriesPoster, setSeriesPoster] = useState(defaultMoviePoster);
     const [removeCommentSnackBar, setRemoveCommentSnackBar] = useState(false);
 
     const history = useHistory();
@@ -52,8 +52,8 @@ function Series(props) {
         cast: [],
         trailerURL: "",
         imdbReview: "",
-        movieLength: "",
-        movieReleaseDate: "",
+        showLength: "",
+        showReleaseDate: "",
     });
 
     const [userLibraryState, setUserLibraryState] = useState([]);
@@ -67,9 +67,37 @@ function Series(props) {
     const userID = LoginModules.getUserProfile().uid;
 
     useEffect(() => {   //init loading
-        MediaModule.getSeriesInfo(seriesID.toString()).then((data) => {
-            console.log(data);
+
+        //isAdmin
+        LoginModules.getAdminUser(userID).then((querySnapshot) => {
+            querySnapshot.forEach(item => {
+                setIsAdmin(true);
+            });
         });
+
+        //series info
+        MediaModule.getSeriesInfo(seriesID.toString()).then((data) => {
+            // console.log(data);
+            setMovies(data);
+        });
+
+        //series poster
+        MediaModule.getSeriesPoster(seriesID).then((url) => {
+            setSeriesPoster(url);
+        })
+
+        //reviews
+        BrowsingModules.getSeriesReviewSnapshot(seriesID)
+            .onSnapshot(
+                (querySnapshot) => {
+                    var reviewList = [];
+                    querySnapshot.forEach((doc) => {
+                        reviewList.push({ id: doc.id, data: doc.data() });
+                        setreviewListState([...reviewList]);
+                    });
+                }
+            )
+        ;
     }, []);
 
     const MenuBar = () => {
@@ -101,7 +129,7 @@ function Series(props) {
     `;
 
     const BackGround = styled.div`
-        background-image: url(${moviePoster});
+        background-image: url(${seriesPoster});
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -198,22 +226,23 @@ function Series(props) {
                                 newPlaylist = "New Playlist";
                             }
                             // create playlist
-                            // BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
-                            //     // console.log("BM: created playlist");
-                            //     setUpdatePlaylistSnackBarOpen(true);
-                            // }).catch((e) => {
-                            //     console.log(e.message);
-                            // });
+                            BrowsingModules.createPlaylist(newPlaylist, [], [seriesID]).then(() => {
+                                // console.log("BM: created playlist");
+                                setUpdatePlaylistSnackBarOpen(true);
+                            }).catch((e) => {
+                                console.log(e.message);
+                            });
                         } else {
                             console.log(selectedPlaylist);
                             // add item to exist playlist
-                            // BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
-                            //     var newMovieIDList = doc.data().movieID;
-                            //     newMovieIDList.push(movieID);
-                            //     BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
-                            //         setUpdatePlaylistSnackBarOpen(true);
-                            //     });
-                            // });
+                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
+                                console.log(doc.data());
+                                // var newMovieIDList = doc.data().movieID;
+                                // newMovieIDList.push(movieID);
+                                // BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
+                                //     setUpdatePlaylistSnackBarOpen(true);
+                                // });
+                            });
                         }
                         handleClose();
                         break;
@@ -384,9 +413,10 @@ function Series(props) {
                 const commentID = props.id;
 
                 const onclickHandler = () => {
-                    BrowsingModules.removeReview(commentID).then(() => {
+                    BrowsingModules.removeSeriesReview(commentID).then(() => {
                         console.log("Success");
                         setRemoveCommentSnackBar(true);
+                        window.location.reload();
                     }).catch((e) => {
                         console.log(e.message);
                     });
@@ -476,7 +506,7 @@ function Series(props) {
             const SendButton = () => {
                 const onclickHandler = () => {
                     if (review.length !== 0) {
-                        // BrowsingModules.createReview(movieID, review, LoginModules.getUserProfile().name);
+                        BrowsingModules.createSeriesReview(seriesID, review, LoginModules.getUserProfile().name);
                     }
                 }
 
@@ -557,7 +587,7 @@ function Series(props) {
                         {/* <EditMovie /> */}
                         <PlayButton />
                         <p>
-                            {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
+                            {movies.showLength} | {movies.showReleaseDate} | IMDB: {movies.imdbReview}
                         </p>
                     </Grid>
                     <Grid item xs={9}>

@@ -177,7 +177,7 @@ const getSeriesInfo = async (id) => {
 
     var data = null;
     
-    await firebase.firestore().collection("movies").doc(id).get().then((doc) => {
+    await firebase.firestore().collection("series").doc(id).get().then((doc) => {
         data = doc.data();
     });
 
@@ -189,6 +189,10 @@ const getSeriesInfo = async (id) => {
         }
     });
 };  //.then(doc).catch() is available
+
+const getSeriesPoster = (id) => {
+    return firebase.storage().ref("seriesPosters/" + id + ".jpg").getDownloadURL();  //.then.catch
+}
 
 const MediaModule = {
     getMovieStream,
@@ -206,6 +210,7 @@ const MediaModule = {
     getMovieInfos,
     uploadPoster,
     getMoviePoster,
+    getSeriesPoster,
     getNewMovieID,
     getNewSeriesID,
     getMovies
