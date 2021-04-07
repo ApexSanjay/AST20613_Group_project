@@ -215,6 +215,9 @@ function App() {
             <ProtectedRoute path="/editMovie/:id">
               <EditMovie />
             </ProtectedRoute>
+            <ProtectedRoute path="/editSeries/:id">
+              <EditMovie />
+            </ProtectedRoute>
             <ProtectedRoute path="/manage/admins">
               <ManageAdmins />
             </ProtectedRoute>
