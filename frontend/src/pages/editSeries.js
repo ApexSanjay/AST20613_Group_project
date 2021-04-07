@@ -3,25 +3,39 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuBar from "./components/menuBar";
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import Container from "./components/container";
 import MediaModule from "./modules/MediaModule";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
-export function UploadSeries(props) {
+export function EditSeries(props) {
 
     var posterFile = null;
-    const [newID, setNewID] = useState();
-    const [uploading, setUploading] = useState(false);
+
+    const params = useParams();
+    const seriesID = params.id;
 
     const [seasonNum, setSeasonNum] = useState(0);
     const [seasons, setSeasons] = useState([]);
 
+    const [currentPoster, setCurrentPoster] = useState(null);
+
     const history = useHistory();
 
-    var data = {
+    // var data = {
+    //     title: "",
+    //     description: "",
+    //     Director: "",
+    //     cast: [],
+    //     trailerURL: "",
+    //     imdbReview: "",
+    //     showLength: "",
+    //     showReleaseDate: ""
+    // }
+
+    const [data, setData] = useState({
         title: "",
         description: "",
         Director: "",
@@ -30,15 +44,7 @@ export function UploadSeries(props) {
         imdbReview: "",
         showLength: "",
         showReleaseDate: ""
-    }
-
-    // var seasons = {
-    //     season: 1,
-    //     content: [{
-    //         id: 11,
-    //         title: "A Scandal in Belgravia",
-    //     }]
-    // }
+    });
 
     const useStyles = makeStyles((theme) => ({
         backdrop: {
@@ -50,9 +56,15 @@ export function UploadSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        MediaModule.getNewSeriesID().then((id) => {
-            setNewID(id);
+        MediaModule.getSeriesInfo(seriesID).then((seriesData) => {
+            // data = seriesData;
+            setData(seriesData)
         });
+
+        MediaModule.getSeriesPoster(seriesID).then((url)=>{
+            setCurrentPoster(url)
+        });
+
     }, []);
 
     const AddSeasonButton = () => {
@@ -69,7 +81,6 @@ export function UploadSeries(props) {
 
         const onChangeHandler = (value) => {
             num = value;
-
         }
 
         return (
@@ -166,14 +177,6 @@ export function UploadSeries(props) {
                 }
                 data.seasonTen[contentID - 1] = { contentID, title };
             }
-            // if (contentID !== null) {
-            //     if (title !== null) {
-
-            //     }
-            //     if (files !== null) {
-
-            //     }
-            // }
             console.log(data);
         }
 
@@ -289,8 +292,13 @@ export function UploadSeries(props) {
     const SelectPoster = () => {
         return (
             <Grid container>
-                <Grid item xs={12}>
-                    <h2>Select Poster</h2>
+                <Grid item xs={6}>
+                    <h2>Current Movie Poster</h2>
+                    <img src={currentPoster} width="80%" alt="Current Poster" />
+                    <br />
+                </Grid>
+                <Grid item xs={6}>
+                    <h2>Select New Poster</h2>
                     <input
                         name="movie"
                         type="file"
@@ -467,7 +475,7 @@ export function UploadSeries(props) {
                             label="Show Length"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("showLength", e.target.value) }}
-                            defaultValue={data.movieLength}
+                            defaultValue={data.showLength}
                             fullWidth
                             required
                         />
@@ -486,7 +494,7 @@ export function UploadSeries(props) {
                             label="Show Release Date"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("showReleaseDate", e.target.value) }}
-                            defaultValue={data.movieReleaseDate}
+                            defaultValue={data.showReleaseDate}
                             fullWidth
                             required
                         />
@@ -524,19 +532,7 @@ export function UploadSeries(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-
-        setUploading(true);
-        console.log(data, newID);
-        data.id = newID;
-        MediaModule.createSeriesInfo(newID.toString(), data).then((docRef)=>{
-            console.log(docRef);
-            console.log("uploaded info");
-            MediaModule.uploadSeriesPoster(newID.toString(), posterFile).then(()=>{
-                console.log("uploaded poster");
-                history.push("/series/" + newID);
-            });
-        });
-
+        
     }
 
     return (
@@ -545,9 +541,9 @@ export function UploadSeries(props) {
             <form onSubmit={onSubmitHandler}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <h1>Upload Movie</h1>
+                        <h1>Update Series</h1>
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <h2>Select File</h2>
                         <table border="1" width="100%">
                             <tr>
@@ -555,13 +551,6 @@ export function UploadSeries(props) {
                                 <td><h4><center>Files</center></h4></td>
                             </tr>
                             {displaySeasonField()}
-                            {/* <tr>
-                                <td><SeasonNumberField /></td>
-                                <td>
-                                    {displayFileField()}
-                                    <AddMoreFileButton />
-                                </td>
-                            </tr> */}
                             <tr>
                                 <td colSpan="2">
                                     <center>
@@ -570,7 +559,7 @@ export function UploadSeries(props) {
                                 </td>
                             </tr>
                         </table>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                         <SelectPoster />
                     </Grid>
@@ -584,14 +573,8 @@ export function UploadSeries(props) {
 
                 </Grid>
             </form>
-            <Backdrop className={classes.backdrop} open={uploading}>
-                <CircularProgress color="inherit" />
-                Uploading... <br />
-                This can takes several minutes.<br />
-                Please do not close this page.<br />
-            </Backdrop>
         </Container>
     );
 }
 
-export default UploadSeries;
+export default EditSeries;

@@ -24,9 +24,13 @@ function Playlist(props) {
     const playlistID = params.id;
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
+    const [seriesPlaylist, setSeriesPlaylist] = useState();
+    const [seriesPlaylistTitle, setSeriesPlaylistTitle] = useState("");
     const [movieListState, setMovieListState] = useState([]);
+    const [seriesListState, setSeriesListState] = useState([]);
 
     var movieList = [];
+    var seriesList = [];
 
     const history = useHistory();
 
@@ -43,6 +47,7 @@ function Playlist(props) {
                 if (doc.exists) {
                     setPlaylistTitle(doc.data().title);
                     setPlaylist(doc.data().movieID);
+                    setSeriesPlaylist(doc.data().seriesID);
                 } else {
                     console.log("doc not exist");
                 }
@@ -70,7 +75,29 @@ function Playlist(props) {
                 console.log(e.message);
             });
         }
-    }, [playlist]);
+
+        //get series title
+        if (seriesPlaylist) {
+            var formattedPlaylist = [];
+
+            for (var i in seriesPlaylist) {
+                formattedPlaylist.push(parseInt(seriesPlaylist[i]))
+            }
+
+            MediaModule.getSeriesInfos(formattedPlaylist).then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    console.log("empty");
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        seriesList.push(doc.data());
+                        setSeriesListState([...seriesList]);
+                    });
+                }
+            }).catch((e) => {
+                console.log(e.message);
+            });
+        }
+    }, [playlist, seriesPlaylist]);
 
     const PlaylistTable = () => {
         const WatchButton = (props) => {
@@ -172,6 +199,105 @@ function Playlist(props) {
     }
 
 
+    const SeriesTable = () => {
+        const WatchButton = (props) => {
+
+            const Container = styled.div`
+                display: inline;
+                margin: 5px;
+            `;
+
+            const onclickHandler = () => {
+                const id = props.id;
+                history.push("/series/" + id);
+            }
+
+            return (
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Watch
+                    </Button>
+                </Container>
+
+            );
+        };
+
+        const RemoveButton = (props) => {
+
+            const Container = styled.div`
+                display: inline;
+                margin: 5px;
+            `;
+
+            const onclickHandler = () => {
+                const seriesID = props.id;
+                const list = seriesPlaylist;
+                for (var i in list) {
+                    if (list[i] === seriesID.toString()) {
+                        list.splice(i, 1);
+                        BrowsingModules.updatePlaylist(playlistID, null, list).then(() => {
+                            console.log("updated");
+                            window.location.reload();   //reload page
+                        });
+                        break;
+                    }
+                }
+            }
+
+            return (
+                <Container>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onclickHandler}
+                    >
+                        Remove
+                    </Button>
+                </Container>
+            );
+        };
+
+        const showSeriesInfo = () => {
+            var res;
+
+            if (seriesListState) {
+                res = seriesListState.map((series, i) => (
+                    <TableRow key={series.title}>
+                        <TableCell component="th" scope="row">
+                            {series.title}
+                        </TableCell>
+                        <TableCell align="right">
+                            <WatchButton id={series.id} />
+                            <RemoveButton id={series.id} />
+                        </TableCell>
+                    </TableRow>
+                ));
+            }
+
+            return res;
+        }
+
+        return (
+            <TableContainer component={Paper}>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell><b>Series Title</b></TableCell>
+                            <TableCell align="right"><b>Actions</b></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {showSeriesInfo()}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        );
+    }
+
     return (
         <Container>
             <SnackBar show={() => { if (playlistID) { return false; } else { return true; } }}>No Playlist ID in URL.</SnackBar>
@@ -182,6 +308,9 @@ function Playlist(props) {
                 </Grid>
                 <Grid item xs={12}>
                     <PlaylistTable />
+                </Grid>
+                <Grid item xs={12}>
+                    <SeriesTable />
                 </Grid>
             </Grid>
         </Container>

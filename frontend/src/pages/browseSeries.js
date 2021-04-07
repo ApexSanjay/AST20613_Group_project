@@ -13,10 +13,24 @@ import BrowsingModules from './modules/BrowsingModules';
 export function BrowseSeries(props) {
 
     const [row1Movie, setRow1Movie] = useState([]);
-    const [row2Movie, setRow2Movie] = useState([]);
-    const [row3Movie, setRow3Movie] = useState([]);
+
 
     useEffect(() => {
+        BrowsingModules.suggestSeries().then((allSeries) => {
+            console.log("allSeries", allSeries);
+            allSeries.forEach((series) => {
+                if (series) {
+                    MediaModule.getSeriesPoster(series.id).then((url) => {
+                        console.log("url", url);
+                        if (url.includes("%2F" + series.id + ".jpg")) {
+                            var movieCardInfo = row1Movie;
+                            movieCardInfo.push({ id: series.id, url: url });
+                            setRow1Movie([...movieCardInfo]);
+                        }
+                    });
+                }
+            });
+        });
     }, []);
 
     const MovieCardRow = (props) => {
@@ -34,12 +48,13 @@ export function BrowseSeries(props) {
             focus: 'right',
             isNavigation: false,
             updateOnMove: true,
-            lazyLoad: 'nearby'
+            lazyLoad: 'nearby',
+            loop: true,
         };
 
-        const MovieCard = (props) => {
+        const SeriesCard = (props) => {
 
-            const link = "/movie/" + props.id;
+            const link = "/series/" + props.id;
             const img = props.img;
 
             const MoviePoster = styled.img`
@@ -65,14 +80,10 @@ export function BrowseSeries(props) {
 
             if (row === 1) {
                 movies = row1Movie;
-            } else if (row === 2) {
-                movies = row2Movie;
-            } else if (row === 3) {
-                movies = row3Movie;
             }
 
             var res = movies.map((info) => (
-                <MovieCard id={info.id} img={info.url} />
+                <SeriesCard id={info.id} img={info.url} />
             ));
 
             return res;
@@ -98,22 +109,12 @@ export function BrowseSeries(props) {
             <Grid container spacing={0}>
 
                 <Grid item xs={12}>
-                    <h2>Movies</h2>
+                    <h2>Series</h2>
                 </Grid>
 
                 <Grid item xs={12}>
                     <h3>Top Rated</h3>
                     <MovieCardRow row={1} />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <h3>Action</h3>
-                    <MovieCardRow row={2} />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <h3>Animation</h3>
-                    <MovieCardRow row={3} />
                 </Grid>
 
             </Grid>

@@ -17,6 +17,7 @@ export { default as Upload } from './upload';
 export { default as UploadSeries } from './uploadSeries';
 export { default as Playlist } from './playlist';
 export { default as EditMovie } from './editMovie';
+export { default as EditSeries } from './editSeries';
 export { default as ManageMovies } from './manageMovies';
 export { default as ManageAdmins } from './manageAdmins';
 export { default as ManageSeries } from './manageSeries';

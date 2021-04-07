@@ -43,19 +43,48 @@ const suggestMovie = async () => {
 
 };
 
-const createPlaylist = (name, movieIDList) => {
+const suggestSeries = async () => {
+
+    var res = [];
+
+    await getAllSeries().then((allSeries)=>{
+        res = allSeries
+    });
+
+    return new Promise((resolve, reject) => {
+        resolve(res);
+    });
+};
+
+const createPlaylist = (name, movieIDList = [], seriesIDList = []) => {
     const uid = firebase.auth().currentUser.uid;
     return firebase.firestore().collection("playlists").add({
         userID: uid,
         title: name,
         movieID: movieIDList,
+        seriesID: seriesIDList
     });
 };  //list is an array of movie id  //.then(docRef).catch is available
 
-const updatePlaylist = (playlistID, movieIDList) => {
-    return firebase.firestore().collection("playlists").doc(playlistID).update({
-        movieID: movieIDList,
+const updatePlaylist = async (playlistID, movieIDList = null, seriesIDList = null) => {
+    if (movieIDList !== null) {
+        await firebase.firestore().collection("playlists").doc(playlistID).update({
+            movieID: movieIDList,
+        });
+    }
+
+    if (seriesIDList !== null){
+        await firebase.firestore().collection("playlists").doc(playlistID).update({
+            seriesID: seriesIDList,
+        });
+    }
+
+    return new Promise((resolve, reject) => {
+        resolve();
     });
+    // return firebase.firestore().collection("playlists").doc(playlistID).update({
+    //     movieID: movieIDList,
+    // });
 };  //.then().catch() is available
 
 const removePlaylist = (playlistID) => {
@@ -99,6 +128,7 @@ const getReviewSnapshot = (movieID) => {
         ;
 };  //
 
+
 const getReviewOnce = (movieID) => {
     return firebase.firestore().collection("reviews").where("movieID", "==", movieID);
 };  //.then().catch() is available
@@ -111,8 +141,56 @@ const getUserIcon = (userID) => {
     return firebase.storage().ref("users/" + userID + "/icon").getDownloadURL();
 }
 
+
+const getSeriesReviewSnapshot = (seriesID) => {
+    return firebase.firestore().collection("seriesReviews").where("seriesID", "==", seriesID)
+        // .onSnapshot(
+        //     (querySnapshot) => {
+        //         querySnapshot.forEach((doc) => {
+        //             doc.data();
+        //         });
+        //     }
+        // )
+        ;
+};  //
+
+const createSeriesReview = (seriesID, review, userName) => {
+    var userID = firebase.auth().currentUser.uid;
+
+    return firebase.firestore().collection("seriesReviews").add({
+        seriesID: seriesID,
+        review: review,
+        userID: userID,
+        userName: userName,
+        timestamp: new Date()
+    });  //.then().catch() is available
+};
+
+
+const removeSeriesReview = (reviewID) => {
+    return firebase.firestore().collection("seriesReviews").doc(reviewID).delete();
+};  //.then().catch() is available
+
+const getAllSeries = async () => {
+
+    var res = [];
+
+    await firebase.firestore().collection("series").orderBy("id").get().then((querySnapshot)=>{
+        if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc)=>{
+                res.push(doc.data());
+            });
+        }
+    });
+
+    return new Promise((resolve, reject)=>{
+        resolve(res);
+    });
+}
+
 const BrowsingModules = {
     searchMovie,
+    suggestMovie,
     suggestMovie,
     createPlaylist,
     updatePlaylist,
@@ -126,6 +204,13 @@ const BrowsingModules = {
     getUser,
     getUserIcon,
     getAllMovies,
+
+    getSeriesReviewSnapshot,
+    createSeriesReview,
+    removeSeriesReview,
+    getAllSeries,
+    suggestSeries,
+
 };
 
 export default BrowsingModules;

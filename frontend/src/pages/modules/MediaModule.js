@@ -31,6 +31,11 @@ const uploadPoster = (movieID, file) => {
     //.then .catch
 };
 
+const uploadSeriesPoster = (id, file) => {
+    return firebase.storage().ref("seriesPosters/" + id + ".jpg").put(file);
+    //.then .catch
+};
+
 const movieInfo = (
     id,
     title,
@@ -76,8 +81,12 @@ const getMovieInfo = (id) => {
     return firebase.firestore().collection("movies").doc(id).get();
 };  //.then(doc).catch() is available
 
-const getMovieInfos = (IDList) => {
-    return firebase.firestore().collection("movies").where("id", "in", IDList).get();
+const getMovieInfos = (IDList = []) => {
+    if(IDList.length !== 0){
+        return firebase.firestore().collection("movies").where("id", "in", IDList).get();
+    } else {
+        return firebase.firestore().collection("movies").where("id", "==", -99999).get();
+    }
 };
 
 const getMoviePoster = (movieID) => {
@@ -93,13 +102,13 @@ const getNewSeriesID = async () => {
     var id = -1;
     await firebase.firestore().collection("series").orderBy("id", "desc").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if(doc.data().id > id) {
+            if (doc.data().id > id) {
                 id = doc.data().id;
             }
         })
     });
 
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         resolve(id + 1);
     })
 }
@@ -158,6 +167,52 @@ const removeMovie = async (id) => {
 
 }
 
+const createSeriesInfo = (id, seriesInfo) => {
+    console.log(seriesInfo);
+    return firebase.firestore().collection("series").doc(id).set(seriesInfo); //.then(docRef).catch(); is available
+};
+
+const updateSeriesInfo = (id, seriesInfo) => {
+    return firebase.firestore().collection("series").doc(id).set(seriesInfo);
+};  //.then().catch() is available
+
+const removeSeriesInfo = (id) => {
+    if (!isNaN(id)) {
+        id = id.toString();
+    }
+    return firebase.firestore().collection("series").doc(id).delete();
+};  //.then().catch() is available
+
+const getSeriesInfo = async (id) => {
+
+    var data = null;
+    
+    await firebase.firestore().collection("series").doc(id).get().then((doc) => {
+        data = doc.data();
+    });
+
+    return new Promise((resolve, reject) => {
+        if(data !== null){
+            resolve(data);
+        } else {
+            reject();
+        }
+    });
+};  //.then(doc).catch() is available
+
+
+const getSeriesInfos = (IDList = []) => {
+    if(IDList.length !== 0){
+        return firebase.firestore().collection("series").where("id", "in", IDList).get();
+    } else {
+        return firebase.firestore().collection("series").where("id", "==", -99999).get();
+    }
+};
+
+const getSeriesPoster = (id) => {
+    return firebase.storage().ref("seriesPosters/" + id + ".jpg").getDownloadURL();  //.then.catch
+}
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -166,12 +221,19 @@ const MediaModule = {
     createMovieInfo,
     updateMovieInfo,
     removeMovieInfo,
+    createSeriesInfo,
+    updateSeriesInfo,
+    removeSeriesInfo,
     getMovieInfo,
+    getSeriesInfo,
     getMovieInfos,
     uploadPoster,
+    uploadSeriesPoster,
     getMoviePoster,
+    getSeriesPoster,
     getNewMovieID,
     getNewSeriesID,
-    getMovies
+    getMovies,
+    getSeriesInfos
 }
 export default MediaModule;

@@ -31,18 +31,28 @@ import BrowsingModules from "./modules/BrowsingModules";
 import LoginModules from "./modules/LoginModules";
 import SnackBar from "./components/snackBar";
 import EditIcon from '@material-ui/icons/Edit';
+import { withStyles } from '@material-ui/core/styles';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
 
 function Series(props) {
 
     const [shareSnackBarOpen, setShareSnackBarOpen] = useState(false);
     const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
-    const [moviePoster, setMoviePoster] = useState(defaultMoviePoster);
+    const [seriesPoster, setSeriesPoster] = useState(defaultMoviePoster);
     const [removeCommentSnackBar, setRemoveCommentSnackBar] = useState(false);
 
     const history = useHistory();
     var params = useParams();
-    var movieID = params.id;     // id of url "/movie/{id}" 
+    var seriesID = params.id;     // id of url "/movie/{id}" 
 
     //get movie info
     const [movies, setMovies] = useState({
@@ -52,8 +62,8 @@ function Series(props) {
         cast: [],
         trailerURL: "",
         imdbReview: "",
-        movieLength: "",
-        movieReleaseDate: "",
+        showLength: "",
+        showReleaseDate: "",
     });
 
     const [userLibraryState, setUserLibraryState] = useState([]);
@@ -66,9 +76,143 @@ function Series(props) {
 
     const userID = LoginModules.getUserProfile().uid;
 
+    const [seriesContent, setSeriesContent] = useState([]);
+
     useEffect(() => {   //init loading
 
+        //isAdmin
+        LoginModules.getAdminUser(userID).then((querySnapshot) => {
+            querySnapshot.forEach(item => {
+                setIsAdmin(true);
+            });
+        });
+
+        //series info
+        MediaModule.getSeriesInfo(seriesID.toString()).then((data) => {
+            // console.log(data);
+            setMovies(data);
+
+            var series = [];
+            if (data.seasonOne) {
+                series.push({ season: 1, content: data.seasonOne });
+            }
+            if (data.seasonTwo) {
+                series.push({ season: 2, content: data.seasonTwo });
+            }
+            if (data.seasonThree) {
+                series.push({ season: 3, content: data.seasonThree });
+            }
+            if (data.seasonFour) {
+                series.push({ season: 4, content: data.seasonFour });
+            }
+            if (data.seasonFive) {
+                series.push({ season: 5, content: data.seasonFive });
+            }
+            if (data.seasonSix) {
+                series.push({ season: 6, content: data.seasonSix });
+            }
+            if (data.seasonSeven) {
+                series.push({ season: 7, content: data.seasonSeven });
+            }
+            if (data.seasonEight) {
+                series.push({ season: 8, content: data.seasonEight });
+            }
+            if (data.seasonNine) {
+                series.push({ season: 9, content: data.seasonNine });
+            }
+            if (data.seasonTen) {
+                series.push({ season: 10, content: data.seasonTen });
+            }
+
+            setSeriesContent(series);
+        });
+
+        //series poster
+        MediaModule.getSeriesPoster(seriesID).then((url) => {
+            setSeriesPoster(url);
+        })
+
+        //reviews
+        BrowsingModules.getSeriesReviewSnapshot(seriesID)
+            .onSnapshot(
+                (querySnapshot) => {
+                    var reviewList = [];
+                    querySnapshot.forEach((doc) => {
+                        reviewList.push({ id: doc.id, data: doc.data() });
+                        setreviewListState([...reviewList]);
+                    });
+                }
+            )
+            ;
+
+        //playlist
+        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+            var userLibrary = [];
+            querySnapshot.forEach((doc) => {
+                if (userLibraryState !== []) {
+                    var playlist = {
+                        title: doc.data().title,
+                        playlistID: doc.id,
+                    }
+                    userLibrary.push(playlist);
+                }
+            });
+            setUserLibraryState(userLibrary);
+        });
+
     }, []);
+
+
+    const Accordion = withStyles({
+        root: {
+            border: '1px solid rgba(0, 0, 0, .125)',
+            boxShadow: 'none',
+            '&:not(:last-child)': {
+                borderBottom: 0,
+            },
+            '&:before': {
+                display: 'none',
+            },
+            '&$expanded': {
+                margin: 'auto',
+            },
+        },
+        expanded: {},
+    })(MuiAccordion);
+
+    const AccordionSummary = withStyles({
+        root: {
+            backgroundColor: 'rgba(0, 0, 0, .03)',
+            borderBottom: '1px solid rgba(0, 0, 0, .125)',
+            marginBottom: -1,
+            minHeight: 56,
+            '&$expanded': {
+                minHeight: 56,
+            },
+        },
+        content: {
+            '&$expanded': {
+                margin: '12px 0',
+            },
+        },
+        expanded: {},
+    })(MuiAccordionSummary);
+
+    const AccordionDetails = withStyles((theme) => ({
+        root: {
+            padding: theme.spacing(2),
+        },
+    }))(MuiAccordionDetails);
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            width: '100%',
+            maxWidth: 360,
+            backgroundColor: theme.palette.background.paper,
+        },
+    }));
+
+    const classes = useStyles();
 
     const MenuBar = () => {
 
@@ -99,7 +243,7 @@ function Series(props) {
     `;
 
     const BackGround = styled.div`
-        background-image: url(${moviePoster});
+        background-image: url(${seriesPoster});
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -196,19 +340,21 @@ function Series(props) {
                                 newPlaylist = "New Playlist";
                             }
                             // create playlist
-                            BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
+                            BrowsingModules.createPlaylist(newPlaylist, [], [seriesID]).then(() => {
                                 // console.log("BM: created playlist");
                                 setUpdatePlaylistSnackBarOpen(true);
                             }).catch((e) => {
                                 console.log(e.message);
                             });
                         } else {
-                            console.log(selectedPlaylist);
+                            // console.log(selectedPlaylist);
                             // add item to exist playlist
                             BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
-                                var newMovieIDList = doc.data().movieID;
-                                newMovieIDList.push(movieID);
-                                BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
+                                console.log(doc.data());
+                                var newSeriesIDList = doc.data().seriesID;
+                                newSeriesIDList.push(seriesID);
+                                // console.log(newSeriesIDList);
+                                BrowsingModules.updatePlaylist(selectedPlaylist, null, newSeriesIDList).then(() => {
                                     setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
@@ -330,32 +476,52 @@ function Series(props) {
     const EditMovie = () => {
 
         const onClickHandler = () => {
-            history.push("/editMovie/" + movieID);
+            history.push("/editSeries/" + seriesID);
         }
 
         return (
             <div>
                 <Button onClick={() => onClickHandler()}>
-                    <EditIcon fontSize="small" /> Edit Movie
+                    <EditIcon fontSize="small" /> Edit Series
                 </Button>
             </div>
         );
     }
 
     const PlayButton = () => {
-        var history = useHistory();
-        const play = () => {
-            history.push("/play/" + movieID);
+        const play = (seriesID, contentID) => {
+            history.push("/play/series/" + seriesID + "/" + contentID);
         }
 
+        const [expanded, setExpanded] = React.useState();
+
+        const handleChange = (panel) => (event, newExpanded) => {
+            setExpanded(newExpanded ? panel : false);
+        };
+
         return (
-            <p>
-                <center>
-                    <Button fullWidth onClick={play}>
-                        <img src={playbtn} width="60%" alt="Play"></img>
-                    </Button>
-                </center>
-            </p>
+            <div>
+                {seriesContent.map((item, i) => {
+                    return (
+                        <Accordion expanded={expanded === i} onChange={handleChange(i)}>
+                            <AccordionSummary>
+                                <Typography>Season {item.season}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <List component="nav" className={classes.root}>
+                                    {item.content.map((contentItem) => {
+                                        return (
+                                            <ListItem button divider>
+                                                <ListItemText primary={contentItem.title} onClick={()=>{play(movies.id, contentItem.id)}} />
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                            </AccordionDetails>
+                        </Accordion>
+                    );
+                })}
+            </div>
         );
     }
 
@@ -382,9 +548,10 @@ function Series(props) {
                 const commentID = props.id;
 
                 const onclickHandler = () => {
-                    BrowsingModules.removeReview(commentID).then(() => {
+                    BrowsingModules.removeSeriesReview(commentID).then(() => {
                         console.log("Success");
                         setRemoveCommentSnackBar(true);
+                        window.location.reload();
                     }).catch((e) => {
                         console.log(e.message);
                     });
@@ -474,7 +641,7 @@ function Series(props) {
             const SendButton = () => {
                 const onclickHandler = () => {
                     if (review.length !== 0) {
-                        BrowsingModules.createReview(movieID, review, LoginModules.getUserProfile().name);
+                        BrowsingModules.createSeriesReview(seriesID, review, LoginModules.getUserProfile().name);
                     }
                 }
 
@@ -555,7 +722,7 @@ function Series(props) {
                         {/* <EditMovie /> */}
                         <PlayButton />
                         <p>
-                            {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}
+                            {movies.showLength} | {movies.showReleaseDate} | IMDB: {movies.imdbReview}
                         </p>
                     </Grid>
                     <Grid item xs={9}>

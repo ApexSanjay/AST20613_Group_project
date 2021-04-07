@@ -14,9 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import MediaModule from './modules/MediaModule';
-import TextField from '@material-ui/core/TextField';
 import BrowsingModules from './modules/BrowsingModules';
-import Fuse from 'fuse.js'
 
 export function ManageSeries(props) {
 
@@ -29,18 +27,15 @@ export function ManageSeries(props) {
     });
     const classes = useStyles();
 
-    const [movieDataState, setMovieDataState] = useState([]);
-
-    const [loadMovieCount, setLoadMovieCount] = useState(0);
+    const [seriesDataState, setSeriesDataState] = useState([]);
 
     const params = useParams();
     const searchValue = params.search;
 
-    var movieData = movieDataState;
-
     useEffect(() => {
-
-
+        BrowsingModules.getAllSeries().then((allSeries)=>{
+            setSeriesDataState(allSeries);
+        });
     }, [])
 
     const UploadSeriesButton = (props) => {
@@ -102,7 +97,7 @@ export function ManageSeries(props) {
         `;
 
         const onclickHandler = () => {
-
+            history.push("/editSeries/" + props.id);
         }
 
         return (
@@ -127,7 +122,9 @@ export function ManageSeries(props) {
         `;
 
         const onclickHandler = () => {
-
+            MediaModule.removeSeriesInfo(props.id).then(()=>{
+                window.location.reload();
+            });
         }
 
         return (
@@ -146,7 +143,7 @@ export function ManageSeries(props) {
 
     const showMovieRow = () => {
 
-        return movieDataState.map((data) => {
+        return seriesDataState.map((data) => {
 
             return (
                 <>
