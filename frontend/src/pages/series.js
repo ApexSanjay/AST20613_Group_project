@@ -476,13 +476,13 @@ function Series(props) {
     const EditMovie = () => {
 
         const onClickHandler = () => {
-            // history.push("/editSeries/" + seriesID);
+            history.push("/editSeries/" + seriesID);
         }
 
         return (
             <div>
                 <Button onClick={() => onClickHandler()}>
-                    <EditIcon fontSize="small" /> Edit Movie
+                    <EditIcon fontSize="small" /> Edit Series
                 </Button>
             </div>
         );

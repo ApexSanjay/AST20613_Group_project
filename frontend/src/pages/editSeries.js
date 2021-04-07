@@ -58,7 +58,6 @@ export function EditSeries(props) {
 
         const onChangeHandler = (value) => {
             num = value;
-
         }
 
         return (
@@ -155,14 +154,6 @@ export function EditSeries(props) {
                 }
                 data.seasonTen[contentID - 1] = { contentID, title };
             }
-            // if (contentID !== null) {
-            //     if (title !== null) {
-
-            //     }
-            //     if (files !== null) {
-
-            //     }
-            // }
             console.log(data);
         }
 
@@ -531,13 +522,6 @@ export function EditSeries(props) {
                                 <td><h4><center>Files</center></h4></td>
                             </tr>
                             {displaySeasonField()}
-                            {/* <tr>
-                                <td><SeasonNumberField /></td>
-                                <td>
-                                    {displayFileField()}
-                                    <AddMoreFileButton />
-                                </td>
-                            </tr> */}
                             <tr>
                                 <td colSpan="2">
                                     <center>

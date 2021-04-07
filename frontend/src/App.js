@@ -28,7 +28,8 @@ import {
   Search,
   ManageSeries,
   UploadSeries,
-  BrowseSeries
+  BrowseSeries,
+  EditSeries
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -216,7 +217,7 @@ function App() {
               <EditMovie />
             </ProtectedRoute>
             <ProtectedRoute path="/editSeries/:id">
-              <EditMovie />
+              <EditSeries />
             </ProtectedRoute>
             <ProtectedRoute path="/manage/admins">
               <ManageAdmins />
