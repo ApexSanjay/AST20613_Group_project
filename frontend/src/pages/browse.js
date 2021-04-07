@@ -147,13 +147,8 @@ export function Browse(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <h3>Action</h3>
+                    <h3>Recommend</h3>
                     <MovieCardRow row={2} />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <h3>Animation</h3>
-                    <MovieCardRow row={3} />
                 </Grid>
 
             </Grid>
