@@ -53,10 +53,25 @@ const createPlaylist = (name, movieIDList = [], seriesIDList = []) => {
     });
 };  //list is an array of movie id  //.then(docRef).catch is available
 
-const updatePlaylist = (playlistID, movieIDList) => {
-    return firebase.firestore().collection("playlists").doc(playlistID).update({
-        movieID: movieIDList,
+const updatePlaylist = async (playlistID, movieIDList = null, seriesIDList = null) => {
+    if (movieIDList !== null) {
+        await firebase.firestore().collection("playlists").doc(playlistID).update({
+            movieID: movieIDList,
+        });
+    }
+
+    if (seriesIDList !== null){
+        await firebase.firestore().collection("playlists").doc(playlistID).update({
+            seriesID: seriesIDList,
+        });
+    }
+
+    return new Promise((resolve, reject) => {
+        resolve();
     });
+    // return firebase.firestore().collection("playlists").doc(playlistID).update({
+    //     movieID: movieIDList,
+    // });
 };  //.then().catch() is available
 
 const removePlaylist = (playlistID) => {

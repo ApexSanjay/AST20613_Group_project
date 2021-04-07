@@ -98,6 +98,22 @@ function Series(props) {
                 }
             )
         ;
+        
+        //playlist
+        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+            var userLibrary = [];
+            querySnapshot.forEach((doc) => {
+                if (userLibraryState !== []) {
+                    var playlist = {
+                        title: doc.data().title,
+                        playlistID: doc.id,
+                    }
+                    userLibrary.push(playlist);
+                }
+            });
+            setUserLibraryState(userLibrary);
+        });
+
     }, []);
 
     const MenuBar = () => {
@@ -233,15 +249,16 @@ function Series(props) {
                                 console.log(e.message);
                             });
                         } else {
-                            console.log(selectedPlaylist);
+                            // console.log(selectedPlaylist);
                             // add item to exist playlist
                             BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
                                 console.log(doc.data());
-                                // var newMovieIDList = doc.data().movieID;
-                                // newMovieIDList.push(movieID);
-                                // BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
-                                //     setUpdatePlaylistSnackBarOpen(true);
-                                // });
+                                var newSeriesIDList = doc.data().seriesID;
+                                newSeriesIDList.push(seriesID);
+                                // console.log(newSeriesIDList);
+                                BrowsingModules.updatePlaylist(selectedPlaylist, null , newSeriesIDList).then(() => {
+                                    setUpdatePlaylistSnackBarOpen(true);
+                                });
                             });
                         }
                         handleClose();
