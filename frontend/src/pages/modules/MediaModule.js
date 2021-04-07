@@ -76,8 +76,12 @@ const getMovieInfo = (id) => {
     return firebase.firestore().collection("movies").doc(id).get();
 };  //.then(doc).catch() is available
 
-const getMovieInfos = (IDList) => {
-    return firebase.firestore().collection("movies").where("id", "in", IDList).get();
+const getMovieInfos = (IDList = []) => {
+    if(IDList.length !== 0){
+        return firebase.firestore().collection("movies").where("id", "in", IDList).get();
+    } else {
+        return firebase.firestore().collection("movies").where("id", "==", -99999).get();
+    }
 };
 
 const getMoviePoster = (movieID) => {
@@ -190,6 +194,15 @@ const getSeriesInfo = async (id) => {
     });
 };  //.then(doc).catch() is available
 
+
+const getSeriesInfos = (IDList = []) => {
+    if(IDList.length !== 0){
+        return firebase.firestore().collection("series").where("id", "in", IDList).get();
+    } else {
+        return firebase.firestore().collection("series").where("id", "==", -99999).get();
+    }
+};
+
 const getSeriesPoster = (id) => {
     return firebase.storage().ref("seriesPosters/" + id + ".jpg").getDownloadURL();  //.then.catch
 }
@@ -213,6 +226,7 @@ const MediaModule = {
     getSeriesPoster,
     getNewMovieID,
     getNewSeriesID,
-    getMovies
+    getMovies,
+    getSeriesInfos
 }
 export default MediaModule;
