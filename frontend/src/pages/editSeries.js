@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import MenuBar from "./components/menuBar";
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import Container from "./components/container";
 import MediaModule from "./modules/MediaModule";
 import Backdrop from '@material-ui/core/Backdrop';
@@ -14,12 +14,28 @@ export function EditSeries(props) {
 
     var posterFile = null;
 
+    const params = useParams();
+    const seriesID = params.id;
+
     const [seasonNum, setSeasonNum] = useState(0);
     const [seasons, setSeasons] = useState([]);
 
+    const [currentPoster, setCurrentPoster] = useState(null);
+
     const history = useHistory();
 
-    var data = {
+    // var data = {
+    //     title: "",
+    //     description: "",
+    //     Director: "",
+    //     cast: [],
+    //     trailerURL: "",
+    //     imdbReview: "",
+    //     showLength: "",
+    //     showReleaseDate: ""
+    // }
+
+    const [data, setData] = useState({
         title: "",
         description: "",
         Director: "",
@@ -28,7 +44,7 @@ export function EditSeries(props) {
         imdbReview: "",
         showLength: "",
         showReleaseDate: ""
-    }
+    });
 
     const useStyles = makeStyles((theme) => ({
         backdrop: {
@@ -40,7 +56,14 @@ export function EditSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
+        MediaModule.getSeriesInfo(seriesID).then((seriesData) => {
+            // data = seriesData;
+            setData(seriesData)
+        });
 
+        MediaModule.getSeriesPoster(seriesID).then((url)=>{
+            setCurrentPoster(url)
+        });
 
     }, []);
 
@@ -269,8 +292,13 @@ export function EditSeries(props) {
     const SelectPoster = () => {
         return (
             <Grid container>
-                <Grid item xs={12}>
-                    <h2>Select Poster</h2>
+                <Grid item xs={6}>
+                    <h2>Current Movie Poster</h2>
+                    <img src={currentPoster} width="80%" alt="Current Poster" />
+                    <br />
+                </Grid>
+                <Grid item xs={6}>
+                    <h2>Select New Poster</h2>
                     <input
                         name="movie"
                         type="file"
@@ -447,7 +475,7 @@ export function EditSeries(props) {
                             label="Show Length"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("showLength", e.target.value) }}
-                            defaultValue={data.movieLength}
+                            defaultValue={data.showLength}
                             fullWidth
                             required
                         />
@@ -466,7 +494,7 @@ export function EditSeries(props) {
                             label="Show Release Date"
                             variant="outlined"
                             onChange={(e) => { onchangeHandler("showReleaseDate", e.target.value) }}
-                            defaultValue={data.movieReleaseDate}
+                            defaultValue={data.showReleaseDate}
                             fullWidth
                             required
                         />
@@ -504,6 +532,7 @@ export function EditSeries(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        
     }
 
     return (
@@ -512,9 +541,9 @@ export function EditSeries(props) {
             <form onSubmit={onSubmitHandler}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <h1>Upload Movie</h1>
+                        <h1>Update Series</h1>
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <h2>Select File</h2>
                         <table border="1" width="100%">
                             <tr>
@@ -530,7 +559,7 @@ export function EditSeries(props) {
                                 </td>
                             </tr>
                         </table>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                         <SelectPoster />
                     </Grid>
