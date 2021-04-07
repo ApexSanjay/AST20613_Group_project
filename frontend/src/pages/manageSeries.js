@@ -97,7 +97,7 @@ export function ManageSeries(props) {
         `;
 
         const onclickHandler = () => {
-
+            history.push("/editSeries/" + props.id);
         }
 
         return (
