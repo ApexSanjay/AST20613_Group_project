@@ -18,9 +18,12 @@ export function UploadSeries(props) {
     // console.log(newID);
     const [uploading, setUploading] = useState(false);
 
-    const [fileNum, setFileNum] = useState(1);
+    // const [fileNum, setFileNum] = useState(1);
     // console.log(fileNum);
     const [seasonNum, setSeasonNum] = useState(1);
+
+    
+    const [season, setSeason] = useState([]);
 
     const history = useHistory();
 
@@ -51,75 +54,6 @@ export function UploadSeries(props) {
         });
     }, []);
 
-    const SelectFile = () => {
-
-        const onChangeHandler = (value) => {
-
-        }
-
-        return (
-            <Grid container spacing={3}>
-                <Grid item xs={6}>
-                    <input
-                        name="movie"
-                        type="file"
-                        onChange={(e) => {
-                            console.log(e.target.files[0]);
-                            movieFile = e.target.files[0];
-                        }}
-                        defaultValue={movieFile}
-                        required
-                    />
-
-                </Grid>
-                <Grid item xs={6}>
-                    <TextField
-                        label="Title"
-                        variant="outlined"
-                        onChange={(e) => { onChangeHandler(e.target.value) }}
-                        defaultValue={data.description}
-                        required
-                        fullWidth
-                    />
-                </Grid>
-            </Grid>
-        );
-    };
-
-    const AddMoreFileButton = () => {
-
-        const onClickHandler = () => {
-            console.log("onClickHandler");
-            setFileNum(fileNum + 1);
-        }
-
-        return (
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => { onClickHandler() }}
-                    >
-                        Add More Files
-            </Button>
-                </Grid>
-            </Grid>
-
-        );
-    }
-
-    const displayFileField = () => {
-        var temp = [];
-        for (var i = 0; i < fileNum; i++) {
-            temp.push("something");
-        }
-
-        return temp.map((item, i) => {
-            return (<SelectFile />);
-        });
-    }
-
     const AddSeasonButton = () => {
 
         const onClickHandler = () => {
@@ -136,13 +70,111 @@ export function UploadSeries(props) {
             </Button>);
     }
 
-    const SeasonNumberField = () => {
-        return (
-            <TextField
-                label="Season"
-                type="number"
+    const SeasonField = (props) => {
 
-            />
+        const seasonOrder = props.order;
+
+        var season;
+        const [fileNum, setFileNum] = useState(1);
+
+        const SeasonNumberField = () => {
+
+            const onChangeHandler = (value) => {
+                season = value;
+            }
+
+            return (
+                <TextField
+                    label="Season"
+                    type="number"
+                    defaultValue={season}
+                    onChange={(e) => { onChangeHandler(e.target.value) }}
+                />
+            );
+        }
+
+        const SelectFile = (props) => {
+
+            var file;
+
+            const fileOrder = props.order;
+
+            const onChangeHandler = (value) => {
+                file = value;
+                console.log(file);
+            }
+
+            return (
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <input
+                            name="movie"
+                            type="file"
+                            onChange={(e) => {
+                                // console.log(e.target.files[0]);
+                                // movieFile = e.target.files[0];
+                                onChangeHandler(e.target.files[0]);
+                            }}
+                            required
+                        />
+
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            label="Title"
+                            variant="outlined"
+                            onChange={(e) => { onChangeHandler(e.target.value) }}
+                            defaultValue={data.description}
+                            required
+                            fullWidth
+                        />
+                    </Grid>
+                </Grid>
+            );
+        };
+
+        const AddMoreFileButton = () => {
+
+            const onClickHandler = () => {
+                // console.log("onClickHandler");
+                setFileNum(fileNum + 1);
+            }
+
+            return (
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { onClickHandler() }}
+                        >
+                            Add More Files
+                </Button>
+                    </Grid>
+                </Grid>
+
+            );
+        }
+
+        const displayFileField = () => {
+            var temp = [];
+            for (var i = 0; i < fileNum; i++) {
+                temp.push("something");
+            }
+
+            return temp.map((item, i) => {
+                return (<SelectFile order={i} />);
+            });
+        }
+
+        return (
+            <tr>
+                <td><SeasonNumberField /></td>
+                <td>
+                    {displayFileField()}
+                    <AddMoreFileButton />
+                </td>
+            </tr>
         );
     }
 
@@ -155,13 +187,7 @@ export function UploadSeries(props) {
 
         return temp.map((item, i) => {
             return (
-                <tr>
-                    <td><SeasonNumberField /></td>
-                    <td>
-                        {displayFileField()}
-                        <AddMoreFileButton />
-                    </td>
-                </tr>
+                <SeasonField order={i} />
             );
         });
     }
@@ -469,7 +495,7 @@ export function UploadSeries(props) {
                                 </td>
                             </tr> */}
                             <tr>
-                                <td colspan="2">
+                                <td colSpan="2">
                                     <center>
                                         <AddSeasonButton />
                                     </center>
