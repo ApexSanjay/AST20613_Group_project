@@ -122,7 +122,9 @@ export function ManageSeries(props) {
         `;
 
         const onclickHandler = () => {
-
+            MediaModule.removeSeriesInfo(props.id).then(()=>{
+                window.location.reload();
+            });
         }
 
         return (
