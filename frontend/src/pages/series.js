@@ -502,19 +502,6 @@ function Series(props) {
         return (
             <div>
                 {seriesContent.map((item, i) => {
-
-                    const displayContent = () => {
-                        item.content.map((contentItem) => {
-                            return (
-                                <ListItem button divider>
-                                    <ListItemText primary={contentItem.title} />
-                                </ListItem>
-                            );
-                        })
-                    }
-
-                    console.log(displayContent());
-
                     return (
                         <Accordion expanded={expanded === i} onChange={handleChange(i)}>
                             <AccordionSummary>
