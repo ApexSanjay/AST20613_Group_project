@@ -73,7 +73,8 @@ export function Browse(props) {
             focus: 'right',
             isNavigation: false,
             updateOnMove: true,
-            lazyLoad: 'nearby'
+            lazyLoad: 'nearby',
+            loop: true,
         };
 
         const MovieCard = (props) => {
