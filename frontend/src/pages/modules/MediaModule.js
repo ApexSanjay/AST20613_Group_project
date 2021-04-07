@@ -93,13 +93,13 @@ const getNewSeriesID = async () => {
     var id = -1;
     await firebase.firestore().collection("series").orderBy("id", "desc").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if(doc.data().id > id) {
+            if (doc.data().id > id) {
                 id = doc.data().id;
             }
         })
     });
 
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         resolve(id + 1);
     })
 }
@@ -158,6 +158,21 @@ const removeMovie = async (id) => {
 
 }
 
+const createSeriesInfo = (id, seriesInfo) => {
+    return firebase.firestore().collection("series").doc(id).set(seriesInfo); //.then(docRef).catch(); is available
+};
+
+const updateSeriesInfo = (id, seriesInfo) => {
+    return firebase.firestore().collection("series").doc(id).set(seriesInfo);
+};  //.then().catch() is available
+
+const removeSeriesInfo = (id) => {
+    if (!isNaN(id)) {
+        id = id.toString();
+    }
+    return firebase.firestore().collection("series").doc(id).delete();
+};  //.then().catch() is available
+
 const MediaModule = {
     getMovieStream,
     uploadMovie,
@@ -166,6 +181,9 @@ const MediaModule = {
     createMovieInfo,
     updateMovieInfo,
     removeMovieInfo,
+    createSeriesInfo,
+    updateSeriesInfo,
+    removeSeriesInfo,
     getMovieInfo,
     getMovieInfos,
     uploadPoster,
