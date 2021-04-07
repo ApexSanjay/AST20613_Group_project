@@ -31,6 +31,16 @@ import BrowsingModules from "./modules/BrowsingModules";
 import LoginModules from "./modules/LoginModules";
 import SnackBar from "./components/snackBar";
 import EditIcon from '@material-ui/icons/Edit';
+import { withStyles } from '@material-ui/core/styles';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
 
 function Series(props) {
 
@@ -66,6 +76,8 @@ function Series(props) {
 
     const userID = LoginModules.getUserProfile().uid;
 
+    const [seriesContent, setSeriesContent] = useState([]);
+
     useEffect(() => {   //init loading
 
         //isAdmin
@@ -79,6 +91,40 @@ function Series(props) {
         MediaModule.getSeriesInfo(seriesID.toString()).then((data) => {
             // console.log(data);
             setMovies(data);
+
+            var series = [];
+            if (data.seasonOne) {
+                series.push({ season: 1, content: data.seasonOne });
+            }
+            if (data.seasonTwo) {
+                series.push({ season: 2, content: data.seasonTwo });
+            }
+            if (data.seasonThree) {
+                series.push({ season: 3, content: data.seasonThree });
+            }
+            if (data.seasonFour) {
+                series.push({ season: 4, content: data.seasonFour });
+            }
+            if (data.seasonFive) {
+                series.push({ season: 5, content: data.seasonFive });
+            }
+            if (data.seasonSix) {
+                series.push({ season: 6, content: data.seasonSix });
+            }
+            if (data.seasonSeven) {
+                series.push({ season: 7, content: data.seasonSeven });
+            }
+            if (data.seasonEight) {
+                series.push({ season: 8, content: data.seasonEight });
+            }
+            if (data.seasonNine) {
+                series.push({ season: 9, content: data.seasonNine });
+            }
+            if (data.seasonTen) {
+                series.push({ season: 10, content: data.seasonTen });
+            }
+
+            setSeriesContent(series);
         });
 
         //series poster
@@ -97,8 +143,8 @@ function Series(props) {
                     });
                 }
             )
-        ;
-        
+            ;
+
         //playlist
         BrowsingModules.getAllPlaylist().then((querySnapshot) => {
             var userLibrary = [];
@@ -115,6 +161,58 @@ function Series(props) {
         });
 
     }, []);
+
+
+    const Accordion = withStyles({
+        root: {
+            border: '1px solid rgba(0, 0, 0, .125)',
+            boxShadow: 'none',
+            '&:not(:last-child)': {
+                borderBottom: 0,
+            },
+            '&:before': {
+                display: 'none',
+            },
+            '&$expanded': {
+                margin: 'auto',
+            },
+        },
+        expanded: {},
+    })(MuiAccordion);
+
+    const AccordionSummary = withStyles({
+        root: {
+            backgroundColor: 'rgba(0, 0, 0, .03)',
+            borderBottom: '1px solid rgba(0, 0, 0, .125)',
+            marginBottom: -1,
+            minHeight: 56,
+            '&$expanded': {
+                minHeight: 56,
+            },
+        },
+        content: {
+            '&$expanded': {
+                margin: '12px 0',
+            },
+        },
+        expanded: {},
+    })(MuiAccordionSummary);
+
+    const AccordionDetails = withStyles((theme) => ({
+        root: {
+            padding: theme.spacing(2),
+        },
+    }))(MuiAccordionDetails);
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            width: '100%',
+            maxWidth: 360,
+            backgroundColor: theme.palette.background.paper,
+        },
+    }));
+
+    const classes = useStyles();
 
     const MenuBar = () => {
 
@@ -256,7 +354,7 @@ function Series(props) {
                                 var newSeriesIDList = doc.data().seriesID;
                                 newSeriesIDList.push(seriesID);
                                 // console.log(newSeriesIDList);
-                                BrowsingModules.updatePlaylist(selectedPlaylist, null , newSeriesIDList).then(() => {
+                                BrowsingModules.updatePlaylist(selectedPlaylist, null, newSeriesIDList).then(() => {
                                     setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
@@ -391,19 +489,52 @@ function Series(props) {
     }
 
     const PlayButton = () => {
-        var history = useHistory();
-        const play = () => {
-            history.push("/play/series" + seriesID);
+        const play = (seriesID, contentID) => {
+            history.push("/play/series/" + seriesID + "/" + contentID);
         }
 
+        const [expanded, setExpanded] = React.useState();
+
+        const handleChange = (panel) => (event, newExpanded) => {
+            setExpanded(newExpanded ? panel : false);
+        };
+
         return (
-            <p>
-                <center>
-                    <Button fullWidth onClick={play}>
-                        <img src={playbtn} width="60%" alt="Play"></img>
-                    </Button>
-                </center>
-            </p>
+            <div>
+                {seriesContent.map((item, i) => {
+
+                    const displayContent = () => {
+                        item.content.map((contentItem) => {
+                            return (
+                                <ListItem button divider>
+                                    <ListItemText primary={contentItem.title} />
+                                </ListItem>
+                            );
+                        })
+                    }
+
+                    console.log(displayContent());
+
+                    return (
+                        <Accordion expanded={expanded === i} onChange={handleChange(i)}>
+                            <AccordionSummary>
+                                <Typography>Season {item.season}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <List component="nav" className={classes.root}>
+                                    {item.content.map((contentItem) => {
+                                        return (
+                                            <ListItem button divider>
+                                                <ListItemText primary={contentItem.title} onClick={()=>{play(movies.id, contentItem.id)}} />
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                            </AccordionDetails>
+                        </Accordion>
+                    );
+                })}
+            </div>
         );
     }
 
