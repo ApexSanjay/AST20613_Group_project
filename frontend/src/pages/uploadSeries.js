@@ -12,14 +12,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export function UploadSeries(props) {
 
-    var movieFile = null;
     var posterFile = null;
     const [newID, setNewID] = useState();
     const [uploading, setUploading] = useState(false);
 
-    const [seasonNum, setSeasonNum] = useState(1);
-    
-    const [season, setSeason] = useState([]);
+    const [seasonNum, setSeasonNum] = useState(0);
+    const [seasons, setSeasons] = useState([]);
 
     const history = useHistory();
 
@@ -33,6 +31,14 @@ export function UploadSeries(props) {
         showLength: "",
         showReleaseDate: ""
     }
+
+    // var seasons = {
+    //     season: 1,
+    //     content: [{
+    //         id: 11,
+    //         title: "A Scandal in Belgravia",
+    //     }]
+    // }
 
     const useStyles = makeStyles((theme) => ({
         backdrop: {
@@ -51,53 +57,96 @@ export function UploadSeries(props) {
 
     const AddSeasonButton = () => {
 
+        var num;
+
         const onClickHandler = () => {
-            setSeasonNum(seasonNum + 1);
+            if (num) {
+                setSeasonNum(seasonNum + 1);
+                seasons.push(num)
+                console.log(seasons);
+            }
+        }
+
+        const onChangeHandler = (value) => {
+            num = value;
         }
 
         return (
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={() => { onClickHandler() }}
-            >
-                Add Season
-            </Button>);
+            <div>
+                <TextField
+                    label="Season"
+                    type="number"
+                    defaultValue={num}
+                    onChange={(e) => { onChangeHandler(e.target.value) }}
+                    required
+                />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => { onClickHandler() }}
+                >
+                    Add Season
+            </Button>
+            </div>
+        );
     }
 
     const SeasonField = (props) => {
 
-        const seasonOrder = props.order;
+        var seasonNum = props.season;
 
-        var season;
+        var contents = {
+            season: 1,
+
+        };
+
         const [fileNum, setFileNum] = useState(1);
 
-        const SeasonNumberField = () => {
+        const updateContents = (seasonNum, contentID, title = null, files = null) => {
+            if (seasonNum !== null) {
 
-            const onChangeHandler = (value) => {
-                season = value;
             }
+            if (contentID !== null) {
+
+            }
+            if (title !== null) {
+
+            }
+            if (files !== null) {
+
+            }
+            console.log("contents", contents);
+        }
+
+        const SeasonNumberField = (props) => {
 
             return (
-                <TextField
-                    label="Season"
-                    type="number"
-                    defaultValue={season}
-                    onChange={(e) => { onChangeHandler(e.target.value) }}
-                    required
-                />
+                <h3>Season {props.season}</h3>
             );
         }
 
         const SelectFile = (props) => {
 
-            var file;
+            var file, title, id = props.id + 1;
 
-            const fileOrder = props.order;
+            console.log(id);
 
-            const onChangeHandler = (value) => {
-                file = value;
-                console.log(file);
+            const onChangeHandler = (field, value) => {
+                // file = value;
+                // console.log(file);
+                switch (field) {
+                    case "file":
+                        file = value;
+                        break;
+                    case "title":
+                        title = value;
+                        break;
+                    default:
+                        break;
+                }
+                // console.log(file, title);
+                // contents[id - 1] = { season, id, title };
+                updateContents(null, null, title, file);
             }
 
             return (
@@ -109,7 +158,7 @@ export function UploadSeries(props) {
                             onChange={(e) => {
                                 // console.log(e.target.files[0]);
                                 // movieFile = e.target.files[0];
-                                onChangeHandler(e.target.files[0]);
+                                onChangeHandler("file", e.target.files[0]);
                             }}
                         />
 
@@ -118,7 +167,7 @@ export function UploadSeries(props) {
                         <TextField
                             label="Title"
                             variant="outlined"
-                            onChange={(e) => { onChangeHandler(e.target.value) }}
+                            onChange={(e) => { onChangeHandler("title", e.target.value) }}
                             defaultValue={data.description}
                             required
                             fullWidth
@@ -157,13 +206,13 @@ export function UploadSeries(props) {
             }
 
             return temp.map((item, i) => {
-                return (<SelectFile order={i} />);
+                return (<SelectFile id={i} />);
             });
         }
 
         return (
             <tr>
-                <td><SeasonNumberField /></td>
+                <td><SeasonNumberField season={seasonNum} /></td>
                 <td>
                     {displayFileField()}
                     <AddMoreFileButton />
@@ -173,15 +222,15 @@ export function UploadSeries(props) {
     }
 
     const displaySeasonField = () => {
-        var temp = [];
+        // var temp = [];
 
-        for (var i = 0; i < seasonNum; i++) {
-            temp.push("something");
-        }
+        // for (var i = 0; i < seasonNum; i++) {
+        //     temp.push("something");
+        // }
 
-        return temp.map((item, i) => {
+        return seasons.map((item, i) => {
             return (
-                <SeasonField order={i} />
+                <SeasonField season={item} />
             );
         });
     }
@@ -230,10 +279,10 @@ export function UploadSeries(props) {
                     data.imdbReview = value;
                     break;
                 case "showLength":
-                    data.movieLength = value;
+                    data.showLength = value;
                     break;
                 case "showReleaseDate":
-                    data.movieReleaseDate = value;
+                    data.showReleaseDate = value;
                     break;
 
                 default:
@@ -426,8 +475,9 @@ export function UploadSeries(props) {
         e.preventDefault();
 
         setUploading(true);
+        console.log(data, newID);
 
-        
+
     }
 
     return (
