@@ -43,6 +43,19 @@ const suggestMovie = async () => {
 
 };
 
+const suggestSeries = async () => {
+
+    var res = [];
+
+    await getAllSeries().then((allSeries)=>{
+        res = allSeries
+    });
+
+    return new Promise((resolve, reject) => {
+        resolve(res);
+    });
+};
+
 const createPlaylist = (name, movieIDList = [], seriesIDList = []) => {
     const uid = firebase.auth().currentUser.uid;
     return firebase.firestore().collection("playlists").add({
@@ -178,6 +191,7 @@ const getAllSeries = async () => {
 const BrowsingModules = {
     searchMovie,
     suggestMovie,
+    suggestMovie,
     createPlaylist,
     updatePlaylist,
     removePlaylist,
@@ -195,6 +209,7 @@ const BrowsingModules = {
     createSeriesReview,
     removeSeriesReview,
     getAllSeries,
+    suggestSeries,
 
 };
 
