@@ -34,6 +34,14 @@ import EditIcon from '@material-ui/icons/Edit';
 
 function Movie(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const [shareSnackBarOpen, setShareSnackBarOpen] = useState(false);
     const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
@@ -58,29 +66,29 @@ function Movie(props) {
 
     const [userLibraryState, setUserLibraryState] = useState([]);
 
-    const [Icon] = useState(LoginModules.getUserProfile().icon);
+    const [Icon] = useState(account.getUserProfile().icon);
 
     const [reviewListState, setreviewListState] = useState([]);
 
     const [isAdmin, setIsAdmin] = useState(false);
 
-    const userID = LoginModules.getUserProfile().uid;
+    const userID = account.getUserProfile().uid;
 
     useEffect(() => {   //init loading
 
         if (userID) {
-            LoginModules.getAdminUser(userID).then((querySnapshot) => {
+            account.getAdminUser(userID).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     setIsAdmin(true);
                 })
             });
         }
 
-        MediaModule.getMoviePoster(movieID).then((url) => {
+        movieInfo.getMoviePoster(movieID).then((url) => {
             setMoviePoster(url);
         })
 
-        MediaModule.getMovieInfo(movieID).then((doc) => {
+        movieInfo.getMovieInfo(movieID).then((doc) => {
             if (doc.exists) {
                 setMovies(doc.data());
             } else {
@@ -88,7 +96,7 @@ function Movie(props) {
             }
         });
 
-        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+        playlist.getAllPlaylist().then((querySnapshot) => {
             var userLibrary = [];
             querySnapshot.forEach((doc) => {
                 if (userLibraryState !== []) {
@@ -102,7 +110,7 @@ function Movie(props) {
             setUserLibraryState(userLibrary);
         });
 
-        BrowsingModules.getReviewSnapshot(movieID)
+        review.getReviewSnapshot(movieID)
             .onSnapshot(
                 (querySnapshot) => {
                     var reviewList = [];
@@ -241,7 +249,7 @@ function Movie(props) {
                                 newPlaylist = "New Playlist";
                             }
                             // create playlist
-                            BrowsingModules.createPlaylist(newPlaylist, [movieID]).then(() => {
+                            playlist.createPlaylist(newPlaylist, [movieID]).then(() => {
                                 // console.log("BM: created playlist");
                                 setUpdatePlaylistSnackBarOpen(true);
                             }).catch((e) => {
@@ -250,10 +258,10 @@ function Movie(props) {
                         } else {
                             console.log(selectedPlaylist);
                             // add item to exist playlist
-                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
+                            playlist.getPlaylist(selectedPlaylist).then((doc) => {
                                 var newMovieIDList = doc.data().movieID;
                                 newMovieIDList.push(movieID);
-                                BrowsingModules.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
+                                playlist.updatePlaylist(selectedPlaylist, newMovieIDList).then(() => {
                                     setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
@@ -417,7 +425,7 @@ function Movie(props) {
             const CommentUserID = props.userID;
 
             useEffect(() => {
-                BrowsingModules.getUserIcon(props.userID).then((url) => {
+                account.getUserIcon(props.userID).then((url) => {
                     setUserIcon(url);
                 });
             }, []);
@@ -427,7 +435,7 @@ function Movie(props) {
                 const commentID = props.id;
 
                 const onclickHandler = () => {
-                    BrowsingModules.removeReview(commentID).then(() => {
+                    review.removeReview(commentID).then(() => {
                         console.log("Success");
                         setRemoveCommentSnackBar(true);
                     }).catch((e) => {
@@ -514,12 +522,12 @@ function Movie(props) {
 
         const ReviewField = () => {
 
-            var review = "";
+            var reviewText = "";
 
             const SendButton = () => {
                 const onclickHandler = () => {
-                    if (review.length !== 0) {
-                        BrowsingModules.createReview(movieID, review, LoginModules.getUserProfile().name);
+                    if (reviewText.length !== 0) {
+                        review.createReview(movieID, reviewText, account.getUserProfile().name);
                     }
                 }
 
@@ -534,7 +542,7 @@ function Movie(props) {
             const CommentTextField = () => {
 
                 const onChangeHandler = (value) => {
-                    review = value;
+                    reviewText = value;
                 }
 
                 return (

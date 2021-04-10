@@ -18,6 +18,12 @@ import BrowsingModules from './modules/BrowsingModules';
 
 export function ManageSeries(props) {
 
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const history = useHistory();
 
     const useStyles = makeStyles({
@@ -33,7 +39,7 @@ export function ManageSeries(props) {
     const searchValue = params.search;
 
     useEffect(() => {
-        BrowsingModules.getAllSeries().then((allSeries)=>{
+        suggest.getAllSeries().then((allSeries) => {
             setSeriesDataState(allSeries);
         });
     }, [])
@@ -122,7 +128,7 @@ export function ManageSeries(props) {
         `;
 
         const onclickHandler = () => {
-            MediaModule.removeSeriesInfo(props.id).then(()=>{
+            seriesInfo.removeSeriesInfo(props.id).then(() => {
                 window.location.reload();
             });
         }

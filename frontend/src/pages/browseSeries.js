@@ -14,13 +14,19 @@ export function BrowseSeries(props) {
 
     const [row1Movie, setRow1Movie] = useState([]);
 
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
 
     useEffect(() => {
-        BrowsingModules.suggestSeries().then((allSeries) => {
+        suggest.suggestSeries().then((allSeries) => {
             console.log("allSeries", allSeries);
             allSeries.forEach((series) => {
                 if (series) {
-                    MediaModule.getSeriesPoster(series.id).then((url) => {
+                    seriesInfo.getSeriesPoster(series.id).then((url) => {
                         console.log("url", url);
                         if (url.includes("%2F" + series.id + ".jpg")) {
                             var movieCardInfo = row1Movie;

@@ -44,6 +44,14 @@ import Divider from '@material-ui/core/Divider';
 
 function Series(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const [shareSnackBarOpen, setShareSnackBarOpen] = useState(false);
     const [updatePlaylistSnackBarOpen, setUpdatePlaylistSnackBarOpen] = useState(false);
 
@@ -68,27 +76,27 @@ function Series(props) {
 
     const [userLibraryState, setUserLibraryState] = useState([]);
 
-    const [Icon] = useState(LoginModules.getUserProfile().icon);
+    const [Icon] = useState(account.getUserProfile().icon);
 
     const [reviewListState, setreviewListState] = useState([]);
 
     const [isAdmin, setIsAdmin] = useState(false);
 
-    const userID = LoginModules.getUserProfile().uid;
+    const userID = account.getUserProfile().uid;
 
     const [seriesContent, setSeriesContent] = useState([]);
 
     useEffect(() => {   //init loading
 
         //isAdmin
-        LoginModules.getAdminUser(userID).then((querySnapshot) => {
+        account.getAdminUser(userID).then((querySnapshot) => {
             querySnapshot.forEach(item => {
                 setIsAdmin(true);
             });
         });
 
         //series info
-        MediaModule.getSeriesInfo(seriesID.toString()).then((data) => {
+        seriesInfo.getSeriesInfo(seriesID.toString()).then((data) => {
             // console.log(data);
             setMovies(data);
 
@@ -128,12 +136,12 @@ function Series(props) {
         });
 
         //series poster
-        MediaModule.getSeriesPoster(seriesID).then((url) => {
+        seriesInfo.getSeriesPoster(seriesID).then((url) => {
             setSeriesPoster(url);
         })
 
         //reviews
-        BrowsingModules.getSeriesReviewSnapshot(seriesID)
+        review.getSeriesReviewSnapshot(seriesID)
             .onSnapshot(
                 (querySnapshot) => {
                     var reviewList = [];
@@ -146,7 +154,7 @@ function Series(props) {
             ;
 
         //playlist
-        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+        playlist.getAllPlaylist().then((querySnapshot) => {
             var userLibrary = [];
             querySnapshot.forEach((doc) => {
                 if (userLibraryState !== []) {
@@ -340,7 +348,7 @@ function Series(props) {
                                 newPlaylist = "New Playlist";
                             }
                             // create playlist
-                            BrowsingModules.createPlaylist(newPlaylist, [], [seriesID]).then(() => {
+                            playlist.createPlaylist(newPlaylist, [], [seriesID]).then(() => {
                                 // console.log("BM: created playlist");
                                 setUpdatePlaylistSnackBarOpen(true);
                             }).catch((e) => {
@@ -349,12 +357,12 @@ function Series(props) {
                         } else {
                             // console.log(selectedPlaylist);
                             // add item to exist playlist
-                            BrowsingModules.getPlaylist(selectedPlaylist).then((doc) => {
+                            playlist.getPlaylist(selectedPlaylist).then((doc) => {
                                 console.log(doc.data());
                                 var newSeriesIDList = doc.data().seriesID;
                                 newSeriesIDList.push(seriesID);
                                 // console.log(newSeriesIDList);
-                                BrowsingModules.updatePlaylist(selectedPlaylist, null, newSeriesIDList).then(() => {
+                                playlist.updatePlaylist(selectedPlaylist, null, newSeriesIDList).then(() => {
                                     setUpdatePlaylistSnackBarOpen(true);
                                 });
                             });
@@ -512,7 +520,7 @@ function Series(props) {
                                     {item.content.map((contentItem) => {
                                         return (
                                             <ListItem button divider>
-                                                <ListItemText primary={contentItem.title} onClick={()=>{play(movies.id, contentItem.id)}} />
+                                                <ListItemText primary={contentItem.title} onClick={() => { play(movies.id, contentItem.id) }} />
                                             </ListItem>
                                         );
                                     })}
@@ -538,7 +546,7 @@ function Series(props) {
             const CommentUserID = props.userID;
 
             useEffect(() => {
-                BrowsingModules.getUserIcon(props.userID).then((url) => {
+                account.getUserIcon(props.userID).then((url) => {
                     setUserIcon(url);
                 });
             }, []);
@@ -548,7 +556,7 @@ function Series(props) {
                 const commentID = props.id;
 
                 const onclickHandler = () => {
-                    BrowsingModules.removeSeriesReview(commentID).then(() => {
+                    review.removeSeriesReview(commentID).then(() => {
                         console.log("Success");
                         setRemoveCommentSnackBar(true);
                         window.location.reload();
@@ -636,12 +644,12 @@ function Series(props) {
 
         const ReviewField = () => {
 
-            var review = "";
+            var reviewText = "";
 
             const SendButton = () => {
                 const onclickHandler = () => {
-                    if (review.length !== 0) {
-                        BrowsingModules.createSeriesReview(seriesID, review, LoginModules.getUserProfile().name);
+                    if (reviewText.length !== 0) {
+                        review.createSeriesReview(seriesID, reviewText, account.getUserProfile().name);
                     }
                 }
 
@@ -656,7 +664,7 @@ function Series(props) {
             const CommentTextField = () => {
 
                 const onChangeHandler = (value) => {
-                    review = value;
+                    reviewText = value;
                 }
 
                 return (

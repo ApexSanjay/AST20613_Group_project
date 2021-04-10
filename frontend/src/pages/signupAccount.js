@@ -9,6 +9,10 @@ import LoginModules from "./modules/LoginModules";
 import Container from "./components/container";
 
 function SignupAccount(props) {
+
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
     const history = useHistory();
 
     const params = useParams();
@@ -116,8 +120,8 @@ function SignupAccount(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        LoginModules.register(email, password, planSelected).then(() => {
-            LoginModules.updateName(name).then(() => {
+        account.register(email, password, planSelected).then(() => {
+            account.updateName(name).then(() => {
                 history.push("/signup/payment");
             });
         }).catch((e) => {

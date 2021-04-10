@@ -11,13 +11,16 @@ import LoginModules from "./modules/LoginModules";
 
 function SettingMembership(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
     const [plan, setPlan] = useState();
 
     const [planDetails, setPlanDetails] = useState();
 
     useEffect(() => {
         if (!plan) {
-            LoginModules.getUserPlan().then((querySnapshot) => {
+            account.getUserPlan().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     setPlan(doc.data().plan);
                 })
@@ -25,7 +28,7 @@ function SettingMembership(props) {
         }
 
         if (plan) {
-            LoginModules.getPlanDetails(plan).then((doc) => {
+            account.getPlanDetails(plan).then((doc) => {
                 if (doc.exists) {
                     setPlanDetails({
                         price: doc.data().Price,

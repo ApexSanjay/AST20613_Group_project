@@ -20,6 +20,12 @@ import MediaModule from "./modules/MediaModule";
 
 function Playlist(props) {
 
+    const review = new BrowsingModules.Review();
+    const playlistObj = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const params = useParams();
     const playlistID = params.id;
     const [playlist, setPlaylist] = useState();
@@ -43,7 +49,7 @@ function Playlist(props) {
 
     useEffect(() => {   //init loading
         if (playlistID != null && !playlist) {
-            BrowsingModules.getPlaylist(playlistID).then((doc) => {
+            playlistObj.getPlaylist(playlistID).then((doc) => {
                 if (doc.exists) {
                     setPlaylistTitle(doc.data().title);
                     setPlaylist(doc.data().movieID);
@@ -62,7 +68,7 @@ function Playlist(props) {
                 formattedPlaylist.push(parseInt(playlist[i]))
             }
 
-            MediaModule.getMovieInfos(formattedPlaylist).then((querySnapshot) => {
+            movieInfo.getMovieInfos(formattedPlaylist).then((querySnapshot) => {
                 if (querySnapshot.empty) {
                     console.log("empty");
                 } else {
@@ -84,7 +90,7 @@ function Playlist(props) {
                 formattedPlaylist.push(parseInt(seriesPlaylist[i]))
             }
 
-            MediaModule.getSeriesInfos(formattedPlaylist).then((querySnapshot) => {
+            seriesInfo.getSeriesInfos(formattedPlaylist).then((querySnapshot) => {
                 if (querySnapshot.empty) {
                     console.log("empty");
                 } else {
@@ -140,7 +146,7 @@ function Playlist(props) {
                 for (var i in list) {
                     if (list[i] === movieID) {
                         list.splice(i, 1);
-                        BrowsingModules.updatePlaylist(playlistID, list).then(() => {
+                        playlistObj.updatePlaylist(playlistID, list).then(() => {
                             window.location.reload();   //reload page
                         });
                         break;
@@ -239,7 +245,7 @@ function Playlist(props) {
                 for (var i in list) {
                     if (list[i] === seriesID.toString()) {
                         list.splice(i, 1);
-                        BrowsingModules.updatePlaylist(playlistID, null, list).then(() => {
+                        playlistObj.updatePlaylist(playlistID, null, list).then(() => {
                             console.log("updated");
                             window.location.reload();   //reload page
                         });

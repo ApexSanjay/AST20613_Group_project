@@ -14,7 +14,11 @@ import Container from "./components/container";
 import SnackBar from "./components/snackBar";
 
 function SettingProfile(props) {
-    var profileName = LoginModules.getUserProfile().name;
+
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
+    var profileName = account.getUserProfile().name;
 
     const [message, setMessage] = useState();
 
@@ -48,7 +52,7 @@ function SettingProfile(props) {
 
     const IconField = () => {
         const [imageAsFile, setImageAsFile] = useState('');
-        const [icon, setIcon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
+        const [icon, setIcon] = useState(account.getUserProfile().icon != null ? account.getUserProfile().icon : face);
 
         const handleImage = (e) => {
             const image = e.target.files[0]
@@ -62,8 +66,8 @@ function SettingProfile(props) {
             if (imageAsFile === '') {
                 console.error(`not an image, the image file is a ${typeof (imageAsFile)}`)
             }
-            LoginModules.updateIcon(imageAsFile).then(() => {
-                var newIcon = LoginModules.getUserProfile().icon;
+            account.updateIcon(imageAsFile).then(() => {
+                var newIcon = account.getUserProfile().icon;
                 setIcon(newIcon);
                 setMessage(<SnackBar show={true}>Icon Updated.</SnackBar>);
             }
@@ -93,8 +97,7 @@ function SettingProfile(props) {
 
     const ProfileSetting = () => {
         const updateProfile = () => {
-            LoginModules.updateName(profileName).then(() => {
-                // console.log(LoginModules.getUserProfile().name);
+            account.updateName(profileName).then(() => {
                 setMessage(<SnackBar show={true}>Profile Updated.</SnackBar>);
             });
         }

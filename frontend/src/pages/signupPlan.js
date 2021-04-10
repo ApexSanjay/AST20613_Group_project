@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function SignupPlan(props) {
+
     const classes = useStyles();
 
     const params = useParams();
@@ -156,7 +157,7 @@ function SignupPlan(props) {
 
     return (
         <Container>
-            <MenuBar/>
+            <MenuBar />
             {(errorRedirected ? <SnackBar show={true}>Please selected a plan.</SnackBar> : <></>)}
             <Grid container spacing={3}>
                 <Grid item xs={12}>

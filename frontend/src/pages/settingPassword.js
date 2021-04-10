@@ -12,6 +12,9 @@ import SnackBar from "./components/snackBar"
 
 function SettingPassword(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
     var oldPwd = "", newPwd = "", confirmPwd = "";
 
     const [message, setMessage] = useState();
@@ -49,11 +52,11 @@ function SettingPassword(props) {
             return (pwd1 === pwd2);
         }
 
-        LoginModules.vertifyPassword(oldPwd).then(() => {
+        account.vertifyPassword(oldPwd).then(() => {
             console.log("checkOldPassword success")
             if (isConfirmedPassword(newPwd, confirmPwd)) {
                 console.log("confirm pwd success");
-                LoginModules.updatePassword(newPwd).then(()=>{
+                account.updatePassword(newPwd).then(() => {
                     setMessage(<SnackBar show={true}>Password update success.</SnackBar>);
                 }
                 );

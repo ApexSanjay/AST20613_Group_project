@@ -12,6 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export function EditSeries(props) {
 
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     var posterFile = null;
 
     const params = useParams();
@@ -56,12 +59,12 @@ export function EditSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        MediaModule.getSeriesInfo(seriesID).then((seriesData) => {
+        seriesInfo.getSeriesInfo(seriesID).then((seriesData) => {
             // data = seriesData;
             setData(seriesData)
         });
 
-        MediaModule.getSeriesPoster(seriesID).then((url)=>{
+        seriesInfo.getSeriesPoster(seriesID).then((url) => {
             setCurrentPoster(url)
         });
 
@@ -532,7 +535,7 @@ export function EditSeries(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        
+
     }
 
     return (

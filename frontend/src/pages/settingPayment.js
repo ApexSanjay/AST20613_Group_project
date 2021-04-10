@@ -11,6 +11,9 @@ import Container from "./components/container";
 
 function SettingPayment(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
     const [cardInfoID, setCardInfoID] = useState();
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
@@ -27,11 +30,11 @@ function SettingPayment(props) {
         cvv: cvv
     }
 
-    const userid = LoginModules.getUserProfile().uid;
+    const userid = account.getUserProfile().uid;
     const history = useHistory();
 
     useEffect(() => {
-        LoginModules.getCardInfo(userid).then((querySnapshot) => {
+        cardInfo.getCardInfo(userid).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var data = doc.data();
                 // console.log(data);

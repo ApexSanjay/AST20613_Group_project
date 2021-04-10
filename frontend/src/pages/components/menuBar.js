@@ -23,16 +23,25 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import LoginModules from "../modules/LoginModules";
 import AdminModules from "../modules/AdminModules";
 import BrowsingModules from '../modules/BrowsingModules';
+import MediaModule from '../modules/MediaModule';
 
 const MenuBar = () => {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+    const admin = new AdminModules.Admin();
+
     const [isAdmin, setIsAdmin] = useState(false);
 
-    const userID = LoginModules.getUserProfile().uid;
+    const userID = account.getUserProfile().uid;
 
     useEffect(() => { //init loading
         if (userID) {
-            LoginModules.getAdminUser(userID).then((querySnapshot) => {
+            account.getAdminUser(userID).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     setIsAdmin(true);
                 })
@@ -98,7 +107,7 @@ const MenuBar = () => {
     };
 
     const logout = () => {
-        LoginModules.logout().then(() => {
+        account.logout().then(() => {
             history.push("/");
         });
     }
@@ -244,8 +253,8 @@ const MenuBar = () => {
                         <Button
                             onclick={() => { btnHandler("myLib") }}
                         >
-                            <Avatar src={LoginModules.getUserProfile().icon}></Avatar>
-                            {LoginModules.getUserProfile().name}
+                            <Avatar src={account.getUserProfile().icon}></Avatar>
+                            {account.getUserProfile().name}
                         </Button>
 
                         <Button aria-haspopup="true" onClick={(e) => { btnHandler("settingIcon", e) }}><SettingsIcon /></Button>

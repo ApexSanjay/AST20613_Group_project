@@ -12,6 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export function UploadSeries(props) {
 
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     var posterFile = null;
     const [newID, setNewID] = useState();
     const [uploading, setUploading] = useState(false);
@@ -50,7 +53,7 @@ export function UploadSeries(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        MediaModule.getNewSeriesID().then((id) => {
+        seriesInfo.getNewSeriesID().then((id) => {
             setNewID(id);
         });
     }, []);
@@ -528,10 +531,10 @@ export function UploadSeries(props) {
         setUploading(true);
         console.log(data, newID);
         data.id = newID;
-        MediaModule.createSeriesInfo(newID.toString(), data).then((docRef)=>{
+        seriesInfo.createSeriesInfo(newID.toString(), data).then((docRef) => {
             console.log(docRef);
             console.log("uploaded info");
-            MediaModule.uploadSeriesPoster(newID.toString(), posterFile).then(()=>{
+            seriesInfo.uploadSeriesPoster(newID.toString(), posterFile).then(() => {
                 console.log("uploaded poster");
                 history.push("/series/" + newID);
             });

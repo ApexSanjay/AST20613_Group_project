@@ -11,6 +11,9 @@ import Container from "./components/container";
 
 function Login(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
     var params = useParams();
     var urlError = params.error;
 
@@ -83,7 +86,7 @@ function Login(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        LoginModules.login(email, password).then(() => {
+        account.login(email, password).then(() => {
             history.push("/browse");
         }).catch((e) => {
             setError(e.code + ": " + e.message);

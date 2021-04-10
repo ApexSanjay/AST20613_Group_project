@@ -7,21 +7,26 @@ import LoginModules from './modules/LoginModules';
 
 function Play(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const params = useParams();
     const movieID = params.id;
     // console.log(movieID);
 
     // const [userPlan, setUserPlan] = useState("");
-    const [movieURL, setMovieURL] = useState(MediaModule.getMovieStream(movieID));
+    const [movieURL, setMovieURL] = useState(movieInfo.getMovieStream(movieID));
 
-    useEffect(()=>{
-        LoginModules.getUserPlan().then((querySnapshot) => {
+    useEffect(() => {
+        account.getUserPlan().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // console.log(doc.data().plan);
-                setMovieURL(MediaModule.getMovieStream(movieID, doc.data().plan))
+                setMovieURL(movieInfo.getMovieStream(movieID, doc.data().plan))
             });
         });
-    },[]);
+    }, []);
 
     const Container = styled.div`
         margin: auto;

@@ -8,6 +8,8 @@ import MenuBar from "./components/menuBarBeforeSignin";
 
 export function Home(props) {
 
+    
+
     const Container = styled.div`
         margin: auto;
         width: 100%;

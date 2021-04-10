@@ -18,6 +18,10 @@ import Fuse from 'fuse.js';
 
 export function Search(props) {
 
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+
     const history = useHistory();
 
     const useStyles = makeStyles({
@@ -36,7 +40,7 @@ export function Search(props) {
 
     useEffect(() => {
 
-        BrowsingModules.getAllMovies().then((querySnapshot) => {
+        suggest.getAllMovies().then((querySnapshot) => {
 
             var moviesData = [];
 
