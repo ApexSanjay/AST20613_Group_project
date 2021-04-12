@@ -195,6 +195,15 @@ class SeriesInfo {
     getSeriesPoster = (id) => {
         return firebase.storage().ref("seriesPosters/" + id + ".jpg").getDownloadURL();  //.then.catch
     }
+
+    uploadSeries = (seriesID, ep, file) => {
+        const data = new FormData();
+        data.append("series", file);
+        return axios.post("http://localhost:4000/uploadSeries/" + seriesID + "/" + ep, data);
+        // .then(res => { // then print response status
+        //     console.log(res.statusText);
+        // })
+    }
 }
 
 export default {MovieInfo, SeriesInfo}

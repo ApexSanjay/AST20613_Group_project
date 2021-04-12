@@ -12,10 +12,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export function UploadSeries(props) {
 
-    const movieInfo = new MediaModule.MovieInfo();
     const seriesInfo = new MediaModule.SeriesInfo();
 
     var posterFile = null;
+    var seriesFile = [];
     const [newID, setNewID] = useState();
     const [uploading, setUploading] = useState(false);
 
@@ -97,7 +97,7 @@ export function UploadSeries(props) {
 
         const [fileNum, setFileNum] = useState(1);
 
-        const updateContents = (contentID, title = null, files = null) => {
+        const updateContents = (contentID, title = null, file = null) => {
             console.log("seasonNum", seasonNum);
 
             if (seasonNum === 1) {
@@ -161,15 +161,22 @@ export function UploadSeries(props) {
                 }
                 data.seasonTen[contentID - 1] = { contentID, title };
             }
-            // if (contentID !== null) {
-            //     if (title !== null) {
-
-            //     }
-            //     if (files !== null) {
-
-            //     }
-            // }
-            console.log(data);
+            if (file !== null) {
+                // const fileID = seasonNum.toString() + contentID.toString();
+                var isExist = false;
+                seriesFile.forEach((item) => {
+                    if (item.seasonNum === seasonNum.toString() && item.contentID === contentID.toString()) {
+                        isExist = true;
+                        item.file = file;
+                    }
+                })
+                if (!isExist) {
+                    seriesFile.push({ seasonNum: seasonNum.toString(), contentID: contentID.toString(), file: file });
+                }
+                // console.log(seasonNum.toString() + contentID.toString());
+            }
+            console.log("data", data);
+            console.log("seriesFile", seriesFile);
         }
 
         const SeasonNumberField = (props) => {
@@ -519,19 +526,55 @@ export function UploadSeries(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-
         setUploading(true);
+        
         console.log(data, newID);
         data.id = newID;
-        seriesInfo.createSeriesInfo(newID.toString(), data).then((docRef) => {
-            console.log(docRef);
-            console.log("uploaded info");
-            seriesInfo.uploadSeriesPoster(newID.toString(), posterFile).then(() => {
-                console.log("uploaded poster");
-                history.push("/series/" + newID);
-            });
-        });
 
+        const uploadFiles = async () => {
+            // await seriesFile.forEach(async (item) => {
+            //     // item.seasonNum, item.contentID, item.file
+            //     await seriesInfo.uploadSeries(item.seasonNum, item.contentID, item.file).then(() => {
+            //         console.log("uploadSeries success");
+            //     });
+
+            //     return new Promise((resolve, reject) => {
+            //         resolve();
+            //     });
+            // });
+
+            console.log(seriesFile);
+
+            for (var i in seriesFile) {
+                await seriesInfo.uploadSeries(newID, seriesFile[i].seasonNum.toString() + seriesFile[i].contentID.toString(), seriesFile[i].file).then(() => {
+                    console.log("uploadSeries success");
+                });
+            }
+
+            await seriesInfo.createSeriesInfo(newID.toString(), data).then((docRef) => {
+                console.log("uploaded info");
+                seriesInfo.uploadSeriesPoster(newID.toString(), posterFile).then(() => {
+                    console.log("uploaded poster");
+                    history.push("/series/" + newID);
+                });
+            });
+
+            return new Promise((resolve, reject) => {
+                resolve();
+            });
+        };
+
+
+        uploadFiles().then(() => {
+            // seriesInfo.createSeriesInfo(newID.toString(), data).then((docRef) => {
+            //     console.log(docRef);
+            //     console.log("uploaded info");
+            //     seriesInfo.uploadSeriesPoster(newID.toString(), posterFile).then(() => {
+            //         console.log("uploaded poster");
+            //         history.push("/series/" + newID);
+            //     });
+            // });
+        });
     }
 
     return (
