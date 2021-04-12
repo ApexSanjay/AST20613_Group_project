@@ -29,7 +29,8 @@ import {
   ManageSeries,
   UploadSeries,
   BrowseSeries,
-  EditSeries
+  EditSeries,
+  PlaySeries
 } from './pages';
 
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -236,6 +237,9 @@ function App() {
             </UnprotectedRoute>
             <ProtectedRoute path="/play/:id">
               <Play />
+            </ProtectedRoute>
+            <ProtectedRoute path="/playSeries/:id/:ep">
+              <PlaySeries />
             </ProtectedRoute>
             <ProtectedRoute path="/series/:id">
               <Series />

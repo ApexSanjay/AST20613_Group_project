@@ -240,6 +240,15 @@ app.use("/play", createProxyMiddleware({
 })
 );
 
+app.use("/playSeries", createProxyMiddleware({
+    target: "http://localhost:8000/series",
+    changeOrigin: true,
+    pathRewrite: {
+        [`^/playSeries`]: '',
+    },
+})
+);
+
 app.listen(port, () => {
     console.log("Upload server listening at http://localhost:4000")
 })

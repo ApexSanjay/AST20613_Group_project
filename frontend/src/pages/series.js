@@ -495,8 +495,8 @@ function Series(props) {
     }
 
     const PlayButton = () => {
-        const play = (seriesID, contentID) => {
-            history.push("/play/series/" + seriesID + "/" + contentID);
+        const play = (seriesID, ep) => {
+            history.push("/playSeries/" + seriesID + "/" + ep);
         }
 
         const [expanded, setExpanded] = React.useState();
@@ -518,7 +518,7 @@ function Series(props) {
                                     {item.content.map((contentItem) => {
                                         return (
                                             <ListItem button divider>
-                                                <ListItemText primary={contentItem.title} onClick={() => { play(movies.id, contentItem.id) }} />
+                                                <ListItemText primary={contentItem.title} onClick={() => { play(movies.id,  contentItem.id.toString()) }} />
                                             </ListItem>
                                         );
                                     })}
