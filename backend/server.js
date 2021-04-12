@@ -27,22 +27,12 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-//upload single file
 app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //movie is the name of <input>
     console.log(req.file, req.body);
     console.log(req.params.id);
 
 
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-
-    // var dir = "data/movie/" + req.params.id;
-
-    // if (!fs.existsSync(dir)) {
-    //     fs.mkdirSync(dir);
-    // } else {
-    //     fs.rmdirSync(dir, { recursive: true });
-    //     fs.mkdirSync(dir);
-    // }
 
     var dir = "data/movie/480p/" + req.params.id;
 
@@ -72,25 +62,6 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
     }
 
     console.log("Start Transcoding...");
-
-    // //default
-    // console.log("default");
-    // ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
-    //     '-profile:v baseline',
-    //     '-level 3.0',
-    //     '-start_number 0',
-    //     '-hls_time 10',
-    //     '-hls_list_size 0',
-    //     '-f hls',
-    //     '-s 640x272',
-    //     '-aspect 640:272',
-    //     '-r 23.976'
-    // ]).output('data/movie/' + req.params.id + "/" + req.params.id + '.m3u8').on('end', () => {
-
-
-
-
-    // }).run();
 
     //480p
     console.log("480p");
@@ -143,6 +114,94 @@ app.post('/upload/:id', upload.single('movie'), function (req, res, next) {   //
 
 });
 
+app.post('/uploadSeries/:id/:ep', upload.single('series'), function (req, res, next) {   //series is the name of <input>
+    console.log(req.file, req.body);
+    console.log(req.params.id, req.params.ep);
+
+
+    ffmpeg.setFfmpegPath(ffmpegInstaller.path);
+
+    var dir = "data/series/480p/" + req.params.id + "/" + req.params.ep;
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    } else {
+        fs.rmdirSync(dir, { recursive: true });
+        fs.mkdirSync(dir);
+    }
+
+    var dir = "data/series/1080p/" + req.params.id + "/" + req.params.ep;
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    } else {
+        fs.rmdirSync(dir, { recursive: true });
+        fs.mkdirSync(dir);
+    }
+
+    var dir = "data/series/4k/" + req.params.id + "/" + req.params.ep;
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    } else {
+        fs.rmdirSync(dir, { recursive: true });
+        fs.mkdirSync(dir);
+    }
+
+    console.log("Start Transcoding...");
+
+    //480p
+    console.log("480p");
+
+    ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
+        '-profile:v baseline',
+        '-level 3.0',
+        '-start_number 0',
+        '-hls_time 10',
+        '-hls_list_size 0',
+        '-f hls',
+        '-s 852x480',
+        '-aspect 852:480',
+    ]).output('data/series/480p/' + req.params.id + "/" + req.params.ep + "/" + req.params.ep + '.m3u8').on('end', () => {
+
+        //1080p
+        console.log("1080p");
+        ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
+            '-profile:v baseline',
+            '-level 3.0',
+            '-start_number 0',
+            '-hls_time 10',
+            '-hls_list_size 0',
+            '-f hls',
+            '-s 1920x1080',
+            '-aspect 1920:1080',
+        ]).output('data/series/1080p/' + req.params.id + "/" + req.params.ep + "/" + req.params.ep + '.m3u8').on('end', () => {
+
+            //4k
+            console.log("4k");
+            ffmpeg('data/uploads/' + req.file.filename, { timeout: 432000 }).addOptions([
+                '-profile:v baseline',
+                '-level 3.0',
+                '-start_number 0',
+                '-hls_time 10',
+                '-hls_list_size 0',
+                '-f hls',
+                '-s 3840x2160',
+                '-aspect 3840:2160',
+            ]).output('data/series/4k/' + + req.params.id + "/" + req.params.ep + "/" + req.params.ep + '.m3u8').on('end', () => {
+
+                console.log("End of Transcoding.");
+                res.sendStatus(200);    //success message
+
+            }).run();
+
+        }).run();
+
+    }).run();
+
+});
+
+
 app.get('/remove/:id', function (req, res) {
 
     console.log("Removing movie " + req.params.id);
@@ -177,6 +236,15 @@ app.use("/play", createProxyMiddleware({
     changeOrigin: true,
     pathRewrite: {
         [`^/play`]: '',
+    },
+})
+);
+
+app.use("/playSeries", createProxyMiddleware({
+    target: "http://localhost:8000/series",
+    changeOrigin: true,
+    pathRewrite: {
+        [`^/playSeries`]: '',
     },
 })
 );

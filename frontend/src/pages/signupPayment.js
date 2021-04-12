@@ -10,6 +10,9 @@ import Container from "./components/container";
 
 function SignupPayment(props) {
 
+    const account = new LoginModules.Account();
+    const cardInfo = new LoginModules.CardInfo();
+
     var
         firstname = "",
         lastname = "",
@@ -20,7 +23,7 @@ function SignupPayment(props) {
     const [error, setError] = useState("");
 
     const history = useHistory();
-    
+
     //onchange handler
     const onchangeHandler = (field, value) => {
         switch (field) {
@@ -143,10 +146,10 @@ function SignupPayment(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        var uid = LoginModules.getUserProfile().uid;
-        LoginModules.createCardInfo(uid, cvv, cardNum, explorationDate, firstname, lastname).then(()=>{
+        var uid = account.getUserProfile().uid;
+        cardInfo.createCardInfo(uid, cvv, cardNum, explorationDate, firstname, lastname).then(() => {
             history.push("/browse");
-        }).catch((e)=>{
+        }).catch((e) => {
             setError(e.code + ": " + e.message);
         });
     }

@@ -20,13 +20,17 @@ import BrowsingModules from "./modules/BrowsingModules";
 
 function Profile(props) {
 
-    var profile = LoginModules.getUserProfile();
-    const [icon] = useState(LoginModules.getUserProfile().icon != null ? LoginModules.getUserProfile().icon : face);
+
+    const account = new LoginModules.Account();
+    const playlist = new BrowsingModules.Playlist();
+
+    var profile = account.getUserProfile();
+    const [icon] = useState(account.getUserProfile().icon != null ? account.getUserProfile().icon : face);
     const history = useHistory();
     const [Lib, setLib] = useState([]);
 
     useEffect(() => {
-        BrowsingModules.getAllPlaylist().then((querySnapshot) => {
+        playlist.getAllPlaylist().then((querySnapshot) => {
             var allPlaylist = [];
             querySnapshot.forEach((doc) => {
                 var playlist = {
@@ -79,7 +83,7 @@ function Profile(props) {
         const ListCard = (props) => {
 
             const removePlayList = () => {
-                BrowsingModules.removePlaylist(props.playlistID).then(() => {
+                playlist.removePlaylist(props.playlistID).then(() => {
                     window.location.reload();   //reload page
                 });
             }

@@ -20,6 +20,12 @@ import Fuse from 'fuse.js'
 
 export function ManageMovies(props) {
 
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const history = useHistory();
 
     const useStyles = makeStyles({
@@ -41,15 +47,14 @@ export function ManageMovies(props) {
     useEffect(() => {
         movieData = [];
         if (!searchValue) {
-            MediaModule.getMovies(loadMovieCount).then((querySnapshot) => {
+            movieInfo.getMovies(loadMovieCount).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     movieData.push(doc.data());
                 });
                 setMovieDataState([...movieData]);
             });
         } else {
-            // console.log("???");
-            BrowsingModules.getAllMovies().then((querySnapshot) => {
+            suggest.getAllMovies().then((querySnapshot) => {
                 var allMovies = [];
                 querySnapshot.forEach((doc) => {
                     allMovies.push(doc.data());
@@ -158,8 +163,7 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            // console.log(props.id);
-            MediaModule.removeMovie(props.id).then(()=>{
+            movieInfo.removeMovie(props.id).then(() => {
                 console.log("removed movies");
                 window.location.reload();
             });

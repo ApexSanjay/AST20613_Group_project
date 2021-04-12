@@ -12,15 +12,21 @@ import BrowsingModules from './modules/BrowsingModules';
 
 export function Browse(props) {
 
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
+
     const [row1Movie, setRow1Movie] = useState([]);
     const [row2Movie, setRow2Movie] = useState([]);
     const [row3Movie, setRow3Movie] = useState([]);
 
     useEffect(() => {
-        BrowsingModules.suggestMovie().then((movies) => {
+        suggest.suggestMovie().then((movies) => {
             movies.forEach((movie) => {
                 if (movie) {
-                    MediaModule.getMoviePoster(movie.id).then((url) => {
+                    movieInfo.getMoviePoster(movie.id).then((url) => {
                         if (url.includes("%2F" + movie.id + ".jpg")) {
                             var movieCardInfo = row1Movie;
                             movieCardInfo.push({ id: movie.id, url: url });
@@ -30,10 +36,10 @@ export function Browse(props) {
                 }
             });
         });
-        BrowsingModules.suggestMovie().then((movies) => {
+        suggest.suggestMovie().then((movies) => {
             movies.forEach((movie) => {
                 if (movie) {
-                    MediaModule.getMoviePoster(movie.id).then((url) => {
+                    movieInfo.getMoviePoster(movie.id).then((url) => {
                         if (url.includes("%2F" + movie.id + ".jpg")) {
                             var movieCardInfo = row2Movie;
                             movieCardInfo.push({ id: movie.id, url: url });
@@ -43,10 +49,10 @@ export function Browse(props) {
                 }
             });
         });
-        BrowsingModules.suggestMovie().then((movies) => {
+        suggest.suggestMovie().then((movies) => {
             movies.forEach((movie) => {
                 if (movie) {
-                    MediaModule.getMoviePoster(movie.id).then((url) => {
+                    movieInfo.getMoviePoster(movie.id).then((url) => {
                         if (url.includes("%2F" + movie.id + ".jpg")) {
                             var movieCardInfo = row3Movie;
                             movieCardInfo.push({ id: movie.id, url: url });

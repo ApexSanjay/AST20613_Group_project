@@ -10,6 +10,8 @@ import ReactPlayer from 'react-player'
 
 export function EditMovie(props) {
 
+    const movieInfo = new MediaModule.MovieInfo();
+
     var movieFile = null;
     var posterFile = null;
     const [input, setInput] = useState({
@@ -33,17 +35,17 @@ export function EditMovie(props) {
     const movieID = params.id;
 
     useEffect(() => {
-        MediaModule.getMovieInfo(movieID).then((doc) => {
+        movieInfo.getMovieInfo(movieID).then((doc) => {
             if (doc.exists) {
                 setInput(doc.data());
             }
         });
 
-        MediaModule.getMoviePoster(movieID).then((url) => {
+        movieInfo.getMoviePoster(movieID).then((url) => {
             setCurrentPoster(url);
         });
 
-        setCurrentMovie(MediaModule.getMovieStream(movieID));
+        setCurrentMovie(movieInfo.getMovieStream(movieID));
 
     }, []);
 
@@ -324,29 +326,28 @@ export function EditMovie(props) {
             history.push("/movie/" + movieID);
         }
 
-        MediaModule.updateMovieInfo(movieID.toString(), data).then(() => {
+        movieInfo.updateMovieInfo(movieID.toString(), data).then(() => {
             console.log("movie info update success");
 
-            // console.log(!movieFile, !posterFile);
             if (movieFile && posterFile) {
                 console.log("upload movie and poster");
-                MediaModule.uploadMovie(movieID, movieFile).then(() => {
+                movieInfo.uploadMovie(movieID, movieFile).then(() => {
                     console.log("upload movie success");
 
-                    MediaModule.uploadPoster(movieID, posterFile).then(() => {
+                    movieInfo.uploadPoster(movieID, posterFile).then(() => {
                         console.log("upload poster success");
                         redirect();
                     });
                 });
             } else if (!movieFile && posterFile) {
                 console.log("upload poster");
-                MediaModule.uploadPoster(movieID, posterFile).then(() => {
+                movieInfo.uploadPoster(movieID, posterFile).then(() => {
                     console.log("upload poster success");
                     redirect();
                 });
             } else if (movieFile && !posterFile) {
                 console.log("upload movie");
-                MediaModule.uploadMovie(movieID, movieFile).then(() => {
+                movieInfo.uploadMovie(movieID, movieFile).then(() => {
                     console.log("upload movie success");
                     redirect();
                 });

@@ -20,8 +20,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import LoginModules from './modules/LoginModules';
 
 export function ManageAdmins(props) {
+
+    const account = new LoginModules.Account();
+    const review = new BrowsingModules.Review();
+    const playlist = new BrowsingModules.Playlist();
+    const suggest = new BrowsingModules.Suggest();
 
     const useStyles = makeStyles({
         table: {
@@ -50,9 +56,7 @@ export function ManageAdmins(props) {
                         }
                     });
                     setAdminDataState([...adminData]);
-
                 });
-
             }
         });
 
@@ -96,7 +100,7 @@ export function ManageAdmins(props) {
         const onSubmitHandler = () => {
             console.log("Clicked");
             if (email.length !== 0 && role.length !== 0) {
-                BrowsingModules.getUser(email).then((querySnapshot) => {
+                account.getUser(email).then((querySnapshot) => {
                     if (!querySnapshot.empty) {
                         var uid;
                         querySnapshot.forEach((doc) => {
@@ -192,8 +196,7 @@ export function ManageAdmins(props) {
                         {data.data.role}
                     </TableCell>
                     <TableCell align="right">
-                        {adminDataState.length <= 1? <></> :<RemoveAdminButton id={data.data.userID}/>}
-                        
+                        {adminDataState.length <= 1 ? <></> : <RemoveAdminButton id={data.data.userID} />}
                     </TableCell>
                 </TableRow>
             );
@@ -208,7 +211,6 @@ export function ManageAdmins(props) {
                     <h2>Manage Admins</h2>
                 </Grid>
                 <Grid item xs={2}>
-                    {/* button */}
                     <AddAdminButton />
                 </Grid>
                 <Grid item xs={12}>
