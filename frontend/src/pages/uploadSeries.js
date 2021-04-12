@@ -35,14 +35,6 @@ export function UploadSeries(props) {
         showReleaseDate: ""
     }
 
-    // var seasons = {
-    //     season: 1,
-    //     content: [{
-    //         id: 11,
-    //         title: "A Scandal in Belgravia",
-    //     }]
-    // }
-
     const useStyles = makeStyles((theme) => ({
         backdrop: {
             zIndex: theme.zIndex.drawer + 1,

@@ -6,13 +6,10 @@ import MenuBar from "./components/menuBar";
 import { useHistory, useParams } from 'react-router';
 import Container from "./components/container";
 import MediaModule from "./modules/MediaModule";
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
 export function EditSeries(props) {
 
-    const movieInfo = new MediaModule.MovieInfo();
     const seriesInfo = new MediaModule.SeriesInfo();
 
     var posterFile = null;

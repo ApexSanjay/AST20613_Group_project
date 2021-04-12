@@ -10,7 +10,6 @@ import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import LinkIcon from '@material-ui/icons/Link';
 import styled from 'styled-components';
 import defaultMoviePoster from "./img/moviePoster/soul_poster.jpg";
-import playbtn from "./img/playbtn.svg";
 import ReactPlayer from 'react-player';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
@@ -39,7 +38,6 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 
 
 function Series(props) {

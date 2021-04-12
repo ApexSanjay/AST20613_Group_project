@@ -54,7 +54,6 @@ export function ManageMovies(props) {
                 setMovieDataState([...movieData]);
             });
         } else {
-            // console.log("???");
             suggest.getAllMovies().then((querySnapshot) => {
                 var allMovies = [];
                 querySnapshot.forEach((doc) => {
@@ -164,7 +163,6 @@ export function ManageMovies(props) {
         `;
 
         const onclickHandler = () => {
-            // console.log(props.id);
             movieInfo.removeMovie(props.id).then(() => {
                 console.log("removed movies");
                 window.location.reload();

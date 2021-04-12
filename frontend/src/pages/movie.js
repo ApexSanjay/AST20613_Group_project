@@ -605,7 +605,6 @@ function Movie(props) {
                         <AddToLibrary />
                         <ShareLink />
                         {(isAdmin ? <EditMovie /> : <></>)}
-                        {/* <EditMovie /> */}
                         <PlayButton />
                         <p>
                             {movies.movieLength} | {movies.movieReleaseDate} | IMDB: {movies.imdbReview}

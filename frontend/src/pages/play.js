@@ -8,15 +8,11 @@ import LoginModules from './modules/LoginModules';
 function Play(props) {
 
     const account = new LoginModules.Account();
-    const cardInfo = new LoginModules.CardInfo();
     const movieInfo = new MediaModule.MovieInfo();
-    const seriesInfo = new MediaModule.SeriesInfo();
 
     const params = useParams();
     const movieID = params.id;
-    // console.log(movieID);
 
-    // const [userPlan, setUserPlan] = useState("");
     const [movieURL, setMovieURL] = useState(movieInfo.getMovieStream(movieID));
 
     useEffect(() => {

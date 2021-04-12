@@ -20,9 +20,7 @@ import MediaModule from "./modules/MediaModule";
 
 function Playlist(props) {
 
-    const review = new BrowsingModules.Review();
     const playlistObj = new BrowsingModules.Playlist();
-    const suggest = new BrowsingModules.Suggest();
     const movieInfo = new MediaModule.MovieInfo();
     const seriesInfo = new MediaModule.SeriesInfo();
 
@@ -31,7 +29,7 @@ function Playlist(props) {
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
     const [seriesPlaylist, setSeriesPlaylist] = useState();
-    const [seriesPlaylistTitle, setSeriesPlaylistTitle] = useState("");
+    // const [seriesPlaylistTitle, setSeriesPlaylistTitle] = useState("");
     const [movieListState, setMovieListState] = useState([]);
     const [seriesListState, setSeriesListState] = useState([]);
 

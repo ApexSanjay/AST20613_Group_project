@@ -56,9 +56,7 @@ export function ManageAdmins(props) {
                         }
                     });
                     setAdminDataState([...adminData]);
-
                 });
-
             }
         });
 
@@ -199,7 +197,6 @@ export function ManageAdmins(props) {
                     </TableCell>
                     <TableCell align="right">
                         {adminDataState.length <= 1 ? <></> : <RemoveAdminButton id={data.data.userID} />}
-
                     </TableCell>
                 </TableRow>
             );
@@ -214,7 +211,6 @@ export function ManageAdmins(props) {
                     <h2>Manage Admins</h2>
                 </Grid>
                 <Grid item xs={2}>
-                    {/* button */}
                     <AddAdminButton />
                 </Grid>
                 <Grid item xs={12}>

@@ -64,10 +64,6 @@ export function Upload(props) {
             <Grid container>
                 <Grid item xs={12}>
                     <h2>Select Movie File</h2>
-                    {/* <form
-                        action="http://localhost:4000/upload"
-                        method="post"
-                        enctype="multipart/form-data"> */}
                     <input
                         name="movie"
                         type="file"
@@ -78,7 +74,6 @@ export function Upload(props) {
                         defaultValue={movieFile}
                         required
                     />
-                    {/* </form> */}
                 </Grid>
             </Grid>
         );
@@ -89,10 +84,6 @@ export function Upload(props) {
             <Grid container>
                 <Grid item xs={12}>
                     <h2>Select Movie Poster</h2>
-                    {/* <form
-                        action="http://localhost:4000/upload"
-                        method="post"
-                        enctype="multipart/form-data"> */}
                     <input
                         name="movie"
                         type="file"
@@ -103,7 +94,6 @@ export function Upload(props) {
                         defaultValue={posterFile}
                         required
                     />
-                    {/* </form> */}
                 </Grid>
             </Grid>
         );
@@ -327,7 +317,6 @@ export function Upload(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        // console.log("submit");
 
         setUploading(true);
 
@@ -345,7 +334,6 @@ export function Upload(props) {
                     ...data,
                     id: newID
                 }
-                // console.log(movieData);
 
                 movieInfo.createMovieInfo(newID.toString(), movieData).then(() => {
                     console.log("movie info upload success");

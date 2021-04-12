@@ -22,10 +22,7 @@ function Profile(props) {
 
 
     const account = new LoginModules.Account();
-    const cardInfo = new LoginModules.CardInfo();
-    const review = new BrowsingModules.Review();
     const playlist = new BrowsingModules.Playlist();
-    const suggest = new BrowsingModules.Suggest();
 
     var profile = account.getUserProfile();
     const [icon] = useState(account.getUserProfile().icon != null ? account.getUserProfile().icon : face);

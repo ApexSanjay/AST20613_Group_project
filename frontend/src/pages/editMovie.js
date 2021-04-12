@@ -11,7 +11,6 @@ import ReactPlayer from 'react-player'
 export function EditMovie(props) {
 
     const movieInfo = new MediaModule.MovieInfo();
-    const seriesInfo = new MediaModule.SeriesInfo();
 
     var movieFile = null;
     var posterFile = null;
@@ -330,7 +329,6 @@ export function EditMovie(props) {
         movieInfo.updateMovieInfo(movieID.toString(), data).then(() => {
             console.log("movie info update success");
 
-            // console.log(!movieFile, !posterFile);
             if (movieFile && posterFile) {
                 console.log("upload movie and poster");
                 movieInfo.uploadMovie(movieID, movieFile).then(() => {
