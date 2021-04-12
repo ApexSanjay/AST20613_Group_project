@@ -251,7 +251,7 @@ const MenuBar = () => {
 
                         <SearchField />
                         <Button
-                            onclick={() => { btnHandler("myLib") }}
+                            onClick={() => { btnHandler("myLib") }}
                         >
                             <Avatar src={account.getUserProfile().icon}></Avatar>
                             {account.getUserProfile().name}
