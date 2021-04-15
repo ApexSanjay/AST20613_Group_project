@@ -1,0 +1,2 @@
+movies filter=lfs diff=lfs merge=lfs -text
+movies/** filter=lfs diff=lfs merge=lfs -text
