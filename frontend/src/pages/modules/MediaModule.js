@@ -81,7 +81,7 @@ class MovieInfo {
             console.log(e.message);
         });
 
-        await firebase.firestore().collection("movies").doc(id).delete();
+        await firebase.firestore().collection("movies").doc(id.toString()).delete();
 
         if (typeof id === 'number') {
             id = id.toString();
