@@ -7,13 +7,13 @@ class MovieInfo {
 
     getMovieStream = (movieID, plan = "Basic") => {
 
-        var movieURL = "http://localhost:4000/play/movie/480p/" + movieID + "/" + movieID + ".m3u8";
+        var movieURL = "http://localhost:4000/play/480p/" + movieID + "/" + movieID + ".m3u8";
         if (plan === "Basic") {
-            movieURL = "http://localhost:4000/play/movie/480p/" + movieID + "/" + movieID + ".m3u8";
+            movieURL = "http://localhost:4000/play/480p/" + movieID + "/" + movieID + ".m3u8";
         } else if (plan === "Standard") {
-            movieURL = "http://localhost:4000/play/movie/1080p/" + movieID + "/" + movieID + ".m3u8";
+            movieURL = "http://localhost:4000/play/1080p/" + movieID + "/" + movieID + ".m3u8";
         } else if (plan === "Premium") {
-            movieURL = "http://localhost:4000/play/movie/4k/" + movieID + "/" + movieID + ".m3u8";
+            movieURL = "http://localhost:4000/play/4k/" + movieID + "/" + movieID + ".m3u8";
         }
 
         return movieURL;
@@ -81,7 +81,7 @@ class MovieInfo {
             console.log(e.message);
         });
 
-        await firebase.firestore().collection("movies").doc(id).delete();
+        await firebase.firestore().collection("movies").doc(id.toString()).delete();
 
         if (typeof id === 'number') {
             id = id.toString();
