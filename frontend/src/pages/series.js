@@ -289,12 +289,18 @@ function Series(props) {
 
         const displayCast = () => {
             var res = "";
-            for (var i in movies.cast) {
-                res += movies.cast[i];
-                if (i !== (movies.cast.length - 1)) {
-                    res += ", ";
+
+            if(typeof movies.cast === "object"){
+                for (var i in movies.cast) {
+                    res += movies.cast[i];
+                    if (i !== (movies.cast.length - 1)) {
+                        res += ", ";
+                    }
                 }
+            } else {
+                res = movies.cast;
             }
+
             return res;
         }
 
