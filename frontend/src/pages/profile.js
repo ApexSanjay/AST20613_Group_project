@@ -17,10 +17,12 @@ import moviePoster from "./img/moviePoster/soul_poster.jpg";
 import Container from "./components/container";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import BrowsingModules from "./modules/BrowsingModules";
+import MediaModule from './modules/MediaModule';
 
 function Profile(props) {
 
-
+    const movieInfo = new MediaModule.MovieInfo();
+    const seriesInfo = new MediaModule.SeriesInfo();
     const account = new LoginModules.Account();
     const playlist = new BrowsingModules.Playlist();
 
@@ -33,13 +35,41 @@ function Profile(props) {
         playlist.getAllPlaylist().then((querySnapshot) => {
             var allPlaylist = [];
             querySnapshot.forEach((doc) => {
-                var playlist = {
-                    playlistTitle: doc.data().title,
-                    playlistID: doc.id,
-                };
-                allPlaylist.push(playlist);
+                var posterID = -1;
+                if(doc.data().seriesID !== undefined){
+                    posterID = doc.data().seriesID[0];
+                    seriesInfo.getSeriesPoster(posterID).then((URL)=>{
+                        console.log(URL);
+                        var playlist = {
+                            playlistTitle: doc.data().title,
+                            playlistID: doc.id,
+                            poster: URL,
+                        };
+                        allPlaylist.push(playlist);
+                        setLib([...allPlaylist]);
+                    });
+                } else if(doc.data().movieID !== undefined){
+                    posterID = doc.data().movieID[0];
+                    seriesInfo.getSeriesPoster(posterID).then((URL)=>{
+                        console.log(URL);
+                        var playlist = {
+                            playlistTitle: doc.data().title,
+                            playlistID: doc.id,
+                            poster: URL,
+                        };
+                        allPlaylist.push(playlist);
+                        setLib([...allPlaylist]);
+                    });
+                }
+                console.log("posterID", posterID);
+                // console.log(doc.data().title, doc.data().seriesID? doc.data().seriesID[0]: "no series" , doc.data().movieID? doc.data().movieID[0]: "no movie");
+                // var playlist = {
+                //     playlistTitle: doc.data().title,
+                //     playlistID: doc.id,
+                // };
+                // allPlaylist.push(playlist);
             });
-            setLib(allPlaylist);
+            // setLib(allPlaylist);
         });
     }, []);
 
@@ -75,7 +105,7 @@ function Profile(props) {
 
         const showAllCard = () => {
             const res = Lib.map((list) => (
-                <ListCard name={list.playlistTitle} playlistID={list.playlistID} />
+                <ListCard name={list.playlistTitle} playlistID={list.playlistID} poster={list.poster}/>
             ));
             return res;
         }
@@ -107,7 +137,7 @@ function Profile(props) {
                         <CardActionArea onClick={() => { onclickHandler("view"); }}>
                             <CardMedia
                                 className={classes.media}
-                                image={moviePoster}
+                                image={props.poster? props.poster : moviePoster}
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
