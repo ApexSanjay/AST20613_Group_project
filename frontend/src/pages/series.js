@@ -522,9 +522,11 @@ function Series(props) {
                             <AccordionDetails>
                                 <List component="nav" className={classes.root}>
                                     {item.content.map((contentItem) => {
+                                        console.log("contentItem", contentItem);
+                                        console.log("item.season", item.season);
                                         return (
                                             <ListItem button divider>
-                                                <ListItemText primary={contentItem.title} onClick={() => { play(movies.id,  contentItem.id.toString()) }} />
+                                                <ListItemText primary={contentItem.title} onClick={() => { play(movies.id.toString(),  (contentItem.contentID !== undefined? item.season.toString() + contentItem.contentID.toString() : contentItem.id.toString())) }} />
                                             </ListItem>
                                         );
                                     })}

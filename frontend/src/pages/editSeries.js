@@ -307,7 +307,6 @@ export function EditSeries(props) {
                             posterFile = e.target.files[0];
                         }}
                         defaultValue={posterFile}
-                        required
                     />
                 </Grid>
             </Grid>
@@ -532,7 +531,16 @@ export function EditSeries(props) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-
+        console.log(data);
+        seriesInfo.updateSeriesInfo(seriesID.toString(), data).then(()=>{
+            if(posterFile !== null){
+                seriesInfo.uploadSeriesPoster(seriesID.toString(), posterFile).then(()=>{
+                    history.push("/series/" + seriesID);
+                });
+            } else {
+                history.push("/series/" + seriesID);
+            }
+        });
     }
 
     return (

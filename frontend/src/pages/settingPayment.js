@@ -8,6 +8,7 @@ import SaveButton from "./components/settingSaveButton";
 import LoginModules from "./modules/LoginModules";
 import { useHistory } from 'react-router';
 import Container from "./components/container";
+import SnackBar from "./components/snackBar";
 
 function SettingPayment(props) {
 
@@ -21,6 +22,7 @@ function SettingPayment(props) {
     const [explorationDate, setExplorationDate] = useState("");
     const [cvv, setCVV] = useState("");
     const [error, setError] = useState("");
+    const [message, setMessage] = useState();
 
     var newData = {
         firstname: firstname,
@@ -46,7 +48,7 @@ function SettingPayment(props) {
                 setCardInfoID(doc.id);
             });
         });
-    }, []);
+    }, [message]);
 
     //onchangehandler
     const onchangeHandler = (field, value) => {
@@ -200,7 +202,7 @@ function SettingPayment(props) {
     const onSubmitHandler = (e) => {
 
         e.preventDefault();
-        LoginModules.updateCardInfo(
+        cardInfo.updateCardInfo(
             cardInfoID,
             userid,
             newData.cvv,
@@ -209,8 +211,8 @@ function SettingPayment(props) {
             newData.firstname,
             newData.lastname
         ).then(() => {
-            setError("update success");
-            history.push("/setting/payment");
+            // setError("update success");
+            setMessage(<SnackBar show={true}>Updated.</SnackBar>);
         }).catch((e) => {
             setError(e.code + ": " + e.message);
         });
@@ -242,6 +244,7 @@ function SettingPayment(props) {
     return (
         <Container>
             <MenuBar />
+            {message}
             <Grid container>
                 <Grid item xs={3}><SettingMenu selected={2} /></Grid>
                 <Grid item xs={9}><PaymentSetting /></Grid>
