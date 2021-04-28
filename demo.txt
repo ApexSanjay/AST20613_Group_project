@@ -1,0 +1,27 @@
+Playable Movies / Series
+
+Jarhead - http://localhost:3000/movie/102
+Soul - http://localhost:3000/movie/103
+Coco - http://localhost:3000/movie/104
+Sherlock - http://localhost:3000/series/6
+Narcos - http://localhost:3000/series/7
+
+## Demo Movie Info
+Demo Movie
+A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.
+Jordan Peele
+Daniel Kaluuya,Allison Williams,Bradley Whitford
+https://www.youtube.com/watch?v=sRfnevzM9kQ
+7.7
+1 hour 44 minutes
+2017
+
+## Demo Series Info
+Demo Series  
+An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.
+Charlie Brooker
+Daniel Lapaine,Hannah John-Kamen,Michaela Coel
+https://www.youtube.com/watch?v=-qIlCo9yqpY
+8.8
+1 hour
+2011

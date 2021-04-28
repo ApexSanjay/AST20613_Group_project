@@ -29,7 +29,6 @@ function Playlist(props) {
     const [playlist, setPlaylist] = useState();
     const [playlistTitle, setPlaylistTitle] = useState("");
     const [seriesPlaylist, setSeriesPlaylist] = useState();
-    // const [seriesPlaylistTitle, setSeriesPlaylistTitle] = useState("");
     const [movieListState, setMovieListState] = useState([]);
     const [seriesListState, setSeriesListState] = useState([]);
 
@@ -90,7 +89,7 @@ function Playlist(props) {
 
             seriesInfo.getSeriesInfos(formattedPlaylist).then((querySnapshot) => {
                 if (querySnapshot.empty) {
-                    console.log("empty");
+                    console.log("series empty");
                 } else {
                     querySnapshot.forEach((doc) => {
                         seriesList.push(doc.data());
@@ -140,9 +139,9 @@ function Playlist(props) {
             const onclickHandler = () => {
                 const movieID = props.id;
                 const list = playlist;
-                console.log(list, movieID);
+                console.log(list, movieID.toString());
                 for (var i in list) {
-                    if (list[i] === movieID) {
+                    if (list[i] === movieID.toString()) {
                         list.splice(i, 1);
                         playlistObj.updatePlaylist(playlistID, list).then(() => {
                             window.location.reload();   //reload page

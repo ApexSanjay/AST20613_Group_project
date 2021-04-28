@@ -28,6 +28,7 @@ export function ManageAdmins(props) {
     const review = new BrowsingModules.Review();
     const playlist = new BrowsingModules.Playlist();
     const suggest = new BrowsingModules.Suggest();
+    const admin = new AdminModules.Admin();
 
     const useStyles = makeStyles({
         table: {
@@ -42,12 +43,12 @@ export function ManageAdmins(props) {
     var adminData = adminDataState;
 
     useEffect(() => {
-        AdminModules.getAllAdmin().then((querySnapshot) => {
+        admin.getAllAdmin().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 adminData.push({ id: doc.id, data: doc.data() });
             });
             for (var i in adminData) {
-                AdminModules.getAdminEmail(adminData[i].data.userID).then((querySnapshot) => {
+                admin.getAdminEmail(adminData[i].data.userID).then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         for (var j in adminData) {
                             if (adminData[j].data.userID === doc.data().userID) {
@@ -105,7 +106,7 @@ export function ManageAdmins(props) {
                         var uid;
                         querySnapshot.forEach((doc) => {
                             uid = doc.data().userID;
-                            AdminModules.addAdmin(uid, role).then(() => {
+                            admin.addAdmin(uid, role).then(() => {
                                 handleClose();
                                 console.log("done");
                                 window.location.reload();   //reload page
@@ -167,7 +168,7 @@ export function ManageAdmins(props) {
         `;
 
         const onclickHandler = () => {
-            AdminModules.removeAdmin(props.id);
+            admin.removeAdmin(props.id);
         }
 
         return (

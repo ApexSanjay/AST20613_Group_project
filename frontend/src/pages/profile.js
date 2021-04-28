@@ -18,13 +18,14 @@ import Container from "./components/container";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import BrowsingModules from "./modules/BrowsingModules";
 import MediaModule from './modules/MediaModule';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
 
 function Profile(props) {
 
     const movieInfo = new MediaModule.MovieInfo();
     const seriesInfo = new MediaModule.SeriesInfo();
     const account = new LoginModules.Account();
-    const playlist = new BrowsingModules.Playlist();
+    const playlistObj = new BrowsingModules.Playlist();
 
     var profile = account.getUserProfile();
     const [icon] = useState(account.getUserProfile().icon != null ? account.getUserProfile().icon : face);
@@ -32,14 +33,13 @@ function Profile(props) {
     const [Lib, setLib] = useState([]);
 
     useEffect(() => {
-        playlist.getAllPlaylist().then((querySnapshot) => {
+        playlistObj.getAllPlaylist().then((querySnapshot) => {
             var allPlaylist = [];
             querySnapshot.forEach((doc) => {
                 var posterID = -1;
-                if(doc.data().seriesID !== undefined){
+                if (doc.data().seriesID !== undefined && doc.data().seriesID.length >= 1) {
                     posterID = doc.data().seriesID[0];
-                    seriesInfo.getSeriesPoster(posterID).then((URL)=>{
-                        console.log(URL);
+                    seriesInfo.getSeriesPoster(posterID).then((URL) => {
                         var playlist = {
                             playlistTitle: doc.data().title,
                             playlistID: doc.id,
@@ -48,10 +48,9 @@ function Profile(props) {
                         allPlaylist.push(playlist);
                         setLib([...allPlaylist]);
                     });
-                } else if(doc.data().movieID !== undefined){
+                } else if (doc.data().movieID !== undefined && doc.data().movieID.length >= 1) {
                     posterID = doc.data().movieID[0];
-                    seriesInfo.getSeriesPoster(posterID).then((URL)=>{
-                        console.log(URL);
+                    movieInfo.getMoviePoster(posterID).then((URL) => {
                         var playlist = {
                             playlistTitle: doc.data().title,
                             playlistID: doc.id,
@@ -60,18 +59,18 @@ function Profile(props) {
                         allPlaylist.push(playlist);
                         setLib([...allPlaylist]);
                     });
+                } else {
+                    var playlist = {
+                        playlistTitle: doc.data().title,
+                        playlistID: doc.id,
+                    };
+                    allPlaylist.push(playlist);
+                    setLib(allPlaylist);
                 }
-                console.log("posterID", posterID);
-                // console.log(doc.data().title, doc.data().seriesID? doc.data().seriesID[0]: "no series" , doc.data().movieID? doc.data().movieID[0]: "no movie");
-                // var playlist = {
-                //     playlistTitle: doc.data().title,
-                //     playlistID: doc.id,
-                // };
-                // allPlaylist.push(playlist);
             });
-            // setLib(allPlaylist);
         });
     }, []);
+
 
     const useStyles = makeStyles({
         media: {
@@ -105,7 +104,7 @@ function Profile(props) {
 
         const showAllCard = () => {
             const res = Lib.map((list) => (
-                <ListCard name={list.playlistTitle} playlistID={list.playlistID} poster={list.poster}/>
+                <ListCard name={list.playlistTitle} playlistID={list.playlistID} poster={list.poster} />
             ));
             return res;
         }
@@ -113,7 +112,7 @@ function Profile(props) {
         const ListCard = (props) => {
 
             const removePlayList = () => {
-                playlist.removePlaylist(props.playlistID).then(() => {
+                playlistObj.removePlaylist(props.playlistID).then(() => {
                     window.location.reload();   //reload page
                 });
             }
@@ -137,7 +136,7 @@ function Profile(props) {
                         <CardActionArea onClick={() => { onclickHandler("view"); }}>
                             <CardMedia
                                 className={classes.media}
-                                image={props.poster? props.poster : moviePoster}
+                                image={props.poster ? props.poster : NotInterestedIcon}
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">

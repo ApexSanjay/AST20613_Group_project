@@ -444,6 +444,7 @@ function Movie(props) {
                     review.removeReview(commentID).then(() => {
                         console.log("Success");
                         setRemoveCommentSnackBar(true);
+                        window.location.reload();
                     }).catch((e) => {
                         console.log(e.message);
                     });
